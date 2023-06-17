@@ -1,0 +1,15 @@
+body {
+  background-color: #fdfff4 !important;
+}
+
+html,
+body,
+root,
+#storybook-root {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box !important;
+}
