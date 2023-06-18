@@ -17,7 +17,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 
 export function Text({
   size = 'md',
-  color = 'gray_100',
+  color = 'black',
   weight = 'regular',
   uppercase = false,
   as,

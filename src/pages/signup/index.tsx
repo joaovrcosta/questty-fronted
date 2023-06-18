@@ -1,5 +1,5 @@
 import { Header } from '@/components/organisms/Header'
-import * as S from '../../styles/pages/signin'
+import * as S from '../../styles/pages/signup'
 import { Heading } from '@/components/atoms/Heading'
 import { Input } from '@/components/atoms/Input'
 import { Button } from '@/components/atoms/Button'
@@ -14,7 +14,7 @@ export default function SignIn() {
       <S.SignInContainer>
         <S.SignInContent>
           <Heading size="md" color="black" weight="bold">
-            Entre com a sua conta:
+            Começe agora mesmo:
           </Heading>
           <S.FormContainer>
             <S.InputContainer>
@@ -26,31 +26,26 @@ export default function SignIn() {
                 label="E-mail"
                 style={{ marginBottom: '1rem' }}
               />
-              <Input
-                placeholder="Digite sua senha"
-                variant="lg"
-                hug={true}
-                showLabel={true}
-                label="Senha"
-              />
             </S.InputContainer>
-            <S.ForgotMyPasswordLink href="/forgot">
-              Esqueci a minha senha
-            </S.ForgotMyPasswordLink>
+
             <S.ButtonContainer>
-              <Button
+              <S.RegisterButton
                 type="submit"
                 rounding="rounded"
                 variant="lg"
                 backgroundColor="blue_500"
                 color="white"
               >
-                Entrar
-              </Button>
+                Registrar-se
+              </S.RegisterButton>
             </S.ButtonContainer>
+            <S.TermsAndPolicies>
+              Ao se inscrever no Questty você concorda com os Termos de Serviço
+              e Política de Privacidade do Questty .
+            </S.TermsAndPolicies>
             <S.EnterWithContainer>
               <Text weight="bold" size="lg">
-                Entre com:
+                Ou inscreva-se usando:
               </Text>
               <S.SocialAuthContainer>
                 <S.WithGoogle>

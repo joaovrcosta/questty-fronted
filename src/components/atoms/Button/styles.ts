@@ -3,7 +3,11 @@ import styled, { css } from 'styled-components'
 // import { darken } from 'polished'
 import Link from 'next/link'
 
-export type roundingVariants = 'rounded' | 'rounded-full' | 'rounded-none'
+export type roundingVariants =
+  | 'rounded'
+  | 'rounded-full'
+  | 'rounded-none'
+  | 'rounded-thin'
 export type sizeVariants = 'sm' | 'md' | 'lg'
 export type colorVariants = 'white' | 'black'
 
@@ -56,11 +60,13 @@ export const Button = styled.button<IButton>`
   border-radius: ${({ rounding }) => {
     switch (rounding) {
       case 'rounded':
-        return '0.25rem'
+        return '0.625rem'
       case 'rounded-full':
         return '9999px'
       case 'rounded-none':
         return '0'
+      case 'rounded-thin':
+        return '5px'
       default:
         return '0.25rem'
     }
@@ -82,10 +88,6 @@ export const Button = styled.button<IButton>`
   font-weight: 500;
 
   transition: 0.3s ease all;
-
-  &:hover {
-    background: rgba(241, 241, 241, 0.7);
-  }
 
   font-weight: bold;
 `

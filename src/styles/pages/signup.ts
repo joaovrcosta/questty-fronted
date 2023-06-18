@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { Button } from '@/components/atoms/Button'
+import { Text } from '@/components/atoms/Text'
 import styled from 'styled-components'
 
 export const SignInContainer = styled.div`
@@ -20,11 +21,11 @@ export const InputContainer = styled.div`
   margin-bottom: 2.5rem;
 `
 
-export const ForgotMyPasswordLink = styled(Link)`
+export const TermsAndPolicies = styled(Text)`
   font-size: ${({ theme }) => theme.typography.text.sm};
-  color: ${({ theme }) => theme.colors.blue_600};
-  font-weight: 600;
+  font-weight: 400;
   text-decoration: none;
+  margin-bottom: 1.75rem;
 `
 
 export const ButtonContainer = styled.div`
@@ -64,4 +65,9 @@ export const WithFacebook = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+`
+export const RegisterButton = styled(Button)`
+  &:hover {
+    opacity: 0.8;
+  }
 `

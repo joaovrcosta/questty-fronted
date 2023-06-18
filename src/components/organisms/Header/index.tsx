@@ -21,7 +21,9 @@ export function Header() {
           <Button backgroundColor="transparent" border={false}>
             <S.StyledLink href="/signin">ENTRAR</S.StyledLink>
           </Button>
-          <Button backgroundColor="blue_200">CADASTRAR</Button>
+          <Button backgroundColor="blue_200">
+            <S.StyledLink href="/signup">CADASTRAR</S.StyledLink>
+          </Button>
         </S.HeaderActionsContainer>
       </S.HeaderContent>
     </S.HeaderContainer>
