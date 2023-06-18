@@ -9,8 +9,29 @@ export const QuestionCardContainer = styled.div`
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
   padding: 0.875rem 2.5rem 0.875rem 1rem;
   max-height: 120px;
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  opacity: 1;
+  filter: brightness(100%);
+  transition: opacity 0.3s ease all, filter 0.3s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.3s ease all;
+  }
+
+  &:hover::before {
+    content: '';
+    position: absolute;
+    border-radius: 5px 0 0px 5px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background-color: ${({ theme }) => theme.colors.blue_500};
+  }
 `
+
 export const QuestionContentContainer = styled.div`
   display: flex;
   align-items: center;
@@ -47,8 +68,12 @@ export const SubjectAndDateTimeContainer = styled.div`
   display: flex;
   gap: 1rem;
 `
-export const Subject = styled(Text)``
-export const DateTime = styled(Text)``
+export const Subject = styled(Text)`
+  font-family: Roboto;
+`
+export const DateTime = styled(Text)`
+  font-family: Roboto;
+`
 
 export const AswerContainer = styled.div`
   display: flex;
@@ -62,7 +87,13 @@ export const AnswerButtonContainer = styled.div`
 `
 
 export const AnswerButton = styled(Button)`
-  border: 2px solid ${({ theme }) => theme.colors.black};
+  border: 1px solid ${({ theme }) => theme.colors.black};
+
+  &:focus {
+    border: 1px solid ${({ theme }) => theme.colors.blue_300};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
+    /* transition: 0.2s ease all; */
+  }
 `
 
 export const AnswerQuantity = styled.div`

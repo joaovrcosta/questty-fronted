@@ -35,3 +35,7 @@ export const QuestionsContainer = styled.div`
 export const FeedContentWrapper = styled.div`
   max-width: 920px;
 `
+
+export const MakeQuestionButton = styled(Button)`
+  padding: 1.5rem;
+`

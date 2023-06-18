@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import { Button } from '@/components/atoms/Button'
 
 interface IHeader {
   isfixed?: boolean
@@ -38,6 +39,14 @@ export const SearchInput = styled.input`
   padding: 0.5rem 1.5rem;
   border-radius: 46px;
   border: 1px solid ${({ theme }) => theme.colors.black};
+
+  outline: none;
+
+  &:focus {
+    border: 1px solid #6d83f3;
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
+    transition: 0.2s ease all;
+  }
 `
 
 export const HeaderActionsContainer = styled.div`
@@ -51,4 +60,11 @@ export const StyledLink = styled(Link)`
   font-weight: bold;
   outline: none;
   color: ${({ theme }) => theme.colors.black};
+`
+
+export const StyledButton = styled(Button)`
+  &:hover {
+    background-color: #eaece1;
+    transition: 0.3s ease all;
+  }
 `

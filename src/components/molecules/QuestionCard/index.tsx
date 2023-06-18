@@ -23,10 +23,10 @@ export function QuestionCard() {
               linear entre...
             </S.QuestionText>
             <S.SubjectAndDateTimeContainer>
-              <S.Subject size="xs" color="gray_600">
+              <S.Subject size="xs" color="gray_800">
                 Matematica
               </S.Subject>
-              <S.DateTime size="xs" color="gray_600">
+              <S.DateTime size="xs" color="gray_800">
                 09/06/23 às 15:58
               </S.DateTime>
             </S.SubjectAndDateTimeContainer>

@@ -3,6 +3,7 @@ import * as S from '../styles/pages/index'
 import { Heading } from '@/components/atoms/Heading'
 import { Button } from '@/components/atoms/Button'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
+import { BsFillGearFill } from 'react-icons/bs'
 
 export default function Home() {
   return (
@@ -21,20 +22,20 @@ export default function Home() {
                 color="white"
               >
                 Matérias
+                <BsFillGearFill size={18} />
               </S.SubjectButtonModal>
             </S.SubjectContent>
             <S.MakeQuestionButtonContainer>
-              <Button
+              <S.MakeQuestionButton
                 rounding="rounded-thin"
                 variant="lg"
                 backgroundColor="transparent"
               >
                 Perguntar
-              </Button>
+              </S.MakeQuestionButton>
             </S.MakeQuestionButtonContainer>
           </S.SubjectsContainer>
           <S.QuestionsContainer>
-            <QuestionCard />
             <QuestionCard />
             <QuestionCard />
             <QuestionCard />
