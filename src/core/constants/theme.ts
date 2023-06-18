@@ -34,11 +34,11 @@ export const defaultTheme = {
       xxl: '4rem',
       xl: '3rem',
       lg: '2rem',
-      md: '1.5rem',
+      md: '1.75rem',
       sm: '1.25rem',
     } as const,
     text: {
-      xxl: '1.5rem',
+      xxl: '1.75rem',
       xl: '1.25rem',
       lg: '1.125rem',
       md: '1rem',

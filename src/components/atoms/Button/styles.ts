@@ -1,6 +1,7 @@
 import { ColorThemeType } from '@/core/constants/theme'
 import styled, { css } from 'styled-components'
 // import { darken } from 'polished'
+import Link from 'next/link'
 
 export type roundingVariants = 'rounded' | 'rounded-full' | 'rounded-none'
 export type sizeVariants = 'sm' | 'md' | 'lg'
@@ -21,13 +22,13 @@ const sizeVariants = (size: sizeVariants) => {
     case 'sm':
       return css`
         font-size: ${({ theme }) => theme.typography.text.xs};
-        padding: 0.5rem 1.5rem;
+        padding: 0.5rem 1rem;
         height: 2.25rem;
       `
     case 'md':
       return css`
         font-size: ${({ theme }) => theme.typography.text.sm};
-        padding: 0.65rem 2.5rem;
+        padding: 0.65rem 1.5rem;
         height: 2.5rem;
       `
     case 'lg':
@@ -41,6 +42,8 @@ const sizeVariants = (size: sizeVariants) => {
 
 export const Button = styled.button<IButton>`
   ${({ variant }) => sizeVariants(variant)}
+
+  white-space: nowrap;
 
   cursor: pointer;
   border: ${({ border }) => (border ? `1px solid black` : 'none')};
@@ -79,4 +82,10 @@ export const Button = styled.button<IButton>`
   font-weight: 500;
 
   transition: 0.3s ease all;
+
+  &:hover {
+    background: rgba(241, 241, 241, 0.7);
+  }
+
+  font-weight: bold;
 `

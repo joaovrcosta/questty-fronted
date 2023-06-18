@@ -1,11 +1,13 @@
-import { Feed } from './Feed'
-import { Header } from '../components/organisms/Header'
+import { Header } from '@/components/organisms/Header'
+import * as S from '../styles/pages/index'
 
 export default function Home() {
   return (
     <>
       <Header />
-      <Feed />
+      <S.HomePageContent>
+        <h1>Feed</h1>
+      </S.HomePageContent>
     </>
   )
 }

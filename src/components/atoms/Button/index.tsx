@@ -15,7 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({
   backgroundColor = 'yellow_500',
-  variant = 'sm',
+  variant = 'md',
   rounding = 'rounded-full',
   boxShadow = false,
   color = 'black',
