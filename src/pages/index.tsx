@@ -1,14 +1,14 @@
-import { Header } from '@/components/organisms/Header'
 import * as S from '../styles/pages/index'
 import { Heading } from '@/components/atoms/Heading'
-import { Button } from '@/components/atoms/Button'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { BsFillGearFill } from 'react-icons/bs'
+import { NextPageWithLayout } from './_app'
+import DefaultLayout from '@/components/templates/Default'
+import { ReactElement } from 'react'
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   return (
     <>
-      <Header />
       <S.HomePageContent>
         <S.FeedContentWrapper>
           <S.SubjectsContainer>
@@ -47,3 +47,9 @@ export default function Home() {
     </>
   )
 }
+
+Home.getLayout = (pages: ReactElement) => {
+  return <DefaultLayout>{pages}</DefaultLayout>
+}
+
+export default Home

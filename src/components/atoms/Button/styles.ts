@@ -8,6 +8,7 @@ export type roundingVariants =
   | 'rounded-full'
   | 'rounded-none'
   | 'rounded-thin'
+  | 'rounded-xxl'
 export type sizeVariants = 'sm' | 'md' | 'lg'
 export type colorVariants = 'white' | 'black'
 
@@ -67,6 +68,8 @@ export const Button = styled.button<IButton>`
         return '0'
       case 'rounded-thin':
         return '5px'
+      case 'rounded-xxl':
+        return '14px'
       default:
         return '0.25rem'
     }

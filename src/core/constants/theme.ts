@@ -40,6 +40,7 @@ export const defaultTheme = {
     } as const,
     text: {
       xxl: '1.75rem',
+      xx1: '1.50rem',
       xl: '1.25rem',
       lg: '1.125rem',
       md: '1rem',
