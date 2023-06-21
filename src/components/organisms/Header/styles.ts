@@ -135,6 +135,8 @@ export const SignInButton = styled(Button)`
 `
 
 export const SignUpButton = styled(Button)`
+  color: ${({ theme }) => theme.colors.white};
+
   &:hover {
     background-color: #eaece1;
     transition: 0.3s ease all;
