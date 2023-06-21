@@ -20,17 +20,30 @@ export function QuestionBox() {
         <S.QuestionInfo>
           <S.QuestionInfoWrapper>
             <S.Username>
-              <Text weight="medium">JujuR0drigues</Text>
+              <Text style={{ fontFamily: 'Poppins' }} weight="medium">
+                JujuR0drigues
+              </Text>
             </S.Username>
             <S.UserLevel>27</S.UserLevel>
-            <Text size="xs">12/11/21 às 11:26</Text>
+            <Text size="xs" style={{ fontFamily: 'Poppins' }}>
+              12/11/21 às 11:26
+            </Text>
           </S.QuestionInfoWrapper>
           <S.AnswerQuantityBox>
-            <Text weight="bold" size="xl" color="blue_950">
+            <Text
+              weight="bold"
+              size="xl"
+              color="blue_950"
+              style={{ fontFamily: 'Poppins' }}
+            >
               Respostas:
             </Text>
             <S.AnswerQuantity>
-              <Text size="xx1" color="blue_500">
+              <Text
+                size="xx1"
+                color="blue_500"
+                style={{ fontFamily: 'Poppins' }}
+              >
                 2
               </Text>
             </S.AnswerQuantity>
@@ -77,7 +90,9 @@ export function QuestionBox() {
           <S.ModerationWrapper>
             <S.ModerateLabel>
               <BiShieldAlt2 size={24} color="#EBA900" />
-              <Text size="lg">Moderar</Text>
+              <Text size="lg" style={{ fontFamily: 'Poppins' }}>
+                Moderar
+              </Text>
             </S.ModerateLabel>
           </S.ModerationWrapper>
         </S.UserHandleActionsContainer>

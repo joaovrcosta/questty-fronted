@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
-
+import starIcon from '../../../assets/star.svg'
+import { BiShieldAlt2 } from 'react-icons/bi'
 export function AnswerBox() {
   return (
     <S.AnswerWrapper>
@@ -16,13 +17,32 @@ export function AnswerBox() {
       </S.UserAvatarContainer>
       <S.AnswerBoxContainer>
         <S.AnswerInfo>
-          <S.AnswerInfoWrapper>
-            <S.Username>
-              <Text weight="medium">JujuR0drigues</Text>
-            </S.Username>
-            <S.UserLevel>27</S.UserLevel>
-            <Text size="xs">12/11/21 às 11:26</Text>
-          </S.AnswerInfoWrapper>
+          <S.AnswerInfoWrapperContainer>
+            <S.AnswerInfoWrapper>
+              <S.Username>
+                <Text weight="medium">rodrigolopes</Text>
+              </S.Username>
+              <S.UserLevel>183</S.UserLevel>
+              <Text size="xs" style={{ fontFamily: 'Poppins' }}>
+                12/11/21 às 11:26
+              </Text>
+            </S.AnswerInfoWrapper>
+            <S.UserSubInfosContainer>
+              <S.UserTag size="xs" weight="bold">
+                PROPLAYER
+              </S.UserTag>
+              <S.AnswerViews size="xs">105 Visualizações</S.AnswerViews>
+            </S.UserSubInfosContainer>
+          </S.AnswerInfoWrapperContainer>
+          <S.AnswerRateContainer>
+            <S.StarsRating>
+              <Image src={starIcon} alt="" />
+              <Text weight="bold">92</Text>
+            </S.StarsRating>
+            <S.CrownNumberContainer>
+              <S.CrownNumber weight="bold">4,1</S.CrownNumber>
+            </S.CrownNumberContainer>
+          </S.AnswerRateContainer>
         </S.AnswerInfo>
         <S.AnswerContent>
           <S.QuestionTitleText size="lg" weight="regular" color="blue_950">
@@ -41,6 +61,24 @@ export function AnswerBox() {
             I e III. c. II e IV.
           </S.QuestionTitleText>
         </S.AnswerContent>
+        <S.UserHandleActionsContainer>
+          <S.LikedButton
+            variant="none"
+            rounding="rounded-full"
+            color="black"
+            backgroundColor="white"
+          >
+            Valeu
+            <Image src={starIcon} alt="" />
+            <Text weight="bold">92</Text>
+          </S.LikedButton>
+          <S.ModerationWrapper>
+            <S.ModerateLabel>
+              <BiShieldAlt2 size={24} color="#EBA900" />
+              <Text size="lg">Moderar</Text>
+            </S.ModerateLabel>
+          </S.ModerationWrapper>
+        </S.UserHandleActionsContainer>
       </S.AnswerBoxContainer>
     </S.AnswerWrapper>
   )

@@ -32,18 +32,24 @@ export function QuestionCard() {
             </S.SubjectAndDateTimeContainer>
           </S.QuestionInfo>
         </S.QuestionContent>
-        <S.AswerContainer>
-          <S.AnswerButtonContainer>
-            <S.AnswerButton backgroundColor="white" variant="sm">
-              RESPONDER
-            </S.AnswerButton>
-          </S.AnswerButtonContainer>
-        </S.AswerContainer>
-        <S.AnswerQuantity>
-          <Text weight="semibold" color="blue_550">
-            1 resposta
-          </Text>
-        </S.AnswerQuantity>
+        <S.UserHandleContainer>
+          <S.AswerContainer>
+            <S.AnswerButtonContainer>
+              <S.AnswerButton backgroundColor="white" variant="sm">
+                RESPONDER
+              </S.AnswerButton>
+            </S.AnswerButtonContainer>
+          </S.AswerContainer>
+          <S.AnswerQuantity>
+            <Text
+              weight="semibold"
+              color="blue_550"
+              style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
+            >
+              1 resposta
+            </Text>
+          </S.AnswerQuantity>
+        </S.UserHandleContainer>
       </S.QuestionContentContainer>
     </S.QuestionCardContainer>
   )

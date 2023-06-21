@@ -1,10 +1,10 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import styled from 'styled-components'
+import Image from 'next/image'
+import styled, { css } from 'styled-components'
 
 export const QuestionBoxContainer = styled.div`
   position: relative;
-  max-height: 640px;
   margin-top: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
@@ -36,6 +36,27 @@ export const QuestionBoxContainer = styled.div`
     border-style: solid;
     border-color: transparent transparent transparent black;
   }
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      width: 100%;
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  `}
+`
+export const LogoIcon = styled(Image)`
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      width: 72px;
+    }
+  `}
 `
 
 export const QuestionInfo = styled.div`
@@ -71,6 +92,7 @@ export const UserLevel = styled.div`
   height: 32px;
   width: 32px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Poppins;
 
   display: flex;
   align-items: center;
@@ -149,6 +171,7 @@ export const MoreDetailsInput = styled.input`
   padding: 0.5rem 1.5rem;
   border-radius: 33px;
   border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
 `
 
 export const QuestionWrapper = styled.div`
@@ -169,4 +192,10 @@ export const UserAvatarContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 2.4rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: none;
+    }
+  `}
 `

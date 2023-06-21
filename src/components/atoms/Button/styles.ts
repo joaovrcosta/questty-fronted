@@ -9,7 +9,7 @@ export type roundingVariants =
   | 'rounded-none'
   | 'rounded-thin'
   | 'rounded-xxl'
-export type sizeVariants = 'sm' | 'md' | 'lg'
+export type sizeVariants = 'sm' | 'md' | 'lg' | 'none'
 export type colorVariants = 'white' | 'black'
 
 interface IButton {
@@ -41,6 +41,12 @@ const sizeVariants = (size: sizeVariants) => {
         font-size: ${({ theme }) => theme.typography.text.md};
         padding: 0.65rem 2.5rem;
         height: 3rem;
+      `
+    case 'none':
+      return css`
+        font-size: ${({ theme }) => theme.typography.text.md};
+        padding: 0;
+        height: 35px;
       `
   }
 }
@@ -93,4 +99,5 @@ export const Button = styled.button<IButton>`
   transition: 0.3s ease all;
 
   font-weight: bold;
+  font-family: Poppins;
 `

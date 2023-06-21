@@ -17,6 +17,8 @@ export default function Question() {
           <Text>Respostas:</Text>
           <S.AnswersContainer>
             <AnswerBox />
+            <AnswerBox />
+            <AnswerBox />
           </S.AnswersContainer>
         </S.QuestionWrapper>
       </S.QuestionContainer>

@@ -13,26 +13,26 @@ const Home: NextPageWithLayout = () => {
         <S.FeedContentWrapper>
           <S.SubjectsContainer>
             <S.SubjectContent>
-              <Heading size="md" weight="bold" color="blue_950">
+              <Heading
+                size="md"
+                weight="bold"
+                color="blue_950"
+                style={{ whiteSpace: 'nowrap' }}
+              >
                 Últimas perguntas
               </Heading>
-              <S.SubjectButtonModal
-                rounding="rounded-thin"
-                backgroundColor="blue_500"
-                color="white"
-              >
-                Matérias
-                <BsFillGearFill size={18} />
-              </S.SubjectButtonModal>
+              <S.Selected>
+                <option value="opcao1">Todas As Matérias</option>
+                <option value="opcao2">Opção 2</option>
+                <option value="opcao3">Opção 3</option>
+              </S.Selected>
+              <S.SelectedAlreadyAnswering>
+                <option value="opcao1">Sem Resposta</option>
+                <option value="opcao3">Respondidas</option>
+              </S.SelectedAlreadyAnswering>
             </S.SubjectContent>
             <S.MakeQuestionButtonContainer>
-              <S.MakeQuestionButton
-                rounding="rounded-thin"
-                variant="lg"
-                backgroundColor="transparent"
-              >
-                Perguntar
-              </S.MakeQuestionButton>
+              <S.MakeQuestionButton>Perguntar</S.MakeQuestionButton>
             </S.MakeQuestionButtonContainer>
           </S.SubjectsContainer>
           <S.QuestionsContainer>

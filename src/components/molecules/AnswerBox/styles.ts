@@ -1,5 +1,6 @@
+import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const AnswerWrapper = styled.div`
   max-width: 912px;
@@ -43,10 +44,24 @@ export const AnswerBoxContainer = styled.div`
     border-style: solid;
     border-color: transparent transparent transparent black;
   }
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      width: 100%;
+
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  `}
 `
 
 export const UserAvatarContainer = styled.div`
-  margin-top: 5rem;
+  margin-top: 6.1rem;
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.colors.black};
   height: 52px;
@@ -55,6 +70,12 @@ export const UserAvatarContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 2.4rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: none;
+    }
+  `}
 `
 
 export const AnswerInfo = styled.div`
@@ -62,7 +83,7 @@ export const AnswerInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 `
 
 export const AnswerInfoWrapper = styled.div`
@@ -81,6 +102,7 @@ export const Username = styled.div`
   justify-content: center;
   padding: 0 0.5rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Poppins;
 `
 
 export const UserLevel = styled.div`
@@ -90,6 +112,7 @@ export const UserLevel = styled.div`
   height: 32px;
   width: 32px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Poppins;
 
   display: flex;
   align-items: center;
@@ -101,4 +124,66 @@ export const AnswerContent = styled.div``
 export const QuestionTitleText = styled(Text)`
   font-family: Nunito;
   line-height: 1.2;
+`
+
+export const AnswerInfoWrapperContainer = styled.div``
+
+export const UserSubInfosContainer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  gap: 1rem;
+`
+
+export const UserTag = styled(Text)`
+  font-family: Poppins;
+`
+
+export const AnswerViews = styled(Text)`
+  font-family: Poppins;
+`
+
+export const AnswerRateContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`
+
+export const StarsRating = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: Poppins;
+`
+
+export const CrownNumberContainer = styled.div`
+  font-family: Poppins;
+`
+
+export const CrownNumber = styled(Text)``
+
+export const UserHandleActionsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+`
+
+export const LikedButton = styled(Button)`
+  font-weight: 700;
+  border: 2px solid ${({ theme }) => theme.colors.black};
+  padding: 0rem 0.75rem;
+
+  &:focus {
+    border: 2px solid #6d83f3;
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
+    transition: 0.2s ease all;
+  }
+`
+
+export const ModerationWrapper = styled.div``
+
+export const ModerateLabel = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-family: Poppins;
 `

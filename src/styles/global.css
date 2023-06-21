@@ -4,15 +4,14 @@ body {
 
 html,
 body,
-root,
-#storybook-root {
+root {
   height: 100%;
 }
 
 * {
   margin: 0;
   box-sizing: border-box !important;
-  font-family: 'Poppins';
+  /* font-family: 'Poppins'; */
 }
 
 h1,

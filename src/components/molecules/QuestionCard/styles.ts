@@ -1,6 +1,6 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -8,7 +8,6 @@ export const QuestionCardContainer = styled.div`
   border-radius: 5px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
   padding: 0.875rem 2.5rem 0.875rem 1rem;
-  max-height: 120px;
   margin-bottom: 0.5rem;
   cursor: pointer;
   opacity: 1;
@@ -30,12 +29,24 @@ export const QuestionCardContainer = styled.div`
     width: 5px;
     background-color: ${({ theme }) => theme.colors.blue_500};
   }
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      padding: 0.875rem 1rem 0.875rem 1rem;
+    }
+  `}
 `
 
 export const QuestionContentContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+    }
+  `}
 `
 
 export const UserAvatarContainer = styled.div`
@@ -57,6 +68,38 @@ export const QuestionContent = styled.div`
 export const QuestionText = styled(Text)`
   line-height: 1.4;
   font-family: Roboto;
+
+  ${({ theme }) => css`
+    @media (max-width: 540px) {
+      /* overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; */
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: 500px) {
+      width: 330px;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: 450px) {
+      width: 290px;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: 400px) {
+      width: 230px;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: 350px) {
+      width: 200px;
+    }
+  `}
 `
 
 export const QuestionInfo = styled.div`
@@ -88,6 +131,7 @@ export const AnswerButtonContainer = styled.div`
 
 export const AnswerButton = styled(Button)`
   border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.blue_300};
@@ -99,4 +143,23 @@ export const AnswerButton = styled(Button)`
 export const AnswerQuantity = styled.div`
   display: flex;
   align-items: center;
+`
+
+export const UserHandleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      flex-direction: row-reverse;
+
+      margin-top: 0.5rem;
+    }
+  `}
 `
