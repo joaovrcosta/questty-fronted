@@ -12,7 +12,7 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   weight?: WeightFont
   uppercase?: boolean
   as?: string | React.ComponentType<any>
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export function Text({

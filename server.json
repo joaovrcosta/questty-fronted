@@ -1,0 +1,64 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "content": "Lapada comercial de software pirateado está sujeito a multa de 1. 500 vezes a 2. 000 vezes o valor de mercado do software, para cada cópia instalada em sua empresa. O preço de mercado de um determinado software é de r$ 720,00, e cópias piratas do mesmo software estão instaladas nos 12 computadores dessa empresa. O valor total da multa (em reais) a que está sujeito o proprietário dos computadores é",
+        "category": "chemistry",
+        "createdAt": "2023-06-04T04:15:02.988Z",
+        "answers": [
+          {
+            "id": 1,
+            "content":"O texto, para defender a ideia de que precisam ser criados novos princípios fundamentais que extrapolem o direito à privacidade para se considerar a... ",
+            "createdAt": "2023-06-22T12:15:02.988Z"
+          },
+          {
+            "id": 2,
+            "content":"O texto, para defender a ideia de que precisam ser criados novos princípios fundamentais que extrapolem o direito à privacidade para se considerar a... ",
+            "createdAt": "2023-06-22T12:15:02.988Z"
+          },
+          {
+            "id": 3,
+            "content":"O texto, para defender a ideia de que precisam ser criados novos princípios fundamentais que extrapolem o direito à privacidade para se considerar a... ",
+            "createdAt": "2023-06-22T12:15:02.988Z"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "content": "O usuário comercial de software pirateado está sujeito a multa de 1. 500 vezes a 2. 000 vezes o valor de mercado do software, para cada cópia...",
+        "category": "math",
+        "createdAt": "2023-06-04T04:15:02.988Z",
+        "answers": [
+          {
+            "id": 1,
+            "content":"O texto, para defender a ideia de que precisam ser criados novos princípios fundamentais que extrapolem o direito à privacidade para se considerar a... ",
+            "createdAt": "2023-06-04T04:15:02.988Z"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "content": "O volume de um tronco de pirâmide hexagonal regular de bases paralelas é igual a 40 m3. Sua altura mede 3 m, e a área da base maior, 20 m2. Quanto...",
+        "category": "biology",
+        "createdAt": "2023-06-04T04:15:02.988Z",
+        "answers": []
+      },
+      {
+        "id": 56,
+        "content": "Os agricultores são os mais prejudicados, tanto pela inalação com pelo contato direto com os defensivos, o que pode causar intoxicação, alergias,...",
+        "category": "enem",
+        "createdAt": "2023-06-04T04:15:02.988Z",
+        "answers": []
+        
+      },
+      {
+        "id": 5,
+        "content": "O texto, para defender a ideia de que precisam ser criados novos princípios fundamentais que extrapolem o direito à privacidade para se considerar a... ",
+        "category": "enem",
+        "createdAt": "2023-06-04T04:15:02.988Z",
+        "answers": []
+      }
+    ]
+  }
+
+ 

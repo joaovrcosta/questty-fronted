@@ -5,8 +5,14 @@ import { BsFillGearFill } from 'react-icons/bs'
 import { NextPageWithLayout } from './_app'
 import DefaultLayout from '@/components/templates/Default'
 import { ReactElement } from 'react'
+import { useContextSelector } from 'use-context-selector'
+import { QuestionContext } from '@/contexts/QuestionsContext'
 
 const Home: NextPageWithLayout = () => {
+  const questions = useContextSelector(QuestionContext, (context) => {
+    return context.questions
+  })
+
   return (
     <>
       <S.HomePageContent>
@@ -36,11 +42,17 @@ const Home: NextPageWithLayout = () => {
             </S.MakeQuestionButtonContainer>
           </S.SubjectsContainer>
           <S.QuestionsContainer>
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
-            <QuestionCard />
+            {questions.map((question) => {
+              return (
+                <QuestionCard
+                  key={question.id}
+                  id={question.id}
+                  content={question.content}
+                  category={question.category}
+                  createdAt={question.createdAt}
+                />
+              )
+            })}
           </S.QuestionsContainer>
         </S.FeedContentWrapper>
       </S.HomePageContent>

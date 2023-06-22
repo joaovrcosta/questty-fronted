@@ -4,8 +4,15 @@ import { BiShieldAlt2 } from 'react-icons/bi'
 import { PlusCircle } from '@phosphor-icons/react'
 import Image from 'next/image'
 import { Avatar } from '@/components/atoms/Avatar'
+import { getTimeAgo } from '@/utils/getTimeAgo'
 
-export function QuestionBox() {
+interface Question {
+  id: number
+  content: string
+  createdAt: string
+}
+
+export function QuestionBox({ content, createdAt }: Question) {
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
@@ -23,13 +30,13 @@ export function QuestionBox() {
               </Text>
             </S.Username>
             <S.UserLevel>27</S.UserLevel>
-            <Text
+            <S.DateTimeText
               size="xs"
               weight="bold"
               style={{ fontFamily: 'Poppins', whiteSpace: 'nowrap' }}
             >
-              Há 35 minutos
-            </Text>
+              {getTimeAgo(createdAt)}
+            </S.DateTimeText>
           </S.QuestionInfoWrapper>
           <S.AnswerQuantityBox>
             <Text
@@ -53,28 +60,14 @@ export function QuestionBox() {
         </S.QuestionInfo>
         <S.QuestionContent>
           <S.QuestionTitle>
-            <S.QuestionTitleText size="xx1" weight="bold" color="blue_950">
-              Computação em nuvem (Cloud Computing) é um conceito que utiliza
-              uma rede de computadores interligados pela internet, usufruindo da
-              capacidade de armazenamento, da memória e da velocidade de
-              cálculos que esses servidores possuem quando estão interligados e
-              compartilhados.{' '}
-            </S.QuestionTitleText>
+            <S.QuestionTitleText
+              size="xx1"
+              weight="bold"
+              color="blue_950"
+            ></S.QuestionTitleText>
           </S.QuestionTitle>
           <S.QuestionContentText size="lg" weight="regular" color="blue_950">
-            I. A propriedade dos dados não é da organização que contratou o
-            serviço. II. É necessário ter uma conexão rápida e estável, caso
-            contrário será desfavorável no aproveitamento absoluto da
-            tecnologia. III. Pode gerar desconfiança ao manter as informações em
-            um ambiente virtual. IV. Rapidez na manipulação e no acesso à
-            informação. É correto apenas o que se afirma em: a. I, III e IV. b.
-            I e III. c. II e IV. I. A propriedade dos dados não é da organização
-            que contratou o serviço. II. É necessário ter uma conexão rápida e
-            estável, caso contrário será desfavorável no aproveitamento absoluto
-            da tecnologia. III. Pode gerar desconfiança ao manter as informações
-            em um ambiente virtual. IV. Rapidez na manipulação e no acesso à
-            informação. É correto apenas o que se afirma em: a. I, III e IV. b.
-            I e III. c. II e IV.
+            {content}
           </S.QuestionContentText>
         </S.QuestionContent>
         <S.UserHandleActionsContainer>
@@ -90,9 +83,9 @@ export function QuestionBox() {
           <S.ModerationWrapper>
             <S.ModerateLabel>
               <BiShieldAlt2 size={24} color="#EBA900" />
-              <Text size="lg" style={{ fontFamily: 'Poppins' }}>
+              <S.ModerateLabelText size="lg" style={{ fontFamily: 'Poppins' }}>
                 Moderar
-              </Text>
+              </S.ModerateLabelText>
             </S.ModerateLabel>
           </S.ModerationWrapper>
         </S.UserHandleActionsContainer>

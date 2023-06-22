@@ -13,8 +13,7 @@ export const AnswerWrapper = styled.div`
 
 export const AnswerBoxContainer = styled.div`
   position: relative;
-  max-height: 640px;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
   padding: 2rem;
@@ -25,7 +24,7 @@ export const AnswerBoxContainer = styled.div`
   &::before {
     content: '';
     position: absolute;
-    top: 25%;
+    top: 80px;
     left: -31px;
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
@@ -38,7 +37,7 @@ export const AnswerBoxContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    top: 25%;
+    top: 80px;
     left: -32px;
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
@@ -57,6 +56,10 @@ export const AnswerBoxContainer = styled.div`
       &::after {
         display: none;
       }
+
+      border-radius: 0;
+      border-right: none;
+      border-right: none;
     }
   `}
 `
@@ -122,9 +125,10 @@ export const UserLevel = styled.div`
 
 export const AnswerContent = styled.div``
 
-export const QuestionTitleText = styled(Text)`
+export const AnswerContentText = styled(Text)`
   font-family: Nunito;
   line-height: 1.2;
+  height: 100%;
 `
 
 export const AnswerInfoWrapperContainer = styled.div``
@@ -190,7 +194,7 @@ export const ModerateLabel = styled.div`
 `
 
 export const AvatarContainer = styled.div`
-  margin-top: 6rem;
+  margin-top: 80px;
   margin-right: 2.4rem;
 
   ${({ theme }) => css`

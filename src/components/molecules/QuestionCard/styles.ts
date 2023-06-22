@@ -68,6 +68,7 @@ export const QuestionContent = styled.div`
 export const QuestionText = styled(Text)`
   line-height: 1.4;
   font-family: Roboto;
+  /* height: 68px; */
 
   ${({ theme }) => css`
     @media (max-width: 540px) {

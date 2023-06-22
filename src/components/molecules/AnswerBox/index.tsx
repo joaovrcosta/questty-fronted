@@ -4,8 +4,15 @@ import { Text } from '@/components/atoms/Text'
 import starIcon from '../../../assets/star.svg'
 import { BiShieldAlt2 } from 'react-icons/bi'
 import { Avatar } from '@/components/atoms/Avatar'
+import { getTimeAgo } from '@/utils/getTimeAgo'
 
-export function AnswerBox() {
+interface Answer {
+  id: number
+  content: string
+  createdAt: string
+}
+
+export function AnswerBox({ id, content, createdAt }: Answer) {
   return (
     <S.AnswerWrapper>
       <S.AvatarContainer>
@@ -20,7 +27,7 @@ export function AnswerBox() {
               </S.Username>
               <S.UserLevel>183</S.UserLevel>
               <Text size="xs" style={{ fontFamily: 'Poppins' }}>
-                Há 24 minutos
+                {getTimeAgo(createdAt)}
               </Text>
             </S.AnswerInfoWrapper>
             <S.UserSubInfosContainer>
@@ -41,21 +48,9 @@ export function AnswerBox() {
           </S.AnswerRateContainer>
         </S.AnswerInfo>
         <S.AnswerContent>
-          <S.QuestionTitleText size="lg" weight="regular" color="blue_950">
-            I. A propriedade dos dados não é da organização que contratou o
-            serviço. II. É necessário ter uma conexão rápida e estável, caso
-            contrário será desfavorável no aproveitamento absoluto da
-            tecnologia. III. Pode gerar desconfiança ao manter as informações em
-            um ambiente virtual. IV. Rapidez na manipulação e no acesso à
-            informação. É correto apenas o que se afirma em: a. I, III e IV. b.
-            I e III. c. II e IV. I. A propriedade dos dados não é da organização
-            que contratou o serviço. II. É necessário ter uma conexão rápida e
-            estável, caso contrário será desfavorável no aproveitamento absoluto
-            da tecnologia. III. Pode gerar desconfiança ao manter as informações
-            em um ambiente virtual. IV. Rapidez na manipulação e no acesso à
-            informação. É correto apenas o que se afirma em: a. I, III e IV. b.
-            I e III. c. II e IV.
-          </S.QuestionTitleText>
+          <S.AnswerContentText size="lg" weight="regular" color="blue_950">
+            {content}
+          </S.AnswerContentText>
         </S.AnswerContent>
         <S.UserHandleActionsContainer>
           <S.LikedButton

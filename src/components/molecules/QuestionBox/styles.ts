@@ -15,7 +15,7 @@ export const QuestionBoxContainer = styled.div`
   &::before {
     content: '';
     position: absolute;
-    top: 14.7%;
+    top: 80px;
     left: -31px;
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
@@ -28,7 +28,7 @@ export const QuestionBoxContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    top: 14.7%;
+    top: 80px;
     left: -32px;
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
@@ -162,6 +162,7 @@ export const UserHandleActionsContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
+  margin-top: 3rem;
 `
 
 export const AnswerButton = styled(Button)`
@@ -182,6 +183,16 @@ export const ModerateLabel = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+  `}
+
+  @media (max-width: 280px) {
+    display: none;
+  }
 `
 
 // More Details
@@ -223,29 +234,8 @@ export const UserAvatarContainer = styled.div`
 `
 
 export const AvatarContainer = styled.div`
-  margin-top: 4.5rem;
+  margin-top: 55px;
   margin-right: 2.4rem;
-
-  ${({ theme }) => css`
-    @media (max-width: 850px) {
-      margin-top: 6.4rem;
-      margin-right: 2.4rem;
-    }
-  `};
-
-  ${({ theme }) => css`
-    @media (max-width: 845px) {
-      margin-top: 5rem;
-      margin-right: 2.4rem;
-    }
-  `};
-
-  ${({ theme }) => css`
-    @media (max-width: 810px) {
-      margin-top: 5.2rem;
-      margin-right: 2.4rem;
-    }
-  `};
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -262,4 +252,18 @@ export const AvatarInfoContainer = styled.div`
       display: block;
     }
   `};
+`
+
+export const ModerateLabelText = styled(Text)`
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      font-size: ${({ theme }) => theme.typography.text.md};
+    }
+  `};
+`
+
+export const DateTimeText = styled(Text)`
+  @media (max-width: 280px) {
+    display: none;
+  }
 `
