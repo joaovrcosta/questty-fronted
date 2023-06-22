@@ -3,30 +3,32 @@ import * as S from './styles'
 import { BiShieldAlt2 } from 'react-icons/bi'
 import { PlusCircle } from '@phosphor-icons/react'
 import Image from 'next/image'
+import { Avatar } from '@/components/atoms/Avatar'
 
 export function QuestionBox() {
   return (
     <S.QuestionWrapper>
-      <S.UserAvatarContainer>
-        <Image
-          src="https://avatars.githubusercontent.com/u/70654718?v=4"
-          alt=""
-          width={48}
-          height={48}
-          style={{ borderRadius: '50%' }}
-        />
-      </S.UserAvatarContainer>
+      <S.AvatarContainer>
+        <Avatar />
+      </S.AvatarContainer>
       <S.QuestionBoxContainer>
         <S.QuestionInfo>
           <S.QuestionInfoWrapper>
+            <S.AvatarInfoContainer>
+              <Avatar />
+            </S.AvatarInfoContainer>
             <S.Username>
               <Text style={{ fontFamily: 'Poppins' }} weight="medium">
                 JujuR0drigues
               </Text>
             </S.Username>
             <S.UserLevel>27</S.UserLevel>
-            <Text size="xs" style={{ fontFamily: 'Poppins' }}>
-              12/11/21 às 11:26
+            <Text
+              size="xs"
+              weight="bold"
+              style={{ fontFamily: 'Poppins', whiteSpace: 'nowrap' }}
+            >
+              Há 35 minutos
             </Text>
           </S.QuestionInfoWrapper>
           <S.AnswerQuantityBox>
@@ -59,22 +61,20 @@ export function QuestionBox() {
               compartilhados.{' '}
             </S.QuestionTitleText>
           </S.QuestionTitle>
-          <S.QuestionContentText>
-            <S.QuestionTitleText size="lg" weight="regular" color="blue_950">
-              I. A propriedade dos dados não é da organização que contratou o
-              serviço. II. É necessário ter uma conexão rápida e estável, caso
-              contrário será desfavorável no aproveitamento absoluto da
-              tecnologia. III. Pode gerar desconfiança ao manter as informações
-              em um ambiente virtual. IV. Rapidez na manipulação e no acesso à
-              informação. É correto apenas o que se afirma em: a. I, III e IV.
-              b. I e III. c. II e IV. I. A propriedade dos dados não é da
-              organização que contratou o serviço. II. É necessário ter uma
-              conexão rápida e estável, caso contrário será desfavorável no
-              aproveitamento absoluto da tecnologia. III. Pode gerar
-              desconfiança ao manter as informações em um ambiente virtual. IV.
-              Rapidez na manipulação e no acesso à informação. É correto apenas
-              o que se afirma em: a. I, III e IV. b. I e III. c. II e IV.
-            </S.QuestionTitleText>
+          <S.QuestionContentText size="lg" weight="regular" color="blue_950">
+            I. A propriedade dos dados não é da organização que contratou o
+            serviço. II. É necessário ter uma conexão rápida e estável, caso
+            contrário será desfavorável no aproveitamento absoluto da
+            tecnologia. III. Pode gerar desconfiança ao manter as informações em
+            um ambiente virtual. IV. Rapidez na manipulação e no acesso à
+            informação. É correto apenas o que se afirma em: a. I, III e IV. b.
+            I e III. c. II e IV. I. A propriedade dos dados não é da organização
+            que contratou o serviço. II. É necessário ter uma conexão rápida e
+            estável, caso contrário será desfavorável no aproveitamento absoluto
+            da tecnologia. III. Pode gerar desconfiança ao manter as informações
+            em um ambiente virtual. IV. Rapidez na manipulação e no acesso à
+            informação. É correto apenas o que se afirma em: a. I, III e IV. b.
+            I e III. c. II e IV.
           </S.QuestionContentText>
         </S.QuestionContent>
         <S.UserHandleActionsContainer>

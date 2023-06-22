@@ -9,12 +9,13 @@ interface IHeader {
 
 export const HeaderContainer = styled.div<IHeader>`
   background-color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: 5rem;
+  /* margin-bottom: 5rem; */
+  margin-right: calc(-16px);
 
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 99999;
   width: 100%;
 
   ${({ theme }) => css`
@@ -64,6 +65,7 @@ export const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 1rem;
 `
 
 export const SearchInput = styled.input`
@@ -85,7 +87,7 @@ export const SearchInput = styled.input`
 export const HeaderActionsContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
 `
 
 export const StyledLink = styled(Link)`
@@ -103,6 +105,7 @@ export const StyledButton = styled(Button)`
 `
 
 export const MakeYourQuestionButton = styled(Button)`
+  margin-left: 1rem;
   &:hover {
     background-color: #eaece1;
     transition: 0.3s ease all;
@@ -135,6 +138,7 @@ export const SignInButton = styled(Button)`
 `
 
 export const SignUpButton = styled(Button)`
+  margin-left: 1rem;
   color: ${({ theme }) => theme.colors.white};
 
   &:hover {

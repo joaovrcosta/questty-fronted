@@ -10,8 +10,8 @@ export default function SignIn() {
   return (
     <>
       <Header />
-      <S.SignInContainer>
-        <S.SignInContent>
+      <S.SignUpContainer>
+        <S.SignUpContent>
           <Heading size="md" color="black" weight="bold">
             Começe agora mesmo:
           </Heading>
@@ -43,7 +43,7 @@ export default function SignIn() {
               e Política de Privacidade do Questty .
             </S.TermsAndPolicies>
             <S.EnterWithContainer>
-              <Text weight="bold" size="lg">
+              <Text weight="bold" size="lg" style={{ fontFamily: 'Poppins' }}>
                 Ou inscreva-se usando:
               </Text>
               <S.SocialAuthContainer>
@@ -56,8 +56,8 @@ export default function SignIn() {
               </S.SocialAuthContainer>
             </S.EnterWithContainer>
           </S.FormContainer>
-        </S.SignInContent>
-      </S.SignInContainer>
+        </S.SignUpContent>
+      </S.SignUpContainer>
     </>
   )
 }

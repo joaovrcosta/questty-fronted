@@ -6,10 +6,19 @@ export const HomePageContent = styled.div`
   max-width: 1280px;
   margin: 0 auto;
 
+  padding: 0.85rem 1rem 1.5rem 1rem;
+
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 0;
       padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: 480px) {
+      gap: 0;
+      width: 100%;
     }
   `}
 `

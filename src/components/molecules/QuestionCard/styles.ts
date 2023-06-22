@@ -100,10 +100,22 @@ export const QuestionText = styled(Text)`
       width: 200px;
     }
   `}
+
+  ${({ theme }) => css`
+    @media (max-width: 280px) {
+      width: 150px;
+    }
+  `}
 `
 
 export const QuestionInfo = styled.div`
   width: 24rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  `}
 `
 
 export const SubjectAndDateTimeContainer = styled.div`

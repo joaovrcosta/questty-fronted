@@ -83,6 +83,8 @@ const baseProps = css<InputProps>`
 export const Input = styled.input<InputProps>`
   ${baseProps}
 
+  font-family: Poppins;
+
   ${({ sizeOf }) =>
     sizeOf == 'lg' &&
     css`
@@ -105,6 +107,7 @@ export const InputBox = styled.div<InputBoxInterface>`
   position: relative;
   width: 100%;
   height: 100%;
+  font-family: Poppins;
 
   ${({ hasError }) =>
     hasError &&

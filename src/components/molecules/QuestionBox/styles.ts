@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components'
 
 export const QuestionBoxContainer = styled.div`
   position: relative;
-  margin-top: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
   padding: 2rem;
@@ -16,7 +15,7 @@ export const QuestionBoxContainer = styled.div`
   &::before {
     content: '';
     position: absolute;
-    top: 13%;
+    top: 14.7%;
     left: -31px;
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
@@ -29,7 +28,7 @@ export const QuestionBoxContainer = styled.div`
   &::after {
     content: '';
     position: absolute;
-    top: 13%;
+    top: 14.7%;
     left: -32px;
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
@@ -40,6 +39,9 @@ export const QuestionBoxContainer = styled.div`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       width: 100%;
+      background-color: transparent;
+      border: none;
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
 
       &::before {
         display: none;
@@ -103,6 +105,12 @@ export const AnswerQuantityBox = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: none;
+    }
+  `}
 `
 
 export const AnswerQuantity = styled.div`
@@ -124,15 +132,29 @@ export const QuestionContent = styled.div`
 `
 
 export const QuestionTitleText = styled(Text)`
-  font-family: Nunito;
   line-height: 1.2;
+  font-family: Inter;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      line-height: 1.4;
+    }
+  `}
 `
 
 export const QuestionTitle = styled.div`
   margin-bottom: 1rem;
 `
 
-export const QuestionContentText = styled.div``
+export const QuestionContentText = styled(Text)`
+  font-family: Nunito;
+
+  ${({ theme }) => css`
+    @media (max-width: 735px) {
+      font-size: 16px;
+    }
+  `};
+`
 
 // User Handle Actions
 export const UserHandleActionsContainer = styled.div`
@@ -198,4 +220,46 @@ export const UserAvatarContainer = styled.div`
       display: none;
     }
   `}
+`
+
+export const AvatarContainer = styled.div`
+  margin-top: 4.5rem;
+  margin-right: 2.4rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 850px) {
+      margin-top: 6.4rem;
+      margin-right: 2.4rem;
+    }
+  `};
+
+  ${({ theme }) => css`
+    @media (max-width: 845px) {
+      margin-top: 5rem;
+      margin-right: 2.4rem;
+    }
+  `};
+
+  ${({ theme }) => css`
+    @media (max-width: 810px) {
+      margin-top: 5.2rem;
+      margin-right: 2.4rem;
+    }
+  `};
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: none;
+    }
+  `};
+`
+
+export const AvatarInfoContainer = styled.div`
+  display: none;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: block;
+    }
+  `};
 `

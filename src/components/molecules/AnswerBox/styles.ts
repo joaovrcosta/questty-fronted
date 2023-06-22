@@ -1,3 +1,4 @@
+import { Avatar } from '@/components/atoms/Avatar'
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import styled, { css } from 'styled-components'
@@ -186,4 +187,15 @@ export const ModerateLabel = styled.div`
   gap: 0.5rem;
   align-items: center;
   font-family: Poppins;
+`
+
+export const AvatarContainer = styled.div`
+  margin-top: 6rem;
+  margin-right: 2.4rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      display: none;
+    }
+  `};
 `

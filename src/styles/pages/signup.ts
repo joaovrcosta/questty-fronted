@@ -1,14 +1,21 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const SignInContainer = styled.div`
+export const SignUpContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  margin-top: 12rem;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      padding: 0 2rem;
+    }
+  `}
 `
 
-export const SignInContent = styled.div`
+export const SignUpContent = styled.div`
   max-width: 374px;
   margin: 0 auto;
   margin-top: 2.5rem;
@@ -26,6 +33,7 @@ export const TermsAndPolicies = styled(Text)`
   font-weight: 400;
   text-decoration: none;
   margin-bottom: 1.75rem;
+  font-family: Poppins;
 `
 
 export const ButtonContainer = styled.div`

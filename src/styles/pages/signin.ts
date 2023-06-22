@@ -1,10 +1,18 @@
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const SignInContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  margin-top: 12rem;
+  font-family: Poppins;
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      padding: 0 2rem;
+    }
+  `}
 `
 
 export const SignInContent = styled.div`

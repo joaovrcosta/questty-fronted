@@ -7,6 +7,7 @@ export const Overlay = styled(Dialog.Overlay)`
   height: 100vh;
   inset: 0;
   background: rgba(253, 255, 244, 0.8);
+  overflow: hidden;
 `
 
 export const Content = styled(Dialog.Content)`
@@ -18,7 +19,7 @@ export const Content = styled(Dialog.Content)`
   font-family: Poppins;
 
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -71,10 +72,18 @@ export const Content = styled(Dialog.Content)`
   }
 
   ${({ theme }) => css`
-    @media (max-width: 700px) {
-      min-width: 32rem;
+    @media (max-width: 768px) {
+      top: 50%;
+      width: 100%;
     }
   `}
+
+  ${({ theme }) => css`
+    @media (max-width: 680px) {
+      min-width: 25rem;
+    }
+  `}
+
 
   ${({ theme }) => css`
     @media (max-width: 512px) {

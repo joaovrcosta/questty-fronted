@@ -3,18 +3,14 @@ import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import starIcon from '../../../assets/star.svg'
 import { BiShieldAlt2 } from 'react-icons/bi'
+import { Avatar } from '@/components/atoms/Avatar'
+
 export function AnswerBox() {
   return (
     <S.AnswerWrapper>
-      <S.UserAvatarContainer>
-        <Image
-          src="https://avatars.githubusercontent.com/u/70654718?v=4"
-          alt=""
-          width={48}
-          height={48}
-          style={{ borderRadius: '50%' }}
-        />
-      </S.UserAvatarContainer>
+      <S.AvatarContainer>
+        <Avatar />
+      </S.AvatarContainer>
       <S.AnswerBoxContainer>
         <S.AnswerInfo>
           <S.AnswerInfoWrapperContainer>
@@ -24,7 +20,7 @@ export function AnswerBox() {
               </S.Username>
               <S.UserLevel>183</S.UserLevel>
               <Text size="xs" style={{ fontFamily: 'Poppins' }}>
-                12/11/21 às 11:26
+                Há 24 minutos
               </Text>
             </S.AnswerInfoWrapper>
             <S.UserSubInfosContainer>
