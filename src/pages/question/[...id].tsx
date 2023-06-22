@@ -13,11 +13,16 @@ interface Question {
   id: number
   content: string
   createdAt: string
+
   answers: {
     id: string
     content: string
     createdAt: string
   }[]
+}
+
+interface QuestionProps {
+  answersQuantity?: number
 }
 
 export default function Question() {
@@ -30,6 +35,10 @@ export default function Question() {
 
   const question = questions.find((question) => question.id === Number(id))
 
+  const answersQuantity = question?.answers.length || 0
+
+  const limitedAnswers = question?.answers.slice(0, 3) || []
+
   return (
     <>
       <Header />
@@ -41,6 +50,7 @@ export default function Question() {
               id={question.id}
               content={question.content}
               createdAt={question.createdAt}
+              answersQuantity={answersQuantity}
             />
           )}
           <S.AnswersSection>
@@ -49,11 +59,11 @@ export default function Question() {
             </S.TextSectionTitle>
           </S.AnswersSection>
           <S.AnswersContainer>
-            {question && question.answers.length > 0 ? (
-              question.answers.map((answer, index) => (
+            {limitedAnswers.length > 0 ? (
+              limitedAnswers.map((answer, index) => (
                 <AnswerBox
-                  key={index} // Usando o índice como chave, pois não temos um identificador único 'id' nas respostas
-                  id={index} // Usando o índice como identificador
+                  key={index}
+                  id={index}
                   content={answer.content}
                   createdAt={answer.createdAt}
                 />

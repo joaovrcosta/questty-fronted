@@ -8,4 +8,10 @@ export const UserAvatarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.colors.white};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_950};
+    transition: 0.2s ease all;
+  }
 `

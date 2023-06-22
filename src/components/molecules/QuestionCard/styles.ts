@@ -9,7 +9,6 @@ export const QuestionCardContainer = styled.div`
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
   padding: 0.875rem 2.5rem 0.875rem 1rem;
   margin-bottom: 0.5rem;
-  cursor: pointer;
   opacity: 1;
   filter: brightness(100%);
   transition: opacity 0.3s ease all, filter 0.3s ease;
@@ -175,4 +174,8 @@ export const UserHandleContainer = styled.div`
       margin-top: 0.5rem;
     }
   `}
+`
+
+export const UserAvatarWrapper = styled.div`
+  margin-right: 1rem;
 `

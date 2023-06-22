@@ -1,18 +1,35 @@
 import { Text } from '@/components/atoms/Text'
 import * as S from './styles'
 import { BiShieldAlt2 } from 'react-icons/bi'
-import { PlusCircle } from '@phosphor-icons/react'
+import { PlusCircle, Eye } from '@phosphor-icons/react'
 import Image from 'next/image'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
+import { useContextSelector } from 'use-context-selector'
+import { QuestionContext } from '@/contexts/QuestionsContext'
 
 interface Question {
   id: number
   content: string
   createdAt: string
+  answersQuantity: number
 }
 
-export function QuestionBox({ content, createdAt }: Question) {
+export function QuestionBox({
+  id,
+  content,
+  createdAt,
+  answersQuantity,
+}: Question) {
+  const questions = useContextSelector(QuestionContext, (context) => {
+    return context.questions
+  })
+
+  const answerCount = questions.filter((question) => question.id === id)[0]
+    ?.answers.length
+  const hasThreeOrMoreAnswers = answerCount >= 3
+  const limitedAnswerCount = Math.min(answerCount, 3)
+
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
@@ -26,7 +43,7 @@ export function QuestionBox({ content, createdAt }: Question) {
             </S.AvatarInfoContainer>
             <S.Username>
               <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                JujuR0drigues
+                joaovrcosta
               </Text>
             </S.Username>
             <S.UserLevel>27</S.UserLevel>
@@ -53,7 +70,7 @@ export function QuestionBox({ content, createdAt }: Question) {
                 color="blue_500"
                 style={{ fontFamily: 'Poppins' }}
               >
-                2
+                {answersQuantity}
               </Text>
             </S.AnswerQuantity>
           </S.AnswerQuantityBox>
@@ -71,15 +88,29 @@ export function QuestionBox({ content, createdAt }: Question) {
           </S.QuestionContentText>
         </S.QuestionContent>
         <S.UserHandleActionsContainer>
-          <S.AnswerButton
-            variant="lg"
-            rounding="rounded-xxl"
-            color="white"
-            backgroundColor="blue_500"
-          >
-            <PlusCircle size={24} weight="bold" />
-            RESPONDER
-          </S.AnswerButton>
+          {hasThreeOrMoreAnswers ? (
+            <S.AnswerButton
+              variant="lg"
+              rounding="rounded-xxl"
+              color="white"
+              backgroundColor="black"
+            >
+              <Eye size={24} weight="bold" />
+              <Text color="white" weight="bold">
+                VER {limitedAnswerCount} RESPOSTAS
+              </Text>
+            </S.AnswerButton>
+          ) : (
+            <S.AnswerButton
+              variant="lg"
+              rounding="rounded-xxl"
+              color="white"
+              backgroundColor="blue_500"
+            >
+              <PlusCircle size={24} weight="bold" />
+              RESPONDER
+            </S.AnswerButton>
+          )}
           <S.ModerationWrapper>
             <S.ModerateLabel>
               <BiShieldAlt2 size={24} color="#EBA900" />

@@ -90,7 +90,6 @@ export const SubjectContent = styled.div`
     @media (max-width: 768px) {
       flex-direction: column;
       width: 100%;
-      padding: 0 1.375rem;
     }
   `}
 `
@@ -107,7 +106,8 @@ export const FeedContentWrapper = styled.div`
 
 export const MakeQuestionButton = styled.button`
   padding: 1.5rem;
-  background: transparent;
+  background-color: ${({ theme }) => theme.colors.blue_950};
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
   padding: 0.85rem 2.5rem;
   font-family: Poppins;
@@ -118,8 +118,8 @@ export const MakeQuestionButton = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.blue_950};
-    color: ${({ theme }) => theme.colors.white};
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.black};
   }
 
   &:focus {
@@ -138,6 +138,7 @@ export const MakeQuestionButton = styled.button`
     @media (max-width: 768px) {
       width: 100%;
       display: block;
+      border-radius: 25px;
     }
   `}
 `

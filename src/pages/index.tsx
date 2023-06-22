@@ -7,6 +7,8 @@ import DefaultLayout from '@/components/templates/Default'
 import { ReactElement } from 'react'
 import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
+import * as Dialog from '@radix-ui/react-dialog'
+import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 
 const Home: NextPageWithLayout = () => {
   const questions = useContextSelector(QuestionContext, (context) => {
@@ -37,9 +39,12 @@ const Home: NextPageWithLayout = () => {
                 <option value="opcao3">Respondidas</option>
               </S.SelectedAlreadyAnswering>
             </S.SubjectContent>
-            <S.MakeQuestionButtonContainer>
-              <S.MakeQuestionButton>Perguntar</S.MakeQuestionButton>
-            </S.MakeQuestionButtonContainer>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <S.MakeQuestionButton>Perguntar</S.MakeQuestionButton>
+              </Dialog.Trigger>
+              <NewTransactionModal />
+            </Dialog.Root>
           </S.SubjectsContainer>
           <S.QuestionsContainer>
             {questions.map((question) => {

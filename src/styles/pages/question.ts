@@ -10,9 +10,14 @@ export const QuestionContainer = styled.div`
 export const QuestionWrapper = styled.div`
   max-width: 912px;
   margin: 0 auto;
+  margin-top: 8rem;
 `
 
-export const AnswersContainer = styled.div``
+export const AnswersContainer = styled.div`
+  & > *:first-child {
+    margin-top: 2.5rem;
+  }
+`
 
 export const AnswersSection = styled.div`
   margin-left: 5.7rem;

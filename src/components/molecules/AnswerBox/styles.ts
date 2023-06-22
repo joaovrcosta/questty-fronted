@@ -13,10 +13,9 @@ export const AnswerWrapper = styled.div`
 
 export const AnswerBoxContainer = styled.div`
   position: relative;
-  margin-top: 2.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 8px;
   width: 90%;
   box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
@@ -157,6 +156,10 @@ export const StarsRating = styled.div`
   align-items: center;
   gap: 0.5rem;
   font-family: Poppins;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const CrownNumberContainer = styled.div`

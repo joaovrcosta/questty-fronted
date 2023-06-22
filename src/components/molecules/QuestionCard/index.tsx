@@ -5,6 +5,7 @@ import { QuestionContext } from '@/contexts/QuestionsContext'
 import { useContextSelector } from 'use-context-selector'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
+import { Avatar } from '@/components/atoms/Avatar'
 
 export type subjectsType =
   | 'math'
@@ -32,19 +33,18 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
     router.push(`/question/${id}`)
   }
 
+  const answerCount = questions.filter((question) => question.id === id)[0]
+    ?.answers.length
+  const hasThreeOrMoreAnswers = answerCount >= 3
+  const limitedAnswerCount = Math.min(answerCount, 3)
+
   return (
     <S.QuestionCardContainer>
       <S.QuestionContentContainer>
         <S.QuestionContent>
-          <S.UserAvatarContainer>
-            <Image
-              src="https://avatars.githubusercontent.com/u/70654718?v=4"
-              alt=""
-              width={48}
-              height={48}
-              style={{ borderRadius: '50%' }}
-            />
-          </S.UserAvatarContainer>
+          <S.UserAvatarWrapper>
+            <Avatar />
+          </S.UserAvatarWrapper>
           <S.QuestionInfo>
             <S.QuestionText>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
@@ -77,18 +77,11 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
               color="blue_550"
               style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
             >
-              {questions.filter((question) => question.id === id)[0]?.answers
-                .length > 0
-                ? `${
-                    questions.filter((question) => question.id === id)[0]
-                      ?.answers.length
-                  } ${
-                    questions.filter((question) => question.id === id)[0]
-                      ?.answers.length > 1
-                      ? 'respostas'
-                      : 'resposta'
+              {answerCount > 0
+                ? `${limitedAnswerCount} ${
+                    limitedAnswerCount > 1 ? 'respostas' : 'resposta'
                   }`
-                : 'Seja o primeiro a responder'}
+                : 'Seja o primeiro(a) a responder'}
             </Text>
           </S.AnswerQuantity>
         </S.UserHandleContainer>
