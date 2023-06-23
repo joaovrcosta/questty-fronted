@@ -3,10 +3,8 @@ import { useRouter } from 'next/router'
 import * as S from '../../styles/pages/question'
 import { QuestionBox } from '@/components/molecules/QuestionBox'
 import { AnswerBox } from '@/components/molecules/AnswerBox'
-import { Text } from '@/components/atoms/Text'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import { useContextSelector } from 'use-context-selector'
-import { formatDistanceToNow, parseISO } from 'date-fns'
 import { NotFoundAnswersBox } from '@/components/molecules/NotFoundAnswerBox'
 
 interface Question {
@@ -18,6 +16,7 @@ interface Question {
     id: string
     content: string
     createdAt: string
+    thanks: number
   }[]
 }
 
@@ -66,6 +65,8 @@ export default function Question() {
                   id={index}
                   content={answer.content}
                   createdAt={answer.createdAt}
+                  isGolden={false} // Set whether the question is golden or not
+                  thanks={answer.thanks}
                 />
               ))
             ) : (

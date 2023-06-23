@@ -67,6 +67,7 @@ export function QuestionBox({
             <S.AnswerQuantity>
               <Text
                 size="xx1"
+                weight="bold"
                 color="blue_500"
                 style={{ fontFamily: 'Poppins' }}
               >
@@ -89,17 +90,17 @@ export function QuestionBox({
         </S.QuestionContent>
         <S.UserHandleActionsContainer>
           {hasThreeOrMoreAnswers ? (
-            <S.AnswerButton
+            <S.SeeAnswerButton
               variant="lg"
               rounding="rounded-xxl"
               color="white"
               backgroundColor="black"
             >
               <Eye size={24} weight="bold" />
-              <Text color="white" weight="bold">
+              <Text color="white" weight="medium">
                 VER {limitedAnswerCount} RESPOSTAS
               </Text>
-            </S.AnswerButton>
+            </S.SeeAnswerButton>
           ) : (
             <S.AnswerButton
               variant="lg"

@@ -5,20 +5,29 @@ import starIcon from '../../../assets/star.svg'
 import { BiShieldAlt2 } from 'react-icons/bi'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
+import { CheckCircle } from '@phosphor-icons/react'
 
 interface Answer {
   id: number
   content: string
   createdAt: string
+  isGolden?: boolean
+  thanks: number
 }
 
-export function AnswerBox({ id, content, createdAt }: Answer) {
+export function AnswerBox({
+  id,
+  content,
+  createdAt,
+  isGolden,
+  thanks,
+}: Answer) {
   return (
     <S.AnswerWrapper>
       <S.AvatarContainer>
         <Avatar />
       </S.AvatarContainer>
-      <S.AnswerBoxContainer>
+      <S.AnswerBoxContainer isGolden={isGolden ?? false}>
         <S.AnswerInfo>
           <S.AnswerInfoWrapperContainer>
             <S.AnswerInfoWrapper>
@@ -26,9 +35,11 @@ export function AnswerBox({ id, content, createdAt }: Answer) {
                 <Text weight="medium">rodrigolopes</Text>
               </S.Username>
               <S.UserLevel>183</S.UserLevel>
-              <Text size="xs" style={{ fontFamily: 'Poppins' }}>
-                {getTimeAgo(createdAt)}
-              </Text>
+              <S.CreatedAtContainer>
+                <Text size="xs" style={{ fontFamily: 'Poppins' }}>
+                  {getTimeAgo(createdAt)}
+                </Text>
+              </S.CreatedAtContainer>
             </S.AnswerInfoWrapper>
             <S.UserSubInfosContainer>
               <S.UserTag size="xs" weight="bold">
@@ -38,9 +49,17 @@ export function AnswerBox({ id, content, createdAt }: Answer) {
             </S.UserSubInfosContainer>
           </S.AnswerInfoWrapperContainer>
           <S.AnswerRateContainer>
+            {isGolden && (
+              <S.BestAnswerStamp>
+                <Text size="xs" weight="bold">
+                  MELHOR RESPOSTA
+                </Text>
+                <CheckCircle size={24} />
+              </S.BestAnswerStamp>
+            )}
             <S.StarsRating>
               <Image src={starIcon} alt="" />
-              <Text weight="bold">92</Text>
+              <Text weight="bold">{thanks}</Text>
             </S.StarsRating>
             <S.CrownNumberContainer>
               <S.CrownNumber weight="bold">4,1</S.CrownNumber>
@@ -61,7 +80,7 @@ export function AnswerBox({ id, content, createdAt }: Answer) {
           >
             Valeu
             <Image src={starIcon} alt="" />
-            <Text weight="bold">92</Text>
+            <Text weight="bold">{thanks}</Text>
           </S.LikedButton>
           <S.ModerationWrapper>
             <S.ModerateLabel>

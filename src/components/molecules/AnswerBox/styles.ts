@@ -3,6 +3,10 @@ import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import styled, { css } from 'styled-components'
 
+interface IAnswerBox {
+  isGolden: boolean
+}
+
 export const AnswerWrapper = styled.div`
   max-width: 912px;
   margin: 0 auto;
@@ -11,10 +15,13 @@ export const AnswerWrapper = styled.div`
   margin-bottom: 2.5rem;
 `
 
-export const AnswerBoxContainer = styled.div`
+export const AnswerBoxContainer = styled.div<IAnswerBox>`
   position: relative;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme, isGolden }) =>
+    isGolden ? theme.colors.yellow_180 : theme.colors.white};
+  border: 1px solid
+    ${({ theme, isGolden }) =>
+      isGolden ? theme.colors.yellow_500 : theme.colors.black};
   padding: 1.5rem 2rem;
   border-radius: 8px;
   width: 90%;
@@ -29,7 +36,8 @@ export const AnswerBoxContainer = styled.div`
     border-width: 32px 0 32px 32px;
     border-style: solid;
     border-color: transparent transparent transparent
-      ${({ theme }) => theme.colors.white};
+      ${({ theme, isGolden }) =>
+        isGolden ? theme.colors.yellow_180 : theme.colors.white};
     z-index: 9999;
   }
 
@@ -41,7 +49,9 @@ export const AnswerBoxContainer = styled.div`
     transform: translateY(-50%) rotate(-180deg);
     border-width: 32px 0 32px 32px;
     border-style: solid;
-    border-color: transparent transparent transparent black;
+    border-color: transparent transparent transparent
+      ${({ theme, isGolden }) =>
+        isGolden ? theme.colors.yellow_500 : theme.colors.black};
   }
 
   ${({ theme }) => css`
@@ -148,6 +158,8 @@ export const AnswerViews = styled(Text)`
 
 export const AnswerRateContainer = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 `
 
@@ -166,7 +178,11 @@ export const CrownNumberContainer = styled.div`
   font-family: Poppins;
 `
 
-export const CrownNumber = styled(Text)``
+export const CrownNumber = styled(Text)`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
 
 export const UserHandleActionsContainer = styled.div`
   display: flex;
@@ -197,7 +213,7 @@ export const ModerateLabel = styled.div`
 `
 
 export const AvatarContainer = styled.div`
-  margin-top: 80px;
+  margin-top: 55px;
   margin-right: 2.4rem;
 
   ${({ theme }) => css`
@@ -205,4 +221,30 @@ export const AvatarContainer = styled.div`
       display: none;
     }
   `};
+`
+
+export const BestAnswerStamp = styled.div`
+  background-color: ${({ theme }) => theme.colors.yellow_500};
+  padding: 0.25rem 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  border-radius: 25px;
+  font-family: Poppins;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    /* display: none; */
+    svg {
+      display: none;
+    }
+  }
+`
+
+export const CreatedAtContainer = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
 `

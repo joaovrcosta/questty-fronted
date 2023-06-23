@@ -19,6 +19,7 @@ interface Question {
     id: string
     content: string
     createdAt: string
+    thanks: number
   }[]
 }
 

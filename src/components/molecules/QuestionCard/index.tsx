@@ -60,6 +60,20 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
+          <S.AnswerQuantity>
+            <Text
+              weight="semibold"
+              color="blue_550"
+              size="sm"
+              style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
+            >
+              {answerCount > 0
+                ? `${limitedAnswerCount} ${
+                    limitedAnswerCount > 1 ? 'respostas' : 'resposta'
+                  }`
+                : 'Seja o primeiro(a) a responder'}
+            </Text>
+          </S.AnswerQuantity>
           <S.AswerContainer>
             <S.AnswerButtonContainer>
               <S.AnswerButton
@@ -71,19 +85,6 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>
-          <S.AnswerQuantity>
-            <Text
-              weight="semibold"
-              color="blue_550"
-              style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
-            >
-              {answerCount > 0
-                ? `${limitedAnswerCount} ${
-                    limitedAnswerCount > 1 ? 'respostas' : 'resposta'
-                  }`
-                : 'Seja o primeiro(a) a responder'}
-            </Text>
-          </S.AnswerQuantity>
         </S.UserHandleContainer>
       </S.QuestionContentContainer>
     </S.QuestionCardContainer>

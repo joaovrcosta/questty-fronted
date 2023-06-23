@@ -175,6 +175,29 @@ export const AnswerButton = styled(Button)`
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
     transition: 0.2s ease all;
   }
+
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.colors.white};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_500};
+    transition: 0.2s ease all;
+  }
+`
+export const SeeAnswerButton = styled(Button)`
+  padding: 1.625rem 2rem;
+  font-weight: 400;
+  border: 2px solid ${({ theme }) => theme.colors.black};
+
+  &:focus {
+    border: 2px solid #6d83f3;
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
+    transition: 0.2s ease all;
+  }
+
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.colors.white};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_950};
+    transition: 0.2s ease all;
+  }
 `
 
 export const ModerationWrapper = styled.div``
