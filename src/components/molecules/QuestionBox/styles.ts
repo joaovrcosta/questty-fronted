@@ -290,3 +290,13 @@ export const DateTimeText = styled(Text)`
     display: none;
   }
 `
+export const UserInfo = styled.div`
+  display: flex;
+  gap: 1rem;
+`
+
+export const InfoWrapperr = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`

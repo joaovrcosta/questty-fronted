@@ -31,12 +31,14 @@ export function AnswerBox({
         <S.AnswerInfo>
           <S.AnswerInfoWrapperContainer>
             <S.AnswerInfoWrapper>
-              <S.Username>
-                <Text weight="medium">rodrigolopes</Text>
-              </S.Username>
-              <S.UserLevel>183</S.UserLevel>
+              <S.QuestionInfo>
+                <S.Username>
+                  <Text weight="medium">rodrigolopes</Text>
+                </S.Username>
+                <S.UserLevel>183</S.UserLevel>
+              </S.QuestionInfo>
               <S.CreatedAtContainer>
-                <Text size="xs" style={{ fontFamily: 'Poppins' }}>
+                <Text size="xs" style={{ fontFamily: 'Inter' }}>
                   {getTimeAgo(createdAt)}
                 </Text>
               </S.CreatedAtContainer>

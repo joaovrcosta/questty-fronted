@@ -41,19 +41,23 @@ export function QuestionBox({
             <S.AvatarInfoContainer>
               <Avatar />
             </S.AvatarInfoContainer>
-            <S.Username>
-              <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                joaovrcosta
-              </Text>
-            </S.Username>
-            <S.UserLevel>27</S.UserLevel>
-            <S.DateTimeText
-              size="xs"
-              weight="bold"
-              style={{ fontFamily: 'Poppins', whiteSpace: 'nowrap' }}
-            >
-              {getTimeAgo(createdAt)}
-            </S.DateTimeText>
+            <S.InfoWrapperr>
+              <S.UserInfo>
+                <S.Username>
+                  <Text style={{ fontFamily: 'Poppins' }} weight="medium">
+                    joaovrcosta
+                  </Text>
+                </S.Username>
+                <S.UserLevel>27</S.UserLevel>
+              </S.UserInfo>
+              <S.DateTimeText
+                size="xs"
+                weight="regular"
+                style={{ fontFamily: 'Inter', whiteSpace: 'nowrap' }}
+              >
+                {getTimeAgo(createdAt)}
+              </S.DateTimeText>
+            </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
           <S.AnswerQuantityBox>
             <Text
@@ -85,7 +89,18 @@ export function QuestionBox({
             ></S.QuestionTitleText>
           </S.QuestionTitle>
           <S.QuestionContentText size="lg" weight="regular" color="blue_950">
-            {content}
+            {content.length > 380 ? (
+              <>
+                <Text size="xx1" weight="bold">
+                  {content.slice(0, 380)} ...
+                </Text>
+                <div style={{ marginTop: '16px', fontSize: '18px' }}>
+                  {content.slice(380)}
+                </div>
+              </>
+            ) : (
+              content
+            )}
           </S.QuestionContentText>
         </S.QuestionContent>
         <S.UserHandleActionsContainer>

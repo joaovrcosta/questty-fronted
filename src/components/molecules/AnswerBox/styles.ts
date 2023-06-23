@@ -103,6 +103,10 @@ export const AnswerInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 `
 
 export const Username = styled.div`
@@ -245,6 +249,11 @@ export const BestAnswerStamp = styled.div`
 
 export const CreatedAtContainer = styled.div`
   @media (max-width: 768px) {
-    display: none;
+    margin-top: 0.5rem;
   }
+`
+
+export const QuestionInfo = styled.div`
+  display: flex;
+  gap: 1rem;
 `

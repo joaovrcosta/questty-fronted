@@ -23,6 +23,7 @@ export const defaultTheme = {
     white: 'rgba(255, 255, 255, 255)',
     black: 'rgba(0, 0, 0, 1)',
     gray_100: 'rgba(237, 237, 237, 1)',
+    gray_250: '#f5f8fa',
     gray_200: 'rgba(204, 204, 204, 1)',
     gray_300: 'rgba(179, 179, 179, 1)',
     gray_400: 'rgba(153, 153, 153, 1)',

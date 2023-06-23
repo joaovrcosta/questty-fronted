@@ -5,6 +5,15 @@ export const QuestionContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+
+  @media (max-width: 950px) {
+    margin-left: 0;
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `
 
 export const QuestionWrapper = styled.div`
