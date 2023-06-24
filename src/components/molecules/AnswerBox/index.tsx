@@ -25,7 +25,10 @@ export function AnswerBox({
   return (
     <S.AnswerWrapper>
       <S.AvatarContainer>
-        <Avatar />
+        <Avatar
+          variant="lg"
+          imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+        />
       </S.AvatarContainer>
       <S.AnswerBoxContainer isGolden={isGolden ?? false}>
         <S.AnswerInfo>

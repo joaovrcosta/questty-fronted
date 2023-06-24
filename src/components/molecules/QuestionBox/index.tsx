@@ -7,6 +7,8 @@ import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
+import Link from 'next/link'
 
 interface Question {
   id: number
@@ -33,13 +35,19 @@ export function QuestionBox({
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
-        <Avatar />
+        <Avatar
+          variant="lg"
+          imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+        />
       </S.AvatarContainer>
       <S.QuestionBoxContainer>
         <S.QuestionInfo>
           <S.QuestionInfoWrapper>
             <S.AvatarInfoContainer>
-              <Avatar />
+              <Avatar
+                variant="lg"
+                imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+              />
             </S.AvatarInfoContainer>
             <S.InfoWrapperr>
               <S.UserInfo>
@@ -59,26 +67,35 @@ export function QuestionBox({
               </S.DateTimeText>
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
-          <S.AnswerQuantityBox>
-            <Text
-              weight="bold"
-              size="xl"
-              color="blue_950"
-              style={{ fontFamily: 'Poppins' }}
-            >
-              Respostas:
-            </Text>
-            <S.AnswerQuantity>
+
+          {hasThreeOrMoreAnswers ? (
+            <Link href="/">
+              <S.BackButtonBox>
+                <AiOutlineArrowLeft size={32} />
+              </S.BackButtonBox>
+            </Link>
+          ) : (
+            <S.AnswerQuantityBox>
               <Text
-                size="xx1"
                 weight="bold"
-                color="blue_500"
+                size="xl"
+                color="blue_950"
                 style={{ fontFamily: 'Poppins' }}
               >
-                {answersQuantity}
+                Respostas:
               </Text>
-            </S.AnswerQuantity>
-          </S.AnswerQuantityBox>
+              <S.AnswerQuantity>
+                <Text
+                  size="xx1"
+                  weight="bold"
+                  color="blue_500"
+                  style={{ fontFamily: 'Poppins' }}
+                >
+                  {answersQuantity}
+                </Text>
+              </S.AnswerQuantity>
+            </S.AnswerQuantityBox>
+          )}
         </S.QuestionInfo>
         <S.QuestionContent>
           <S.QuestionTitle>

@@ -163,6 +163,10 @@ export const UserHandleActionsContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 2rem;
   margin-top: 3rem;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `
 
 export const AnswerButton = styled(Button)`
@@ -200,7 +204,11 @@ export const SeeAnswerButton = styled(Button)`
   }
 `
 
-export const ModerationWrapper = styled.div``
+export const ModerationWrapper = styled.div`
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+  }
+`
 
 export const ModerateLabel = styled.div`
   display: flex;
@@ -293,10 +301,34 @@ export const DateTimeText = styled(Text)`
 export const UserInfo = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 280px) {
+    display: none;
+  }
 `
 
 export const InfoWrapperr = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+`
+
+export const BackButtonBox = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 0.5rem;
+  transition: 0.2s ease all;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.gray_100};
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `

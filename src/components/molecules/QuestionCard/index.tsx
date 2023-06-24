@@ -20,9 +20,16 @@ interface Question {
   content: string
   category: subjectsType
   createdAt: string
+  readOnly?: boolean
 }
 
-export function QuestionCard({ id, content, category, createdAt }: Question) {
+export function QuestionCard({
+  id,
+  content,
+  category,
+  createdAt,
+  readOnly = false,
+}: Question) {
   const questions = useContextSelector(QuestionContext, (context) => {
     return context.questions
   })
@@ -43,7 +50,10 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
       <S.QuestionContentContainer>
         <S.QuestionContent>
           <S.UserAvatarWrapper>
-            <Avatar />
+            <Avatar
+              variant="lg"
+              imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+            />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
             <S.QuestionText>
@@ -61,18 +71,22 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
         </S.QuestionContent>
         <S.UserHandleContainer>
           <S.AnswerQuantity>
-            <Text
-              weight="semibold"
-              color="blue_550"
-              size="sm"
-              style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
-            >
-              {answerCount > 0
-                ? `${limitedAnswerCount} ${
-                    limitedAnswerCount > 1 ? 'respostas' : 'resposta'
-                  }`
-                : 'Seja o primeiro(a) a responder'}
-            </Text>
+            {readOnly ? (
+              ''
+            ) : (
+              <Text
+                weight="semibold"
+                color="blue_550"
+                size="sm"
+                style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
+              >
+                {answerCount > 0
+                  ? `${limitedAnswerCount} ${
+                      limitedAnswerCount > 1 ? 'respostas' : 'resposta'
+                    }`
+                  : 'Seja o primeiro(a) a responder'}
+              </Text>
+            )}
           </S.AnswerQuantity>
           <S.AswerContainer>
             <S.AnswerButtonContainer>
@@ -81,7 +95,7 @@ export function QuestionCard({ id, content, category, createdAt }: Question) {
                 variant="sm"
                 onClick={handleResponderClick}
               >
-                RESPONDER
+                {readOnly ? 'VISUALIZAR' : 'RESPONDER'}
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>

@@ -2,21 +2,20 @@ import Image from 'next/image'
 import * as S from './styles'
 import Link from 'next/link'
 
-export function Avatar() {
+interface AvatarProps {
+  variant: S.sizeVariants
+  imageUrl: string
+}
+
+export function Avatar({ variant, imageUrl }: AvatarProps) {
   return (
     <>
-      <S.UserAvatarContainer>
+      <S.UserAvatarContainer variant={variant}>
         <Link
           href="/profile/1
         "
         >
-          <Image
-            src="https://avatars.githubusercontent.com/u/70654718?v=4"
-            alt=""
-            width={48}
-            height={48}
-            style={{ borderRadius: '50%', display: 'block' }}
-          />
+          <S.AvatarImage src={imageUrl} variant={variant} />
         </Link>
       </S.UserAvatarContainer>
     </>

@@ -17,6 +17,7 @@ interface Question {
     content: string
     createdAt: string
     thanks: number
+    isGolden: boolean
   }[]
 }
 
@@ -37,6 +38,9 @@ export default function Question() {
   const answersQuantity = question?.answers.length || 0
 
   const limitedAnswers = question?.answers.slice(0, 3) || []
+
+  const hasMultipleGoldenAnswers =
+    limitedAnswers.filter((answer) => answer.isGolden).length > 1
 
   return (
     <>
@@ -59,16 +63,20 @@ export default function Question() {
           </S.AnswersSection>
           <S.AnswersContainer>
             {limitedAnswers.length > 0 ? (
-              limitedAnswers.map((answer, index) => (
-                <AnswerBox
-                  key={index}
-                  id={index}
-                  content={answer.content}
-                  createdAt={answer.createdAt}
-                  isGolden={false} // Set whether the question is golden or not
-                  thanks={answer.thanks}
-                />
-              ))
+              limitedAnswers.map((answer, index) => {
+                const isGolden = answer.isGolden && !hasMultipleGoldenAnswers
+
+                return (
+                  <AnswerBox
+                    key={index}
+                    id={index}
+                    content={answer.content}
+                    createdAt={answer.createdAt}
+                    isGolden={isGolden} // Set whether the question is golden or not
+                    thanks={answer.thanks}
+                  />
+                )
+              })
             ) : (
               <NotFoundAnswersBox />
             )}

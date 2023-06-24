@@ -20,6 +20,7 @@ interface Question {
     content: string
     createdAt: string
     thanks: number
+    isGolden: boolean
   }[]
 }
 
@@ -54,7 +55,6 @@ export function QuestionsProvider({ children }: QuestionProviderProps) {
     })
 
     setQuestions(response.data)
-    console.log(response.data)
   }, [])
 
   //Esta função cria uma nova transação, e na hora de criar atualiza o array de transações
