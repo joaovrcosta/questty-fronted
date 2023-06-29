@@ -6,6 +6,7 @@ import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import { SiFacebook } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
+import { Footer } from '@/components/organisms/Footer'
 
 export default function SignIn() {
   return (
@@ -64,6 +65,7 @@ export default function SignIn() {
           </S.FormContainer>
         </S.SignInContent>
       </S.SignInContainer>
+      <Footer />
     </>
   )
 }

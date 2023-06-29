@@ -44,13 +44,12 @@ export function Footer() {
             Ajuda
           </S.ColumnTitle>
           <S.TalkToUs>
-            <BsChat size={16} color="#fff" />
+            <BsChat size={16} color="#000" />
             <S.LinkTalkToUs>Fale Conosco</S.LinkTalkToUs>
           </S.TalkToUs>
-          <S.WhatsappButton variant="md">
-            <BsWhatsapp size={16} />
-            Suporte
-          </S.WhatsappButton>
+          <Text style={{ marginBottom: '1rem' }} weight="semibold">
+            support@questty.com
+          </Text>
           <S.Link>
             Horário de atendimento de segunda à sexta, das 8h às 18h.
           </S.Link>

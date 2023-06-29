@@ -21,8 +21,6 @@ export const FooterContent = styled.div`
   padding: 3rem 1.25rem 3rem 1.25rem;
   font-family: Poppins;
   gap: 1rem;
-
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_300};
 `
 
 export const LogoColumn = styled.div`
@@ -96,7 +94,7 @@ export const Link = styled.a`
 
 export const LinkTalkToUs = styled.a`
   font-size: ${({ theme }) => theme.typography.text.md};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
   margin-left: 0.5rem;
 
   cursor: pointer;
@@ -127,6 +125,7 @@ export const AllRightsText = styled(Text)`
 export const TalkToUs = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
 `
 
 export const WhatsappButton = styled(Button)`

@@ -8,6 +8,7 @@ import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
+import { Footer } from '@/components/organisms/Footer'
 
 export default function Profile() {
   const questions = useContextSelector(QuestionContext, (context) => {
@@ -115,6 +116,7 @@ export default function Profile() {
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>
+      <Footer />
     </>
   )
 }

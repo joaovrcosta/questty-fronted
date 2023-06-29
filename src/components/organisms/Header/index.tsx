@@ -1,18 +1,19 @@
-import Image from 'next/image'
 import * as S from './styles'
 import logoImg from '../../../assets/logo.svg'
 import { Button } from '@/components/atoms/Button'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
+import Link from 'next/link'
+import { SearchInput } from '@/components/atoms/SearchInput'
 
 export function Header() {
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
-        <S.LogoImage src={logoImg} width={145} height={46} alt="" />
-        <S.SearchInputContainer>
-          <S.SearchInput placeholder="Qual a sua dúvida?" />
-        </S.SearchInputContainer>
+        <Link href="/">
+          <S.LogoImage src={logoImg} width={145} height={46} alt="" />
+        </Link>
+        <SearchInput />
         <S.HeaderActionsContainer>
           <Dialog.Root>
             <Dialog.Trigger asChild>

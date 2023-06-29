@@ -5,7 +5,7 @@ import starIcon from '../../../assets/star.svg'
 import { BiShieldAlt2 } from 'react-icons/bi'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
-import { CheckCircle } from '@phosphor-icons/react'
+import { MdVerified } from 'react-icons/md'
 
 interface Answer {
   id: number
@@ -56,10 +56,10 @@ export function AnswerBox({
           <S.AnswerRateContainer>
             {isGolden && (
               <S.BestAnswerStamp>
-                <Text size="xs" weight="bold">
+                <Text size="xs" weight="bold" color="blue_950">
                   MELHOR RESPOSTA
                 </Text>
-                <CheckCircle size={24} />
+                <MdVerified size={20} color="#10162F" />
               </S.BestAnswerStamp>
             )}
             <S.StarsRating>

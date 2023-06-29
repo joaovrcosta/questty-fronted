@@ -7,6 +7,7 @@ export const SignUpContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   margin-top: 12rem;
+  margin-bottom: 8rem;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {

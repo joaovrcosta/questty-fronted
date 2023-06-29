@@ -6,6 +6,7 @@ export const SignInContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   margin-top: 12rem;
+  margin-bottom: 6rem;
   font-family: Poppins;
 
   ${({ theme }) => css`
