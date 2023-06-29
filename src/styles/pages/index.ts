@@ -5,15 +5,20 @@ export const HomePageContent = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  display: flex;
 
-  padding: 0.85rem 1rem 1.5rem 1rem;
+  padding: 0.85rem 1rem 3rem 1rem;
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 0;
-      padding: 1.5rem 1rem 1.5rem 1rem;
+      padding: 1.5rem 1rem 3rem 1rem;
     }
   `}
+
+  @media (max-width: 1168px) {
+    width: 100%;
+  }
 
   ${({ theme }) => css`
     @media (max-width: 480px) {
@@ -102,6 +107,10 @@ export const QuestionsContainer = styled.div`
 
 export const FeedContentWrapper = styled.div`
   max-width: 920px;
+
+  @media (max-width: 1168px) {
+    width: 100%;
+  }
 `
 
 export const MakeQuestionButton = styled.button`
@@ -139,6 +148,63 @@ export const MakeQuestionButton = styled.button`
       width: 100%;
       display: block;
       border-radius: 25px;
+    }
+  `}
+`
+
+export const RankingSidebar = styled.div`
+  padding: 0 0 0 2rem;
+  width: 100%;
+
+  @media (max-width: 1168px) {
+    display: none;
+  }
+`
+
+export const RankingBox = styled.div`
+  font-family: Poppins;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  padding: 1.25rem;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
+  max-height: 363px;
+`
+
+export const HeadingRankContainer = styled.div`
+  margin-top: 1.5rem;
+  margin-bottom: 2.8rem;
+`
+
+export const RankingHeading = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`
+
+export const SelectedContainer = styled.div`
+  width: 100%;
+  margin-bottom: 1rem;
+`
+export const UserRankingWrapper = styled.div`
+  max-height: 224px;
+`
+export const SelectedRanking = styled.select`
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  font-size: 14px;
+  border-radius: 25px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
+
+  &:focus {
+    border: 2px solid #6d83f3;
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
+  }
+
+  ${({ theme }) => css`
+    @media (max-width: 768px) {
+      width: 100%;
+      border: 2px solid ${({ theme }) => theme.colors.blue_950};
     }
   `}
 `

@@ -1,10 +1,10 @@
 import { formatDistanceToNow, parseISO } from 'date-fns'
-import { pt } from 'date-fns/locale'
+import { ptBR } from 'date-fns/locale'
 
 export const getTimeAgo = (createdAt: string) => {
   const parsedCreatedAt = parseISO(createdAt)
   const relativeTime = formatDistanceToNow(parsedCreatedAt, {
-    locale: pt,
+    locale: ptBR,
     addSuffix: false,
   })
   return `Há ${relativeTime}`

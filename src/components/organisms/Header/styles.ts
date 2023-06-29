@@ -11,6 +11,7 @@ export const HeaderContainer = styled.div<IHeader>`
   background-color: ${({ theme }) => theme.colors.primary};
   /* margin-bottom: 5rem; */
   margin-right: calc(-16px);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
 
   position: fixed;
   top: 0;
@@ -107,7 +108,7 @@ export const StyledButton = styled(Button)`
 export const MakeYourQuestionButton = styled(Button)`
   margin-left: 1rem;
   &:hover {
-    background-color: #eaece1;
+    background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
   }
 
@@ -120,7 +121,7 @@ export const MakeYourQuestionButton = styled(Button)`
 
 export const SignInButton = styled(Button)`
   &:hover {
-    background-color: #eaece1;
+    background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
   }
 
@@ -142,7 +143,7 @@ export const SignUpButton = styled(Button)`
   color: ${({ theme }) => theme.colors.white};
 
   &:hover {
-    background-color: #eaece1;
+    opacity: 0.9;
     transition: 0.3s ease all;
   }
 
@@ -155,8 +156,7 @@ export const SignUpButton = styled(Button)`
 
 export const SubHeader = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.black};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 
   display: flex;
   align-items: center;

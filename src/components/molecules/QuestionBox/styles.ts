@@ -214,6 +214,9 @@ export const ModerateLabel = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  padding: 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -223,6 +226,11 @@ export const ModerateLabel = styled.div`
 
   @media (max-width: 280px) {
     display: none;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.3s ease all;
   }
 `
 

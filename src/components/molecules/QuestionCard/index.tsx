@@ -52,7 +52,7 @@ export function QuestionCard({
           <S.UserAvatarWrapper>
             <Avatar
               variant="lg"
-              imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+              imageUrl="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
             />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
@@ -84,7 +84,7 @@ export function QuestionCard({
                   ? `${limitedAnswerCount} ${
                       limitedAnswerCount > 1 ? 'respostas' : 'resposta'
                     }`
-                  : 'Seja o primeiro(a) a responder'}
+                  : 'Seja o primeiro(a)'}
               </Text>
             )}
           </S.AnswerQuantity>

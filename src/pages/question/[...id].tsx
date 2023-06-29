@@ -6,6 +6,7 @@ import { AnswerBox } from '@/components/molecules/AnswerBox'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import { useContextSelector } from 'use-context-selector'
 import { NotFoundAnswersBox } from '@/components/molecules/NotFoundAnswerBox'
+import { Footer } from '@/components/organisms/Footer'
 
 interface Question {
   id: number
@@ -83,6 +84,7 @@ export default function Question() {
           </S.AnswersContainer>
         </S.QuestionWrapper>
       </S.QuestionContainer>
+      <Footer />
     </>
   )
 }

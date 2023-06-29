@@ -9,6 +9,9 @@ import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
+import { UserRankingBox } from '@/components/molecules/UserRakingBox'
+import { Text } from '@/components/atoms/Text'
+import { FaCrown } from 'react-icons/fa'
 
 const Home: NextPageWithLayout = () => {
   const questions = useContextSelector(QuestionContext, (context) => {
@@ -60,6 +63,57 @@ const Home: NextPageWithLayout = () => {
             })}
           </S.QuestionsContainer>
         </S.FeedContentWrapper>
+        <S.RankingSidebar>
+          <S.HeadingRankContainer>
+            <Heading
+              size="md"
+              weight="bold"
+              color="blue_950"
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              Ranking
+            </Heading>
+          </S.HeadingRankContainer>
+          <S.RankingBox>
+            <S.RankingHeading>
+              <FaCrown size={24} color="#c98600" />
+              <Text weight="semibold">Melhores Estudantes</Text>
+            </S.RankingHeading>
+            <S.SelectedContainer>
+              <S.SelectedRanking>
+                <option value="opcao1">Diário</option>
+              </S.SelectedRanking>
+            </S.SelectedContainer>
+            <S.UserRankingWrapper>
+              <UserRankingBox
+                username="matheusq2017"
+                points={1873}
+                avatarUrl="https://encurtador.com.br/jwDR4"
+              />
+              <UserRankingBox
+                username="Crocodilo25"
+                points={1873}
+                avatarUrl="https://encurtador.com.br/bdgzN"
+              />
+              <UserRankingBox
+                username="
+              lucasgabryelgomesoli"
+                points={1839}
+                avatarUrl="https://encurtador.com.br/avO89"
+              />
+              <UserRankingBox
+                username="gustmelo92"
+                points={1722}
+                avatarUrl="https://encurtador.com.br/iTU49"
+              />
+              <UserRankingBox
+                username="webnauta"
+                points={952}
+                avatarUrl="https://images.unsplash.com/photo-1687795975931-3e76a94abecd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+              />
+            </S.UserRankingWrapper>
+          </S.RankingBox>
+        </S.RankingSidebar>
       </S.HomePageContent>
     </>
   )

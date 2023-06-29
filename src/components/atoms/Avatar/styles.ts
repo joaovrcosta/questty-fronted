@@ -39,7 +39,7 @@ export const UserAvatarContainer = styled.div<IAvatar>`
 
   &:hover {
     border: 2px solid ${({ theme }) => theme.colors.white};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_950};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.yellow_700};
     transition: 0.2s ease all;
   }
 `

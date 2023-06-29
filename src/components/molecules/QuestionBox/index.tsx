@@ -37,7 +37,7 @@ export function QuestionBox({
       <S.AvatarContainer>
         <Avatar
           variant="lg"
-          imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+          imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
         />
       </S.AvatarContainer>
       <S.QuestionBoxContainer>
@@ -46,7 +46,7 @@ export function QuestionBox({
             <S.AvatarInfoContainer>
               <Avatar
                 variant="lg"
-                imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+                imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
               />
             </S.AvatarInfoContainer>
             <S.InfoWrapperr>
@@ -71,7 +71,7 @@ export function QuestionBox({
           {hasThreeOrMoreAnswers ? (
             <Link href="/">
               <S.BackButtonBox>
-                <AiOutlineArrowLeft size={32} />
+                <AiOutlineArrowLeft size={24} />
               </S.BackButtonBox>
             </Link>
           ) : (
@@ -148,7 +148,7 @@ export function QuestionBox({
             <S.ModerateLabel>
               <BiShieldAlt2 size={24} color="#EBA900" />
               <S.ModerateLabelText size="lg" style={{ fontFamily: 'Poppins' }}>
-                Moderar
+                Denunciar
               </S.ModerateLabelText>
             </S.ModerateLabel>
           </S.ModerationWrapper>

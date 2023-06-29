@@ -66,9 +66,9 @@ export function AnswerBox({
               <Image src={starIcon} alt="" />
               <Text weight="bold">{thanks}</Text>
             </S.StarsRating>
-            <S.CrownNumberContainer>
+            {/* <S.CrownNumberContainer>
               <S.CrownNumber weight="bold">4,1</S.CrownNumber>
-            </S.CrownNumberContainer>
+            </S.CrownNumberContainer> */}
           </S.AnswerRateContainer>
         </S.AnswerInfo>
         <S.AnswerContent>

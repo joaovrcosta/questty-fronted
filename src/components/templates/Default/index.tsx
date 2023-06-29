@@ -1,3 +1,4 @@
+import { Footer } from '@/components/organisms/Footer'
 import { Header } from '@/components/organisms/Header'
 
 interface ILayout {
@@ -9,6 +10,7 @@ export default function DefaultLayout({ children }: ILayout) {
     <>
       <Header />
       <main>{children}</main>
+      <Footer />
     </>
   )
 }
