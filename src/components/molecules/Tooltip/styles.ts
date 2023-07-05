@@ -28,7 +28,7 @@ interface ITooltip {
 
 export const IconButton = styled.button<ITooltip>`
   all: unset;
-  border-radius: 5px;
+  border-radius: 25px;
   height: 35px;
   width: 35px;
   display: inline-flex;

@@ -64,10 +64,15 @@ export const QuestionContent = styled.div`
   align-items: center;
 `
 
-export const QuestionText = styled(Text)`
+export const QuestionText = styled.a`
   line-height: 1.4;
   font-family: Roboto;
   /* height: 68px; */
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
   ${({ theme }) => css`
     @media (max-width: 540px) {
@@ -144,11 +149,18 @@ export const AnswerButtonContainer = styled.div`
 export const AnswerButton = styled(Button)`
   border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
+  color: ${({ theme }) => theme.colors.blue_950};
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.blue_300};
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
     /* transition: 0.2s ease all; */
+  }
+
+  &:hover {
+    border: 1px solid ${({ theme }) => theme.colors.white};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_950};
+    transition: 0.2s ease all;
   }
 `
 

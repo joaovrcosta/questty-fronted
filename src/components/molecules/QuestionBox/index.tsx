@@ -9,6 +9,8 @@ import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
+import * as Dialog from '@radix-ui/react-dialog'
+import { AnswerModal } from '../AnswerModal'
 
 interface Question {
   id: number
@@ -61,7 +63,7 @@ export function QuestionBox({
               <S.DateTimeText
                 size="xs"
                 weight="regular"
-                style={{ fontFamily: 'Inter', whiteSpace: 'nowrap' }}
+                style={{ fontFamily: 'Inter' }}
               >
                 {getTimeAgo(createdAt)}
               </S.DateTimeText>
@@ -134,15 +136,20 @@ export function QuestionBox({
               </Text>
             </S.SeeAnswerButton>
           ) : (
-            <S.AnswerButton
-              variant="lg"
-              rounding="rounded-xxl"
-              color="white"
-              backgroundColor="blue_500"
-            >
-              <PlusCircle size={24} weight="bold" />
-              RESPONDER
-            </S.AnswerButton>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <S.AnswerButton
+                  variant="lg"
+                  rounding="rounded-xxl"
+                  color="white"
+                  backgroundColor="blue_500"
+                >
+                  <PlusCircle size={24} weight="bold" />
+                  RESPONDER
+                </S.AnswerButton>
+              </Dialog.Trigger>
+              <AnswerModal />
+            </Dialog.Root>
           )}
           <S.ModerationWrapper>
             <S.ModerateLabel>

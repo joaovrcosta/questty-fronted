@@ -26,7 +26,7 @@ export const FormContainer = styled.form``
 
 export const InputContainer = styled.div`
   margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
 `
 
 export const ForgotMyPasswordLink = styled(Link)`
@@ -73,4 +73,11 @@ export const WithFacebook = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+`
+export const StayLoggedContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+
+  gap: 0.5rem;
 `

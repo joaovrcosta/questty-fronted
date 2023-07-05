@@ -35,6 +35,10 @@ export default function SignIn() {
                 label="Senha"
               />
             </S.InputContainer>
+            <S.StayLoggedContainer>
+              <input type="checkbox" id="stay-logged" />
+              <label htmlFor="stay-logged">Mantenha-me conectado</label>
+            </S.StayLoggedContainer>
             <S.ForgotMyPasswordLink href="/forgot">
               Esqueci a minha senha
             </S.ForgotMyPasswordLink>

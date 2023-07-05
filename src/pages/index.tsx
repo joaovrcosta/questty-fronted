@@ -32,12 +32,12 @@ const Home: NextPageWithLayout = () => {
               >
                 Últimas perguntas
               </Heading>
-              <S.Selected>
+              <S.Selected style={{ maxWidth: '184px' }}>
                 <option value="opcao1">Todas As Matérias</option>
                 <option value="opcao2">Opção 2</option>
                 <option value="opcao3">Opção 3</option>
               </S.Selected>
-              <S.SelectedAlreadyAnswering>
+              <S.SelectedAlreadyAnswering style={{ maxWidth: '156px' }}>
                 <option value="opcao1">Sem Resposta</option>
                 <option value="opcao3">Respondidas</option>
               </S.SelectedAlreadyAnswering>
@@ -80,7 +80,9 @@ const Home: NextPageWithLayout = () => {
               <Text weight="semibold">Melhores Estudantes</Text>
             </S.RankingHeading>
             <S.SelectedContainer>
-              <S.SelectedRanking>
+              <S.SelectedRanking
+                style={{ maxWidth: '105px', maxHeight: '40px' }}
+              >
                 <option value="opcao1">Diário</option>
               </S.SelectedRanking>
             </S.SelectedContainer>

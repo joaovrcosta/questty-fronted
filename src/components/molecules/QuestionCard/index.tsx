@@ -56,7 +56,7 @@ export function QuestionCard({
             />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
-            <S.QuestionText>
+            <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
             </S.QuestionText>
             <S.SubjectAndDateTimeContainer>

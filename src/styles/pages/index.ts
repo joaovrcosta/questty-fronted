@@ -35,6 +35,7 @@ export const SubjectsContainer = styled.div`
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 2.5rem;
+  max-width: 836px;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -45,7 +46,7 @@ export const SubjectsContainer = styled.div`
 `
 
 export const Selected = styled.select`
-  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   font-size: 14px;
   border-radius: 25px;
   border: 1px solid ${({ theme }) => theme.colors.black};
@@ -65,7 +66,7 @@ export const Selected = styled.select`
 `
 
 export const SelectedAlreadyAnswering = styled.select`
-  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   font-size: 14px;
   border-radius: 25px;
   border: 1px solid ${({ theme }) => theme.colors.black};
@@ -106,7 +107,7 @@ export const QuestionsContainer = styled.div`
 `
 
 export const FeedContentWrapper = styled.div`
-  max-width: 920px;
+  max-width: 836px;
 
   @media (max-width: 1168px) {
     width: 100%;
@@ -190,7 +191,7 @@ export const UserRankingWrapper = styled.div`
   max-height: 224px;
 `
 export const SelectedRanking = styled.select`
-  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   font-size: 14px;
   border-radius: 25px;
   border: 1px solid ${({ theme }) => theme.colors.black};
