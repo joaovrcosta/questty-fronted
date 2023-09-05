@@ -7,8 +7,25 @@ import { Text } from '@/components/atoms/Text'
 import { SiFacebook } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
 import { Footer } from '@/components/organisms/Footer'
+import { useForm } from 'react-hook-form'
+import userStore from '@/features/app/user-store'
+
+interface FormData {
+  email: string
+  password: string
+}
 
 export default function SignIn() {
+  const { register, handleSubmit } = useForm<FormData>()
+
+  async function handleSignIn(data: FormData) {
+    try {
+      await userStore.authenticate(data.email, data.password)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <Header />
@@ -17,9 +34,10 @@ export default function SignIn() {
           <Heading size="md" color="black" weight="bold">
             Entre com a sua conta:
           </Heading>
-          <S.FormContainer>
+          <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
             <S.InputContainer>
               <Input
+                {...register('email')}
                 placeholder="exemplo@exemplo.com"
                 variant="lg"
                 hug={true}
@@ -28,7 +46,9 @@ export default function SignIn() {
                 style={{ marginBottom: '1rem' }}
               />
               <Input
+                {...register('password')}
                 placeholder="Digite sua senha"
+                type="password"
                 variant="lg"
                 hug={true}
                 showLabel={true}
