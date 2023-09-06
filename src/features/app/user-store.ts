@@ -1,15 +1,21 @@
 import api from '@/services/api'
 import { makeObservable, observable, action } from 'mobx'
 
-interface IUser {
+interface signInData {
   email: string
   password: string
+}
+
+interface IUser {
+  id: string
+  name: string
+  email: string
 }
 
 interface IUserStore {
   currentUser: IUser | null
   setCurrentUser(user: IUser | null): void
-  authenticate(email: string, password: string): Promise<void>
+  signIn(data: signInData): Promise<void>
 }
 
 class UserStore implements IUserStore {
@@ -20,7 +26,7 @@ class UserStore implements IUserStore {
     makeObservable(this, {
       currentUser: observable,
       setCurrentUser: action,
-      authenticate: action,
+      signIn: action,
       setToken: action,
     })
   }
@@ -33,7 +39,7 @@ class UserStore implements IUserStore {
     this.token = token
   }
 
-  async authenticate(email: string, password: string) {
+  async signIn({ email, password }: signInData) {
     try {
       const requestData = {
         email,
