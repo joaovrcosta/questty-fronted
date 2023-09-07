@@ -10,32 +10,33 @@ export function HeaderLandingPage() {
     <S.HeaderContainer>
       <S.HeaderContent>
         <Link href="/">
-          <S.LogoImage src={logoImg} width={145} height={46} alt="" />
+          <S.LogoImage src={logoImg} width={200} height={70} alt="" />
         </Link>
         <S.HeaderActionsContainer>
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <S.MakeYourQuestionButton
-                border={false}
-                backgroundColor="transparent"
-              >
-                FAÇA SUA PERGUNTA
-              </S.MakeYourQuestionButton>
-            </Dialog.Trigger>
-            <NewTransactionModal />
-          </Dialog.Root>
-
           <S.StyledLink href="/signin">
-            <S.SignInButton backgroundColor="transparent" border={false}>
+            <S.SignInButton backgroundColor="white" boxShadow={true}>
               ENTRAR
             </S.SignInButton>
           </S.StyledLink>
 
           <S.StyledLink href="/signup">
-            <S.SignUpButton backgroundColor="blue_500">
+            <S.SignUpButton
+              backgroundColor="white"
+              borderColor="yellow_650"
+              boxShadow={true}
+            >
               CADASTRAR
             </S.SignUpButton>
           </S.StyledLink>
+
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <S.MakeYourQuestionButton backgroundColor="yellow_600">
+                FAÇA SUA PERGUNTA
+              </S.MakeYourQuestionButton>
+            </Dialog.Trigger>
+            <NewTransactionModal />
+          </Dialog.Root>
         </S.HeaderActionsContainer>
       </S.HeaderContent>
       <S.SubHeader>

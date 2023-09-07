@@ -8,6 +8,7 @@ interface InputProps {
   background: ColorThemeType
   sizeOf: sizeVariants
   hasIcon?: boolean
+  border: boolean
 }
 
 const sizeVariants = (size: sizeVariants) => {
@@ -27,7 +28,7 @@ const baseProps = css<InputProps>`
   width: 100%;
   width: -webkit-fill-available;
   outline: none;
-  border: 1px solid transparent;
+  border: ${({ border }) => (border ? `1px solid black` : 'none')};
 
   ${({ sizeOf }) =>
     sizeOf == 'lg' &&
@@ -53,7 +54,6 @@ const baseProps = css<InputProps>`
 
   ${({ theme, background }) => css`
     background: ${theme.colors[background]};
-    border: 1px solid transparent;
     color: ${theme.colors.gray_900};
     font-size: ${theme.typography.text.xs};
     font-weight: ${theme.typography.weight.medium};

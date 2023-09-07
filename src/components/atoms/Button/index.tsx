@@ -4,6 +4,7 @@ import { ColorThemeType } from '@/core/constants/theme'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   backgroundColor?: ColorThemeType
+  borderColor?: ColorThemeType
   variant?: S.sizeVariants
   rounding?: S.roundingVariants
   color?: S.colorVariants
@@ -15,6 +16,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({
   backgroundColor = 'yellow_500',
+  borderColor = 'black',
   variant = 'md',
   rounding = 'rounded-full',
   boxShadow = false,
@@ -27,6 +29,7 @@ export function Button({
   return (
     <S.Button
       backgroundColor={backgroundColor}
+      borderColor={borderColor}
       rounding={rounding}
       variant={variant}
       boxShadow={boxShadow}

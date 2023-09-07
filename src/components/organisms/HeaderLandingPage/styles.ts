@@ -9,10 +9,9 @@ interface IHeader {
 }
 
 export const HeaderContainer = styled.div<IHeader>`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.yellow_400};
   /* margin-bottom: 5rem; */
   margin-right: calc(-16px);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
 
   position: fixed;
   top: 0;
@@ -31,7 +30,7 @@ export const HeaderContent = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1.5rem 0 1.5rem 0;
+  padding: 2.5rem 0 2.5rem 0;
 
   display: flex;
   align-items: center;
@@ -150,7 +149,7 @@ export const SignInButton = styled(Button)`
 
 export const SignUpButton = styled(Button)`
   margin-left: 1rem;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
 
   &:hover {
     opacity: 0.9;

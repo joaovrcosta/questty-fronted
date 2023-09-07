@@ -14,6 +14,7 @@ export type colorVariants = 'white' | 'black'
 
 interface IButton {
   backgroundColor: ColorThemeType
+  borderColor: ColorThemeType
   variant: sizeVariants
   rounding: roundingVariants
   hug: boolean
@@ -64,6 +65,8 @@ export const Button = styled.button<IButton>`
   background-color: ${({ theme, backgroundColor }) =>
     theme.colors[backgroundColor]};
 
+  border-color: ${({ theme, borderColor }) => theme.colors[borderColor]};
+
   border-radius: ${({ rounding }) => {
     switch (rounding) {
       case 'rounded':
@@ -82,7 +85,7 @@ export const Button = styled.button<IButton>`
   }};
 
   box-shadow: ${({ boxShadow }) =>
-    boxShadow ? '0px 1px 10px 0px rgba(0, 0, 0, 0.25)' : 'none'};
+    boxShadow ? '0px 4px 4px 0px rgba(0, 0, 0, 0.25);' : 'none'};
 
   ${({ hug }) =>
     css`

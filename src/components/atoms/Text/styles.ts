@@ -19,6 +19,7 @@ export const Text = styled.p<TextProps>`
     font-weight: ${weight ? theme.typography.weight[weight] : 'inherit'};
     text-transform: ${uppercase ? 'uppercase' : 'inherit'};
   `}
+  font-family: 'Poppins';
   margin-bottom: 0;
   transition: 0.3s ease all;
 `

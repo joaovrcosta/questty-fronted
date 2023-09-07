@@ -9,6 +9,7 @@ type InputAppProps = Props & {
   className?: string
   backgroundColor?: ColorThemeType
   variant: S.sizeVariants
+  border: boolean
   hug?: boolean
   error?: string
   label?: string
@@ -28,6 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputAppProps>(
       className,
       placeholderIcon,
       showLabel,
+      border,
       label,
       backgroundColor = 'white',
       error,
@@ -47,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputAppProps>(
             {showLabel && <S.InputLabel>{label}</S.InputLabel>}
             <S.Input
               hasIcon={!!placeholderIcon}
+              border={border}
               background={backgroundColor}
               type="text"
               autoComplete="none"
