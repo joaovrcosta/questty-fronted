@@ -8,6 +8,7 @@ import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import { UserRankingBox } from '@/components/molecules/UserRakingBox'
 import { Text } from '@/components/atoms/Text'
 import { FaCrown } from 'react-icons/fa'
+import { Header } from '@/components/organisms/Header'
 
 export default function Home() {
   const questions = useContextSelector(QuestionContext, (context) => {
@@ -16,6 +17,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <S.HomePageContent>
         <S.FeedContentWrapper>
           <S.SubjectsContainer>

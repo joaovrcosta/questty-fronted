@@ -1,5 +1,6 @@
 import { Footer } from '@/components/organisms/Footer'
 import { Header } from '@/components/organisms/Header'
+import { HeaderLandingPage } from '@/components/organisms/HeaderLandingPage'
 import { useRouter } from 'next/router'
 
 interface ILayout {
@@ -13,7 +14,7 @@ export default function DefaultLayout({ children }: ILayout) {
 
   return (
     <>
-      {isLandingPage ? Header}
+      {isLandingPage ? <HeaderLandingPage /> : <Header />}
 
       <main>{children}</main>
       <Footer />
