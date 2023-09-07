@@ -20,7 +20,7 @@ export default function SignIn() {
 
   async function handleSignIn(data: FormData) {
     try {
-      await userStore.authenticate(data.email, data.password)
+      await userStore.signIn(data)
     } catch (error) {
       console.log(error)
     }
