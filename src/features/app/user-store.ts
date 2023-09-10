@@ -83,7 +83,7 @@ class UserStore implements IUserStore {
 
       this.setCurrentUser(user)
 
-      Router.push('/')
+      Router.push('/home')
     } catch (error) {
       console.error('Erro ao autenticar:', error)
       throw error

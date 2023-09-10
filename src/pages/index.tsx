@@ -14,7 +14,7 @@ const Landing: NextPageWithLayout = () => {
           <S.HeroContainer>
             <S.HeroHeading>
               <Heading color="blue_950" size="xxl" weight="bold">
-                Question, aprenda
+                Questione, aprenda
               </Heading>
               <S.TextContainer>
                 <Text color="blue_950">
@@ -35,6 +35,7 @@ const Landing: NextPageWithLayout = () => {
           </S.HeroContainer>
         </S.LandingContainer>
       </S.LandingContent>
+      <S.WaveContainer />
     </>
   )
 }

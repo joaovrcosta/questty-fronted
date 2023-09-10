@@ -44,6 +44,7 @@ export default function SignIn() {
                 showLabel={true}
                 label="E-mail"
                 style={{ marginBottom: '1rem' }}
+                border={true}
               />
               <Input
                 {...register('password')}
@@ -53,6 +54,7 @@ export default function SignIn() {
                 hug={true}
                 showLabel={true}
                 label="Senha"
+                border={true}
               />
             </S.InputContainer>
             <S.StayLoggedContainer>
