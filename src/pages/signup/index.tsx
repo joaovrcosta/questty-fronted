@@ -6,6 +6,7 @@ import { Text } from '@/components/atoms/Text'
 import { SiFacebook } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
 import { Footer } from '@/components/organisms/Footer'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 export default function SignIn() {
   return (
@@ -25,6 +26,7 @@ export default function SignIn() {
                 showLabel={true}
                 label="E-mail"
                 style={{ marginBottom: '1rem' }}
+                border={true}
               />
             </S.InputContainer>
 
@@ -62,4 +64,23 @@ export default function SignIn() {
       <Footer />
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const tokenJwt = ctx.req.cookies['questty-token']
+
+  if (tokenJwt) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/home',
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }

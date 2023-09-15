@@ -9,6 +9,8 @@ import { FcGoogle } from 'react-icons/fc'
 import { Footer } from '@/components/organisms/Footer'
 import { useForm } from 'react-hook-form'
 import userStore from '@/features/app/user-store'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { withSession } from '@/lib/with-session'
 
 interface FormData {
   email: string
@@ -94,4 +96,23 @@ export default function SignIn() {
       <Footer />
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const tokenJwt = ctx.req.cookies['questty-token']
+
+  if (tokenJwt) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/home',
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }

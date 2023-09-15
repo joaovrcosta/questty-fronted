@@ -9,6 +9,8 @@ import { UserRankingBox } from '@/components/molecules/UserRakingBox'
 import { Text } from '@/components/atoms/Text'
 import { FaCrown } from 'react-icons/fa'
 import { Header } from '@/components/organisms/Header'
+import { GetServerSideProps } from 'next'
+import { withSession } from '@/lib/with-session'
 
 export default function Home() {
   const questions = useContextSelector(QuestionContext, (context) => {
@@ -118,3 +120,11 @@ export default function Home() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSession(
+  async (_ctx) => {
+    return {
+      props: {},
+    }
+  }
+)
