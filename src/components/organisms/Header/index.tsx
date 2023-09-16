@@ -5,8 +5,26 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import Link from 'next/link'
 import { SearchInput } from '@/components/atoms/SearchInput'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { GetServerSideProps } from 'next'
+import { parseCookies } from 'nookies'
+import { parse } from 'cookie'
+import api from '@/services/api'
+import Cookies from 'js-cookie'
+import { useRouter } from 'next/router'
+import { Avatar } from '@/components/atoms/Avatar'
 
 export function Header() {
+  const { isLoggedIn, logout } = useAuthStore()
+  const router = useRouter()
+
+  const logoutUser = async () => {
+    logout()
+    Cookies.remove('questty-token')
+
+    router.push('/')
+  }
+
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
@@ -27,31 +45,70 @@ export function Header() {
             <NewTransactionModal />
           </Dialog.Root>
 
-          <S.StyledLink href="/signin">
-            <S.SignInButton backgroundColor="transparent" border={false}>
-              ENTRAR
-            </S.SignInButton>
-          </S.StyledLink>
+          {!isLoggedIn && (
+            <S.StyledLink href="/signin">
+              <S.SignInButton backgroundColor="transparent" border={false}>
+                ENTRAR
+              </S.SignInButton>
+            </S.StyledLink>
+          )}
 
-          <S.StyledLink href="/signup">
-            <S.SignUpButton backgroundColor="blue_500">
-              CADASTRAR
+          {!isLoggedIn && (
+            <S.StyledLink href="/signup">
+              <S.SignUpButton backgroundColor="blue_500">
+                CADASTRAR
+              </S.SignUpButton>
+            </S.StyledLink>
+          )}
+          {isLoggedIn && (
+            <Avatar
+              imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+              variant="lg"
+            />
+          )}
+
+          {/* {isLoggedIn && (
+            <S.SignUpButton
+              onClick={logoutUser}
+              backgroundColor="transparent"
+              border={false}
+            >
+              SAIR
             </S.SignUpButton>
-          </S.StyledLink>
+          )} */}
         </S.HeaderActionsContainer>
       </S.HeaderContent>
-      <S.SubHeader>
-        <S.SubHeaderContent>
-          <S.StyledButton backgroundColor="transparent" border={false}>
-            <S.StyledLink href="/signin">ENTRAR</S.StyledLink>
-          </S.StyledButton>
-          <Button backgroundColor="blue_500">
-            <S.StyledLink href="/signup" style={{ color: 'white' }}>
-              CADASTRAR
-            </S.StyledLink>
-          </Button>
-        </S.SubHeaderContent>
-      </S.SubHeader>
+      {/* ... */}
     </S.HeaderContainer>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const tokenJwt = ctx.req.cookies['questty-token']
+
+  console.log(tokenJwt)
+
+  const { login } = useAuthStore()
+
+  if (tokenJwt) {
+    try {
+      const userResponse = await api.get('/me', {
+        headers: {
+          Authorization: `Bearer ${tokenJwt}`,
+        },
+      })
+
+      if (userResponse.status === 200) {
+        const user = userResponse.data
+
+        login(user, tokenJwt)
+      }
+    } catch (error) {
+      console.error('Erro ao obter informações do usuário:', error)
+    }
+  }
+
+  return {
+    props: {},
+  }
 }

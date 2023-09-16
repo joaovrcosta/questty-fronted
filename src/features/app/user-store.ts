@@ -26,7 +26,6 @@ interface IAnswer {
 interface IUserStore {
   currentUser: User | null
   setCurrentUser(user: User | null): void
-  signIn(data: signInData): Promise<void>
 }
 
 class UserStore implements IUserStore {
@@ -36,7 +35,6 @@ class UserStore implements IUserStore {
     makeObservable(this, {
       currentUser: observable,
       setCurrentUser: action,
-      signIn: action,
     })
   }
 
@@ -55,38 +53,6 @@ class UserStore implements IUserStore {
     if (token) {
       const user = JSON.parse(token)
       this.setCurrentUser(user)
-    }
-  }
-
-  async signIn({ email, password }: signInData) {
-    try {
-      const response = await api.post('/sessions', {
-        email,
-        password,
-      })
-
-      const { token } = response.data
-
-      setCookie(undefined, 'questty-token', token, {
-        maxAge: 60 * 60 * 24 * 1, // 24 horas
-      })
-
-      const userResponse = await api.get('/me', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-
-      const user = userResponse.data
-
-      console.log(user)
-
-      this.setCurrentUser(user)
-
-      Router.push('/home')
-    } catch (error) {
-      console.error('Erro ao autenticar:', error)
-      throw error
     }
   }
 }

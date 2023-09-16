@@ -11,11 +11,16 @@ import { FaCrown } from 'react-icons/fa'
 import { Header } from '@/components/organisms/Header'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 export default function Home() {
   const questions = useContextSelector(QuestionContext, (context) => {
     return context.questions
   })
+
+  const { user } = useAuthStore()
+
+  console.log(user)
 
   return (
     <>

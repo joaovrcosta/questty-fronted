@@ -1,19 +1,23 @@
 import { Header } from '@/components/organisms/Header'
 import * as S from '../../styles/pages/profile'
-import { Avatar } from '@/components/atoms/Avatar'
+
 import { Text } from '@/components/atoms/Text'
-import { Button } from '@/components/atoms/Button'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { Footer } from '@/components/organisms/Footer'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { getTimeAgo } from '@/utils/getTimeAgo'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 export default function Profile() {
   const questions = useContextSelector(QuestionContext, (context) => {
     return context.questions
   })
+
+  const user = useAuthStore((state) => state.user)
 
   return (
     <>
@@ -47,7 +51,7 @@ export default function Profile() {
                 marginTop: '1rem',
               }}
             >
-              joaovrcosta
+              {user?.name}
             </Text>
             <S.UserEditing>
               <S.EditButton
@@ -75,7 +79,7 @@ export default function Profile() {
                   <AiOutlineCalendar size={18} />
                   <Text size="xs">Entrou em </Text>
                   <Text weight="semibold" size="xs">
-                    10 de fevereiro de 2021
+                    {getTimeAgo(user?.createdAt)}
                   </Text>
                 </S.CreatedAt>
               </S.SeenIn>
@@ -91,8 +95,8 @@ export default function Profile() {
               Ultimas respostas:
             </Text>
             <S.UserHistory>
-              {questions.map((question) => {
-                return (
+              {user?.answers ? (
+                user.answers.map((question) => (
                   <QuestionCard
                     readOnly={true}
                     key={question.id}
@@ -101,8 +105,12 @@ export default function Profile() {
                     category={question.category}
                     createdAt={question.createdAt}
                   />
-                )
-              })}
+                ))
+              ) : (
+                <Text size="md" color="gray_500">
+                  Nenhuma resposta encontrada.
+                </Text>
+              )}
             </S.UserHistory>
             <S.ShowmoreQuestionsButtonContainer>
               <S.showMoreButton

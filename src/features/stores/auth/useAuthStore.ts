@@ -1,15 +1,19 @@
 import { create } from 'zustand'
 
-type User = {
-  id: number
-  username: string
+export interface IUser {
+  id: string
+  name: string
+  email: string
+  createdAt: string
+  answers: Array<any>
+  questions: Array<any>
 }
 
-type AuthStore = {
-  user: User | null
+interface AuthStore {
+  user: IUser | null
   token: string | null
   isLoggedIn: boolean
-  login: (user: User, token: string) => void
+  login: (user: IUser, token: string) => void
   logout: () => void
 }
 
@@ -17,7 +21,10 @@ const useAuthStore = create<AuthStore>((set) => ({
   user: null,
   token: null,
   isLoggedIn: false,
-  login: (user, token) => set({ user, token, isLoggedIn: true }),
+  login: (user, token) => {
+    console.log('Logging in:', user)
+    set({ user, token, isLoggedIn: true })
+  },
   logout: () => set({ user: null, token: null, isLoggedIn: false }),
 }))
 

@@ -117,6 +117,7 @@ export const StyledButton = styled(Button)`
 
 export const MakeYourQuestionButton = styled(Button)`
   margin-left: 1rem;
+  margin-right: 2.25rem;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
@@ -150,7 +151,7 @@ export const SignInButton = styled(Button)`
 
 export const SignUpButton = styled(Button)`
   margin-left: 1rem;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.blue_950};
 
   &:hover {
     opacity: 0.9;

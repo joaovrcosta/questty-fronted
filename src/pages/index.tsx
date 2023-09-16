@@ -5,6 +5,7 @@ import { Heading } from '@/components/atoms/Heading'
 import * as S from '@/styles/pages/index'
 import { Text } from '@/components/atoms/Text'
 import { Button } from '@/components/atoms/Button'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
 const Landing: NextPageWithLayout = () => {
   return (
@@ -45,3 +46,22 @@ Landing.getLayout = (pages: ReactElement) => {
 }
 
 export default Landing
+
+export const getServerSideProps: GetServerSideProps = async (
+  ctx: GetServerSidePropsContext
+) => {
+  const tokenJwt = ctx.req.cookies['questty-token']
+
+  if (tokenJwt) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/home',
+      },
+    }
+  }
+
+  return {
+    props: {},
+  }
+}

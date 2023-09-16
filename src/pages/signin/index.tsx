@@ -8,9 +8,12 @@ import { SiFacebook } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
 import { Footer } from '@/components/organisms/Footer'
 import { useForm } from 'react-hook-form'
-import userStore from '@/features/app/user-store'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { withSession } from '@/lib/with-session'
+import api from '@/services/api'
+import { setCookie } from 'nookies'
+import Router from 'next/router'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 interface FormData {
   email: string
@@ -19,12 +22,39 @@ interface FormData {
 
 export default function SignIn() {
   const { register, handleSubmit } = useForm<FormData>()
+  const { login } = useAuthStore()
 
-  async function handleSignIn(data: FormData) {
+  const handleSignIn = async (data: FormData) => {
     try {
-      await userStore.signIn(data)
+      const { email, password } = data
+
+      const response = await api.post('/sessions', {
+        email,
+        password,
+      })
+
+      const { token } = response.data
+
+      setCookie(undefined, 'questty-token', token, {
+        maxAge: 60 * 60 * 24 * 1, // 24 horas
+      })
+
+      const userResponse = await api.get('/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const user = userResponse.data.user
+
+      console.log(user.answers)
+
+      login(user, token)
+
+      Router.push('/home')
     } catch (error) {
-      console.log(error)
+      console.error('Erro ao autenticar:', error)
+      throw error
     }
   }
 
