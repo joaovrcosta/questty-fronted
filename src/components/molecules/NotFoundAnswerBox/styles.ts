@@ -14,7 +14,7 @@ export const Container = styled.div`
 `
 
 export const NotFoundAnwersContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow_150};
+  background-color: ${({ theme }) => theme.colors.yellow_200};
   height: 20rem;
   border-radius: 10px;
   width: 90%;

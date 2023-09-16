@@ -18,7 +18,7 @@ export const AnswerWrapper = styled.div`
 export const AnswerBoxContainer = styled.div<IAnswerBox>`
   position: relative;
   background-color: ${({ theme, isGolden }) =>
-    isGolden ? theme.colors.yellow_180 : theme.colors.white};
+    isGolden ? theme.colors.yellow_200 : theme.colors.white};
   border: 1px solid
     ${({ theme, isGolden }) =>
       isGolden ? theme.colors.yellow_500 : theme.colors.black};
@@ -37,7 +37,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
     border-style: solid;
     border-color: transparent transparent transparent
       ${({ theme, isGolden }) =>
-        isGolden ? theme.colors.yellow_180 : theme.colors.white};
+        isGolden ? theme.colors.yellow_200 : theme.colors.white};
     z-index: 9999;
   }
 

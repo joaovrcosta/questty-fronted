@@ -79,7 +79,7 @@ export const CreatedAt = styled.div`
 `
 
 export const UserHistory = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow_180};
+  background-color: ${({ theme }) => theme.colors.yellow_200};
   font-family: Poppins;
   margin-top: 1rem;
 `
@@ -132,5 +132,15 @@ export const UserAvatarPhoto = styled(Avatar)`
   @media (max-width: 768px) {
     height: 32px;
     width: 32px;
+  }
+`
+
+export const signOutButton = styled(Button)`
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.blue_950};
+    transition: 0.3s ease all;
+    color: ${({ theme }) => theme.colors.white};
   }
 `

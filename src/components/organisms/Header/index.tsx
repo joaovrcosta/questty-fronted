@@ -18,13 +18,6 @@ export function Header() {
   const { isLoggedIn, logout } = useAuthStore()
   const router = useRouter()
 
-  const logoutUser = async () => {
-    logout()
-    Cookies.remove('questty-token')
-
-    router.push('/')
-  }
-
   return (
     <S.HeaderContainer>
       <S.HeaderContent>

@@ -11,11 +11,22 @@ import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { Button } from '@/components/atoms/Button'
+import Cookies from 'js-cookie'
+import router from 'next/router'
 
 export default function Profile() {
+  const { logout } = useAuthStore()
   const questions = useContextSelector(QuestionContext, (context) => {
     return context.questions
   })
+
+  const logoutUser = async () => {
+    logout()
+    Cookies.remove('questty-token')
+
+    router.push('/')
+  }
 
   const user = useAuthStore((state) => state.user)
 
@@ -82,6 +93,13 @@ export default function Profile() {
                     {getTimeAgo(user?.createdAt)}
                   </Text>
                 </S.CreatedAt>
+                <S.signOutButton
+                  onClick={logoutUser}
+                  backgroundColor="transparent"
+                  rounding="rounded-thin"
+                >
+                  Sair
+                </S.signOutButton>
               </S.SeenIn>
             </S.UserEditing>
           </S.UserInfo>
