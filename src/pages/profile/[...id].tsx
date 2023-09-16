@@ -3,23 +3,16 @@ import * as S from '../../styles/pages/profile'
 
 import { Text } from '@/components/atoms/Text'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
-import { useContextSelector } from 'use-context-selector'
-import { QuestionContext } from '@/contexts/QuestionsContext'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { getTimeAgo } from '@/utils/getTimeAgo'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { Button } from '@/components/atoms/Button'
 import Cookies from 'js-cookie'
 import router from 'next/router'
 
 export default function Profile() {
-  const { logout } = useAuthStore()
-  const questions = useContextSelector(QuestionContext, (context) => {
-    return context.questions
-  })
+  const { logout, isLoggedIn } = useAuthStore()
 
   const logoutUser = async () => {
     logout()
@@ -41,17 +34,19 @@ export default function Profile() {
                 variant="xl"
                 imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
               />
-              <S.EditButtonMobile
-                variant="lg"
-                rounding="rounded"
-                color="white"
-                backgroundColor="blue_500"
-                style={{
-                  padding: '0.65rem 1.5rem',
-                }}
-              >
-                Editar Perfil
-              </S.EditButtonMobile>
+              {isLoggedIn && (
+                <S.EditButtonMobile
+                  variant="lg"
+                  rounding="rounded"
+                  color="white"
+                  backgroundColor="blue_500"
+                  style={{
+                    padding: '0.65rem 1.5rem',
+                  }}
+                >
+                  Editar Perfil
+                </S.EditButtonMobile>
+              )}
             </S.AvatarContainer>
             <Text
               size="xl"
@@ -62,20 +57,23 @@ export default function Profile() {
                 marginTop: '1rem',
               }}
             >
-              {user?.name}
+              @{user?.name}
             </Text>
             <S.UserEditing>
-              <S.EditButton
-                variant="lg"
-                rounding="rounded"
-                color="white"
-                backgroundColor="blue_500"
-                style={{
-                  padding: '0.65rem 1.5rem',
-                }}
-              >
-                Editar Perfil
-              </S.EditButton>
+              {isLoggedIn && (
+                <S.EditButton
+                  variant="lg"
+                  rounding="rounded"
+                  color="white"
+                  backgroundColor="blue_500"
+                  style={{
+                    padding: '0.65rem 1.5rem',
+                  }}
+                >
+                  Editar Perfil
+                </S.EditButton>
+              )}
+
               <S.SeenIn>
                 <S.ActiveIn>
                   <BiTimeFive size={18} />
@@ -93,13 +91,15 @@ export default function Profile() {
                     {getTimeAgo(user?.createdAt)}
                   </Text>
                 </S.CreatedAt>
-                <S.signOutButton
-                  onClick={logoutUser}
-                  backgroundColor="transparent"
-                  rounding="rounded-thin"
-                >
-                  Sair
-                </S.signOutButton>
+                {isLoggedIn && (
+                  <S.signOutButton
+                    onClick={logoutUser}
+                    backgroundColor="transparent"
+                    rounding="rounded-thin"
+                  >
+                    Sair
+                  </S.signOutButton>
+                )}
               </S.SeenIn>
             </S.UserEditing>
           </S.UserInfo>

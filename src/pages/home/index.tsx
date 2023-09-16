@@ -1,8 +1,6 @@
 import * as S from '../../styles/pages/home'
 import { Heading } from '@/components/atoms/Heading'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
-import { useContextSelector } from 'use-context-selector'
-import { QuestionContext } from '@/contexts/QuestionsContext'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import { UserRankingBox } from '@/components/molecules/UserRakingBox'
@@ -12,15 +10,32 @@ import { Header } from '@/components/organisms/Header'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
+import { useEffect } from 'react'
+import api from '@/services/api'
 
 export default function Home() {
-  const questions = useContextSelector(QuestionContext, (context) => {
-    return context.questions
-  })
+  const questionStore = useQuestionsStore()
+  const questions = useQuestionsStore((state) => state.questions)
 
-  const { user } = useAuthStore()
+  console.log(questions)
 
-  console.log(user)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const questionsResponse = await api.get('/questions/recent')
+        const data = await questionsResponse.data
+
+        console.log(data)
+
+        questionStore.setQuestions(data.questions)
+      } catch (error) {
+        console.error('Erro ao buscar questões:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -55,17 +70,19 @@ export default function Home() {
             </Dialog.Root>
           </S.SubjectsContainer>
           <S.QuestionsContainer>
-            {questions.map((question) => {
-              return (
+            {questions ? (
+              questions.map((question) => (
                 <QuestionCard
-                  key={question.id}
                   id={question.id}
+                  key={question.id}
                   content={question.content}
-                  category={question.category}
+                  category_id={question.category_id}
                   createdAt={question.createdAt}
                 />
-              )
-            })}
+              ))
+            ) : (
+              <p>Carregando...</p>
+            )}
           </S.QuestionsContainer>
         </S.FeedContentWrapper>
         <S.RankingSidebar>

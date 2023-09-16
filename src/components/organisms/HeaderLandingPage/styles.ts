@@ -133,18 +133,6 @@ export const SignInButton = styled(Button)`
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
   }
-
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      display: none;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      display: none;
-    }
-  `}
 `
 
 export const SignUpButton = styled(Button)`

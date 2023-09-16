@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
-import { QuestionContext } from '@/contexts/QuestionsContext'
-import { useContextSelector } from 'use-context-selector'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
+import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
 
 export type subjectsType =
   | 'math'
@@ -14,11 +13,12 @@ export type subjectsType =
   | 'geography'
   | 'chemistry'
   | 'enem'
+  | '6767497f-2929-4f97-92f6-2abef996b6f5'
 
 interface Question {
-  id: number
+  id: string
   content: string
-  category: subjectsType
+  category_id: string
   createdAt: string
   readOnly?: boolean
 }
@@ -26,22 +26,21 @@ interface Question {
 export function QuestionCard({
   id,
   content,
-  category,
+  category_id,
   createdAt,
   readOnly = false,
 }: Question) {
-  const questions = useContextSelector(QuestionContext, (context) => {
-    return context.questions
-  })
+  const questions = useQuestionsStore((state) => state.questions)
 
   const router = useRouter()
 
   const handleResponderClick = () => {
-    router.push(`/question/${id}`)
+    router.push(`/tarefa/${id}`)
   }
 
-  const answerCount = questions.filter((question) => question.id === id)[0]
-    ?.answers.length
+  const answerCount = 0
+  // const answerCount = questions?.filter((question) => question.id === id)[0]
+  //   ?.answers.length
   const hasThreeOrMoreAnswers = answerCount >= 3
   const limitedAnswerCount = Math.min(answerCount, 3)
 
@@ -61,7 +60,7 @@ export function QuestionCard({
             </S.QuestionText>
             <S.SubjectAndDateTimeContainer>
               <S.Subject size="xs" color="gray_800">
-                {category}
+                {category_id}
               </S.Subject>
               <S.DateTime size="xs" color="gray_800">
                 {getTimeAgo(createdAt)}
