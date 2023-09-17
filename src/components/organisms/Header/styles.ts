@@ -41,7 +41,7 @@ export const HeaderContent = styled.div`
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 1.5rem;
-      padding: 1.5rem 1rem 1.5rem 1rem;
+      padding: 1rem 1.5rem 1rem 1.5rem;
     }
   `}
 
@@ -151,7 +151,7 @@ export const SignInButton = styled(Button)`
   `}
 `
 
-export const ButtonDiv = styled.div`
+export const ButtonDiv = styled.span`
   &::after {
     content: '';
     position: absolute;
@@ -162,7 +162,7 @@ export const ButtonDiv = styled.div`
     /* Substitua pela cor desejada */
     border-radius: 50%;
     background: ${({ theme }) =>
-      theme.colors.primary}; /* Substitua pela cor desejada */
+      theme.colors.gray_100}; /* Substitua pela cor desejada */
     mix-blend-mode: lighten;
     transition: all 0.5s ease;
     transform-origin: center;
@@ -177,7 +177,7 @@ export const ButtonDiv = styled.div`
 `
 
 export const SignUpButton = styled(Button)`
-  color: ${({ theme }) => theme.colors.blue_950};
+  color: ${({ theme }) => theme.colors.white};
 
   &:hover {
     opacity: 0.9;

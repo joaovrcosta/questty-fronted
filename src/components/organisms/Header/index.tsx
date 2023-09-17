@@ -45,16 +45,14 @@ export function Header() {
           {!isLoggedIn && (
             <S.StyledLink href="/signin">
               <S.SignInButton backgroundColor="transparent" border={false}>
-                <S.ButtonDiv>
-                  <p style={{ zIndex: 2 }}>ENTRAR</p>
-                </S.ButtonDiv>
+                ENTRAR
               </S.SignInButton>
             </S.StyledLink>
           )}
 
           {!isLoggedIn && (
             <S.StyledLink href="/signup">
-              <S.SignUpButton backgroundColor="blue_500">
+              <S.SignUpButton backgroundColor="blue_550">
                 CADASTRAR
               </S.SignUpButton>
             </S.StyledLink>

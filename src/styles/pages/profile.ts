@@ -41,12 +41,12 @@ export const UserInfo = styled.aside`
 `
 
 export const SeenIn = styled.div`
-  margin-top: 3.25rem;
+  margin-top: 1rem;
   font-family: Poppins;
   white-space: nowrap;
 
   @media (max-width: 768px) {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 `
 
@@ -79,7 +79,6 @@ export const CreatedAt = styled.div`
 `
 
 export const UserHistory = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow_200};
   font-family: Poppins;
   margin-top: 1rem;
 `
@@ -146,6 +145,19 @@ export const signOutButton = styled(Button)`
 `
 export const NotFindAnyAnswer = styled.div`
   padding: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.yellow_100};
+  border: 1px solid ${({ theme }) => theme.colors.gray_200};
   border-radius: 20px;
+`
+
+export const UserDetailsBox = styled.div`
+  padding: 1rem 0rem 0rem 0rem;
+  display: flex;
+  gap: 0.5rem;
+`
+
+export const AnswersQuantity = styled.div`
+  padding: 0.5rem 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.gray_200};
+  border-radius: 8px;
+  text-align: center;
 `

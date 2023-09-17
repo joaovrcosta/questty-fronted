@@ -59,6 +59,22 @@ export default function Profile() {
             >
               @{user?.name}
             </Text>
+
+            <S.UserDetailsBox>
+              <S.AnswersQuantity>
+                <Text weight="bold">750</Text>
+                <Text size="xs">Respostas</Text>
+              </S.AnswersQuantity>
+              <S.AnswersQuantity>
+                <Text weight="bold">24</Text>
+                <Text size="xs">Melhores</Text>
+              </S.AnswersQuantity>
+              <S.AnswersQuantity>
+                <Text weight="bold">24</Text>
+                <Text size="xs">Valeus</Text>
+              </S.AnswersQuantity>
+            </S.UserDetailsBox>
+
             <S.UserEditing>
               {isLoggedIn && (
                 <S.EditButton
