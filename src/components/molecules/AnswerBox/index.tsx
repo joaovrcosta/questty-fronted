@@ -9,6 +9,7 @@ import { MdVerified } from 'react-icons/md'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { useState } from 'react'
 
 interface Answer {
   id: string
@@ -28,6 +29,7 @@ export function AnswerBox({
   isGolden,
 }: Answer) {
   const { token } = useAuthStore()
+  const [likesTotal, setLikesTotal] = useState(likesQuantity) // Mova a declaração aqui
 
   function handleLikeClick() {
     if (!token) {
@@ -44,12 +46,14 @@ export function AnswerBox({
       })
       .then((response) => {
         console.log('Like dado com sucesso:', response.data)
+
+        // Atualize likesTotal usando setLikesTotal
+        setLikesTotal(likesTotal! + 1)
       })
       .catch((error) => {
         console.error('Erro ao dar like:', error)
       })
   }
-
   return (
     <S.AnswerWrapper>
       <S.AvatarContainer>
@@ -92,7 +96,7 @@ export function AnswerBox({
             )}
             <S.StarsRating>
               <Image src={starIcon} alt="" />
-              <Text weight="bold">{likesQuantity}</Text>
+              <Text weight="bold">{likesTotal}</Text>
             </S.StarsRating>
             {/* <S.CrownNumberContainer>
               <S.CrownNumber weight="bold">4,1</S.CrownNumber>
@@ -114,7 +118,7 @@ export function AnswerBox({
           >
             Valeu
             <Image src={starIcon} alt="" />
-            <Text weight="bold">{likesQuantity}</Text>
+            <Text weight="bold">{likesTotal}</Text>
           </S.LikedButton>
           <S.ModerationWrapper>
             <S.ModerateLabel>
