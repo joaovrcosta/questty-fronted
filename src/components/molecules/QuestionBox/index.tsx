@@ -13,15 +13,17 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { AnswerModal } from '../AnswerModal'
 
 interface Question {
-  id: number
-  content: string
-  createdAt: string
-  answersQuantity: number
+  id?: number | string
+  content?: string
+  createdAt?: string
+  answersQuantity?: number
+  author?: string
 }
 
 export function QuestionBox({
   id,
   content,
+  author,
   createdAt,
   answersQuantity,
 }: Question) {
@@ -55,10 +57,10 @@ export function QuestionBox({
               <S.UserInfo>
                 <S.Username>
                   <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                    joaovrcosta
+                    {author}
                   </Text>
                 </S.Username>
-                <S.UserLevel>27</S.UserLevel>
+                {/* <S.UserLevel>27</S.UserLevel> */}
               </S.UserInfo>
               <S.DateTimeText
                 size="xs"
@@ -108,18 +110,20 @@ export function QuestionBox({
             ></S.QuestionTitleText>
           </S.QuestionTitle>
           <S.QuestionContentText size="lg" weight="regular" color="blue_950">
-            {content.length > 380 ? (
-              <>
-                <Text size="xx1" weight="bold">
-                  {content.slice(0, 380)} ...
-                </Text>
-                <div style={{ marginTop: '16px', fontSize: '18px' }}>
-                  {content.slice(380)}
-                </div>
-              </>
-            ) : (
-              content
-            )}
+            {content ? (
+              content.length > 380 ? (
+                <>
+                  <Text size="xx1" weight="bold">
+                    {content.slice(0, 380)} ...
+                  </Text>
+                  <div style={{ marginTop: '16px', fontSize: '18px' }}>
+                    {content.slice(380)}
+                  </div>
+                </>
+              ) : (
+                content
+              )
+            ) : null}
           </S.QuestionContentText>
         </S.QuestionContent>
         <S.UserHandleActionsContainer>

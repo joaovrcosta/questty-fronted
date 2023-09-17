@@ -6,22 +6,50 @@ import { BiShieldAlt2 } from 'react-icons/bi'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { MdVerified } from 'react-icons/md'
+import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
+import api from '@/services/api'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 interface Answer {
-  id: number
+  id: string
   content: string
+  author?: string
   createdAt: string
   isGolden?: boolean
-  thanks: number
+  likesQuantity?: number
 }
 
 export function AnswerBox({
   id,
   content,
   createdAt,
+  author,
+  likesQuantity,
   isGolden,
-  thanks,
 }: Answer) {
+  const { token } = useAuthStore()
+
+  function handleLikeClick() {
+    if (!token) {
+      console.error('Token de autenticação não encontrado')
+      return
+    }
+
+    api
+      .post(`/likes/${id}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        console.log('Like dado com sucesso:', response.data)
+      })
+      .catch((error) => {
+        console.error('Erro ao dar like:', error)
+      })
+  }
+
   return (
     <S.AnswerWrapper>
       <S.AvatarContainer>
@@ -36,9 +64,9 @@ export function AnswerBox({
             <S.AnswerInfoWrapper>
               <S.QuestionInfo>
                 <S.Username>
-                  <Text weight="medium">rodrigolopes</Text>
+                  <Text weight="medium">{author}</Text>
                 </S.Username>
-                <S.UserLevel>183</S.UserLevel>
+                {/* <S.UserLevel>183</S.UserLevel> */}
               </S.QuestionInfo>
               <S.CreatedAtContainer>
                 <Text size="xs" style={{ fontFamily: 'Inter' }}>
@@ -46,12 +74,12 @@ export function AnswerBox({
                 </Text>
               </S.CreatedAtContainer>
             </S.AnswerInfoWrapper>
-            <S.UserSubInfosContainer>
+            {/* <S.UserSubInfosContainer>
               <S.UserTag size="xs" weight="bold">
                 PROPLAYER
               </S.UserTag>
               <S.AnswerViews size="xs">105 Visualizações</S.AnswerViews>
-            </S.UserSubInfosContainer>
+            </S.UserSubInfosContainer> */}
           </S.AnswerInfoWrapperContainer>
           <S.AnswerRateContainer>
             {isGolden && (
@@ -64,7 +92,7 @@ export function AnswerBox({
             )}
             <S.StarsRating>
               <Image src={starIcon} alt="" />
-              <Text weight="bold">{thanks}</Text>
+              <Text weight="bold">{likesQuantity}</Text>
             </S.StarsRating>
             {/* <S.CrownNumberContainer>
               <S.CrownNumber weight="bold">4,1</S.CrownNumber>
@@ -82,10 +110,11 @@ export function AnswerBox({
             rounding="rounded-full"
             color="black"
             backgroundColor="white"
+            onClick={handleLikeClick}
           >
             Valeu
             <Image src={starIcon} alt="" />
-            <Text weight="bold">{thanks}</Text>
+            <Text weight="bold">{likesQuantity}</Text>
           </S.LikedButton>
           <S.ModerationWrapper>
             <S.ModerateLabel>
