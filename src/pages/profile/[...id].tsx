@@ -124,9 +124,11 @@ export default function Profile() {
                   />
                 ))
               ) : (
-                <Text size="md" color="gray_500">
-                  Nenhuma resposta encontrada.
-                </Text>
+                <S.NotFindAnyAnswer>
+                  <Text size="md" color="gray_500">
+                    Nenhuma resposta encontrada.
+                  </Text>
+                </S.NotFindAnyAnswer>
               )}
             </S.UserHistory>
             <S.ShowmoreQuestionsButtonContainer>

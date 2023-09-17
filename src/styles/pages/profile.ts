@@ -144,3 +144,8 @@ export const signOutButton = styled(Button)`
     color: ${({ theme }) => theme.colors.white};
   }
 `
+export const NotFindAnyAnswer = styled.div`
+  padding: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.yellow_100};
+  border-radius: 20px;
+`

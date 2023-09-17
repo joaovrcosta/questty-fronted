@@ -21,27 +21,33 @@ export function Header() {
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
-        <Link href="/">
-          <S.LogoImage src={logoImg} width={145} height={46} alt="" />
-        </Link>
-        <SearchInput />
+        <S.FirstBoxContent>
+          <Link href="/">
+            <S.LogoImage src={logoImg} width={145} height={46} alt="" />
+          </Link>
+          <SearchInput />
+        </S.FirstBoxContent>
         <S.HeaderActionsContainer>
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <S.MakeYourQuestionButton
-                border={false}
-                backgroundColor="transparent"
-              >
-                FAÇA SUA PERGUNTA
-              </S.MakeYourQuestionButton>
-            </Dialog.Trigger>
-            <NewTransactionModal />
-          </Dialog.Root>
+          <S.MakeQuestionButton>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <S.MakeYourQuestionButton
+                  border={false}
+                  backgroundColor="transparent"
+                >
+                  PERGUNTAR
+                </S.MakeYourQuestionButton>
+              </Dialog.Trigger>
+              <NewTransactionModal />
+            </Dialog.Root>
+          </S.MakeQuestionButton>
 
           {!isLoggedIn && (
             <S.StyledLink href="/signin">
               <S.SignInButton backgroundColor="transparent" border={false}>
-                ENTRAR
+                <S.ButtonDiv>
+                  <p style={{ zIndex: 2 }}>ENTRAR</p>
+                </S.ButtonDiv>
               </S.SignInButton>
             </S.StyledLink>
           )}
