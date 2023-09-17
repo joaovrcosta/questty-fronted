@@ -18,15 +18,11 @@ export default function Home() {
   const questionStore = useQuestionsStore()
   const questions = useQuestionsStore((state) => state.questions)
 
-  console.log(questions)
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const questionsResponse = await api.get('/questions/recent')
         const data = await questionsResponse.data
-
-        console.log(data)
 
         questionStore.setQuestions(data.questions)
       } catch (error) {
@@ -76,7 +72,7 @@ export default function Home() {
                   id={question.id}
                   key={question.id}
                   content={question.content}
-                  category_id={question.category_id}
+                  category_id={question.category.name}
                   createdAt={question.createdAt}
                 />
               ))

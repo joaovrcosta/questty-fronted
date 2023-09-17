@@ -18,7 +18,7 @@ export type subjectsType =
 interface Question {
   id: string
   content: string
-  category_id: string
+  category_id?: string
   createdAt: string
   readOnly?: boolean
 }
@@ -59,9 +59,11 @@ export function QuestionCard({
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
             </S.QuestionText>
             <S.SubjectAndDateTimeContainer>
-              <S.Subject size="xs" color="gray_800">
-                {category_id}
-              </S.Subject>
+              {!!category_id && (
+                <S.Subject size="xs" color="gray_800">
+                  {category_id}
+                </S.Subject>
+              )}
               <S.DateTime size="xs" color="gray_800">
                 {getTimeAgo(createdAt)}
               </S.DateTime>

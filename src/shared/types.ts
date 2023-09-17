@@ -11,6 +11,9 @@ export interface IQuestion {
   updatedAt: string
   deletedAt: string
   createdAt: string
+  category: {
+    name: string
+  }
   answers: IAnswer[]
 }
 
