@@ -59,6 +59,22 @@ export default function Profile() {
             >
               @{user?.name}
             </Text>
+
+            <S.UserDetailsBox>
+              <S.AnswersQuantity>
+                <Text weight="bold">750</Text>
+                <Text size="xs">Respostas</Text>
+              </S.AnswersQuantity>
+              <S.AnswersQuantity>
+                <Text weight="bold">24</Text>
+                <Text size="xs">Melhores</Text>
+              </S.AnswersQuantity>
+              <S.AnswersQuantity>
+                <Text weight="bold">24</Text>
+                <Text size="xs">Valeus</Text>
+              </S.AnswersQuantity>
+            </S.UserDetailsBox>
+
             <S.UserEditing>
               {isLoggedIn && (
                 <S.EditButton
@@ -124,11 +140,11 @@ export default function Profile() {
                   />
                 ))
               ) : (
-                <Text size="md" color="gray_500">
-                  {user?.answers
-                    ? 'Nenhuma resposta encontrada.'
-                    : 'Carregando...'}
-                </Text>
+                <S.NotFindAnyAnswer>
+                  <Text size="md" color="gray_500">
+                    Nenhuma resposta encontrada.
+                  </Text>
+                </S.NotFindAnyAnswer>
               )}
             </S.UserHistory>
             <S.ShowmoreQuestionsButtonContainer>

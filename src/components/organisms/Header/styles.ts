@@ -36,12 +36,12 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem; //Spacing Items
+  gap: 5em; //Spacing Items
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
-      gap: 0;
-      padding: 1.5rem 1rem 1.5rem 1rem;
+      gap: 1.5rem;
+      padding: 1rem 1.5rem 1rem 1.5rem;
     }
   `}
 
@@ -52,6 +52,14 @@ export const HeaderContent = styled.div`
     }
   `}
 `
+
+export const FirstBoxContent = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+`
+
+export const MakeQuestionButton = styled.div``
 
 export const LogoImage = styled(Image)`
   ${({ theme }) => css`
@@ -66,7 +74,6 @@ export const SearchInputContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-left: 1rem;
   border-radius: 46px;
   border: 1px solid ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
@@ -98,7 +105,7 @@ export const SearchInput = styled.input`
 export const HeaderActionsContainer = styled.div`
   display: flex;
   align-items: center;
-  /* gap: 1.5rem; */
+  gap: 1.5rem;
 `
 
 export const StyledLink = styled(Link)`
@@ -116,8 +123,6 @@ export const StyledButton = styled(Button)`
 `
 
 export const MakeYourQuestionButton = styled(Button)`
-  margin-left: 1rem;
-  margin-right: 2.25rem;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
@@ -131,27 +136,48 @@ export const MakeYourQuestionButton = styled(Button)`
 `
 
 export const SignInButton = styled(Button)`
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.gray_100};
-    transition: 0.3s ease all;
-  }
+  position: relative;
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
-      display: none;
+      /* Estilos para telas até 1280px de largura */
     }
   `}
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
-      display: none;
+      display: none; /* Oculta o botão em telas até 768px de largura */
     }
   `}
 `
 
+export const ButtonDiv = styled.span`
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Substitua pela cor desejada */
+    border-radius: 50%;
+    background: ${({ theme }) =>
+      theme.colors.gray_100}; /* Substitua pela cor desejada */
+    mix-blend-mode: lighten;
+    transition: all 0.5s ease;
+    transform-origin: center;
+    transform: scale(0);
+    z-index: 1;
+  }
+
+  &:hover::after {
+    border-radius: 24px;
+    transform: scale(1);
+  }
+`
+
 export const SignUpButton = styled(Button)`
-  margin-left: 1rem;
-  color: ${({ theme }) => theme.colors.blue_950};
+  color: ${({ theme }) => theme.colors.white};
 
   &:hover {
     opacity: 0.9;
