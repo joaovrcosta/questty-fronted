@@ -51,7 +51,7 @@ export const SeenIn = styled.div`
 `
 
 export const UserEditing = styled.div`
-  margin-top: 3.25rem;
+  margin-top: 2rem;
 
   @media (max-width: 768px) {
     margin-top: 1.5rem;
@@ -157,7 +157,8 @@ export const UserDetailsBox = styled.div`
 
 export const AnswersQuantity = styled.div`
   padding: 0.5rem 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray_200};
+  width: 6rem;
+  border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 8px;
   text-align: center;
 `

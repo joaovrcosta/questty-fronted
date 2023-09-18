@@ -1,22 +1,22 @@
 import * as S from './styles'
 import logoImg from '../../../assets/logo.svg'
-import { Button } from '@/components/atoms/Button'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import Link from 'next/link'
 import { SearchInput } from '@/components/atoms/SearchInput'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { GetServerSideProps } from 'next'
-import { parseCookies } from 'nookies'
-import { parse } from 'cookie'
 import api from '@/services/api'
-import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
-import { Avatar } from '@/components/atoms/Avatar'
+import { Dropdown } from '@/components/molecules/DropdownMenu'
 
 export function Header() {
-  const { isLoggedIn, logout } = useAuthStore()
+  const { isLoggedIn, logout, user } = useAuthStore()
   const router = useRouter()
+
+  // const handleResponderClick = () => {
+  //   router.push(`/tarefa/${id}`)
+  // }
 
   return (
     <S.HeaderContainer>
@@ -57,22 +57,7 @@ export function Header() {
               </S.SignUpButton>
             </S.StyledLink>
           )}
-          {isLoggedIn && (
-            <Avatar
-              imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
-              variant="lg"
-            />
-          )}
-
-          {/* {isLoggedIn && (
-            <S.SignUpButton
-              onClick={logoutUser}
-              backgroundColor="transparent"
-              border={false}
-            >
-              SAIR
-            </S.SignUpButton>
-          )} */}
+          {isLoggedIn && <Dropdown id={user?.id} />}
         </S.HeaderActionsContainer>
       </S.HeaderContent>
       {/* ... */}

@@ -36,7 +36,7 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 5em; //Spacing Items
+  gap: 1.5em; //Spacing Items
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
