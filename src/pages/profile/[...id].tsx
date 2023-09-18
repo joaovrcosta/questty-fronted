@@ -113,7 +113,7 @@ export default function Profile() {
               Ultimas respostas:
             </Text>
             <S.UserHistory>
-              {user?.answers ? (
+              {user?.answers && user.answers.length > 0 ? (
                 user.answers.map((question) => (
                   <QuestionCard
                     readOnly={true}
@@ -125,7 +125,9 @@ export default function Profile() {
                 ))
               ) : (
                 <Text size="md" color="gray_500">
-                  Nenhuma resposta encontrada.
+                  {user?.answers
+                    ? 'Nenhuma resposta encontrada.'
+                    : 'Carregando...'}
                 </Text>
               )}
             </S.UserHistory>
