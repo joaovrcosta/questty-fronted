@@ -1,7 +1,7 @@
 import * as S from './styles'
 import logoImg from '../../../assets/logo.svg'
 import { Text } from '@/components/atoms/Text'
-import { BsWhatsapp, BsChat, BsYoutube, BsInstagram } from 'react-icons/bs'
+import { BsChat, BsYoutube, BsInstagram } from 'react-icons/bs'
 import Image from 'next/image'
 
 export function Footer() {

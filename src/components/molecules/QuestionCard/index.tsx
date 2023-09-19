@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'

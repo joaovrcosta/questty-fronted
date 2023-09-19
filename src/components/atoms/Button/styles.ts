@@ -1,7 +1,5 @@
 import { ColorThemeType } from '@/core/constants/theme'
 import styled, { css } from 'styled-components'
-// import { darken } from 'polished'
-import Link from 'next/link'
 
 export type roundingVariants =
   | 'rounded'

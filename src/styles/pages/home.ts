@@ -1,4 +1,3 @@
-import { Button } from '@/components/atoms/Button'
 import styled, { css } from 'styled-components'
 
 export const HomePageContent = styled.div`

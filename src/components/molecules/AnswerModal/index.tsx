@@ -1,11 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
 import { X } from '@phosphor-icons/react'
-import {
-  AiOutlineArrowLeft,
-  AiOutlinePaperClip,
-  AiOutlinePlusCircle,
-} from 'react-icons/ai'
+import { AiOutlinePaperClip, AiOutlinePlusCircle } from 'react-icons/ai'
 import { TbMathFunctionY } from 'react-icons/tb'
 import { MdOutlineEmojiSymbols } from 'react-icons/md'
 import { Tooltip } from '../Tooltip'

@@ -7,16 +7,10 @@ import { SearchInput } from '@/components/atoms/SearchInput'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { GetServerSideProps } from 'next'
 import api from '@/services/api'
-import { useRouter } from 'next/router'
 import { Dropdown } from '@/components/molecules/DropdownMenu'
 
 export function Header() {
-  const { isLoggedIn, logout, user } = useAuthStore()
-  const router = useRouter()
-
-  // const handleResponderClick = () => {
-  //   router.push(`/tarefa/${id}`)
-  // }
+  const { isLoggedIn, user } = useAuthStore()
 
   return (
     <S.HeaderContainer>

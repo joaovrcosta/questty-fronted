@@ -1,5 +1,4 @@
 import { Header } from '@/components/organisms/Header'
-import { useRouter } from 'next/router'
 import * as S from '../../styles/pages/question'
 import { QuestionBox } from '@/components/molecules/QuestionBox'
 import { AnswerBox } from '@/components/molecules/AnswerBox'
@@ -24,10 +23,7 @@ interface Question {
 }
 
 export default function Question(props: IQuestionData) {
-  const router = useRouter()
-  const { id } = router.query
   const setQuestion = useQuestionStore((state) => state.setQuestion)
-  const question = useQuestionStore((state) => state.question)
 
   useEffect(() => {
     setQuestion(props)
@@ -77,8 +73,6 @@ export const getServerSideProps = async (ctx: any) => {
   try {
     const res = await api.get(`questions/${id}`)
     const questionData = res.data.question
-
-    console.log('Resposta da requisição:', questionData)
 
     if (questionData !== undefined) {
       return { props: { questionData } }

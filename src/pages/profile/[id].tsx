@@ -13,6 +13,7 @@ import { IProfileData } from '@/shared/types'
 import { useProfileStore } from '@/features/stores/profile/useProfileStore'
 import { useEffect } from 'react'
 import { getDayOfYear } from '@/utils/getDayOfYear'
+import Link from 'next/link'
 
 export default function Profile(props: IProfileData) {
   const { logout, isLoggedIn } = useAuthStore()
@@ -26,7 +27,11 @@ export default function Profile(props: IProfileData) {
 
   const logoutUser = async () => {
     logout()
-    Cookies.remove('questty-token')
+
+    const token = Cookies.get('questty-token')
+    if (token) {
+      Cookies.remove('questty-token')
+    }
 
     router.push('/')
   }
@@ -43,17 +48,19 @@ export default function Profile(props: IProfileData) {
                 imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
               />
               {isLoggedIn && isCurrentUserProfile && (
-                <S.EditButtonMobile
-                  variant="lg"
-                  rounding="rounded"
-                  color="white"
-                  backgroundColor="blue_500"
-                  style={{
-                    padding: '0.65rem 1.5rem',
-                  }}
-                >
-                  Editar Perfil
-                </S.EditButtonMobile>
+                <Link href={`edit/${props.userData.id}`}>
+                  <S.EditButtonMobile
+                    variant="lg"
+                    rounding="rounded"
+                    color="white"
+                    backgroundColor="blue_500"
+                    style={{
+                      padding: '0.65rem 1.5rem',
+                    }}
+                  >
+                    Editar Perfil
+                  </S.EditButtonMobile>
+                </Link>
               )}
             </S.AvatarContainer>
             <Text
@@ -85,17 +92,19 @@ export default function Profile(props: IProfileData) {
 
             <S.UserEditing>
               {isLoggedIn && isCurrentUserProfile && (
-                <S.EditButton
-                  variant="lg"
-                  rounding="rounded"
-                  color="white"
-                  backgroundColor="blue_500"
-                  style={{
-                    padding: '0.65rem 1.5rem',
-                  }}
-                >
-                  Editar Perfil
-                </S.EditButton>
+                <Link href={`edit/${props.userData.id}`}>
+                  <S.EditButton
+                    variant="lg"
+                    rounding="rounded"
+                    color="white"
+                    backgroundColor="blue_500"
+                    style={{
+                      padding: '0.65rem 1.5rem',
+                    }}
+                  >
+                    Editar Perfil
+                  </S.EditButton>
+                </Link>
               )}
 
               <S.SeenIn>
@@ -180,7 +189,7 @@ export const getServerSideProps = async (ctx: any) => {
 
     const userData = res.data.user
 
-    return { props: { userData } }
+    return { props: { userData, id } }
   } catch (error) {
     console.error('Erro ao buscar dados:', error)
     return { props: { userData: null } }

@@ -1,4 +1,3 @@
-import { Avatar } from '@/components/atoms/Avatar'
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import styled, { css } from 'styled-components'
