@@ -3,13 +3,10 @@ import { useRouter } from 'next/router'
 import * as S from '../../styles/pages/question'
 import { QuestionBox } from '@/components/molecules/QuestionBox'
 import { AnswerBox } from '@/components/molecules/AnswerBox'
-import { NotFoundAnswersBox } from '@/components/molecules/NotFoundAnswerBox'
 import { Footer } from '@/components/organisms/Footer'
 import api from '@/services/api'
-import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
-import { GetServerSideProps } from 'next'
-import { IQuestion } from '@/shared/types'
+import { IQuestionData } from '@/shared/types'
 import { useEffect } from 'react'
 
 interface Question {
@@ -26,31 +23,15 @@ interface Question {
   }[]
 }
 
-interface QuestionProps {
-  answersQuantity?: number
-}
-
-export default function Question() {
+export default function Question(props: IQuestionData) {
   const router = useRouter()
   const { id } = router.query
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const question = useQuestionStore((state) => state.question)
 
   useEffect(() => {
-    if (id) {
-      const fetchQuestionAndAnswers = async () => {
-        try {
-          const questionResponse = await api.get(`/questions/${id}`)
-          const question = questionResponse.data.question
-          setQuestion(question)
-        } catch (error) {
-          console.error('Erro ao buscar a pergunta:', error)
-        }
-      }
-
-      fetchQuestionAndAnswers()
-    }
-  }, [id, setQuestion])
+    setQuestion(props)
+  }, [props])
 
   return (
     <>
@@ -58,12 +39,12 @@ export default function Question() {
       <S.QuestionContainer>
         <S.QuestionWrapper>
           <QuestionBox
-            id={question?.id}
-            key={question?.id}
-            content={question?.content}
-            answersQuantity={question?.answers?.length || 0}
-            createdAt={question?.createdAt}
-            author={question?.author?.name}
+            id={props.questionData?.id}
+            key={props.questionData?.id}
+            content={props.questionData?.content}
+            answersQuantity={props.questionData.answers.length || 0}
+            createdAt={props.questionData?.createdAt}
+            author={props.questionData?.author.name}
           />
           <S.AnswersSection>
             <S.TextSectionTitle weight="bold" color="blue_950">
@@ -71,7 +52,7 @@ export default function Question() {
             </S.TextSectionTitle>
           </S.AnswersSection>
           <S.AnswersContainer>
-            {question?.answers.map((answer) => (
+            {props?.questionData.answers.map((answer) => (
               <AnswerBox
                 key={answer?.id}
                 id={answer?.id}
@@ -88,4 +69,24 @@ export default function Question() {
       <Footer />
     </>
   )
+}
+
+export const getServerSideProps = async (ctx: any) => {
+  const { id } = ctx.params as { id: string }
+
+  try {
+    const res = await api.get(`questions/${id}`)
+    const questionData = res.data.question
+
+    console.log('Resposta da requisição:', questionData)
+
+    if (questionData !== undefined) {
+      return { props: { questionData } }
+    } else {
+      return { props: {} }
+    }
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error)
+    return { props: { questionData: null } }
+  }
 }

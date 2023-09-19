@@ -1,13 +1,13 @@
-import { IQuestion } from '@/shared/types'
+import { IQuestionData } from '@/shared/types'
 import { create } from 'zustand'
 
 interface QuestionStore {
-  question: IQuestion | null
-  setQuestion: (question: IQuestion | null) => void
+  question: IQuestionData | null
+  setQuestion: (question: IQuestionData | null) => void
 }
 
 export const useQuestionStore = create<QuestionStore>((set) => ({
   question: null,
-  setQuestion: (newQuestion: IQuestion | null) =>
+  setQuestion: (newQuestion: IQuestionData | null) =>
     set({ question: newQuestion }),
 }))

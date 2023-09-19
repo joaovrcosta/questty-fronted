@@ -68,3 +68,20 @@ export interface IProfileData {
     answers: IAnswer[]
   }
 }
+
+export interface IQuestionData {
+  questionData: {
+    id: string
+    content: string
+    bestAnswerId: string
+    author_id: string
+    createdAt: string
+    deletedAt: string
+    updated_at: string
+    category_id: string
+    answers: IAnswer[]
+    author: {
+      name: string
+    }
+  }
+}

@@ -180,8 +180,6 @@ export const getServerSideProps = async (ctx: any) => {
 
     const userData = res.data.user
 
-    console.log('Resposta da requisição:', userData)
-
     return { props: { userData } }
   } catch (error) {
     console.error('Erro ao buscar dados:', error)
