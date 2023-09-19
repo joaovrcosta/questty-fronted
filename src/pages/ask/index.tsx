@@ -53,7 +53,6 @@ export default function Ask() {
                   key={question.id}
                   id={question.id}
                   content={question.content}
-                  category={question.category}
                   createdAt={question.createdAt}
                 />
               )

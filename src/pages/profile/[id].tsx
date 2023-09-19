@@ -1,18 +1,28 @@
 import { Header } from '@/components/organisms/Header'
 import * as S from '../../styles/pages/profile'
-
 import { Text } from '@/components/atoms/Text'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
-import { getTimeAgo } from '@/utils/getTimeAgo'
 import Cookies from 'js-cookie'
 import router from 'next/router'
+import api from '@/services/api'
+import { IProfileData } from '@/shared/types'
+import { useProfileStore } from '@/features/stores/profile/useProfileStore'
+import { useEffect } from 'react'
+import { getDayOfYear } from '@/utils/getDayOfYear'
 
-export default function Profile() {
+export default function Profile(props: IProfileData) {
   const { logout, isLoggedIn } = useAuthStore()
+  const { setProfile } = useProfileStore()
+  const authenticatedUser = useAuthStore((state) => state.user)
+  const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
+
+  useEffect(() => {
+    setProfile(props)
+  }, [props])
 
   const logoutUser = async () => {
     logout()
@@ -20,8 +30,6 @@ export default function Profile() {
 
     router.push('/')
   }
-
-  const user = useAuthStore((state) => state.user)
 
   return (
     <>
@@ -34,7 +42,7 @@ export default function Profile() {
                 variant="xl"
                 imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
               />
-              {isLoggedIn && (
+              {isLoggedIn && isCurrentUserProfile && (
                 <S.EditButtonMobile
                   variant="lg"
                   rounding="rounded"
@@ -57,26 +65,26 @@ export default function Profile() {
                 marginTop: '1rem',
               }}
             >
-              @{user?.name}
+              @{props.userData.name}
             </Text>
 
             <S.UserDetailsBox>
               <S.AnswersQuantity>
-                <Text weight="bold">750</Text>
+                <Text weight="bold">{props.userData.answers.length}</Text>
                 <Text size="xs">Respostas</Text>
               </S.AnswersQuantity>
               <S.AnswersQuantity>
-                <Text weight="bold">24</Text>
+                <Text weight="bold">0</Text>
                 <Text size="xs">Melhores</Text>
               </S.AnswersQuantity>
               <S.AnswersQuantity>
-                <Text weight="bold">24</Text>
+                <Text weight="bold">0</Text>
                 <Text size="xs">Valeus</Text>
               </S.AnswersQuantity>
             </S.UserDetailsBox>
 
             <S.UserEditing>
-              {isLoggedIn && (
+              {isLoggedIn && isCurrentUserProfile && (
                 <S.EditButton
                   variant="lg"
                   rounding="rounded"
@@ -104,10 +112,10 @@ export default function Profile() {
                   <AiOutlineCalendar size={18} />
                   <Text size="xs">Entrou em </Text>
                   <Text weight="semibold" size="xs">
-                    {getTimeAgo(user?.createdAt)}
+                    {getDayOfYear(props.userData.createdAt)}
                   </Text>
                 </S.CreatedAt>
-                {isLoggedIn && (
+                {isLoggedIn && isCurrentUserProfile && (
                   <S.signOutButton
                     onClick={logoutUser}
                     backgroundColor="transparent"
@@ -129,8 +137,8 @@ export default function Profile() {
               Ultimas respostas:
             </Text>
             <S.UserHistory>
-              {user?.answers && user.answers.length > 0 ? (
-                user.answers.map((question) => (
+              {props.userData?.answers && props.userData.answers.length > 0 ? (
+                props.userData.answers.map((question) => (
                   <QuestionCard
                     readOnly={true}
                     key={question.id}
@@ -162,4 +170,21 @@ export default function Profile() {
       <Footer />
     </>
   )
+}
+
+export const getServerSideProps = async (ctx: any) => {
+  const { id } = ctx.params as { id: string }
+
+  try {
+    const res = await api.get(`profile/${id}`)
+
+    const userData = res.data.user
+
+    console.log('Resposta da requisição:', userData)
+
+    return { props: { userData } }
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error)
+    return { props: { userData: null } }
+  }
 }

@@ -30,10 +30,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       getUserFromToken(token)
         .then((user) => {
           if (user) {
-            console.log(
-              'Estado do usuário após o login:',
-              useAuthStore.getState().user
-            )
+            // console.log(
+            //   'Estado do usuário após o login:',
+            //   useAuthStore.getState().user
+            // )
             login(user, token)
           }
         })

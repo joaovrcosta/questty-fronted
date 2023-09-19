@@ -11,9 +11,9 @@ export type subjectsType =
   | 'enem'
 
 interface Question {
-  id: number
+  id: string
   content: string
-  category: subjectsType
+  category?: subjectsType
   createdAt: string
   answers: {
     id: string

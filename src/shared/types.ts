@@ -39,3 +39,32 @@ export interface ILike {
   answer_id: string
   createdAt: string
 }
+
+export interface IStudent {
+  id: string
+  name: string
+  email: string
+  createdAt: string
+  answers: IAnswer[]
+  questions: IQuestion[]
+}
+
+export interface ICurrentUserData {
+  id: string
+  name: string
+  email: string
+  createdAt: string
+  answers: IAnswer[]
+  questions: IQuestion[]
+}
+
+export interface IProfileData {
+  userData: {
+    id: string
+    name: string
+    email: string
+    createdAt: string
+    questions: IQuestion[]
+    answers: IAnswer[]
+  }
+}
