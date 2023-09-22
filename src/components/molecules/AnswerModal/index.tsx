@@ -9,8 +9,11 @@ import * as T from '../Tooltip/styles'
 import { Text } from '@/components/atoms/Text'
 import { Avatar } from '@/components/atoms/Avatar'
 import Link from 'next/link'
+import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 
-export function AnswerModal() {
+export function AnswerModal({ id }: { id: string }) {
+  const { question } = useQuestionStore()
+
   return (
     <Dialog.Portal>
       <S.Overlay />
@@ -19,6 +22,7 @@ export function AnswerModal() {
           <S.QuestionInfoWrapper>
             <S.AvatarInfoContainer>
               <Avatar
+                id={String(id)}
                 variant="lg"
                 imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
               />
@@ -27,23 +31,17 @@ export function AnswerModal() {
               <S.UserInfo>
                 <S.Username>
                   <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                    joaovrcosta
+                    {question?.questionData.author.name}
                   </Text>
                 </S.Username>
-                <S.UserLevel>27</S.UserLevel>
+                {/* <S.UserLevel>27</S.UserLevel> */}
               </S.UserInfo>
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
           <Dialog.Title style={{ fontSize: '18px', marginBottom: '24px' }}>
             Pergunta
           </Dialog.Title>
-          <Text>
-            Realize os seguintes lançamentos em razonetes a débito e crédito e
-            faça o balancete de verificaçãoRealize os seguintes lançamentos em
-            razonetes a débito e crédito e faça o balancete de
-            verificaçãoRealize os seguintes lançamentos em razonetes a débito e
-            crédito e faça o balancete de verificação
-          </Text>
+          <Text>{question?.questionData.content}</Text>
         </S.QuestionTextContainer>
         <S.FormAnsweringContainer>
           <form>

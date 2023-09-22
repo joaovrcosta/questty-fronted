@@ -56,6 +56,7 @@ export function AnswerBox({
     <S.AnswerWrapper>
       <S.AvatarContainer>
         <Avatar
+          id={String(id)}
           variant="lg"
           imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
         />

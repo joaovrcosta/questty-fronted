@@ -66,7 +66,7 @@ export default function Question(props: IQuestionData) {
                     : false
                 }
                 key={answer?.id}
-                id={answer?.id}
+                id={answer?.author_id}
                 content={answer?.content}
                 createdAt={answer?.createdAt}
                 isGolden={answer?.isGolden}

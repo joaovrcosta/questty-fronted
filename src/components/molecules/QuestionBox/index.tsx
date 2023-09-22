@@ -29,13 +29,19 @@ export function QuestionBox({
 }: Question) {
   const { question } = useQuestionStore()
 
+  console.log(question?.questionData.author_id)
+
+  const hasThreeAnswers =
+    Array.isArray(question?.questionData.answers) &&
+    question?.questionData.answers.length === 3
+
   const questions = useContextSelector(QuestionContext, (context) => {
     return context.questions
   })
 
   const answerCount = questions.filter((question) => question.id === id)[0]
     ?.answers.length
-  const hasThreeOrMoreAnswers = answerCount >= 3
+
   const limitedAnswerCount = Math.min(answerCount, 3)
 
   return (
@@ -76,7 +82,7 @@ export function QuestionBox({
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
 
-          {hasThreeOrMoreAnswers ? (
+          {hasThreeAnswers ? (
             <Link href="/">
               <S.BackButtonBox>
                 <AiOutlineArrowLeft size={24} />
@@ -84,14 +90,16 @@ export function QuestionBox({
             </Link>
           ) : (
             <S.AnswerQuantityBox>
-              <Text
-                weight="bold"
-                size="xl"
-                color="blue_950"
-                style={{ fontFamily: 'Poppins' }}
-              >
-                Respostas:
-              </Text>
+              <div id="answers">
+                <Text
+                  weight="bold"
+                  size="xl"
+                  color="blue_950"
+                  style={{ fontFamily: 'Poppins' }}
+                >
+                  Respostas:
+                </Text>
+              </div>
               <S.AnswerQuantity>
                 <Text
                   size="xx1"
@@ -131,18 +139,20 @@ export function QuestionBox({
           </S.QuestionContentText>
         </S.QuestionContent>
         <S.UserHandleActionsContainer>
-          {hasThreeOrMoreAnswers ? (
-            <S.SeeAnswerButton
-              variant="lg"
-              rounding="rounded-xxl"
-              color="white"
-              backgroundColor="black"
-            >
-              <Eye size={24} weight="bold" />
-              <Text color="white" weight="medium">
-                VER {limitedAnswerCount} RESPOSTAS
-              </Text>
-            </S.SeeAnswerButton>
+          {hasThreeAnswers ? (
+            <a href="#respostas">
+              <S.SeeAnswerButton
+                variant="lg"
+                rounding="rounded-xxl"
+                color="white"
+                backgroundColor="black"
+              >
+                <Eye size={24} weight="bold" />
+                <Text color="white" weight="medium">
+                  VER {answersQuantity} RESPOSTAS
+                </Text>
+              </S.SeeAnswerButton>
+            </a>
           ) : (
             <Dialog.Root>
               <Dialog.Trigger asChild>
@@ -156,7 +166,7 @@ export function QuestionBox({
                   RESPONDER
                 </S.AnswerButton>
               </Dialog.Trigger>
-              <AnswerModal />
+              <AnswerModal id={String(question?.questionData.author_id)} />
             </Dialog.Root>
           )}
           <S.ModerationWrapper>
