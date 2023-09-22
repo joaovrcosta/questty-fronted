@@ -7,6 +7,7 @@ import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestionData } from '@/shared/types'
 import { useEffect } from 'react'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 interface Question {
   id: number
@@ -24,6 +25,15 @@ interface Question {
 
 export default function Question(props: IQuestionData) {
   const setQuestion = useQuestionStore((state) => state.setQuestion)
+  const { user } = useAuthStore()
+  const { question } = useQuestionStore()
+
+  const answersAuthorIds = question?.questionData.answers.map(
+    (resposta) => resposta.author_id
+  )
+  const userLogged = user?.id
+
+  const isUserInList = userLogged && answersAuthorIds?.includes(userLogged)
 
   useEffect(() => {
     setQuestion(props)
@@ -50,6 +60,11 @@ export default function Question(props: IQuestionData) {
           <S.AnswersContainer>
             {props?.questionData.answers.map((answer) => (
               <AnswerBox
+                isButtonDisabled={
+                  isUserInList && answer?.author_id === userLogged
+                    ? true
+                    : false
+                }
                 key={answer?.id}
                 id={answer?.id}
                 content={answer?.content}

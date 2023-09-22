@@ -151,7 +151,7 @@ export default function Profile(props: IProfileData) {
                   <QuestionCard
                     readOnly={true}
                     key={question.id}
-                    id={question.id}
+                    id={question.question_id}
                     content={question.content}
                     createdAt={question.createdAt}
                   />

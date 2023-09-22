@@ -10,6 +10,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
 import * as Dialog from '@radix-ui/react-dialog'
 import { AnswerModal } from '../AnswerModal'
+import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 
 interface Question {
   id?: number | string
@@ -26,6 +27,8 @@ export function QuestionBox({
   createdAt,
   answersQuantity,
 }: Question) {
+  const { question } = useQuestionStore()
+
   const questions = useContextSelector(QuestionContext, (context) => {
     return context.questions
   })
@@ -39,6 +42,7 @@ export function QuestionBox({
     <S.QuestionWrapper>
       <S.AvatarContainer>
         <Avatar
+          id={String(question?.questionData.author_id)}
           variant="lg"
           imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
         />
@@ -48,6 +52,7 @@ export function QuestionBox({
           <S.QuestionInfoWrapper>
             <S.AvatarInfoContainer>
               <Avatar
+                id=""
                 variant="lg"
                 imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
               />

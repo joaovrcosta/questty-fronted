@@ -17,6 +17,7 @@ interface Answer {
   createdAt: string
   isGolden?: boolean
   likesQuantity?: number
+  isButtonDisabled: boolean
 }
 
 export function AnswerBox({
@@ -26,9 +27,10 @@ export function AnswerBox({
   author,
   likesQuantity,
   isGolden,
+  isButtonDisabled,
 }: Answer) {
   const { token } = useAuthStore()
-  const [likesTotal, setLikesTotal] = useState(likesQuantity) // Mova a declaração aqui
+  const [likesTotal, setLikesTotal] = useState(likesQuantity)
 
   function handleLikeClick() {
     if (!token) {
@@ -43,10 +45,7 @@ export function AnswerBox({
           'Content-Type': 'application/json',
         },
       })
-      .then((response) => {
-        console.log('Like dado com sucesso:', response.data)
-
-        // Atualize likesTotal usando setLikesTotal
+      .then((res) => {
         setLikesTotal(likesTotal! + 1)
       })
       .catch((error) => {
@@ -113,6 +112,7 @@ export function AnswerBox({
             rounding="rounded-full"
             color="black"
             backgroundColor="white"
+            disabled={isButtonDisabled}
             onClick={handleLikeClick}
           >
             Valeu

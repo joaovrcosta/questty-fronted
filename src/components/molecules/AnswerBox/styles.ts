@@ -204,6 +204,11 @@ export const LikedButton = styled(Button)`
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
     transition: 0.2s ease all;
   }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 `
 
 export const ModerationWrapper = styled.div``
