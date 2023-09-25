@@ -10,9 +10,39 @@ import { Text } from '@/components/atoms/Text'
 import { Avatar } from '@/components/atoms/Avatar'
 import Link from 'next/link'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
+import api from '@/services/api'
+import { useForm } from 'react-hook-form'
+
+interface FormData {
+  content: string
+}
 
 export function AnswerModal({ id }: { id: string }) {
+  const { register, handleSubmit } = useForm<FormData>()
   const { question } = useQuestionStore()
+  const { token } = useAuthStore()
+
+  const handleAnswerQuestion = async (data: FormData) => {
+    try {
+      const { content } = data
+
+      const response = await api.post(
+        `/answers/${question?.questionData.id}`,
+        {
+          content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    } catch (error) {
+      console.error('Error creating answer:', error)
+      throw error
+    }
+  }
 
   return (
     <Dialog.Portal>
@@ -44,7 +74,7 @@ export function AnswerModal({ id }: { id: string }) {
           <Text>{question?.questionData.content}</Text>
         </S.QuestionTextContainer>
         <S.FormAnsweringContainer>
-          <form>
+          <form onSubmit={handleSubmit(handleAnswerQuestion)}>
             <S.HeadingContainer>
               <Link href="/">
                 <S.BackButtonBox>
@@ -55,7 +85,10 @@ export function AnswerModal({ id }: { id: string }) {
                 Responda
               </Text>
             </S.HeadingContainer>
-            <S.QuestionTextarea placeholder="Escreva sua pergunta aqui. (Para conseguir uma ótima resposta, descreva sua dúvida de forma simples e clara"></S.QuestionTextarea>
+            <S.QuestionTextarea
+              placeholder="Escreva sua pergunta aqui. (Para conseguir uma ótima resposta, descreva sua dúvida de forma simples e clara"
+              {...register('content')}
+            ></S.QuestionTextarea>
             <S.QuestionMoreInfoContainer>
               <S.Tools>
                 <Tooltip content="Anexe aqui">

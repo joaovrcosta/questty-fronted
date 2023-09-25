@@ -45,10 +45,6 @@ export function NewTransactionModal() {
           },
         }
       )
-
-      if (response.status === 201) {
-        closeDialogRef.current?.()
-      }
     } catch (error) {
       console.error('Error creating new question:', error)
       throw error

@@ -7,7 +7,7 @@ import { AiOutlineCalendar } from 'react-icons/ai'
 import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import Cookies from 'js-cookie'
-import router from 'next/router'
+import router, { useRouter } from 'next/router'
 import api from '@/services/api'
 import { IProfileData } from '@/shared/types'
 import { useProfileStore } from '@/features/stores/profile/useProfileStore'
@@ -16,6 +16,7 @@ import { getDayOfYear } from '@/utils/getDayOfYear'
 import Link from 'next/link'
 
 export default function Profile(props: IProfileData) {
+  const router = useRouter()
   const { logout, isLoggedIn } = useAuthStore()
   const { setProfile } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
@@ -25,15 +26,8 @@ export default function Profile(props: IProfileData) {
     setProfile(props)
   }, [props])
 
-  const logoutUser = async () => {
-    logout()
-
-    const token = Cookies.get('questty-token')
-    if (token) {
-      Cookies.remove('questty-token')
-    }
-
-    router.push('/')
+  const handleLogoutClick = () => {
+    useAuthStore.getState().logout(router)
   }
 
   return (
@@ -126,7 +120,7 @@ export default function Profile(props: IProfileData) {
                 </S.CreatedAt>
                 {isLoggedIn && isCurrentUserProfile && (
                   <S.signOutButton
-                    onClick={logoutUser}
+                    onClick={handleLogoutClick}
                     backgroundColor="transparent"
                     rounding="rounded-thin"
                   >
@@ -149,6 +143,7 @@ export default function Profile(props: IProfileData) {
               {props.userData?.answers && props.userData.answers.length > 0 ? (
                 props.userData.answers.map((question) => (
                   <QuestionCard
+                    author_id={question.author_id}
                     readOnly={true}
                     key={question.id}
                     id={question.question_id}

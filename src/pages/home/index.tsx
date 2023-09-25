@@ -68,11 +68,13 @@ export default function Home() {
             {questions ? (
               questions.map((question) => (
                 <QuestionCard
+                  author_id={question.author_id}
                   id={question.id}
                   key={question.id}
                   content={question.content}
                   category_id={question.category.name}
                   createdAt={question.createdAt}
+                  answersQuantity={question.answers?.length}
                 />
               ))
             ) : (

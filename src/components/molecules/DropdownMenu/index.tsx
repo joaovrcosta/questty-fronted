@@ -1,11 +1,20 @@
 import * as Menu from '@radix-ui/react-dropdown-menu'
 import * as S from './styles'
 import Link from 'next/link'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { useRouter } from 'next/router'
 
 interface DropdownProps {
   id?: string
 }
 export function Dropdown({ id }: DropdownProps) {
+  const { logout } = useAuthStore()
+  const router = useRouter()
+
+  const handleLogoutClick = () => {
+    useAuthStore.getState().logout(router)
+  }
+
   return (
     <Menu.Root>
       <S.UserAvatarContainer>
@@ -21,7 +30,7 @@ export function Dropdown({ id }: DropdownProps) {
           <S.Item>Ver perfil</S.Item>
         </Link>
         <S.Item>Editar Perfil</S.Item>
-        <S.Item>Sair</S.Item>
+        <S.Item onClick={handleLogoutClick}>Sair</S.Item>
       </S.Content>
     </Menu.Root>
   )

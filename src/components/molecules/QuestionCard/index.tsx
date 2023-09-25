@@ -16,16 +16,20 @@ export type subjectsType =
 
 interface Question {
   id: string
+  author_id: string
   content: string
   category_id?: string
   createdAt: string
   readOnly?: boolean
+  answersQuantity?: number
 }
 
 export function QuestionCard({
   id,
+  author_id,
   content,
   category_id,
+  answersQuantity,
   createdAt,
   readOnly = false,
 }: Question) {
@@ -37,11 +41,8 @@ export function QuestionCard({
     router.push(`/tarefa/${id}`)
   }
 
-  const answerCount = 0
-  // const answerCount = questions?.filter((question) => question.id === id)[0]
-  //   ?.answers.length
-  const hasThreeOrMoreAnswers = answerCount >= 3
-  const limitedAnswerCount = Math.min(answerCount, 3)
+  const answerCount = answersQuantity || 0
+  const limitedAnswerCount = 3
 
   return (
     <S.QuestionCardContainer>
@@ -49,6 +50,7 @@ export function QuestionCard({
         <S.QuestionContent>
           <S.UserAvatarWrapper>
             <Avatar
+              id={author_id}
               variant="lg"
               imageUrl="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
             />
@@ -95,7 +97,11 @@ export function QuestionCard({
                 variant="sm"
                 onClick={handleResponderClick}
               >
-                {readOnly ? 'VISUALIZAR' : 'RESPONDER'}
+                {readOnly
+                  ? 'VISUALIZAR'
+                  : answerCount >= 3
+                  ? 'VISUALIZAR'
+                  : 'RESPONDER'}
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>

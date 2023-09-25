@@ -11,6 +11,7 @@ import Link from 'next/link'
 import * as Dialog from '@radix-ui/react-dialog'
 import { AnswerModal } from '../AnswerModal'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 interface Question {
   id?: number | string
@@ -28,8 +29,9 @@ export function QuestionBox({
   answersQuantity,
 }: Question) {
   const { question } = useQuestionStore()
+  const { user } = useAuthStore()
 
-  console.log(question?.questionData.author_id)
+  const isAuthor = question?.questionData.author_id === user?.id
 
   const hasThreeAnswers =
     Array.isArray(question?.questionData.answers) &&
@@ -156,26 +158,33 @@ export function QuestionBox({
           ) : (
             <Dialog.Root>
               <Dialog.Trigger asChild>
-                <S.AnswerButton
-                  variant="lg"
-                  rounding="rounded-xxl"
-                  color="white"
-                  backgroundColor="blue_500"
-                >
-                  <PlusCircle size={24} weight="bold" />
-                  RESPONDER
-                </S.AnswerButton>
+                {!isAuthor && (
+                  <S.AnswerButton
+                    variant="lg"
+                    rounding="rounded-xxl"
+                    color="white"
+                    backgroundColor="blue_500"
+                  >
+                    <PlusCircle size={24} weight="bold" />
+                    RESPONDER
+                  </S.AnswerButton>
+                )}
               </Dialog.Trigger>
               <AnswerModal id={String(question?.questionData.author_id)} />
             </Dialog.Root>
           )}
           <S.ModerationWrapper>
-            <S.ModerateLabel>
-              <BiShieldAlt2 size={24} color="#EBA900" />
-              <S.ModerateLabelText size="lg" style={{ fontFamily: 'Poppins' }}>
-                Denunciar
-              </S.ModerateLabelText>
-            </S.ModerateLabel>
+            {!isAuthor && (
+              <S.ModerateLabel>
+                <BiShieldAlt2 size={24} color="#EBA900" />
+                <S.ModerateLabelText
+                  size="lg"
+                  style={{ fontFamily: 'Poppins' }}
+                >
+                  Denunciar
+                </S.ModerateLabelText>
+              </S.ModerateLabel>
+            )}
           </S.ModerationWrapper>
         </S.UserHandleActionsContainer>
         <S.MoreDetailsInputContainer>
