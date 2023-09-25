@@ -14,7 +14,6 @@ const useAuthStore = create<AuthStore>((set) => ({
   token: null,
   isLoggedIn: false,
   login: (user, token) => {
-    // console.log('Logging in:', user)
     set({ user, token, isLoggedIn: true })
   },
   logout: () => set({ user: null, token: null, isLoggedIn: false }),

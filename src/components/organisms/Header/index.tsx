@@ -8,9 +8,11 @@ import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { GetServerSideProps } from 'next'
 import api from '@/services/api'
 import { Dropdown } from '@/components/molecules/DropdownMenu'
+import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 
 export function Header() {
   const { isLoggedIn, user } = useAuthStore()
+  const { isOpen, setIsOpen } = useQuestionModalStore()
 
   return (
     <S.HeaderContainer>
@@ -23,7 +25,7 @@ export function Header() {
         </S.FirstBoxContent>
         <S.HeaderActionsContainer>
           <S.MakeQuestionButton>
-            <Dialog.Root>
+            <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
               <Dialog.Trigger asChild>
                 <S.MakeYourQuestionButton
                   border={false}

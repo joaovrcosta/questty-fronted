@@ -85,3 +85,11 @@ export interface IQuestionData {
     }
   }
 }
+
+export interface ICategories {
+  id: string
+  name: string
+  createdAt: string
+  deletedAt: string
+  deleted: boolean
+}
