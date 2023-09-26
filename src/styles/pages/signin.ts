@@ -40,6 +40,10 @@ export const ButtonContainer = styled.div`
   margin: 3rem 0 2.75rem 0;
 `
 
+export const EmailInputContainer = styled.div`
+  margin-bottom: 1rem;
+`
+
 export const EnterWithContainer = styled.div``
 
 // Social Auth

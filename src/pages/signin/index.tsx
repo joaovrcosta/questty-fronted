@@ -13,15 +13,33 @@ import api from '@/services/api'
 import { setCookie } from 'nookies'
 import Router from 'next/router'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { Spinner } from '@/components/atoms/Spinner'
+import { useState } from 'react'
+import axios, { AxiosError } from 'axios'
 
 interface FormData {
   email: string
   password: string
 }
 
+const loginFormSchema = zod.object({
+  email: zod.string().email('E-mail inválido'),
+  password: zod.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+})
+
 export default function SignIn() {
-  const { register, handleSubmit } = useForm<FormData>()
+  const [error, setError] = useState<string | null>(null)
+  const { register, handleSubmit, watch, formState } = useForm<FormData>({
+    resolver: zodResolver(loginFormSchema),
+  })
+
+  const { isSubmitting } = formState
+
   const { login } = useAuthStore()
+
+  const isPasswordFilledIn = watch('password')
 
   const handleSignIn = async (data: FormData) => {
     try {
@@ -46,14 +64,23 @@ export default function SignIn() {
 
       const user = userResponse.data.user
 
-      console.log(user.answers)
-
       login(user, token)
 
       Router.push('/home')
     } catch (error) {
-      console.error('Erro ao autenticar:', error)
-      throw error
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError
+        if (axiosError.response) {
+          const responseData: any = axiosError.response.data
+          setError(responseData.message)
+        } else {
+          console.error('Erro ao autenticar:', error)
+          throw error
+        }
+      } else {
+        console.error('Erro ao autenticar:', error)
+        throw error
+      }
     }
   }
 
@@ -67,16 +94,23 @@ export default function SignIn() {
           </Heading>
           <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
             <S.InputContainer>
-              <Input
-                {...register('email')}
-                placeholder="exemplo@exemplo.com"
-                variant="lg"
-                hug={true}
-                showLabel={true}
-                label="E-mail"
-                style={{ marginBottom: '1rem' }}
-                border={true}
-              />
+              <S.EmailInputContainer>
+                <Input
+                  {...register('email')}
+                  placeholder="exemplo@exemplo.com"
+                  variant="lg"
+                  hug={true}
+                  showLabel={true}
+                  label="E-mail"
+                  style={{ marginBottom: '0.5rem' }}
+                  border={true}
+                />
+                {formState.errors.email && (
+                  <span style={{ color: '#D20032' }}>
+                    {formState.errors.email.message}
+                  </span>
+                )}
+              </S.EmailInputContainer>
               <Input
                 {...register('password')}
                 placeholder="Digite sua senha"
@@ -85,8 +119,21 @@ export default function SignIn() {
                 hug={true}
                 showLabel={true}
                 label="Senha"
+                style={{ marginBottom: '0.5rem' }}
                 border={true}
               />
+
+              {formState.errors.password && (
+                <span style={{ color: '#D20032' }}>
+                  {formState.errors.password.message}
+                </span>
+              )}
+
+              {error && (
+                <Text className="error" color="danger_500">
+                  E-mail ou senha inválida
+                </Text>
+              )}
             </S.InputContainer>
             <S.StayLoggedContainer>
               <input type="checkbox" id="stay-logged" />
@@ -102,8 +149,13 @@ export default function SignIn() {
                 variant="lg"
                 backgroundColor="blue_500"
                 color="white"
+                disabled={!isPasswordFilledIn || isSubmitting}
               >
-                Entrar
+                {isSubmitting ? (
+                  <Spinner size="sm" baseColor="white" variant="primary" />
+                ) : (
+                  <Text color="white">Entrar</Text>
+                )}
               </Button>
             </S.ButtonContainer>
             <S.EnterWithContainer>

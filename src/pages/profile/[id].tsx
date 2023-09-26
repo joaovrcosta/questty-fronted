@@ -38,6 +38,7 @@ export default function Profile(props: IProfileData) {
           <S.UserInfo>
             <S.AvatarContainer>
               <S.UserAvatarPhoto
+                id={props.userData.id}
                 variant="xl"
                 imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
               />

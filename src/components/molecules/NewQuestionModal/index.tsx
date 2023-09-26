@@ -10,16 +10,31 @@ import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useForm } from 'react-hook-form'
 import { SubjectSelect } from '@/components/atoms/SubjetSelect'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { Button } from '@/components/atoms/Button'
 
 interface FormData {
   content: string
   subject: string
 }
 
+const createNewQuestionFormSchema = zod.object({
+  content: zod
+    .string()
+    .min(20, 'Sua pergunta é muito curta. Use pelo menos 20 caracteres')
+    .max(5000, 'A pergunta deve ter no máximo 5000 caracteres'),
+})
+
 export function NewTransactionModal() {
-  const closeDialogRef = useRef<() => void | null>(null)
+  const { register, handleSubmit, watch, formState } = useForm<FormData>({
+    resolver: zodResolver(createNewQuestionFormSchema),
+  })
+
+  const isContentFilledIn = watch('content')
+
   const [subject, subjectSelect] = useState('')
   const { setIsOpen } = useQuestionModalStore()
 
@@ -27,7 +42,6 @@ export function NewTransactionModal() {
     subjectSelect(event.target.value)
   }
 
-  const { register, handleSubmit } = useForm<FormData>()
   const { token } = useAuthStore()
 
   const handleCreateNewQuestion = async (data: FormData) => {
@@ -73,6 +87,11 @@ export function NewTransactionModal() {
             {...register('content')}
             placeholder="Escreva sua pergunta aqui. (Para conseguir uma ótima resposta, descreva sua dúvida de forma simples e clara"
           ></S.QuestionTextarea>
+          {formState.errors.content && (
+            <span style={{ color: '#D20032' }}>
+              {formState.errors.content.message}
+            </span>
+          )}
           <S.QuestionMoreInfoContainer>
             <S.Tools>
               <Tooltip content="Anexe aqui">
@@ -98,7 +117,9 @@ export function NewTransactionModal() {
             </S.Selects>
           </S.QuestionMoreInfoContainer>
 
-          <button type="submit">Fazer pergunta</button>
+          <Button type="submit" disabled={!isContentFilledIn}>
+            Fazer pergunta
+          </Button>
         </form>
       </S.Content>
     </Dialog.Portal>

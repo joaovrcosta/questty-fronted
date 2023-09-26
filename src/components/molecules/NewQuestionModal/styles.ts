@@ -18,7 +18,7 @@ export const Content = styled(Dialog.Content)`
   border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
   z-index: 999999;
-  max-height: 373px;
+  max-height: 25.8rem;
   border-radius: 5px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 

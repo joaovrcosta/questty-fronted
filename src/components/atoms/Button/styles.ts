@@ -101,4 +101,9 @@ export const Button = styled.button<IButton>`
 
   font-weight: bold;
   font-family: Poppins;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `
