@@ -13,6 +13,7 @@ import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
 import { useForm } from 'react-hook-form'
+import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 
 interface FormData {
   content: string
@@ -20,6 +21,7 @@ interface FormData {
 
 export function AnswerModal({ id }: { id: string }) {
   const { register, handleSubmit } = useForm<FormData>()
+  const { setIsOpen } = useQuestionModalStore()
   const { question } = useQuestionStore()
   const { token } = useAuthStore()
 
@@ -38,6 +40,10 @@ export function AnswerModal({ id }: { id: string }) {
           },
         }
       )
+
+      if (response.status === 201) {
+        window.location.reload()
+      }
     } catch (error) {
       console.error('Error creating answer:', error)
       throw error
@@ -74,7 +80,12 @@ export function AnswerModal({ id }: { id: string }) {
           <Text>{question?.questionData.content}</Text>
         </S.QuestionTextContainer>
         <S.FormAnsweringContainer>
-          <form onSubmit={handleSubmit(handleAnswerQuestion)}>
+          <form
+            onSubmit={handleSubmit(async (data) => {
+              await handleAnswerQuestion(data)
+              setIsOpen(false)
+            })}
+          >
             <S.HeadingContainer>
               <Link href="/">
                 <S.BackButtonBox>

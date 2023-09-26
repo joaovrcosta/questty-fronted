@@ -18,6 +18,7 @@ interface Answer {
   isGolden?: boolean
   likesQuantity?: number
   isButtonDisabled: boolean
+  authorId: string
 }
 
 export function AnswerBox({
@@ -25,6 +26,7 @@ export function AnswerBox({
   content,
   createdAt,
   author,
+  authorId,
   likesQuantity,
   isGolden,
   isButtonDisabled,
@@ -56,7 +58,7 @@ export function AnswerBox({
     <S.AnswerWrapper>
       <S.AvatarContainer>
         <Avatar
-          id={String(id)}
+          id={String(authorId)}
           variant="lg"
           imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
         />

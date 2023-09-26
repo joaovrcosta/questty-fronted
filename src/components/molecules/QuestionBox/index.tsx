@@ -12,6 +12,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { AnswerModal } from '../AnswerModal'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 
 interface Question {
   id?: number | string
@@ -30,6 +31,7 @@ export function QuestionBox({
 }: Question) {
   const { question } = useQuestionStore()
   const { user } = useAuthStore()
+  const { isOpen, setIsOpen } = useQuestionModalStore()
 
   const isAuthor = question?.questionData.author_id === user?.id
 
@@ -156,7 +158,7 @@ export function QuestionBox({
               </S.SeeAnswerButton>
             </a>
           ) : (
-            <Dialog.Root>
+            <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
               <Dialog.Trigger asChild>
                 {!isAuthor && (
                   <S.AnswerButton

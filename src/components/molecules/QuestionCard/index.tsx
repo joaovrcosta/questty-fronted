@@ -82,11 +82,7 @@ export function QuestionCard({
                 size="sm"
                 style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
               >
-                {answerCount > 0
-                  ? `${limitedAnswerCount} ${
-                      limitedAnswerCount > 1 ? 'respostas' : 'resposta'
-                    }`
-                  : 'Seja o primeiro(a)'}
+                {`${answerCount} respostas`}
               </Text>
             )}
           </S.AnswerQuantity>
