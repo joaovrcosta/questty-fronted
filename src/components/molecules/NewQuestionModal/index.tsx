@@ -1,20 +1,22 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
+import * as T from '../Tooltip/styles'
+import * as zod from 'zod'
 import { X } from '@phosphor-icons/react'
 import { AiOutlinePaperClip } from 'react-icons/ai'
 import { TbMathFunctionY } from 'react-icons/tb'
 import { MdOutlineEmojiSymbols } from 'react-icons/md'
 import { Tooltip } from '../Tooltip'
-import * as T from '../Tooltip/styles'
-import api from '@/services/api'
-import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useForm } from 'react-hook-form'
 import { SubjectSelect } from '@/components/atoms/SubjetSelect'
 import { useState } from 'react'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
 import { Button } from '@/components/atoms/Button'
+import { useRouter } from 'next/router'
+import { Spinner } from '@/components/atoms/Spinner'
+import api from '@/services/api'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 interface FormData {
   content: string
@@ -33,10 +35,13 @@ export function NewTransactionModal() {
     resolver: zodResolver(createNewQuestionFormSchema),
   })
 
+  const { isSubmitting } = formState
+
   const isContentFilledIn = watch('content')
 
   const [subject, subjectSelect] = useState('')
   const { setIsOpen } = useQuestionModalStore()
+  const router = useRouter()
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     subjectSelect(event.target.value)
@@ -59,6 +64,10 @@ export function NewTransactionModal() {
           },
         }
       )
+
+      const { id } = response.data
+
+      await router.push(`/tarefa/${id}`)
     } catch (error) {
       console.error('Error creating new question:', error)
       throw error
@@ -117,9 +126,13 @@ export function NewTransactionModal() {
             </S.Selects>
           </S.QuestionMoreInfoContainer>
 
-          <Button type="submit" disabled={!isContentFilledIn}>
-            Fazer pergunta
-          </Button>
+          {isSubmitting ? (
+            <Spinner size="sm" baseColor="blue_950" variant="primary" />
+          ) : (
+            <Button type="submit" disabled={isSubmitting}>
+              Fazer pergunta
+            </Button>
+          )}
         </form>
       </S.Content>
     </Dialog.Portal>

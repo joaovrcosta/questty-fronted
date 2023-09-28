@@ -18,6 +18,7 @@ import * as zod from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useState } from 'react'
 import axios, { AxiosError } from 'axios'
+import { HeaderAuth } from '@/components/organisms/HeaderAuth'
 
 interface FormData {
   email: string
@@ -66,7 +67,7 @@ export default function SignIn() {
 
       login(user, token)
 
-      Router.push('/home')
+      await Router.push('/home')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError
@@ -86,7 +87,7 @@ export default function SignIn() {
 
   return (
     <>
-      <Header />
+      <HeaderAuth />
       <S.SignInContainer>
         <S.SignInContent>
           <Heading size="md" color="black" weight="bold">
@@ -142,21 +143,22 @@ export default function SignIn() {
             <S.ForgotMyPasswordLink href="/forgot">
               Esqueci a minha senha
             </S.ForgotMyPasswordLink>
+
             <S.ButtonContainer>
-              <Button
-                type="submit"
-                rounding="rounded"
-                variant="lg"
-                backgroundColor="blue_500"
-                color="white"
-                disabled={!isPasswordFilledIn || isSubmitting}
-              >
-                {isSubmitting ? (
-                  <Spinner size="sm" baseColor="white" variant="primary" />
-                ) : (
-                  <Text color="white">Entrar</Text>
-                )}
-              </Button>
+              {isSubmitting ? (
+                <Spinner size="md" baseColor="blue_950" variant="secondary" />
+              ) : (
+                <Button
+                  type="submit"
+                  rounding="rounded"
+                  variant="lg"
+                  backgroundColor="blue_500"
+                  color="white"
+                  disabled={isSubmitting}
+                >
+                  Entrar
+                </Button>
+              )}
             </S.ButtonContainer>
             <S.EnterWithContainer>
               <Text weight="bold" size="lg">

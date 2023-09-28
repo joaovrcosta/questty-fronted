@@ -16,7 +16,7 @@ export type subjectsType =
 
 interface Question {
   id: string
-  author_id: string
+  author_id?: string
   content: string
   category_id?: string
   createdAt: string

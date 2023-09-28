@@ -25,6 +25,8 @@ export function AnswerModal({ id }: { id: string }) {
   const { question } = useQuestionStore()
   const { token } = useAuthStore()
 
+  console.log(token)
+
   const handleAnswerQuestion = async (data: FormData) => {
     try {
       const { content } = data

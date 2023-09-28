@@ -142,25 +142,25 @@ export function QuestionBox({
             ) : null}
           </S.QuestionContentText>
         </S.QuestionContent>
-        <S.UserHandleActionsContainer>
-          {hasThreeAnswers ? (
-            <a href="#respostas">
-              <S.SeeAnswerButton
-                variant="lg"
-                rounding="rounded-xxl"
-                color="white"
-                backgroundColor="black"
-              >
-                <Eye size={24} weight="bold" />
-                <Text color="white" weight="medium">
-                  VER {answersQuantity} RESPOSTAS
-                </Text>
-              </S.SeeAnswerButton>
-            </a>
-          ) : (
-            <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-              <Dialog.Trigger asChild>
-                {!isAuthor && (
+        {!isAuthor && (
+          <S.UserHandleActionsContainer>
+            {hasThreeAnswers ? (
+              <a href="#respostas">
+                <S.SeeAnswerButton
+                  variant="lg"
+                  rounding="rounded-xxl"
+                  color="white"
+                  backgroundColor="black"
+                >
+                  <Eye size={24} weight="bold" />
+                  <Text color="white" weight="medium">
+                    VER {answersQuantity} RESPOSTAS
+                  </Text>
+                </S.SeeAnswerButton>
+              </a>
+            ) : (
+              <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+                <Dialog.Trigger asChild>
                   <S.AnswerButton
                     variant="lg"
                     rounding="rounded-xxl"
@@ -170,13 +170,11 @@ export function QuestionBox({
                     <PlusCircle size={24} weight="bold" />
                     RESPONDER
                   </S.AnswerButton>
-                )}
-              </Dialog.Trigger>
-              <AnswerModal id={String(question?.questionData.author_id)} />
-            </Dialog.Root>
-          )}
-          <S.ModerationWrapper>
-            {!isAuthor && (
+                </Dialog.Trigger>
+                <AnswerModal id={String(question?.questionData?.author_id)} />
+              </Dialog.Root>
+            )}
+            <S.ModerationWrapper>
               <S.ModerateLabel>
                 <BiShieldAlt2 size={24} color="#EBA900" />
                 <S.ModerateLabelText
@@ -186,9 +184,10 @@ export function QuestionBox({
                   Denunciar
                 </S.ModerateLabelText>
               </S.ModerateLabel>
-            )}
-          </S.ModerationWrapper>
-        </S.UserHandleActionsContainer>
+            </S.ModerationWrapper>
+          </S.UserHandleActionsContainer>
+        )}
+
         <S.MoreDetailsInputContainer>
           <S.MoreDetailsInput placeholder="Pedir detalhes sobre a pergunta" />
         </S.MoreDetailsInputContainer>

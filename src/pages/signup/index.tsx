@@ -7,11 +7,12 @@ import { SiFacebook } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
 import { Footer } from '@/components/organisms/Footer'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { HeaderAuth } from '@/components/organisms/HeaderAuth'
 
 export default function SignIn() {
   return (
     <>
-      <Header />
+      <HeaderAuth />
       <S.SignUpContainer>
         <S.SignUpContent>
           <Heading size="md" color="black" weight="bold">
