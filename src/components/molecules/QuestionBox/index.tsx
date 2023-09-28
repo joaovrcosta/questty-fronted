@@ -1,6 +1,6 @@
 import { Text } from '@/components/atoms/Text'
 import * as S from './styles'
-import { BiShieldAlt2 } from 'react-icons/bi'
+import { AiOutlineFlag } from 'react-icons/ai'
 import { PlusCircle, Eye } from '@phosphor-icons/react'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
@@ -74,7 +74,7 @@ export function QuestionBox({
                     {author}
                   </Text>
                 </S.Username>
-                {/* <S.UserLevel>27</S.UserLevel> */}
+                <S.UserLevel>0</S.UserLevel>
               </S.UserInfo>
               <S.DateTimeText
                 size="xs"
@@ -176,7 +176,7 @@ export function QuestionBox({
             )}
             <S.ModerationWrapper>
               <S.ModerateLabel>
-                <BiShieldAlt2 size={24} color="#EBA900" />
+                <AiOutlineFlag size={24} color="#10162f" />
                 <S.ModerateLabelText
                   size="lg"
                   style={{ fontFamily: 'Poppins' }}

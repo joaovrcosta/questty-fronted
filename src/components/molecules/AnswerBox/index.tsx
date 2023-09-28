@@ -71,7 +71,7 @@ export function AnswerBox({
                 <S.Username>
                   <Text weight="medium">{author}</Text>
                 </S.Username>
-                {/* <S.UserLevel>183</S.UserLevel> */}
+                <S.UserLevel>0</S.UserLevel>
               </S.QuestionInfo>
               <S.CreatedAtContainer>
                 <Text size="xs" style={{ fontFamily: 'Inter' }}>

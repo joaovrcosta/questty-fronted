@@ -5,7 +5,7 @@ export const Container = styled.div`
 
   ${({ theme }) => css`
     @media (max-width: 770px) {
-      margin-top: 152px;
+      margin-top: 6.25rem;
     }
   `}
 `

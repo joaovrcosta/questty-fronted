@@ -50,4 +50,8 @@ export const Item = styled(Menu.Item)`
     outline: 0;
     background: rgba(0, 0, 0, 0.1);
   }
+
+  @media (max-width: 768px) {
+    display: block !important;
+  }
 `

@@ -6,12 +6,12 @@ export const HomePageContent = styled.div`
   margin: 0 auto;
   display: flex;
 
-  padding: 0.85rem 1rem 3rem 1rem;
+  padding: 2.5rem 1rem 3rem 1rem;
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 0;
-      padding: 1.5rem 1rem 3rem 1rem;
+      padding: 1rem 1rem 3rem 1rem;
     }
   `}
 
@@ -32,7 +32,6 @@ export const SubjectsContainer = styled.div`
   align-items: center;
   gap: 1rem;
   justify-content: space-between;
-  margin-top: 1rem;
   margin-bottom: 2.5rem;
   max-width: 836px;
 
@@ -172,7 +171,7 @@ export const RankingBox = styled.div`
 `
 
 export const HeadingRankContainer = styled.div`
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 2.8rem;
 `
 

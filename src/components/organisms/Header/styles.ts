@@ -65,7 +65,7 @@ export const LogoImage = styled(Image)`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       width: 72px;
-      margin-right: 1rem;
+      /* margin-right: 1rem; */
     }
   `}
 `
@@ -102,10 +102,18 @@ export const SearchInput = styled.input`
   }
 `
 
+export const AvatarContainer = styled.div`
+  margin-left: 1rem;
+`
+
 export const HeaderActionsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const StyledLink = styled(Link)`
@@ -198,7 +206,6 @@ export const SubHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
 
   ${({ theme }) => css`
     @media (min-width: 768px) {
@@ -209,11 +216,11 @@ export const SubHeader = styled.div`
 
 export const SubHeaderContent = styled.div`
   width: 100%;
-  max-width: 500px;
-  padding: 1.5rem 5rem 1.5rem 5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   display: flex;
+  gap: 0.5rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `
 
 export const SearchIcon = styled(BiSearch)`
@@ -235,4 +242,37 @@ export const SearchButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`
+
+export const SubSignInButton = styled(Button)`
+  width: 10rem;
+
+  /* @media (max-width: 400px) {
+    width: 100%;
+    width: 10rem;
+  } */
+
+  @media (max-width: 364px) {
+    width: 100%;
+  }
+  /* @media (max-width: 280px) {
+    font-size: 0.75rem;
+  } */
+`
+
+export const SubSignUpButton = styled(Button)`
+  width: 12.25rem;
+  /* @media (max-width: 400px) {
+    width: 97%;
+  } */
+  @media (max-width: 364px) {
+    width: 100%;
+  }
+  /* @media (max-width: 310px) {
+    width: 85%;
+  } */
+  /* @media (max-width: 280px) {
+    width: 80%;
+    font-size: 0.75rem;
+  } */
 `

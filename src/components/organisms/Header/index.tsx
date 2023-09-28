@@ -18,7 +18,7 @@ export function Header() {
     <S.HeaderContainer>
       <S.HeaderContent>
         <S.FirstBoxContent>
-          <Link href="/">
+          <Link href="/" style={{ textDecoration: 'none' }}>
             <S.LogoImage src={logoImg} width={145} height={46} alt="" />
           </Link>
           <SearchInput />
@@ -53,10 +53,24 @@ export function Header() {
               </S.SignUpButton>
             </S.StyledLink>
           )}
-          {isLoggedIn && <Dropdown id={user?.id} />}
         </S.HeaderActionsContainer>
+        <S.AvatarContainer>
+          {isLoggedIn && <Dropdown id={user?.id} />}
+        </S.AvatarContainer>
       </S.HeaderContent>
-      {/* ... */}
+      {!isLoggedIn && (
+        <S.SubHeader>
+          <S.SubHeaderContent>
+            <S.StyledLink href="/signin">
+              <S.SubSignInButton>ENTRAR</S.SubSignInButton>
+            </S.StyledLink>
+
+            <S.StyledLink href="/signin">
+              <S.SubSignUpButton>CADASTRE-SE JÁ</S.SubSignUpButton>
+            </S.StyledLink>
+          </S.SubHeaderContent>
+        </S.SubHeader>
+      )}
     </S.HeaderContainer>
   )
 }

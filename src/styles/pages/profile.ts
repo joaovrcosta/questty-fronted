@@ -18,7 +18,7 @@ export const ProfileContent = styled.div`
 
   @media (max-width: 768px) {
     flex-wrap: wrap;
-    padding: 3rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
   }
 `
 
@@ -41,7 +41,7 @@ export const UserInfo = styled.aside`
 `
 
 export const SeenIn = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-family: Poppins;
   white-space: nowrap;
 
@@ -135,7 +135,10 @@ export const UserAvatarPhoto = styled(Avatar)`
 `
 
 export const signOutButton = styled(Button)`
+  display: flex;
+  align-items: center;
   margin-top: 1rem;
+  color: ${({ theme }) => theme.colors.blue_950};
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.blue_950};
@@ -157,8 +160,8 @@ export const UserDetailsBox = styled.div`
 
 export const AnswersQuantity = styled.div`
   padding: 0.5rem 1rem;
-  width: 6rem;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  width: 33%;
+  border: 1px solid ${({ theme }) => theme.colors.blue_950};
   border-radius: 8px;
   text-align: center;
 `

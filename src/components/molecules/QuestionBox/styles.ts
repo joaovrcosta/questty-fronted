@@ -7,7 +7,7 @@ export const QuestionBoxContainer = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem 1.5rem 2rem;
   border-radius: 8px;
   width: 90%;
   box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
@@ -161,8 +161,8 @@ export const UserHandleActionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
-  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  /* margin-top: 3rem; */
 
   @media (max-width: 768px) {
     flex-wrap: wrap;
@@ -205,8 +205,8 @@ export const SeeAnswerButton = styled(Button)`
 `
 
 export const ModerationWrapper = styled.div`
-  @media (max-width: 768px) {
-    margin-top: 2rem;
+  @media (max-width: 340px) {
+    margin-top: 1rem;
   }
 `
 
@@ -299,6 +299,9 @@ export const ModerateLabelText = styled(Text)`
       font-size: ${({ theme }) => theme.typography.text.md};
     }
   `};
+  @media (max-width: 436px) {
+    display: none;
+  }
 `
 
 export const DateTimeText = styled(Text)`

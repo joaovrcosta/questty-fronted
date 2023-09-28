@@ -5,7 +5,7 @@ export const QuestionContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 
   @media (max-width: 950px) {
     margin-left: 0;

@@ -3,6 +3,7 @@ import * as S from '../../styles/pages/profile'
 import { Text } from '@/components/atoms/Text'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { BiTimeFive } from 'react-icons/bi'
+import { ImExit } from 'react-icons/im'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
@@ -43,7 +44,10 @@ export default function Profile(props: IProfileData) {
                 imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
               />
               {isLoggedIn && isCurrentUserProfile && (
-                <Link href={`edit/${props.userData.id}`}>
+                <Link
+                  href={`edit/${props.userData.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
                   <S.EditButtonMobile
                     variant="lg"
                     rounding="rounded"
@@ -72,16 +76,28 @@ export default function Profile(props: IProfileData) {
 
             <S.UserDetailsBox>
               <S.AnswersQuantity>
-                <Text weight="bold">{props.userData.answers.length}</Text>
-                <Text size="xs">Respostas</Text>
+                <Text weight="bold" color="blue_950">
+                  {props.userData.answers.length}
+                </Text>
+                <Text size="xs" color="blue_950">
+                  Respostas
+                </Text>
               </S.AnswersQuantity>
               <S.AnswersQuantity>
-                <Text weight="bold">0</Text>
-                <Text size="xs">Melhores</Text>
+                <Text weight="bold" color="blue_950">
+                  0
+                </Text>
+                <Text size="xs" color="blue_950">
+                  Melhores
+                </Text>
               </S.AnswersQuantity>
               <S.AnswersQuantity>
-                <Text weight="bold">0</Text>
-                <Text size="xs">Valeus</Text>
+                <Text weight="bold" color="blue_950">
+                  0
+                </Text>
+                <Text size="xs" color="blue_950">
+                  Valeus
+                </Text>
               </S.AnswersQuantity>
             </S.UserDetailsBox>
 
@@ -114,20 +130,11 @@ export default function Profile(props: IProfileData) {
                 </S.ActiveIn>
                 <S.CreatedAt>
                   <AiOutlineCalendar size={18} />
-                  <Text size="xs">Entrou em </Text>
+                  <Text size="xs">Por aqui desde </Text>
                   <Text weight="semibold" size="xs">
                     {getDayOfYear(props.userData.createdAt)}
                   </Text>
                 </S.CreatedAt>
-                {isLoggedIn && isCurrentUserProfile && (
-                  <S.signOutButton
-                    onClick={handleLogoutClick}
-                    backgroundColor="transparent"
-                    rounding="rounded-thin"
-                  >
-                    Sair
-                  </S.signOutButton>
-                )}
               </S.SeenIn>
             </S.UserEditing>
           </S.UserInfo>
