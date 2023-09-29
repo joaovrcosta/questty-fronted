@@ -94,6 +94,7 @@ export const Button = styled.button<IButton>`
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  border-bottom: ${({ border }) => (border ? `3px solid black` : 'none')};
 
   font-weight: 500;
 
@@ -105,5 +106,12 @@ export const Button = styled.button<IButton>`
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:active {
+    transform: scale(0.95);
+    /* box-shadow: none; */
   }
 `

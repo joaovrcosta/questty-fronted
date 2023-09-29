@@ -126,7 +126,7 @@ export function AnswerBox({
           <S.ModerationWrapper>
             <S.ModerateLabel>
               <AiOutlineFlag size={24} color="#10162f" />
-              <Text size="lg">Moderar</Text>
+              {/* <Text size="lg">Moderar</Text> */}
             </S.ModerateLabel>
           </S.ModerationWrapper>
         </S.UserHandleActionsContainer>

@@ -8,6 +8,11 @@ import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestionData } from '@/shared/types'
 import { useEffect } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { Text } from '@/components/atoms/Text'
+import GirlLamp from '@/assets/GirlLamp.svg'
+import Image from 'next/image'
+import { Button } from '@/components/atoms/Button'
+import { MoreQuestonCard } from '@/components/molecules/MoreQuestion'
 
 interface Question {
   id: number
@@ -35,6 +40,8 @@ export default function Question(props: IQuestionData) {
 
   const isUserInList = userLogged && answersAuthorIds?.includes(userLogged)
 
+  console.log(props?.questionData.answers)
+
   useEffect(() => {
     setQuestion(props)
   }, [props])
@@ -53,29 +60,58 @@ export default function Question(props: IQuestionData) {
             author={props.questionData?.author.name}
           />
           <S.AnswersSection>
-            <S.TextSectionTitle weight="bold" color="blue_950" id="#respostas">
-              Respostas:
-            </S.TextSectionTitle>
+            {props?.questionData.answers.length > 0 ? (
+              <S.TextSectionTitle
+                weight="bold"
+                color="blue_950"
+                id="#respostas"
+              >
+                Resposta:
+              </S.TextSectionTitle>
+            ) : (
+              <div></div>
+            )}
           </S.AnswersSection>
           <S.AnswersContainer>
-            {props?.questionData.answers.map((answer) => (
-              <AnswerBox
-                isButtonDisabled={
-                  isUserInList && answer?.author_id === userLogged
-                    ? true
-                    : false
-                }
-                key={answer?.id}
-                id={answer?.id}
-                authorId={answer?.author_id}
-                content={answer?.content}
-                createdAt={answer?.createdAt}
-                isGolden={answer?.isGolden}
-                author={answer?.author?.name}
-                likesQuantity={answer?.likes?.length || 0}
-              />
-            ))}
+            {props?.questionData.answers.length > 0 ? (
+              props?.questionData.answers.map((answer) => (
+                <AnswerBox
+                  isButtonDisabled={
+                    isUserInList && answer?.author_id === userLogged
+                      ? true
+                      : false
+                  }
+                  key={answer?.id}
+                  id={answer?.id}
+                  authorId={answer?.author_id}
+                  content={answer?.content}
+                  createdAt={answer?.createdAt}
+                  isGolden={answer?.isGolden}
+                  author={answer?.author?.name}
+                  likesQuantity={answer?.likes?.length || 0}
+                />
+              ))
+            ) : (
+              <S.NeedHelpContainer>
+                <Image src={GirlLamp} alt="" />
+                <Text size="xx1" weight="medium">
+                  {props.questionData?.author.name} precisa da sua ajuda.
+                </Text>
+                <Text>Essa pergunta não teve resposta ainda</Text>
+                <S.AnswerButton>RESPONDER</S.AnswerButton>
+              </S.NeedHelpContainer>
+            )}
           </S.AnswersContainer>
+          <S.HelpMorePeopleContainer>
+            <Text size="xl" weight="semibold">
+              Ajude outras pessoas com dúvidas sobre ENEM:
+            </Text>
+            <div style={{ marginTop: '1.5rem' }}>
+              <MoreQuestonCard />
+              <MoreQuestonCard />
+              <MoreQuestonCard />
+            </div>
+          </S.HelpMorePeopleContainer>
         </S.QuestionWrapper>
       </S.QuestionContainer>
       <Footer />

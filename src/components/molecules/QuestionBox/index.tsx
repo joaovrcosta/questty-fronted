@@ -189,7 +189,9 @@ export function QuestionBox({
         )}
 
         <S.MoreDetailsInputContainer>
-          <S.MoreDetailsInput placeholder="Pedir detalhes sobre a pergunta" />
+          <S.MoreDetailsInput
+            placeholder={`Pedir detalhes ao usuario ${author}`}
+          />
         </S.MoreDetailsInputContainer>
       </S.QuestionBoxContainer>
     </S.QuestionWrapper>

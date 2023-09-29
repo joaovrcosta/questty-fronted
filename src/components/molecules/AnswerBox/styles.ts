@@ -21,7 +21,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
   border: 1px solid
     ${({ theme, isGolden }) =>
       isGolden ? theme.colors.yellow_500 : theme.colors.black};
-  padding: 1.5rem 2rem;
+  padding: 2rem 2rem;
   border-radius: 8px;
   width: 90%;
   box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
@@ -67,7 +67,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
 
       border-radius: 0;
       border-right: none;
-      border-right: none;
+      border-left: none;
     }
   `}
 `
@@ -139,7 +139,7 @@ export const AnswerContent = styled.div``
 
 export const AnswerContentText = styled(Text)`
   font-family: Nunito;
-  line-height: 1.2;
+  line-height: 24px;
   height: 100%;
 `
 
@@ -211,7 +211,14 @@ export const LikedButton = styled(Button)`
   }
 `
 
-export const ModerationWrapper = styled.div``
+export const ModerationWrapper = styled.div`
+  padding: 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+  }
+`
 
 export const ModerateLabel = styled.div`
   display: flex;

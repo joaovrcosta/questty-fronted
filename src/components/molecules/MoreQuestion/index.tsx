@@ -15,16 +15,16 @@ export type subjectsType =
   | '6767497f-2929-4f97-92f6-2abef996b6f5'
 
 interface Question {
-  id: string
+  id?: string
   author_id?: string
-  content: string
+  content?: string
   category_id?: string
-  createdAt: string
+  createdAt?: string
   readOnly?: boolean
   answersQuantity?: number
 }
 
-export function QuestionCard({
+export function MoreQuestonCard({
   id,
   author_id,
   content,
@@ -66,9 +66,10 @@ export function QuestionCard({
                 • {getTimeAgo(createdAt)}
               </S.DateTime>
             </S.SubjectAndDateTimeContainer>
-            <S.QuestionText onClick={handleResponderClick}>
+            {/* <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
-            </S.QuestionText>
+            </S.QuestionText> */}
+            <Text>Uma pergunta qualquer ai</Text>
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>

@@ -1,3 +1,4 @@
+import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import styled from 'styled-components'
 
@@ -47,4 +48,38 @@ export const TextSectionTitle = styled(Text)`
   margin-right: 2rem;
   font-size: 24px;
   font-family: Poppins;
+`
+
+export const NeedHelpContainer = styled.div`
+  width: 90%;
+  background-color: transparent;
+  margin-left: auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
+`
+
+export const AnswerButton = styled(Button)`
+  width: 50%;
+  margin-top: 1rem;
+`
+
+export const HelpMorePeopleContainer = styled.div`
+  width: 90%;
+  margin-left: auto;
+  margin-top: 8rem;
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `

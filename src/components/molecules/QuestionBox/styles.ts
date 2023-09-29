@@ -7,7 +7,7 @@ export const QuestionBoxContainer = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
-  padding: 3rem 2rem 1.5rem 2rem;
+  padding: 1.5rem 2rem 1.5rem 2rem;
   border-radius: 8px;
   width: 90%;
   box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
@@ -40,6 +40,7 @@ export const QuestionBoxContainer = styled.div`
     @media (max-width: 768px) {
       width: 100%;
       background-color: transparent;
+      padding: 3rem 2rem 1.5rem 2rem;
       border: none;
       box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
 

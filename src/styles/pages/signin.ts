@@ -19,7 +19,7 @@ export const SignInContainer = styled.div`
 export const SignInContent = styled.div`
   max-width: 374px;
   margin: 0 auto;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
 `
 
 export const FormContainer = styled.form``

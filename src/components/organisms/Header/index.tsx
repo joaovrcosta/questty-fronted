@@ -68,7 +68,7 @@ export function Header() {
             </S.StyledLink>
 
             <S.StyledLink href="/signin">
-              <S.SubSignUpButton backgroundColor="blue_550" color="white">
+              <S.SubSignUpButton backgroundColor="blue_500" color="white">
                 CADASTRE-SE JÁ
               </S.SubSignUpButton>
             </S.StyledLink>
