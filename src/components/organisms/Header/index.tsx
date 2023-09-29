@@ -62,11 +62,15 @@ export function Header() {
         <S.SubHeader>
           <S.SubHeaderContent>
             <S.StyledLink href="/signin">
-              <S.SubSignInButton>ENTRAR</S.SubSignInButton>
+              <S.SubSignInButton backgroundColor="transparent">
+                ENTRAR
+              </S.SubSignInButton>
             </S.StyledLink>
 
             <S.StyledLink href="/signin">
-              <S.SubSignUpButton>CADASTRE-SE JÁ</S.SubSignUpButton>
+              <S.SubSignUpButton backgroundColor="blue_550" color="white">
+                CADASTRE-SE JÁ
+              </S.SubSignUpButton>
             </S.StyledLink>
           </S.SubHeaderContent>
         </S.SubHeader>

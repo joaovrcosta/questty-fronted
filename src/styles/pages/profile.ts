@@ -156,12 +156,17 @@ export const UserDetailsBox = styled.div`
   padding: 1rem 0rem 0rem 0rem;
   display: flex;
   gap: 0.5rem;
+  width: 100%;
 `
 
 export const AnswersQuantity = styled.div`
   padding: 0.5rem 1rem;
-  width: 33%;
+  min-width: 96px;
   border: 1px solid ${({ theme }) => theme.colors.blue_950};
-  border-radius: 8px;
+  border-radius: 16px;
   text-align: center;
+
+  @media (max-width: 1100px) {
+    width: 33%;
+  }
 `

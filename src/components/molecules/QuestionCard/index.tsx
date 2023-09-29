@@ -56,9 +56,6 @@ export function QuestionCard({
             />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
-            <S.QuestionText onClick={handleResponderClick}>
-              {content.length > 142 ? content.slice(0, 142) + '...' : content}
-            </S.QuestionText>
             <S.SubjectAndDateTimeContainer>
               {!!category_id && (
                 <S.Subject size="xs" color="gray_800">
@@ -66,9 +63,12 @@ export function QuestionCard({
                 </S.Subject>
               )}
               <S.DateTime size="xs" color="gray_800">
-                {getTimeAgo(createdAt)}
+                • {getTimeAgo(createdAt)}
               </S.DateTime>
             </S.SubjectAndDateTimeContainer>
+            <S.QuestionText onClick={handleResponderClick}>
+              {content.length > 142 ? content.slice(0, 142) + '...' : content}
+            </S.QuestionText>
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>

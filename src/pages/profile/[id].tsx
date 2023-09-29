@@ -9,12 +9,16 @@ import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import Cookies from 'js-cookie'
 import router, { useRouter } from 'next/router'
+import { PiMedalFill } from 'react-icons/pi'
 import api from '@/services/api'
 import { IProfileData } from '@/shared/types'
 import { useProfileStore } from '@/features/stores/profile/useProfileStore'
 import { useEffect } from 'react'
 import { getDayOfYear } from '@/utils/getDayOfYear'
 import Link from 'next/link'
+import { MdQuestionAnswer } from 'react-icons/md'
+import starIcon from '../../assets/star.svg'
+import Image from 'next/image'
 
 export default function Profile(props: IProfileData) {
   const router = useRouter()
@@ -71,30 +75,62 @@ export default function Profile(props: IProfileData) {
                 marginTop: '1rem',
               }}
             >
-              @{props.userData.name}
+              <span style={{ color: '#2089EA', fontWeight: 'bold' }}>@</span>{' '}
+              {props.userData.name}
             </Text>
 
             <S.UserDetailsBox>
               <S.AnswersQuantity>
-                <Text weight="bold" color="blue_950">
-                  {props.userData.answers.length}
-                </Text>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.25rem',
+                  }}
+                >
+                  <MdQuestionAnswer size={16} color="#2089EA" />
+                  <Text weight="bold" color="blue_950">
+                    {props.userData.answers.length}
+                  </Text>
+                </div>
+
                 <Text size="xs" color="blue_950">
                   Respostas
                 </Text>
               </S.AnswersQuantity>
               <S.AnswersQuantity>
-                <Text weight="bold" color="blue_950">
-                  0
-                </Text>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.25rem',
+                  }}
+                >
+                  <PiMedalFill size={16} color="#EBA900" />
+                  <Text weight="bold" color="blue_950">
+                    0
+                  </Text>
+                </div>
                 <Text size="xs" color="blue_950">
                   Melhores
                 </Text>
               </S.AnswersQuantity>
               <S.AnswersQuantity>
-                <Text weight="bold" color="blue_950">
-                  0
-                </Text>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.25rem',
+                  }}
+                >
+                  <Image src={starIcon} alt="" />
+                  <Text weight="bold" color="blue_950">
+                    0
+                  </Text>
+                </div>
                 <Text size="xs" color="blue_950">
                   Valeus
                 </Text>

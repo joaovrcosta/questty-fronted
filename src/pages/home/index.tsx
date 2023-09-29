@@ -12,6 +12,7 @@ import { withSession } from '@/lib/with-session'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
 import { useEffect } from 'react'
 import api from '@/services/api'
+import { Footer } from '@/components/organisms/Footer'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -136,6 +137,7 @@ export default function Home() {
           </S.RankingBox>
         </S.RankingSidebar>
       </S.HomePageContent>
+      <Footer />
     </>
   )
 }

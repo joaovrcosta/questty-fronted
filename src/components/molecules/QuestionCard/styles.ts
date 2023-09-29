@@ -40,12 +40,13 @@ export const QuestionContentContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 80px;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
       flex-wrap: wrap;
     }
-  `}
+  `};
 `
 
 export const UserAvatarContainer = styled.div`
@@ -115,6 +116,7 @@ export const QuestionText = styled.a`
 
 export const QuestionInfo = styled.div`
   width: 24rem;
+  min-height: 64px;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -124,12 +126,15 @@ export const QuestionInfo = styled.div`
 `
 
 export const SubjectAndDateTimeContainer = styled.div`
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  align-items: center;
 `
 export const Subject = styled(Text)`
   font-family: Roboto;
+  font-weight: 700;
+  font-size: 14px;
 `
 export const DateTime = styled(Text)`
   font-family: Roboto;

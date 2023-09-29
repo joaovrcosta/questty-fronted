@@ -9,6 +9,7 @@ import { MdVerified } from 'react-icons/md'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useState } from 'react'
+import { AiOutlineFlag } from 'react-icons/ai'
 
 interface Answer {
   id: string
@@ -124,7 +125,7 @@ export function AnswerBox({
           </S.LikedButton>
           <S.ModerationWrapper>
             <S.ModerateLabel>
-              <BiShieldAlt2 size={24} color="#EBA900" />
+              <AiOutlineFlag size={24} color="#10162f" />
               <Text size="lg">Moderar</Text>
             </S.ModerateLabel>
           </S.ModerationWrapper>

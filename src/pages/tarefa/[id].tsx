@@ -53,7 +53,7 @@ export default function Question(props: IQuestionData) {
             author={props.questionData?.author.name}
           />
           <S.AnswersSection>
-            <S.TextSectionTitle weight="bold" color="blue_950">
+            <S.TextSectionTitle weight="bold" color="blue_950" id="#respostas">
               Respostas:
             </S.TextSectionTitle>
           </S.AnswersSection>
