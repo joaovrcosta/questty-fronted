@@ -46,15 +46,19 @@ export const IconButton = styled.button<ITooltip>`
 `
 
 export const ToolTipContent = styled(TooltipRadix.Content)`
-  border-radius: 4px;
-  padding: 10px 15px;
-  font-size: 1rem;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 14px;
   line-height: 1;
   color: ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
   user-select: none;
   margin-bottom: 0.5rem;
   animation-duration: 400ms;
+  font-family: 'Poppins';
+  box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  line-height: 1.5rem;
 
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;

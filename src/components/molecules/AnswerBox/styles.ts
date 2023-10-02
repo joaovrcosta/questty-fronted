@@ -126,6 +126,7 @@ export const UserLevel = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 5px;
   height: 32px;
+  cursor: pointer;
   width: 32px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: Poppins;
@@ -213,7 +214,8 @@ export const LikedButton = styled(Button)`
 
 export const ModerationWrapper = styled.div`
   padding: 0.5rem;
-  border-radius: 12px;
+  border-radius: 50%;
+  transition: 0.2s ease all;
   cursor: pointer;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};

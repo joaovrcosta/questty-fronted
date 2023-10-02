@@ -83,6 +83,9 @@ export interface IQuestionData {
     author: {
       name: string
     }
+    category: {
+      name: string
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import * as S from './styles'
 import { AiOutlineFlag } from 'react-icons/ai'
 import { PlusCircle, Eye } from '@phosphor-icons/react'
 import { Avatar } from '@/components/atoms/Avatar'
-import { getTimeAgo } from '@/utils/getTimeAgo'
+import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
 import { useContextSelector } from 'use-context-selector'
 import { QuestionContext } from '@/contexts/QuestionsContext'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -13,6 +13,7 @@ import { AnswerModal } from '../AnswerModal'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
+import { Tooltip } from '../Tooltip'
 
 interface Question {
   id?: number | string
@@ -81,7 +82,7 @@ export function QuestionBox({
                 weight="regular"
                 style={{ fontFamily: 'Inter' }}
               >
-                {getTimeAgo(createdAt)}
+                {getFormattedDateAndTime(createdAt)}
               </S.DateTimeText>
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
@@ -175,15 +176,11 @@ export function QuestionBox({
               </Dialog.Root>
             )}
             <S.ModerationWrapper>
-              <S.ModerateLabel>
-                <AiOutlineFlag size={24} color="#10162f" />
-                <S.ModerateLabelText
-                  size="lg"
-                  style={{ fontFamily: 'Poppins' }}
-                >
-                  Denunciar
-                </S.ModerateLabelText>
-              </S.ModerateLabel>
+              <Tooltip content="Denunciar">
+                <S.ModerateLabel>
+                  <AiOutlineFlag size={24} color="#10162f" />
+                </S.ModerateLabel>
+              </Tooltip>
             </S.ModerationWrapper>
           </S.UserHandleActionsContainer>
         )}

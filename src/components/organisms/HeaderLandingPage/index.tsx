@@ -4,13 +4,32 @@ import { Button } from '@/components/atoms/Button'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 export function HeaderLandingPage() {
+  // const [scrolling, setScrolling] = useState(false)
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 40) {
+  //       setScrolling(true)
+  //     } else {
+  //       setScrolling(false)
+  //     }
+  //   }
+
+  //   window.addEventListener('scroll', handleScroll)
+
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll)
+  //   }
+  // }, [])
+
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
         <Link href="/">
-          <S.LogoImage src={logoImg} width={200} height={70} alt="" />
+          <S.LogoImage src={logoImg} width={160} height={52} alt="" />
         </Link>
         <S.HeaderActionsContainer>
           <S.StyledLink href="/signin">

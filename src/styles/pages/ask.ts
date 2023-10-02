@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const AskContainer = styled.div`
   width: 100%;
-  max-width: 1280px;
+  max-width: 1016px;
   margin: 0 auto;
 `
 export const AskContent = styled.div`
-  padding: 2rem 0.75rem;
+  padding: 1.5rem 0rem;
 `
 
 export const SearchHeader = styled.div`
@@ -16,9 +16,9 @@ export const SearchHeader = styled.div`
 `
 
 export const QuestionsContainer = styled.div`
-  padding: 0.5rem;
+  padding: 1.5rem;
   border: 2px solid ${({ theme }) => theme.colors.gray_100};
-  border-radius: 5px;
+  border-radius: 8px;
 `
 
 export const SearchQuantity = styled.div`

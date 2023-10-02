@@ -1,9 +1,10 @@
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
-import { getTimeAgo } from '@/utils/getTimeAgo'
+import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
+import { Tooltip } from '../Tooltip'
 
 export type subjectsType =
   | 'math'
@@ -33,8 +34,6 @@ export function QuestionCard({
   createdAt,
   readOnly = false,
 }: Question) {
-  const questions = useQuestionsStore((state) => state.questions)
-
   const router = useRouter()
 
   const handleResponderClick = () => {
@@ -42,7 +41,6 @@ export function QuestionCard({
   }
 
   const answerCount = answersQuantity || 0
-  const limitedAnswerCount = 3
 
   return (
     <S.QuestionCardContainer>
@@ -63,7 +61,7 @@ export function QuestionCard({
                 </S.Subject>
               )}
               <S.DateTime size="xs" color="gray_800">
-                • {getTimeAgo(createdAt)}
+                {getTimeAgo(createdAt)}
               </S.DateTime>
             </S.SubjectAndDateTimeContainer>
             <S.QuestionText onClick={handleResponderClick}>

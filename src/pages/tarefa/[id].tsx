@@ -40,7 +40,9 @@ export default function Question(props: IQuestionData) {
 
   const isUserInList = userLogged && answersAuthorIds?.includes(userLogged)
 
-  console.log(props?.questionData.answers)
+  console.log(props.questionData)
+
+  console.log(props?.questionData.category.name)
 
   useEffect(() => {
     setQuestion(props)
@@ -104,7 +106,8 @@ export default function Question(props: IQuestionData) {
           </S.AnswersContainer>
           <S.HelpMorePeopleContainer>
             <Text size="xl" weight="semibold">
-              Ajude outras pessoas com dúvidas sobre ENEM:
+              Ajude outras pessoas com dúvidas sobre{' '}
+              {props?.questionData.category.name}
             </Text>
             <div style={{ marginTop: '1.5rem' }}>
               <MoreQuestonCard />

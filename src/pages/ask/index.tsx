@@ -1,23 +1,10 @@
 import { Footer } from '@/components/organisms/Footer'
 import { Header } from '@/components/organisms/Header'
 import * as S from '../../styles/pages/ask'
-import { useContextSelector } from 'use-context-selector'
-import { QuestionContext } from '@/contexts/QuestionsContext'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { Text } from '@/components/atoms/Text'
-import { useEffect, useState } from 'react'
 
 export default function Ask() {
-  const [questionCount, setQuestionCount] = useState(0)
-
-  const questions = useContextSelector(QuestionContext, (context) => {
-    return context.questions
-  })
-
-  useEffect(() => {
-    setQuestionCount(questions.length)
-  }, [questions])
-
   return (
     <>
       <Header />
@@ -30,7 +17,7 @@ export default function Ask() {
               </Text>
               <S.SearchQuantity>
                 <Text weight="bold" size="sm">
-                  {questionCount}
+                  0
                 </Text>
               </S.SearchQuantity>
             </S.AllResultsContainer>
@@ -46,17 +33,27 @@ export default function Ask() {
             </S.Seen>
           </S.SearchHeader>
           <S.QuestionsContainer>
-            {questions.map((question) => {
-              return (
-                <QuestionCard
-                  readOnly={true}
-                  key={question.id}
-                  id={question.id}
-                  content={question.content}
-                  createdAt={question.createdAt}
-                />
-              )
-            })}
+            <QuestionCard
+              readOnly={true}
+              key="1"
+              id="1"
+              content="Static Content"
+              createdAt="2023-06-22T12:15:02.988Z"
+            />
+            <QuestionCard
+              readOnly={true}
+              key="1"
+              id="1"
+              content="Static Content"
+              createdAt="2023-06-22T12:15:02.988Z"
+            />
+            <QuestionCard
+              readOnly={true}
+              key="1"
+              id="1"
+              content="Static Content"
+              createdAt="2023-06-22T12:15:02.988Z"
+            />
           </S.QuestionsContainer>
         </S.AskContent>
       </S.AskContainer>

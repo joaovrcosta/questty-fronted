@@ -2,7 +2,6 @@ import Image from 'next/image'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import starIcon from '../../../assets/star.svg'
-import { BiShieldAlt2 } from 'react-icons/bi'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { MdVerified } from 'react-icons/md'
@@ -10,6 +9,7 @@ import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useState } from 'react'
 import { AiOutlineFlag } from 'react-icons/ai'
+import { Tooltip } from '../Tooltip'
 
 interface Answer {
   id: string
@@ -72,7 +72,9 @@ export function AnswerBox({
                 <S.Username>
                   <Text weight="medium">{author}</Text>
                 </S.Username>
-                <S.UserLevel>0</S.UserLevel>
+                <Tooltip content="Nível deste usuario">
+                  <S.UserLevel>0</S.UserLevel>
+                </Tooltip>
               </S.QuestionInfo>
               <S.CreatedAtContainer>
                 <Text size="xs" style={{ fontFamily: 'Inter' }}>
@@ -124,10 +126,12 @@ export function AnswerBox({
             <Text weight="bold">{likesTotal}</Text>
           </S.LikedButton>
           <S.ModerationWrapper>
-            <S.ModerateLabel>
-              <AiOutlineFlag size={24} color="#10162f" />
-              {/* <Text size="lg">Moderar</Text> */}
-            </S.ModerateLabel>
+            <Tooltip content="Denunciar">
+              <S.ModerateLabel>
+                <AiOutlineFlag size={24} color="#10162f" />
+                {/* <Text size="lg">Moderar</Text> */}
+              </S.ModerateLabel>
+            </Tooltip>
           </S.ModerationWrapper>
         </S.UserHandleActionsContainer>
       </S.AnswerBoxContainer>

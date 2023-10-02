@@ -24,6 +24,10 @@ export const HeaderContainer = styled.div<IHeader>`
       width: 100%;
     }
   `}
+
+  .scrolled {
+    background-color: #fff;
+  }
 `
 
 export const HeaderContent = styled.div`

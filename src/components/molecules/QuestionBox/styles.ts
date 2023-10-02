@@ -216,7 +216,7 @@ export const ModerateLabel = styled.div`
   gap: 0.5rem;
   align-items: center;
   padding: 0.5rem;
-  border-radius: 12px;
+  border-radius: 50%;
   cursor: pointer;
 
   ${({ theme }) => css`

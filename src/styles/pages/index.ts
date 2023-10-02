@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components'
 
+export const MainContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.yellow_400};
+  /* height: 100vh; */
+`
+
 export const LandingContent = styled.div`
   width: 100%;
   max-width: 1280px;
@@ -50,7 +55,7 @@ export const HeroContainer = styled.div`
 `
 
 export const TextContainer = styled.div`
-  width: 36rem;
+  width: 40rem;
   margin-top: 1rem;
   z-index: 99;
 `
@@ -63,9 +68,10 @@ export const InputSearchFormContainer = styled.form`
   margin-top: 5rem;
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 56px;
-  padding: 1.25rem;
+  padding: 1.3rem;
   justify-content: space-between;
   z-index: 99;
+  width: 40rem;
 `
 
 export const InputSearch = styled.input`
@@ -76,7 +82,7 @@ export const InputSearch = styled.input`
 export const WaveContainer = styled.div`
   bottom: 16rem;
   height: 40vh;
-  background-color: ${({ theme }) => theme.colors.yellow_400};
+  background-color: transparent;
   position: relative;
 
   &::before {
@@ -98,3 +104,76 @@ export const WaveContainer = styled.div`
     }
   }
 `
+export const CardsContainer = styled.div`
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: 3rem 1rem 1rem 1rem;
+`
+
+export const CardWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+
+export const SecondContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+`
+
+export const RocketGirlContainer = styled.div`
+  @media (max-width: 1200px) {
+    display: none;
+  }
+`
+
+export const HowWorksContainer = styled.div`
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.white};
+`
+
+export const HeadingContainer = styled.div`
+  width: 100%;
+  padding: 6rem 0 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const StepContainer = styled.div``
+
+export const FirstStepWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+  padding-left: 12rem;
+  padding-right: 12rem;
+
+  @media (max-width: 1200px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+`
+
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const StepImage = styled.div`
+  @media (max-width: 870px) {
+    display: none;
+  }
+`
+export const ThrdContainer = styled.div``
+
+export const ProposeContainer = styled.div``
