@@ -3,9 +3,7 @@ import * as S from './styles'
 import { AiOutlineFlag } from 'react-icons/ai'
 import { PlusCircle, Eye } from '@phosphor-icons/react'
 import { Avatar } from '@/components/atoms/Avatar'
-import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
-import { useContextSelector } from 'use-context-selector'
-import { QuestionContext } from '@/contexts/QuestionsContext'
+import { getFormattedDateAndTime } from '@/utils/getTimeAgo'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -39,15 +37,6 @@ export function QuestionBox({
   const hasThreeAnswers =
     Array.isArray(question?.questionData.answers) &&
     question?.questionData.answers.length === 3
-
-  const questions = useContextSelector(QuestionContext, (context) => {
-    return context.questions
-  })
-
-  const answerCount = questions.filter((question) => question.id === id)[0]
-    ?.answers.length
-
-  const limitedAnswerCount = Math.min(answerCount, 3)
 
   return (
     <S.QuestionWrapper>
