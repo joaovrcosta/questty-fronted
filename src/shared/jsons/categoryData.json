@@ -1,0 +1,20 @@
+{
+    "categories": [
+        {
+            "id": "1ea88951-5185-4e6c-b226-abc607e0958c",
+            "name": "Economia"
+        },
+        {
+            "id": "28b57e80-ec8e-4415-be66-d5474b910c21",
+            "name": "Quimica"
+        },
+        {
+            "id": "a77e51c4-7710-4336-af48-81d6a1b8a57d",
+            "name": "Biologia"
+        },
+        {
+            "id": "c42c42aa-91fb-494d-a669-2a2308eaf591",
+            "name": "Artes"
+        }
+    ]
+}
