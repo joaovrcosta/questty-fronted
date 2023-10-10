@@ -40,10 +40,6 @@ export default function Question(props: IQuestionData) {
 
   const isUserInList = userLogged && answersAuthorIds?.includes(userLogged)
 
-  console.log(props.questionData)
-
-  console.log(props?.questionData.category.name)
-
   useEffect(() => {
     setQuestion(props)
   }, [props])

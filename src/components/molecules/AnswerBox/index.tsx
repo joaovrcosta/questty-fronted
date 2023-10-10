@@ -7,7 +7,7 @@ import { getTimeAgo } from '@/utils/getTimeAgo'
 import { MdVerified } from 'react-icons/md'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { AiOutlineFlag } from 'react-icons/ai'
 import { Tooltip } from '../Tooltip'
 
@@ -34,6 +34,39 @@ export function AnswerBox({
 }: Answer) {
   const { token } = useAuthStore()
   const [likesTotal, setLikesTotal] = useState(likesQuantity)
+  const { user } = useAuthStore()
+  const [isAlreadyLiked, setIsAlreadyLiked] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user?.id) {
+          const res = await api.get(`/likes/${user.id}/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          if (res.status === 200) {
+            const data = res.data
+
+            // Verifica se a pessoa curtiu com base na resposta do back-end
+            setIsAlreadyLiked(data.liked === true)
+
+            // Se o campo "liked" na resposta for verdadeiro, setResult(true), caso contrário, setResult(false)
+          } else {
+            console.log('Outro código de status:', res.status)
+          }
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error('Erro:', error.message)
+        }
+      }
+    }
+
+    fetchData()
+  }, [id, token, user?.id])
 
   function handleLikeClick() {
     if (!token) {
@@ -50,11 +83,13 @@ export function AnswerBox({
       })
       .then((res) => {
         setLikesTotal(likesTotal! + 1)
+        setIsAlreadyLiked(true)
       })
       .catch((error) => {
         console.error('Erro ao dar like:', error)
       })
   }
+
   return (
     <S.AnswerWrapper>
       <S.AvatarContainer>
@@ -82,12 +117,6 @@ export function AnswerBox({
                 </Text>
               </S.CreatedAtContainer>
             </S.AnswerInfoWrapper>
-            {/* <S.UserSubInfosContainer>
-              <S.UserTag size="xs" weight="bold">
-                PROPLAYER
-              </S.UserTag>
-              <S.AnswerViews size="xs">105 Visualizações</S.AnswerViews>
-            </S.UserSubInfosContainer> */}
           </S.AnswerInfoWrapperContainer>
           <S.AnswerRateContainer>
             {isGolden && (
@@ -118,8 +147,8 @@ export function AnswerBox({
             rounding="rounded-full"
             color="black"
             backgroundColor="white"
-            disabled={isButtonDisabled}
             onClick={handleLikeClick}
+            disabled={isAlreadyLiked || isButtonDisabled}
           >
             Valeu
             <Image src={starIcon} alt="" />

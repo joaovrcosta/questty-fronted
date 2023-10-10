@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components'
 import * as S from '../styles/pages/app'
 import { ReactElement, ReactNode, useEffect } from 'react'
 import { NextPage } from 'next'
-import { QuestionsProvider } from '@/contexts/QuestionsContext'
 import { GlobalStyle } from '@/styles/global'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import Cookies from 'js-cookie'
@@ -46,9 +45,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <QuestionsProvider>
-        <S.Container>{getLayout(<Component {...pageProps} />)}</S.Container>
-      </QuestionsProvider>
+      <S.Container>{getLayout(<Component {...pageProps} />)}</S.Container>
     </ThemeProvider>
   )
 }
