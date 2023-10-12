@@ -5,6 +5,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 export function HeaderLandingPage() {
   // const [scrolling, setScrolling] = useState(false)
@@ -24,6 +25,11 @@ export function HeaderLandingPage() {
   //     window.removeEventListener('scroll', handleScroll)
   //   }
   // }, [])
+  const router = useRouter()
+
+  const handleButtonClick = () => {
+    router.push('/question/add')
+  }
 
   return (
     <S.HeaderContainer>
@@ -48,14 +54,12 @@ export function HeaderLandingPage() {
             </S.SignUpButton>
           </S.StyledLink>
 
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <S.MakeYourQuestionButton backgroundColor="yellow_600">
-                FAÇA SUA PERGUNTA
-              </S.MakeYourQuestionButton>
-            </Dialog.Trigger>
-            <NewTransactionModal />
-          </Dialog.Root>
+          <S.MakeYourQuestionButton
+            backgroundColor="yellow_600"
+            onClick={handleButtonClick}
+          >
+            FAÇA SUA PERGUNTA
+          </S.MakeYourQuestionButton>
         </S.HeaderActionsContainer>
       </S.HeaderContent>
       <S.SubHeader>

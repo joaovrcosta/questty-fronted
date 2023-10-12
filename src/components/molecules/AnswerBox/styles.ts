@@ -207,8 +207,8 @@ export const LikedButton = styled(Button)`
   }
 
   &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+    opacity: 0.8;
+    /* border: 2px solid #ff341a; */
   }
 `
 

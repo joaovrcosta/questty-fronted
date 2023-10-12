@@ -3,11 +3,12 @@ import styled, { css } from 'styled-components'
 export const SubjectSelect = styled.select`
   height: 2.5rem;
   width: 180px;
-  background-color: #ebf2f7;
+  background-color: #fff;
   border: none;
   color: #46535f;
   font-family: Poppins;
   cursor: pointer;
+  border: 1px solid #000;
 
   border-radius: 30px;
   padding: 0 0 0 16px;

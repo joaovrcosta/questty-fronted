@@ -3,7 +3,7 @@ import * as S from './styles'
 import categoriesData from '@/shared/jsons/categoryData.json'
 
 interface SubjectSelectProps {
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 export function SubjectSelect({ onChange }: SubjectSelectProps) {

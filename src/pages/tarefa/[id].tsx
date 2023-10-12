@@ -1,5 +1,5 @@
 import { Header } from '@/components/organisms/Header'
-import * as S from '../../styles/pages/question'
+import * as S from '../../styles/pages/tarefa'
 import { QuestionBox } from '@/components/molecules/QuestionBox'
 import { AnswerBox } from '@/components/molecules/AnswerBox'
 import { Footer } from '@/components/organisms/Footer'

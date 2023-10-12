@@ -1,15 +1,14 @@
-import Image from 'next/image'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
-import starIcon from '../../../assets/star.svg'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { MdVerified } from 'react-icons/md'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiOutlineFlag } from 'react-icons/ai'
 import { Tooltip } from '../Tooltip'
+import { AiFillHeart } from 'react-icons/ai'
 
 interface Answer {
   id: string
@@ -128,7 +127,7 @@ export function AnswerBox({
               </S.BestAnswerStamp>
             )}
             <S.StarsRating>
-              <Image src={starIcon} alt="" />
+              <AiFillHeart size={24} color="#ff341a;" />
               <Text weight="bold">{likesTotal}</Text>
             </S.StarsRating>
             {/* <S.CrownNumberContainer>
@@ -151,7 +150,7 @@ export function AnswerBox({
             disabled={isAlreadyLiked || isButtonDisabled}
           >
             Valeu
-            <Image src={starIcon} alt="" />
+            <AiFillHeart size={16} color="#ff341a;" />
             <Text weight="bold">{likesTotal}</Text>
           </S.LikedButton>
           <S.ModerationWrapper>

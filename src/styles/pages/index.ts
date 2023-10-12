@@ -68,7 +68,7 @@ export const InputSearchFormContainer = styled.form`
   margin-top: 5rem;
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 56px;
-  padding: 1.3rem;
+  padding: 1.25rem;
   justify-content: space-between;
   z-index: 99;
   width: 40rem;
@@ -78,6 +78,11 @@ export const InputSearch = styled.input`
   border: none;
   font-family: 'Poppins';
   font-size: 1.25rem;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
 `
 export const WaveContainer = styled.div`
   bottom: 16rem;
