@@ -66,6 +66,12 @@ export const NeedHelpContainer = styled.div`
 
   @media (max-width: 768px) {
     margin: 0 auto;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 420px) {
+    margin: 0 auto;
+    margin-bottom: 3rem;
   }
 `
 
@@ -77,7 +83,7 @@ export const AnswerButton = styled(Button)`
 export const HelpMorePeopleContainer = styled.div`
   width: 90%;
   margin-left: auto;
-  margin-top: 8rem;
+  margin-top: 4rem;
 
   @media (max-width: 768px) {
     margin: 0 auto;

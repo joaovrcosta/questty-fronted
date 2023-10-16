@@ -17,6 +17,8 @@ import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAn
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
+import { Spinner } from '@/components/atoms/Spinner'
+import { Button } from '@/components/atoms/Button'
 
 interface FormData {
   content: string
@@ -25,7 +27,17 @@ interface FormData {
 const AnswerFormSchema = zod.object({
   content: zod
     .string()
-    .min(20, `Mas já?! Escreva no mínimo 20 caracteres para explicar melhor.`),
+    .min(20, 'Mas já?! Escreva no mínimo 20 caracteres para explicar melhor.')
+    .refine(
+      (content) => {
+        const words = content.split(/\s+/)
+        return !words.some((word) => word.length > 46)
+      },
+      {
+        message: 'Nenhuma palavra deve ter mais de 46 letras.',
+        path: ['content'],
+      }
+    ),
 })
 
 export function AnswerModal({ id }: { id: string }) {
@@ -154,10 +166,17 @@ export function AnswerModal({ id }: { id: string }) {
                 </Tooltip>
               </S.Tools>
             </S.QuestionMoreInfoContainer> */}
-            <button type="submit">
-              <AiOutlinePlusCircle size={24} />
-              Responder
-            </button>
+            {isSubmitting ? (
+              <Spinner size="sm" baseColor="blue_950" variant="primary" />
+            ) : (
+              <Button
+                type="submit"
+                rounding="rounded-full"
+                disabled={isSubmitting}
+              >
+                Fazer pergunta
+              </Button>
+            )}
           </form>
         </S.FormAnsweringContainer>
       </S.Content>

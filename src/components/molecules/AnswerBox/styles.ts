@@ -1,5 +1,6 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import styled, { css } from 'styled-components'
 
 interface IAnswerBox {
@@ -21,7 +22,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
   border: 1px solid
     ${({ theme, isGolden }) =>
       isGolden ? theme.colors.yellow_500 : theme.colors.black};
-  padding: 2rem 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 8px;
   width: 90%;
   box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
@@ -193,11 +194,15 @@ export const UserHandleActionsContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
+  border-bottom: 2px solid #e5e5e5;
+  padding: 0 0 1rem 0;
+  margin-bottom: 1.5rem;
 `
 
 export const LikedButton = styled(Button)`
   font-weight: 700;
   border: 2px solid ${({ theme }) => theme.colors.black};
+  border-bottom: 4px solid ${({ theme }) => theme.colors.black};
   padding: 1rem;
 
   &:focus {
@@ -269,4 +274,27 @@ export const CreatedAtContainer = styled.div`
 export const QuestionInfo = styled.div`
   display: flex;
   gap: 1rem;
+`
+
+export const MoreDetailsInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
+
+export const MoreDetailsInput = styled.input`
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  border-radius: 33px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
+`
+
+export const hearthIconCSS = styled(AiFillHeart)`
+  color: ${({ theme }) => theme.colors.hearth_500};
+`
+
+export const HeartIconOutline = styled(AiOutlineHeart)`
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.hearth_500};
 `

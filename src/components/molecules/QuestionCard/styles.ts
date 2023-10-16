@@ -77,9 +77,7 @@ export const QuestionText = styled.a`
 
   ${({ theme }) => css`
     @media (max-width: 540px) {
-      /* overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis; */
+      width: 100%;
     }
   `}
 

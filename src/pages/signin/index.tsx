@@ -20,6 +20,7 @@ import { useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
 import Head from 'next/head'
+import Cookies from 'js-cookie'
 
 interface FormData {
   email: string
@@ -45,6 +46,13 @@ export default function SignIn() {
 
   const handleSignIn = async (data: FormData) => {
     try {
+      const existingToken = Cookies.get('questty-token')
+
+      if (existingToken) {
+        await Router.push('/home')
+        return
+      }
+
       const { email, password } = data
 
       const response = await api.post('/sessions', {

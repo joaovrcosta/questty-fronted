@@ -30,7 +30,7 @@ export function QuestionBox({
   answersQuantity,
 }: Question) {
   const { question } = useQuestionStore()
-  const { user } = useAuthStore()
+  const { user, isLoggedIn } = useAuthStore()
   const { isOpen, setIsOpen } = useAnswerModalStore()
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
@@ -52,7 +52,7 @@ export function QuestionBox({
           imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
         />
       </S.AvatarContainer>
-      <S.QuestionBoxContainer>
+      <S.QuestionBoxContainer isLoggedIn={isLoggedIn}>
         <S.QuestionInfo>
           <S.QuestionInfoWrapper>
             <S.AvatarInfoContainer>
@@ -170,6 +170,10 @@ export function QuestionBox({
         )}
 
         <S.MoreDetailsInputContainer>
+          <Avatar
+            variant="sm"
+            imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+          />
           <S.MoreDetailsInput
             placeholder={`Pedir detalhes ao usuario ${author}`}
           />

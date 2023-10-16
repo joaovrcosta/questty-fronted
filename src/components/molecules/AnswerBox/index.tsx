@@ -106,9 +106,9 @@ export function AnswerBox({
                 <S.Username>
                   <Text weight="medium">{author}</Text>
                 </S.Username>
-                <Tooltip content="Nível deste usuario">
+                {/* <Tooltip content="Nível deste usuario">
                   <S.UserLevel>0</S.UserLevel>
-                </Tooltip>
+                </Tooltip> */}
               </S.QuestionInfo>
               <S.CreatedAtContainer>
                 <Text size="xs" style={{ fontFamily: 'Inter' }}>
@@ -127,7 +127,7 @@ export function AnswerBox({
               </S.BestAnswerStamp>
             )}
             <S.StarsRating>
-              <AiFillHeart size={24} color="#ff341a;" />
+              <S.hearthIconCSS size={24}></S.hearthIconCSS>
               <Text weight="bold">{likesTotal}</Text>
             </S.StarsRating>
             {/* <S.CrownNumberContainer>
@@ -150,7 +150,11 @@ export function AnswerBox({
             disabled={isAlreadyLiked || isButtonDisabled}
           >
             Valeu
-            <AiFillHeart size={16} color="#ff341a;" />
+            {isAlreadyLiked ? (
+              <S.hearthIconCSS></S.hearthIconCSS>
+            ) : (
+              <S.HeartIconOutline></S.HeartIconOutline>
+            )}
             <Text weight="bold">{likesTotal}</Text>
           </S.LikedButton>
           <S.ModerationWrapper>
@@ -162,6 +166,14 @@ export function AnswerBox({
             </Tooltip>
           </S.ModerationWrapper>
         </S.UserHandleActionsContainer>
+
+        <S.MoreDetailsInputContainer>
+          <Avatar
+            variant="sm"
+            imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+          />
+          <S.MoreDetailsInput placeholder={`Escreva seu comentário`} />
+        </S.MoreDetailsInputContainer>
       </S.AnswerBoxContainer>
     </S.AnswerWrapper>
   )

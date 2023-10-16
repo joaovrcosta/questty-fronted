@@ -3,7 +3,11 @@ import { Text } from '@/components/atoms/Text'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-export const QuestionBoxContainer = styled.div`
+interface IQuestionBoxProps {
+  isLoggedIn: boolean
+}
+
+export const QuestionBoxContainer = styled.div<IQuestionBoxProps>`
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
@@ -36,23 +40,22 @@ export const QuestionBoxContainer = styled.div`
     border-color: transparent transparent transparent black;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      width: 100%;
-      background-color: transparent;
-      padding: 3rem 2rem 1.5rem 2rem;
-      border: none;
-      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+  @media (max-width: 768px) {
+    width: 100%;
+    background-color: transparent;
+    padding: ${({ isLoggedIn }) =>
+      isLoggedIn ? '0rem 2rem 1.5rem 2rem' : '3rem 2rem 1.5rem 2rem'};
+    border: none;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
 
-      &::before {
-        display: none;
-      }
-
-      &::after {
-        display: none;
-      }
+    &::before {
+      display: none;
     }
-  `}
+
+    &::after {
+      display: none;
+    }
+  }
 `
 export const LogoIcon = styled(Image)`
   ${({ theme }) => css`
@@ -163,6 +166,8 @@ export const UserHandleActionsContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e5e5e5;
+  padding: 0 0 1rem 0;
   /* margin-top: 3rem; */
 
   @media (max-width: 768px) {
@@ -218,7 +223,7 @@ export const ModerateLabel = styled.div`
   gap: 0.5rem;
   align-items: center;
   padding: 0.5rem;
-  border-radius: 50%;
+  border-radius: 12px;
   cursor: pointer;
 
   ${({ theme }) => css`
@@ -239,7 +244,11 @@ export const ModerateLabel = styled.div`
 
 // More Details
 
-export const MoreDetailsInputContainer = styled.div``
+export const MoreDetailsInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
 
 export const MoreDetailsInput = styled.input`
   width: 100%;
