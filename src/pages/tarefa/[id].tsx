@@ -13,6 +13,7 @@ import GirlLamp from '@/assets/GirlLamp.svg'
 import Image from 'next/image'
 import { Button } from '@/components/atoms/Button'
 import { MoreQuestonCard } from '@/components/molecules/MoreQuestion'
+import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 
 interface Question {
   id: number
@@ -32,6 +33,7 @@ export default function Question(props: IQuestionData) {
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const { user } = useAuthStore()
   const { question } = useQuestionStore()
+  const { answer } = useAnswerStore()
 
   const answersAuthorIds = question?.questionData.answers.map(
     (resposta) => resposta.author_id
@@ -58,7 +60,7 @@ export default function Question(props: IQuestionData) {
             author={props.questionData?.author.name}
           />
           <S.AnswersSection>
-            {props?.questionData.answers.length > 0 ? (
+            {props?.questionData.answers.length > 0 || answer ? (
               <S.TextSectionTitle
                 weight="bold"
                 color="blue_950"
@@ -66,12 +68,22 @@ export default function Question(props: IQuestionData) {
               >
                 Respostas:
               </S.TextSectionTitle>
-            ) : (
-              <div></div>
-            )}
+            ) : null}
           </S.AnswersSection>
           <S.AnswersContainer>
-            {props?.questionData.answers.length > 0 ? (
+            {answer ? (
+              <AnswerBox
+                key={answer?.answer.id}
+                id={String(answer?.answer.id)}
+                authorId={String(answer?.answer.author_id)}
+                content={String(answer?.answer.content)}
+                createdAt={String(answer?.answer.createdAt)}
+                isGolden={answer?.answer.isGolden}
+                author={user?.name}
+                likesQuantity={0}
+                isButtonDisabled={true}
+              />
+            ) : props?.questionData.answers.length > 0 ? (
               props?.questionData.answers.map((answer) => (
                 <AnswerBox
                   isButtonDisabled={
@@ -91,12 +103,16 @@ export default function Question(props: IQuestionData) {
               ))
             ) : (
               <S.NeedHelpContainer>
-                <Image src={GirlLamp} alt="" />
-                <Text size="xx1" weight="medium">
-                  {props.questionData?.author.name} precisa da sua ajuda.
-                </Text>
-                <Text>Essa pergunta não teve resposta ainda</Text>
-                <S.AnswerButton>RESPONDER</S.AnswerButton>
+                {answer ? null : (
+                  <>
+                    <Image src={GirlLamp} alt="" />
+                    <Text size="xx1" weight="medium">
+                      {props.questionData?.author.name} precisa da sua ajuda.
+                    </Text>
+                    <Text>Essa pergunta não teve resposta ainda</Text>
+                    <S.AnswerButton>RESPONDER</S.AnswerButton>
+                  </>
+                )}
               </S.NeedHelpContainer>
             )}
           </S.AnswersContainer>

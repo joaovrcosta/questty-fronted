@@ -33,6 +33,24 @@ export interface IAnswer {
   likes: ILike[]
 }
 
+export interface INewAnswer {
+  answer: {
+    id: string
+    content: string
+    isGolden: boolean
+    author_id: string
+    author: {
+      name: string
+    }
+    question_id: string
+    createdAt: string
+    deletedAt: string
+    updatedAt: string
+    deleted: boolean
+    likes: ILike[]
+  }
+}
+
 export interface ILike {
   id: string
   author_id: string

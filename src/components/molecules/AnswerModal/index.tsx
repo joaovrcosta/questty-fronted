@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 
 interface FormData {
   content: string
@@ -34,6 +35,7 @@ export function AnswerModal({ id }: { id: string }) {
   const { setIsOpen } = useAnswerModalStore()
   const { question } = useQuestionStore()
   const { token } = useAuthStore()
+  const answerStore = useAnswerStore()
 
   const { isSubmitting } = formState
 
@@ -52,6 +54,13 @@ export function AnswerModal({ id }: { id: string }) {
           },
         }
       )
+
+      if (response.status === 201) {
+        answerStore.setAnswer(response.data)
+      }
+      if (response.status === 400) {
+        console.log('Pergunta já respondida')
+      }
     } catch (error) {
       console.error('Error creating answer:', error)
       throw error
