@@ -90,9 +90,11 @@ export default function SignIn() {
       <HeaderAuth />
       <S.SignInContainer>
         <S.SignInContent>
-          <Heading size="md" color="black" weight="bold">
-            Entre com a sua conta:
-          </Heading>
+          <S.HeadingContainer>
+            <Heading size="md" color="blue_950" weight="bold">
+              Entrar
+            </Heading>
+          </S.HeadingContainer>
           <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
             <S.InputContainer>
               <S.EmailInputContainer>
@@ -114,7 +116,7 @@ export default function SignIn() {
               </S.EmailInputContainer>
               <Input
                 {...register('password')}
-                placeholder="Digite sua senha"
+                placeholder="Senha"
                 type="password"
                 variant="lg"
                 hug={true}
@@ -136,10 +138,6 @@ export default function SignIn() {
                 </Text>
               )}
             </S.InputContainer>
-            <S.StayLoggedContainer>
-              <input type="checkbox" id="stay-logged" />
-              <label htmlFor="stay-logged">Mantenha-me conectado</label>
-            </S.StayLoggedContainer>
             <S.ForgotMyPasswordLink href="/forgot">
               Esqueci a minha senha
             </S.ForgotMyPasswordLink>
@@ -155,6 +153,7 @@ export default function SignIn() {
                   backgroundColor="blue_500"
                   color="white"
                   disabled={isSubmitting}
+                  hug={true}
                 >
                   Entrar
                 </Button>

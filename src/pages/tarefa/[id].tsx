@@ -64,7 +64,7 @@ export default function Question(props: IQuestionData) {
                 color="blue_950"
                 id="#respostas"
               >
-                Resposta:
+                Respostas:
               </S.TextSectionTitle>
             ) : (
               <div></div>

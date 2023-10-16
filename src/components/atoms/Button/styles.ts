@@ -68,7 +68,7 @@ export const Button = styled.button<IButton>`
   border-radius: ${({ rounding }) => {
     switch (rounding) {
       case 'rounded':
-        return '0.625rem'
+        return '1rem'
       case 'rounded-full':
         return '9999px'
       case 'rounded-none':

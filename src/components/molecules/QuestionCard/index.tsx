@@ -1,10 +1,8 @@
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
-import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
+import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
-import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
-import { Tooltip } from '../Tooltip'
 
 export type subjectsType =
   | 'math'

@@ -186,6 +186,10 @@ export const AnswerButton = styled(Button)`
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_500};
     transition: 0.2s ease all;
   }
+
+  @media (max-width: 768px) {
+    width: 85%;
+  }
 `
 export const SeeAnswerButton = styled(Button)`
   padding: 1.625rem 2rem;

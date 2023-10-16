@@ -37,7 +37,7 @@ export const ForgotMyPasswordLink = styled(Link)`
 `
 
 export const ButtonContainer = styled.div`
-  margin: 3rem 0 2.75rem 0;
+  margin: 1rem 0 2.75rem 0;
 `
 
 export const EmailInputContainer = styled.div`
@@ -84,4 +84,10 @@ export const StayLoggedContainer = styled.div`
   padding: 1rem 0;
 
   gap: 0.5rem;
+`
+
+export const HeadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

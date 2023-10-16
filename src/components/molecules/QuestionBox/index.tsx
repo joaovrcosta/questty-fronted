@@ -12,6 +12,7 @@ import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 import { Tooltip } from '../Tooltip'
+import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
 
 interface Question {
   id?: number | string
@@ -30,7 +31,7 @@ export function QuestionBox({
 }: Question) {
   const { question } = useQuestionStore()
   const { user } = useAuthStore()
-  const { isOpen, setIsOpen } = useQuestionModalStore()
+  const { isOpen, setIsOpen } = useAnswerModalStore()
 
   const isAuthor = question?.questionData.author_id === user?.id
 

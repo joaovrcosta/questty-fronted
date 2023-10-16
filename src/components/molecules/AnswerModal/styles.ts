@@ -13,8 +13,8 @@ export const Overlay = styled(Dialog.Overlay)`
 
 export const Content = styled(Dialog.Content)`
   min-width: 1000px;
-  padding: 1.5rem;
   font-family: Poppins;
+  padding: 0 1rem;
   z-index: 999999;
   max-height: 980px;
   border-radius: 5px;
@@ -159,7 +159,6 @@ export const QuestionTextarea = styled.textarea`
 
   &:focus {
     border: 2px solid #6d83f3;
-    background-color: ${({ theme }) => theme.colors.white};
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
     transition: 0.1s ease all;
   }
@@ -244,8 +243,14 @@ export const QuestionTextContainer = styled.div`
     /* flex-direction: column-reverse; */
   }
 
-  @media (max-width: 950px) {
-    padding: 0 3rem;
+  @media (max-width: 960px) {
+    padding: 0 6rem;
+    /* flex-direction: column-reverse; */
+  }
+
+  @media (max-width: 680px) {
+    padding: 0.5rem 0 0 0;
+    width: 100%;
     /* flex-direction: column-reverse; */
   }
 `
@@ -259,20 +264,17 @@ export const FormAnsweringContainer = styled.div`
     /* flex-direction: column-reverse; */
   }
 
-  @media (max-width: 950px) {
-    padding: 0 3rem;
+  @media (max-width: 960px) {
+    padding: 0 6rem;
     margin-top: 2rem;
+    width: 100%;
     /* flex-direction: column-reverse; */
   }
 
-  @media (max-width: 850px) {
-    padding: 0 3rem;
-    margin-top: 2rem;
-    /* flex-direction: column-reverse; */
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 2rem;
+  @media (max-width: 680px) {
+    padding: 0.5rem 0;
+    margin-top: 0;
+    width: 100%;
     /* flex-direction: column-reverse; */
   }
 `
@@ -281,7 +283,8 @@ export const QuestionInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  justify-content: space-between;
 `
 
 export const AvatarInfoContainer = styled.div``
@@ -331,6 +334,12 @@ export const HeadingContainer = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   gap: 1rem;
+
+  @media (max-width: 680px) {
+    padding: 0;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
 `
 
 export const BackButtonBox = styled.button`
@@ -346,5 +355,32 @@ export const BackButtonBox = styled.button`
 
   &:hover {
     background: ${({ theme }) => theme.colors.gray_100};
+  }
+`
+
+export const TextContainer = styled.div`
+  padding: 0 2rem 0 0;
+  max-height: 500px;
+  width: 100%;
+
+  @media (max-width: 680px) {
+    padding: 0;
+    max-height: 250px;
+  }
+
+  overflow-y: auto;
+`
+
+export const AvatarInformationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+`
+
+export const CloseButtonMobile = styled.div`
+  display: none;
+  @media (max-width: 1080px) {
+    display: block;
   }
 `

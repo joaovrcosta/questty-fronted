@@ -13,17 +13,29 @@ import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
 import { useForm } from 'react-hook-form'
-import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
+import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface FormData {
   content: string
 }
 
+const AnswerFormSchema = zod.object({
+  content: zod
+    .string()
+    .min(20, `Mas já?! Escreva no mínimo 20 caracteres para explicar melhor.`),
+})
+
 export function AnswerModal({ id }: { id: string }) {
-  const { register, handleSubmit } = useForm<FormData>()
-  const { setIsOpen } = useQuestionModalStore()
+  const { register, handleSubmit, formState } = useForm<FormData>({
+    resolver: zodResolver(AnswerFormSchema),
+  })
+  const { setIsOpen } = useAnswerModalStore()
   const { question } = useQuestionStore()
   const { token } = useAuthStore()
+
+  const { isSubmitting } = formState
 
   const handleAnswerQuestion = async (data: FormData) => {
     try {
@@ -40,14 +52,14 @@ export function AnswerModal({ id }: { id: string }) {
           },
         }
       )
-
-      if (response.status === 201) {
-        window.location.reload()
-      }
     } catch (error) {
       console.error('Error creating answer:', error)
       throw error
     }
+  }
+
+  const handleCloseModal = () => {
+    setIsOpen(false)
   }
 
   return (
@@ -56,28 +68,37 @@ export function AnswerModal({ id }: { id: string }) {
       <S.Content>
         <S.QuestionTextContainer>
           <S.QuestionInfoWrapper>
-            <S.AvatarInfoContainer>
-              <Avatar
-                id={String(id)}
-                variant="lg"
-                imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
-              />
-            </S.AvatarInfoContainer>
-            <S.InfoWrapperr>
-              <S.UserInfo>
-                <S.Username>
-                  <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                    {question?.questionData.author.name}
-                  </Text>
-                </S.Username>
-                {/* <S.UserLevel>27</S.UserLevel> */}
-              </S.UserInfo>
-            </S.InfoWrapperr>
+            <S.AvatarInformationContainer>
+              <S.AvatarInfoContainer>
+                <Avatar
+                  id={String(id)}
+                  variant="lg"
+                  imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+                />
+              </S.AvatarInfoContainer>
+              <S.InfoWrapperr>
+                <S.UserInfo>
+                  <S.Username>
+                    <Text style={{ fontFamily: 'Poppins' }} weight="medium">
+                      {question?.questionData.author.name}
+                    </Text>
+                  </S.Username>
+                  {/* <S.UserLevel>27</S.UserLevel> */}
+                </S.UserInfo>
+              </S.InfoWrapperr>
+            </S.AvatarInformationContainer>
+            <S.CloseButtonMobile>
+              <S.BackButtonBox onClick={handleCloseModal}>
+                <X size={24} />
+              </S.BackButtonBox>
+            </S.CloseButtonMobile>
           </S.QuestionInfoWrapper>
-          <Dialog.Title style={{ fontSize: '18px', marginBottom: '24px' }}>
-            Pergunta
+          <Dialog.Title style={{ fontSize: '18px', marginBottom: '1rem' }}>
+            Pergunta:
           </Dialog.Title>
-          <Text>{question?.questionData.content}</Text>
+          <S.TextContainer>
+            <Text>{question?.questionData.content}</Text>
+          </S.TextContainer>
         </S.QuestionTextContainer>
         <S.FormAnsweringContainer>
           <form
@@ -87,20 +108,23 @@ export function AnswerModal({ id }: { id: string }) {
             })}
           >
             <S.HeadingContainer>
-              <Link href="/">
-                <S.BackButtonBox>
-                  <X size={24} />
-                </S.BackButtonBox>
-              </Link>
+              <S.BackButtonBox onClick={handleCloseModal}>
+                <X size={24} />
+              </S.BackButtonBox>
               <Text weight="bold" size="xl" color="blue_950">
                 Responda
               </Text>
             </S.HeadingContainer>
             <S.QuestionTextarea
-              placeholder="Escreva sua pergunta aqui. (Para conseguir uma ótima resposta, descreva sua dúvida de forma simples e clara"
               {...register('content')}
+              placeholder="Explicação passo a passo:"
             ></S.QuestionTextarea>
-            <S.QuestionMoreInfoContainer>
+            {formState.errors.content && (
+              <span style={{ color: '#D20032', fontSize: '14px' }}>
+                {formState.errors.content.message}
+              </span>
+            )}
+            {/* <S.QuestionMoreInfoContainer>
               <S.Tools>
                 <Tooltip content="Anexe aqui">
                   <T.IconButton backgroundColor="white">
@@ -120,7 +144,7 @@ export function AnswerModal({ id }: { id: string }) {
                   </T.IconButton>
                 </Tooltip>
               </S.Tools>
-            </S.QuestionMoreInfoContainer>
+            </S.QuestionMoreInfoContainer> */}
             <button type="submit">
               <AiOutlinePlusCircle size={24} />
               Responder
