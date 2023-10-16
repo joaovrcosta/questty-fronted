@@ -32,8 +32,12 @@ export function QuestionBox({
   const { question } = useQuestionStore()
   const { user } = useAuthStore()
   const { isOpen, setIsOpen } = useAnswerModalStore()
+  const largeText = content?.substring(0, 380)
+  const normalText = content?.substring(380)
 
   const isAuthor = question?.questionData.author_id === user?.id
+
+  const isAlreadyAnsweredByUser = ''
 
   const hasThreeAnswers =
     Array.isArray(question?.questionData.answers) &&
@@ -99,7 +103,7 @@ export function QuestionBox({
                 <Text
                   size="xx1"
                   weight="bold"
-                  color="blue_500"
+                  color="blue_950"
                   style={{ fontFamily: 'Poppins' }}
                 >
                   {answersQuantity}
@@ -116,22 +120,12 @@ export function QuestionBox({
               color="blue_950"
             ></S.QuestionTitleText>
           </S.QuestionTitle>
-          <S.QuestionContentText size="lg" weight="regular" color="blue_950">
-            {content ? (
-              content.length > 380 ? (
-                <>
-                  <Text size="xx1" weight="bold">
-                    {content.slice(0, 380)} ...
-                  </Text>
-                  <div style={{ marginTop: '16px', fontSize: '18px' }}>
-                    {content.slice(380)}
-                  </div>
-                </>
-              ) : (
-                content
-              )
-            ) : null}
-          </S.QuestionContentText>
+          <S.ContentContainer>
+            <Text size="xl" color="blue_950" weight="semibold">
+              {largeText}
+            </Text>
+            <Text color="blue_950">{normalText}</Text>
+          </S.ContentContainer>
         </S.QuestionContent>
         {!isAuthor && (
           <S.UserHandleActionsContainer>
@@ -139,7 +133,7 @@ export function QuestionBox({
               <a href="#respostas">
                 <S.SeeAnswerButton
                   variant="lg"
-                  rounding="rounded-xxl"
+                  rounding="rounded-full"
                   color="white"
                   backgroundColor="black"
                 >
@@ -154,9 +148,9 @@ export function QuestionBox({
                 <Dialog.Trigger asChild>
                   <S.AnswerButton
                     variant="lg"
-                    rounding="rounded-xxl"
+                    rounding="rounded-full"
                     color="white"
-                    backgroundColor="blue_500"
+                    backgroundColor="black"
                   >
                     <PlusCircle size={24} weight="bold" />
                     RESPONDER

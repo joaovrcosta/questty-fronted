@@ -7,7 +7,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   borderColor?: ColorThemeType
   variant?: S.sizeVariants
   rounding?: S.roundingVariants
-  color?: S.colorVariants
+  color?: ColorThemeType
   boxShadow?: boolean
   border?: boolean
   hug?: boolean

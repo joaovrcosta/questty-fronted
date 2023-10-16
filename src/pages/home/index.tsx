@@ -13,6 +13,7 @@ import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore
 import { useEffect } from 'react'
 import api from '@/services/api'
 import { Footer } from '@/components/organisms/Footer'
+import Head from 'next/head'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -35,6 +36,10 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Questões com respostas para todas as matérias | Questty</title>
+      </Head>
+
       <Header />
       <S.HomePageContent>
         <S.FeedContentWrapper>

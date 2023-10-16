@@ -8,7 +8,6 @@ export type roundingVariants =
   | 'rounded-thin'
   | 'rounded-xxl'
 export type sizeVariants = 'sm' | 'md' | 'lg' | 'none'
-export type colorVariants = 'white' | 'black'
 
 interface IButton {
   backgroundColor: ColorThemeType
@@ -17,7 +16,7 @@ interface IButton {
   rounding: roundingVariants
   hug: boolean
   boxShadow: boolean
-  color: colorVariants
+  color: ColorThemeType
   border: boolean
 }
 

@@ -16,10 +16,15 @@ import rocketGirl from '@/assets/girl-rocket.svg'
 import girlPuzzle from '@/assets/girl-puzzle.svg'
 import boyHeadphone from '@/assets/boy-img-icon.svg'
 import girlUniverse from '@/assets/girl-univerve.svg'
+import Head from 'next/head'
 
 const Landing: NextPageWithLayout = () => {
   return (
     <>
+      <Head>
+        <title>Questty.com.br - Para estudantes. Por estudantes.</title>
+      </Head>
+
       <S.MainContainer>
         <S.LandingContent>
           <S.LandingContainer>

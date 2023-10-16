@@ -19,11 +19,12 @@ import Link from 'next/link'
 import { MdQuestionAnswer } from 'react-icons/md'
 import starIcon from '../../assets/star.svg'
 import Image from 'next/image'
+import Head from 'next/head'
 
 export default function Profile(props: IProfileData) {
   const router = useRouter()
   const { logout, isLoggedIn } = useAuthStore()
-  const { setProfile } = useProfileStore()
+  const { setProfile, user } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
 
@@ -37,6 +38,10 @@ export default function Profile(props: IProfileData) {
 
   return (
     <>
+      <Head>
+        <title>{user?.userData.name} | Questty</title>
+      </Head>
+
       <Header />
       <S.ProfileContainer>
         <S.ProfileContent>

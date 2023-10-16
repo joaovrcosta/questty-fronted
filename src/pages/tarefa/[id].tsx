@@ -14,6 +14,7 @@ import Image from 'next/image'
 import { Button } from '@/components/atoms/Button'
 import { MoreQuestonCard } from '@/components/molecules/MoreQuestion'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
+import Head from 'next/head'
 
 interface Question {
   id: number
@@ -34,6 +35,7 @@ export default function Question(props: IQuestionData) {
   const { user } = useAuthStore()
   const { question } = useQuestionStore()
   const { answer } = useAnswerStore()
+  const textForTitle = question?.questionData.content.substring(0, 100)
 
   const answersAuthorIds = question?.questionData.answers.map(
     (resposta) => resposta.author_id
@@ -48,6 +50,10 @@ export default function Question(props: IQuestionData) {
 
   return (
     <>
+      <Head>
+        <title>{textForTitle} | Questty</title>
+      </Head>
+
       <Header />
       <S.QuestionContainer>
         <S.QuestionWrapper>

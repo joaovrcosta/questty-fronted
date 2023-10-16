@@ -198,7 +198,7 @@ export const UserHandleActionsContainer = styled.div`
 export const LikedButton = styled(Button)`
   font-weight: 700;
   border: 2px solid ${({ theme }) => theme.colors.black};
-  padding: 0rem 0.75rem;
+  padding: 1rem;
 
   &:focus {
     border: 2px solid #6d83f3;

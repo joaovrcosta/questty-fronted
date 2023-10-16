@@ -171,19 +171,18 @@ export const UserHandleActionsContainer = styled.div`
 `
 
 export const AnswerButton = styled(Button)`
-  padding: 1.625rem 2rem;
-  font-weight: 400;
+  font-weight: 600;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
   &:focus {
-    border: 2px solid #6d83f3;
+    border: 2px solid #000;
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
     transition: 0.2s ease all;
   }
 
   &:hover {
     border: 2px solid ${({ theme }) => theme.colors.white};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_500};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.black};
     transition: 0.2s ease all;
   }
 
@@ -192,8 +191,7 @@ export const AnswerButton = styled(Button)`
   }
 `
 export const SeeAnswerButton = styled(Button)`
-  padding: 1.625rem 2rem;
-  font-weight: 400;
+  font-weight: 600;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
   &:focus {
@@ -348,3 +346,5 @@ export const BackButtonBox = styled.button`
     display: none;
   }
 `
+
+export const ContentContainer = styled.div``

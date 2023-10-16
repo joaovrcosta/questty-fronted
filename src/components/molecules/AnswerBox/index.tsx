@@ -143,7 +143,7 @@ export function AnswerBox({
         <S.UserHandleActionsContainer>
           <S.LikedButton
             variant="none"
-            rounding="rounded-full"
+            rounding="rounded"
             color="black"
             backgroundColor="white"
             onClick={handleLikeClick}

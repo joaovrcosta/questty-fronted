@@ -8,10 +8,15 @@ import { FcGoogle } from 'react-icons/fc'
 import { Footer } from '@/components/organisms/Footer'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
+import Head from 'next/head'
 
 export default function SignIn() {
   return (
     <>
+      <Head>
+        <title>Questty.com.br - Para estudantes. Por estudantes.</title>
+      </Head>
+
       <HeaderAuth />
       <S.SignUpContainer>
         <S.SignUpContent>

@@ -19,6 +19,7 @@ import { Spinner } from '@/components/atoms/Spinner'
 import { useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
+import Head from 'next/head'
 
 interface FormData {
   email: string
@@ -87,6 +88,9 @@ export default function SignIn() {
 
   return (
     <>
+      <Head>
+        <title>Questty.com.br - Para estudantes. Por estudantes.</title>
+      </Head>
       <HeaderAuth />
       <S.SignInContainer>
         <S.SignInContent>
