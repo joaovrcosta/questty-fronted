@@ -20,6 +20,7 @@ import { MdQuestionAnswer } from 'react-icons/md'
 import starIcon from '../../assets/star.svg'
 import Image from 'next/image'
 import Head from 'next/head'
+import avatar_empty from '../../assets/avatar_empty.svg'
 
 export default function Profile(props: IProfileData) {
   const router = useRouter()
@@ -44,13 +45,15 @@ export default function Profile(props: IProfileData) {
 
       <Header />
       <S.ProfileContainer>
-        <S.ProfileContent>
+        <S.ProfileContent isLoggedIn={isLoggedIn}>
           <S.UserInfo>
             <S.AvatarContainer>
               <S.UserAvatarPhoto
                 id={props.userData.id}
                 variant="xl"
-                imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+                imageUrl={
+                  props.userData.avatar_url ? props.userData.avatar_url : null
+                }
               />
               {isLoggedIn && isCurrentUserProfile && (
                 <Link
@@ -81,7 +84,7 @@ export default function Profile(props: IProfileData) {
               }}
             >
               <span style={{ color: '#2089EA', fontWeight: 'bold' }}>@</span>{' '}
-              {props.userData.name}
+              {props.userData.username}
             </Text>
 
             <S.UserDetailsBox>

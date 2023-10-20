@@ -61,6 +61,9 @@ export interface ILike {
 export interface IStudent {
   id: string
   name: string
+  username: string
+  avatar_url: string
+  code: Number
   email: string
   createdAt: string
   answers: IAnswer[]
@@ -70,6 +73,9 @@ export interface IStudent {
 export interface ICurrentUserData {
   id: string
   name: string
+  username: string
+  avatar_url: string
+  code: Number
   email: string
   createdAt: string
   answers: IAnswer[]
@@ -80,6 +86,9 @@ export interface IProfileData {
   userData: {
     id: string
     name: string
+    username: string
+    code: Number
+    avatar_url: string
     email: string
     createdAt: string
     questions: IQuestion[]

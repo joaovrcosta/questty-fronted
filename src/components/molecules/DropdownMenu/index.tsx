@@ -8,12 +8,14 @@ interface DropdownProps {
   id?: string
 }
 export function Dropdown({ id }: DropdownProps) {
-  const { logout } = useAuthStore()
+  const { logout, user } = useAuthStore()
   const router = useRouter()
 
   const handleLogoutClick = () => {
     useAuthStore.getState().logout(router)
   }
+
+  console.log(user?.avatar_url)
 
   return (
     <Menu.Root>
@@ -22,7 +24,10 @@ export function Dropdown({ id }: DropdownProps) {
           href="/profile/1
         "
         >
-          <S.AvatarImage src="https://avatars.githubusercontent.com/u/70654718?v=4" />
+          <S.AvatarImage
+            variant="sm"
+            imageUrl={user?.avatar_url ? user?.avatar_url : null}
+          />
         </Link>
       </S.UserAvatarContainer>
       <S.Content align="end">

@@ -2,12 +2,16 @@ import { Avatar } from '@/components/atoms/Avatar'
 import { Button } from '@/components/atoms/Button'
 import styled from 'styled-components'
 
+interface IProfileProps {
+  isLoggedIn: boolean
+}
+
 export const ProfileContainer = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
 `
-export const ProfileContent = styled.div`
+export const ProfileContent = styled.div<IProfileProps>`
   display: flex;
   padding: 3.25em;
 
@@ -18,7 +22,9 @@ export const ProfileContent = styled.div`
 
   @media (max-width: 768px) {
     flex-wrap: wrap;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: ${({ isLoggedIn }) =>
+      isLoggedIn ? '0rem 1rem 1rem 1rem' : '4rem 1rem 1rem 1rem'};
+    border: none;
   }
 `
 

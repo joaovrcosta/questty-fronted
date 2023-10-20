@@ -177,7 +177,7 @@ export function QuestionBox({
         <S.MoreDetailsInputContainer>
           <Avatar
             variant="sm"
-            imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+            imageUrl={user?.avatar_url ? user?.avatar_url : null}
           />
           <S.MoreDetailsInput
             placeholder={`Pedir detalhes ao usuario ${author}`}

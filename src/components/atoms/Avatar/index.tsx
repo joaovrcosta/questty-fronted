@@ -1,9 +1,11 @@
 import * as S from './styles'
 import Link from 'next/link'
+import emptyProfileImg from '@/assets/avatar_empty.svg'
+import { BlankAvatar } from './BlankAvatar'
 
 interface AvatarProps {
   variant: S.sizeVariants
-  imageUrl: string
+  imageUrl: string | null
   id?: string
 }
 
@@ -12,7 +14,11 @@ export function Avatar({ variant, imageUrl, id }: AvatarProps) {
     <>
       <S.UserAvatarContainer variant={variant}>
         <Link href={`/profile/${id}`}>
-          <S.AvatarImage src={imageUrl} variant={variant} />
+          {imageUrl !== null ? (
+            <S.AvatarImage src={imageUrl} variant={variant} />
+          ) : (
+            <BlankAvatar variant={variant} />
+          )}
         </Link>
       </S.UserAvatarContainer>
     </>
