@@ -14,7 +14,7 @@ export function withSession(handler: GetServerSideProps) {
 
     const url = ctx.req.url ?? ''
 
-    if (url.includes('/home')) {
+    if (url.includes('/home' || '/ask' || '/edit')) {
       if (!tokenJwt) {
         return {
           redirect: {

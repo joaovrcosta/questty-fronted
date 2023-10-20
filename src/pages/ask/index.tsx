@@ -3,6 +3,8 @@ import { Header } from '@/components/organisms/Header'
 import * as S from '../../styles/pages/ask'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { Text } from '@/components/atoms/Text'
+import { withSession } from '@/lib/with-session'
+import { GetServerSideProps } from 'next'
 
 export default function Ask() {
   return (
@@ -61,3 +63,11 @@ export default function Ask() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSession(
+  async (_ctx) => {
+    return {
+      props: {},
+    }
+  }
+)

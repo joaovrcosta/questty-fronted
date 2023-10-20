@@ -152,10 +152,6 @@ export const QuestionTextarea = styled.textarea`
     transition: 0.1s ease all;
   }
 
-  &:hover {
-    opacity: 0.8;
-  }
-
   ${({ theme }) => css`
     @media (max-width: 768px) {
       height: 12rem;

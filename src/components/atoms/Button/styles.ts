@@ -111,6 +111,5 @@ export const Button = styled.button<IButton>`
 
   &:active {
     transform: scale(0.95);
-    /* box-shadow: none; */
   }
 `

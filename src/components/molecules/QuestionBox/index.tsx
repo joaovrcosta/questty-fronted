@@ -124,7 +124,12 @@ export function QuestionBox({
             <Text size="xl" color="blue_950" weight="semibold">
               {largeText}
             </Text>
-            <Text color="blue_950">{normalText}</Text>
+            <Text
+              color="blue_950"
+              style={{ marginTop: '1rem', lineHeight: '24px' }}
+            >
+              {normalText}
+            </Text>
           </S.ContentContainer>
         </S.QuestionContent>
         {!isAuthor && (

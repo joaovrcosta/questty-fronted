@@ -16,14 +16,19 @@ const useAuthStore = create<AuthStore>((set) => {
     user: null,
     token: null,
     isLoggedIn: false,
-    login: (user, token) => {
+    login: async (user, token) => {
       set({ user, token, isLoggedIn: true })
     },
-    logout: (router: NextRouter) => {
+    logout: async (router: NextRouter) => {
       Cookies.remove('questty-token')
+      localStorage.removeItem('token')
       set({ user: null, token: null, isLoggedIn: false })
 
-      router.push('/')
+      await new Promise<void>((resolve) => {
+        router.push('/').then(() => {
+          resolve()
+        })
+      })
     },
   }
 })

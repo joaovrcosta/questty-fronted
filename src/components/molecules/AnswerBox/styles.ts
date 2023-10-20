@@ -203,17 +203,20 @@ export const LikedButton = styled(Button)`
   font-weight: 700;
   border: 2px solid ${({ theme }) => theme.colors.black};
   border-bottom: 4px solid ${({ theme }) => theme.colors.black};
-  padding: 1rem;
+  padding: 1.02rem;
 
   &:focus {
-    border: 2px solid #6d83f3;
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
     transition: 0.2s ease all;
   }
 
   &:disabled {
     opacity: 0.8;
     /* border: 2px solid #ff341a; */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
   }
 `
 
@@ -296,5 +299,5 @@ export const hearthIconCSS = styled(AiFillHeart)`
 
 export const HeartIconOutline = styled(AiOutlineHeart)`
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.hearth_500};
+  color: ${({ theme }) => theme.colors.black};
 `

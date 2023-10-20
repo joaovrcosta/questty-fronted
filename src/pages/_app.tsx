@@ -34,6 +34,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         })
         .catch((error) => {
           console.error('Erro ao obter usuário:', error)
+          if (error.response && error.response.status === 401) {
+            window.location.href = '/signin'
+          }
         })
     }
   }, [])

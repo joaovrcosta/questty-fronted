@@ -228,6 +228,12 @@ export default function Profile(props: IProfileData) {
 export const getServerSideProps = async (ctx: any) => {
   const { id } = ctx.params as { id: string }
 
+  const existingToken = Cookies.get('questty-token')
+
+  if (existingToken) {
+    return { props: { token: existingToken, id } }
+  }
+
   try {
     const res = await api.get(`profile/${id}`)
 
