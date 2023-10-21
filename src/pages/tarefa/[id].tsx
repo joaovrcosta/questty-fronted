@@ -115,8 +115,8 @@ export default function Question(props: IQuestionData) {
           content={String(answer?.answer.content)}
           createdAt={String(answer?.answer.createdAt)}
           isGolden={answer?.answer.isGolden}
-          author={user?.name}
-          avatarUrl={answer?.answer.author.avatar_url}
+          author={user?.username}
+          avatarUrl={answer?.answer.author?.avatar_url}
           likesQuantity={0}
           isButtonDisabled={true}
         />

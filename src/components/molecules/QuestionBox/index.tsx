@@ -13,6 +13,8 @@ import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 import { Tooltip } from '../Tooltip'
 import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
+import { useEffect, useState } from 'react'
+import { SkeletonLine } from '@/components/atoms/Skeleton'
 
 interface Question {
   id?: number | string
@@ -31,11 +33,21 @@ export function QuestionBox({
   answersQuantity,
   avatarUrl,
 }: Question) {
+  const [loading, setLoading] = useState(true)
+
   const { question } = useQuestionStore()
   const { user, isLoggedIn } = useAuthStore()
   const { isOpen, setIsOpen } = useAnswerModalStore()
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
+
+  useEffect(() => {
+    if (question === null) {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+  })
 
   const isAuthor = question?.questionData?.author_id === user?.id
 
@@ -154,6 +166,25 @@ export function QuestionBox({
                   </Text>
                 </S.SeeAnswerButton>
               </a>
+            ) : loading ? (
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <div>
+                  <SkeletonLine
+                    width={29}
+                    rows={3}
+                    height={10}
+                    rounding="rounded"
+                  />
+                </div>
+                <div>
+                  <SkeletonLine
+                    width={30}
+                    rows={3}
+                    height={10}
+                    rounding="rounded"
+                  />
+                </div>
+              </div>
             ) : (
               <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                 <Dialog.Trigger asChild>
@@ -179,7 +210,6 @@ export function QuestionBox({
             </S.ModerationWrapper>
           </S.UserHandleActionsContainer>
         )}
-
         <S.MoreDetailsInputContainer>
           <Avatar
             variant="sm"
