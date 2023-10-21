@@ -19,6 +19,8 @@ export default function Home() {
   const questionStore = useQuestionsStore()
   const questions = useQuestionsStore((state) => state.questions)
 
+  console.log(questions)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,6 +83,7 @@ export default function Home() {
                   category_id={question.category.name}
                   createdAt={question.createdAt}
                   answersQuantity={question.answers?.length}
+                  avatarUrl={question.author.avatar_url}
                 />
               ))
             ) : (

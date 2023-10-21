@@ -15,8 +15,6 @@ export function Dropdown({ id }: DropdownProps) {
     useAuthStore.getState().logout(router)
   }
 
-  console.log(user?.avatar_url)
-
   return (
     <Menu.Root>
       <S.UserAvatarContainer>

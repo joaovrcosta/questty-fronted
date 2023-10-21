@@ -62,7 +62,8 @@ export default function Question(props: IQuestionData) {
             content={props.questionData?.content}
             answersQuantity={props.questionData.answers.length || 0}
             createdAt={props.questionData?.createdAt}
-            author={props.questionData?.author.name}
+            author={props.questionData?.author.username}
+            avatarUrl={props.questionData?.author.avatar_url}
           />
           <S.AnswersSection>
             {props?.questionData.answers.length > 0 || answer ? (
@@ -85,6 +86,7 @@ export default function Question(props: IQuestionData) {
                 createdAt={String(answer?.answer.createdAt)}
                 isGolden={answer?.answer.isGolden}
                 author={user?.name}
+                avatarUrl={answer?.answer.author.avatar_url}
                 likesQuantity={0}
                 isButtonDisabled={true}
               />
@@ -102,8 +104,9 @@ export default function Question(props: IQuestionData) {
                   content={answer?.content}
                   createdAt={answer?.createdAt}
                   isGolden={answer?.isGolden}
-                  author={answer?.author?.name}
+                  author={answer?.author?.username}
                   likesQuantity={answer?.likes?.length || 0}
+                  avatarUrl={answer?.author?.avatar_url}
                 />
               ))
             ) : (

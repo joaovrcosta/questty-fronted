@@ -5,6 +5,7 @@ export interface IQuestion {
   author_id: string
   author: {
     name: string
+    avatar_url: string
   }
   deleted: boolean
   category_id: string
@@ -24,6 +25,8 @@ export interface IAnswer {
   author_id: string
   author: {
     name: string
+    username: string
+    avatar_url: string
   }
   question_id: string
   createdAt: string
@@ -41,6 +44,8 @@ export interface INewAnswer {
     author_id: string
     author: {
       name: string
+      avatar_url: string
+      username: string
     }
     question_id: string
     createdAt: string
@@ -109,6 +114,8 @@ export interface IQuestionData {
     answers: IAnswer[]
     author: {
       name: string
+      username: string
+      avatar_url: string
     }
     category: {
       name: string

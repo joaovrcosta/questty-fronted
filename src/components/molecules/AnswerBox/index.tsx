@@ -19,6 +19,7 @@ interface Answer {
   likesQuantity?: number
   isButtonDisabled: boolean
   authorId: string
+  avatarUrl?: string
 }
 
 export function AnswerBox({
@@ -30,6 +31,7 @@ export function AnswerBox({
   likesQuantity,
   isGolden,
   isButtonDisabled,
+  avatarUrl,
 }: Answer) {
   const { token } = useAuthStore()
   const [likesTotal, setLikesTotal] = useState(likesQuantity)
@@ -95,7 +97,7 @@ export function AnswerBox({
         <Avatar
           id={String(authorId)}
           variant="lg"
-          imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
+          imageUrl={avatarUrl ? avatarUrl : null}
         />
       </S.AvatarContainer>
       <S.AnswerBoxContainer isGolden={isGolden ?? false}>
@@ -168,10 +170,7 @@ export function AnswerBox({
         </S.UserHandleActionsContainer>
 
         <S.MoreDetailsInputContainer>
-          <Avatar
-            variant="sm"
-            imageUrl="https://avatars.githubusercontent.com/u/70654718?v=4"
-          />
+          <Avatar variant="sm" imageUrl={avatarUrl ? avatarUrl : null} />
           <S.MoreDetailsInput placeholder={`Escreva seu comentário`} />
         </S.MoreDetailsInputContainer>
       </S.AnswerBoxContainer>
