@@ -18,14 +18,17 @@ export const AnswerWrapper = styled.div`
 export const AnswerBoxContainer = styled.div<IAnswerBox>`
   position: relative;
   background-color: ${({ theme, isGolden }) =>
-    isGolden ? theme.colors.yellow_200 : theme.colors.white};
+    isGolden ? theme.colors.white : theme.colors.white};
   border: 1px solid
     ${({ theme, isGolden }) =>
-      isGolden ? theme.colors.yellow_500 : theme.colors.black};
+      isGolden ? theme.colors.green_500 : theme.colors.black};
   padding: 1.5rem 2rem;
   border-radius: 8px;
   width: 90%;
-  box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: ${({ theme, isGolden }) =>
+    isGolden
+      ? '0px 4px 5px 10px rgba(240, 250, 245, 1)'
+      : '0px 4px 5px 10px rgba(0, 0, 0, 0.05)'};
 
   &::before {
     content: '';
@@ -37,7 +40,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
     border-style: solid;
     border-color: transparent transparent transparent
       ${({ theme, isGolden }) =>
-        isGolden ? theme.colors.yellow_200 : theme.colors.white};
+        isGolden ? theme.colors.white : theme.colors.white};
     z-index: 9999;
   }
 
@@ -51,7 +54,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
     border-style: solid;
     border-color: transparent transparent transparent
       ${({ theme, isGolden }) =>
-        isGolden ? theme.colors.yellow_500 : theme.colors.black};
+        isGolden ? theme.colors.green_500 : theme.colors.black};
   }
 
   ${({ theme }) => css`
@@ -249,7 +252,7 @@ export const AvatarContainer = styled.div`
 `
 
 export const BestAnswerStamp = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow_500};
+  background-color: ${({ theme }) => theme.colors.green_500};
   padding: 0.25rem 1rem;
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 25px;

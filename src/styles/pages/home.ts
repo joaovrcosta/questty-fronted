@@ -1,3 +1,4 @@
+import { SkeletonBox } from '@/components/atoms/Skeleton'
 import styled, { css } from 'styled-components'
 
 export const HomePageContent = styled.div`
@@ -206,4 +207,10 @@ export const SelectedRanking = styled.select`
       border: 2px solid ${({ theme }) => theme.colors.blue_950};
     }
   `}
+`
+
+export const QuestionCardSkeleton = styled(SkeletonBox)`
+  width: 100px;
+  height: 100px;
+  flex-direction: column;
 `

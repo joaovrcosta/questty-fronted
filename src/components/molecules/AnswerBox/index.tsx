@@ -51,10 +51,7 @@ export function AnswerBox({
           if (res.status === 200) {
             const data = res.data
 
-            // Verifica se a pessoa curtiu com base na resposta do back-end
             setIsAlreadyLiked(data.liked === true)
-
-            // Se o campo "liked" na resposta for verdadeiro, setResult(true), caso contrário, setResult(false)
           } else {
             console.log('Outro código de status:', res.status)
           }
@@ -122,10 +119,10 @@ export function AnswerBox({
           <S.AnswerRateContainer>
             {isGolden && (
               <S.BestAnswerStamp>
-                <Text size="xs" weight="bold" color="blue_950">
+                <Text size="xs" weight="bold" color="white">
                   MELHOR RESPOSTA
                 </Text>
-                <MdVerified size={20} color="#10162F" />
+                <MdVerified size={20} color="#fff" />
               </S.BestAnswerStamp>
             )}
             <S.StarsRating>
@@ -170,7 +167,10 @@ export function AnswerBox({
         </S.UserHandleActionsContainer>
 
         <S.MoreDetailsInputContainer>
-          <Avatar variant="sm" imageUrl={avatarUrl ? avatarUrl : null} />
+          <Avatar
+            variant="sm"
+            imageUrl={user?.avatar_url ? user?.avatar_url : null}
+          />
           <S.MoreDetailsInput placeholder={`Escreva seu comentário`} />
         </S.MoreDetailsInputContainer>
       </S.AnswerBoxContainer>

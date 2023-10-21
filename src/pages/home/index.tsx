@@ -10,16 +10,17 @@ import { Header } from '@/components/organisms/Header'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import api from '@/services/api'
 import { Footer } from '@/components/organisms/Footer'
 import Head from 'next/head'
+import { SkeletonBox, SkeletonLine } from '@/components/atoms/Skeleton'
+import { SkeletonBoxRows } from '@/components/atoms/Skeleton/styles'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
   const questions = useQuestionsStore((state) => state.questions)
-
-  console.log(questions)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,7 @@ export default function Home() {
         const data = await questionsResponse.data
 
         questionStore.setQuestions(data.questions)
+        setLoading(false)
       } catch (error) {
         console.error('Erro ao buscar questões:', error)
       }
@@ -87,7 +89,48 @@ export default function Home() {
                 />
               ))
             ) : (
-              <p>Carregando...</p>
+              <>
+                <div style={{ marginBottom: '1rem' }}>
+                  <SkeletonLine
+                    width={820}
+                    rows={1}
+                    height={106}
+                    rounding="rounded"
+                  />
+                </div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <SkeletonLine
+                    width={820}
+                    rows={1}
+                    height={106}
+                    rounding="rounded"
+                  />
+                </div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <SkeletonLine
+                    width={820}
+                    rows={1}
+                    height={106}
+                    rounding="rounded"
+                  />
+                </div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <SkeletonLine
+                    width={820}
+                    rows={1}
+                    height={106}
+                    rounding="rounded"
+                  />
+                </div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <SkeletonLine
+                    width={820}
+                    rows={1}
+                    height={106}
+                    rounding="rounded"
+                  />
+                </div>
+              </>
             )}
           </S.QuestionsContainer>
         </S.FeedContentWrapper>

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import * as Dialog from '@radix-ui/react-dialog'
+import { Button } from '@/components/atoms/Button'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -382,5 +383,26 @@ export const CloseButtonMobile = styled.div`
   display: none;
   @media (max-width: 1080px) {
     display: block;
+  }
+`
+
+export const AnswerButton = styled(Button)`
+  font-weight: 600;
+  border: 2px solid ${({ theme }) => theme.colors.black};
+
+  &:focus {
+    border: 2px solid #000;
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
+    transition: 0.2s ease all;
+  }
+
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.colors.white};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.black};
+    transition: 0.2s ease all;
+  }
+
+  @media (max-width: 768px) {
+    width: 70%;
   }
 `

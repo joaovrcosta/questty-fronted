@@ -6,7 +6,7 @@ import { Footer } from '@/components/organisms/Footer'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestionData } from '@/shared/types'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
 import GirlLamp from '@/assets/GirlLamp.svg'
@@ -14,6 +14,7 @@ import Image from 'next/image'
 import { MoreQuestonCard } from '@/components/molecules/MoreQuestion'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import Head from 'next/head'
+import { SkeletonLine } from '@/components/atoms/Skeleton'
 
 interface Question {
   id: number
@@ -30,13 +31,15 @@ interface Question {
 }
 
 export default function Question(props: IQuestionData) {
+  const [loading, setLoading] = useState(true)
+
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const { user } = useAuthStore()
   const { question } = useQuestionStore()
   const { answer } = useAnswerStore()
-  const textForTitle = question?.questionData.content.substring(0, 100)
+  const textForTitle = question?.questionData?.content.substring(0, 100)
 
-  const answersAuthorIds = question?.questionData.answers.map(
+  const answersAuthorIds = question?.questionData?.answers.map(
     (resposta) => resposta.author_id
   )
   const userLogged = user?.id
@@ -46,6 +49,112 @@ export default function Question(props: IQuestionData) {
   useEffect(() => {
     setQuestion(props)
   }, [props])
+
+  useEffect(() => {
+    if (question === null) {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+  })
+
+  const renderAnswers = () => {
+    if (loading) {
+      return (
+        <>
+          <div
+            style={{
+              marginBottom: '1rem',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <SkeletonLine
+              width={820}
+              rows={1}
+              height={200}
+              rounding="rounded"
+            />
+          </div>
+          <div
+            style={{
+              marginBottom: '1rem',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <SkeletonLine
+              width={820}
+              rows={1}
+              height={200}
+              rounding="rounded"
+            />
+          </div>
+          <div
+            style={{
+              marginBottom: '1rem',
+              display: 'flex',
+              justifyContent: 'flex-end',
+            }}
+          >
+            <SkeletonLine
+              width={820}
+              rows={1}
+              height={200}
+              rounding="rounded"
+            />
+          </div>
+        </>
+      )
+    } else if (answer) {
+      return (
+        <AnswerBox
+          key={answer?.answer.id}
+          id={String(answer?.answer.id)}
+          authorId={String(answer?.answer.author_id)}
+          content={String(answer?.answer.content)}
+          createdAt={String(answer?.answer.createdAt)}
+          isGolden={answer?.answer.isGolden}
+          author={user?.name}
+          avatarUrl={answer?.answer.author.avatar_url}
+          likesQuantity={0}
+          isButtonDisabled={true}
+        />
+      )
+    } else if (props.questionData?.answers.length > 0) {
+      return props.questionData.answers.map((answer) => (
+        <AnswerBox
+          isButtonDisabled={
+            isUserInList && answer?.author_id === userLogged ? true : false
+          }
+          key={answer?.id}
+          id={answer?.id}
+          authorId={answer?.author_id}
+          content={answer?.content}
+          createdAt={answer?.createdAt}
+          isGolden={answer?.isGolden}
+          author={answer?.author?.username}
+          likesQuantity={answer?.likes?.length || 0}
+          avatarUrl={answer?.author?.avatar_url}
+        />
+      ))
+    } else {
+      return (
+        <S.NeedHelpContainer>
+          {answer ? null : (
+            <>
+              <Image src={GirlLamp} alt="" />
+              <Text size="xx1" weight="medium">
+                {props.questionData?.author.name} precisa da sua ajuda.
+              </Text>
+              <Text>Essa pergunta não teve resposta ainda</Text>
+              <S.AnswerButton>RESPONDER</S.AnswerButton>
+            </>
+          )}
+        </S.NeedHelpContainer>
+      )
+    }
+  }
 
   return (
     <>
@@ -60,13 +169,13 @@ export default function Question(props: IQuestionData) {
             id={props.questionData?.id}
             key={props.questionData?.id}
             content={props.questionData?.content}
-            answersQuantity={props.questionData.answers.length || 0}
+            answersQuantity={props.questionData?.answers.length || 0}
             createdAt={props.questionData?.createdAt}
             author={props.questionData?.author.username}
-            avatarUrl={props.questionData?.author.avatar_url}
+            avatarUrl={props.questionData?.author?.avatar_url}
           />
           <S.AnswersSection>
-            {props?.questionData.answers.length > 0 || answer ? (
+            {props?.questionData?.answers.length > 0 || answer ? (
               <S.TextSectionTitle
                 weight="bold"
                 color="blue_950"
@@ -77,7 +186,7 @@ export default function Question(props: IQuestionData) {
             ) : null}
           </S.AnswersSection>
           <S.AnswersContainer>
-            {answer ? (
+            {/* {answer ? (
               <AnswerBox
                 key={answer?.answer.id}
                 id={String(answer?.answer.id)}
@@ -90,8 +199,8 @@ export default function Question(props: IQuestionData) {
                 likesQuantity={0}
                 isButtonDisabled={true}
               />
-            ) : props?.questionData.answers.length > 0 ? (
-              props?.questionData.answers.map((answer) => (
+            ) : props?.questionData?.answers.length > 0 ? (
+              props?.questionData?.answers.map((answer) => (
                 <AnswerBox
                   isButtonDisabled={
                     isUserInList && answer?.author_id === userLogged
@@ -122,12 +231,13 @@ export default function Question(props: IQuestionData) {
                   </>
                 )}
               </S.NeedHelpContainer>
-            )}
+            )} */}
+            {renderAnswers()}
           </S.AnswersContainer>
           <S.HelpMorePeopleContainer>
             <Text size="xl" weight="semibold">
               Ajude outras pessoas com dúvidas sobre{' '}
-              {props?.questionData.category.name}
+              {props?.questionData?.category.name}
             </Text>
             <div style={{ marginTop: '1.5rem' }}>
               <MoreQuestonCard />

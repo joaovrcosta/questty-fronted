@@ -37,19 +37,23 @@ export function QuestionBox({
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
 
-  const isAuthor = question?.questionData.author_id === user?.id
+  const isAuthor = question?.questionData?.author_id === user?.id
 
-  const isAlreadyAnsweredByUser = ''
+  const isAlreadyAnsweredByUser =
+    Array.isArray(question?.questionData?.answers) &&
+    question?.questionData.answers.some(
+      (answer) => answer.author_id === user?.id
+    )
 
   const hasThreeAnswers =
-    Array.isArray(question?.questionData.answers) &&
+    Array.isArray(question?.questionData?.answers) &&
     question?.questionData.answers.length === 3
 
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
         <Avatar
-          id={String(question?.questionData.author_id)}
+          id={String(question?.questionData?.author_id)}
           variant="lg"
           imageUrl={avatarUrl ? avatarUrl : null}
         />
@@ -134,7 +138,7 @@ export function QuestionBox({
             </Text>
           </S.ContentContainer>
         </S.QuestionContent>
-        {!isAuthor && (
+        {!isAuthor && !isAlreadyAnsweredByUser && (
           <S.UserHandleActionsContainer>
             {hasThreeAnswers ? (
               <a href="#respostas">

@@ -49,6 +49,8 @@ export function AnswerModal({ id }: { id: string }) {
   const { token } = useAuthStore()
   const answerStore = useAnswerStore()
 
+  console.log()
+
   const { isSubmitting } = formState
 
   const handleAnswerQuestion = async (data: FormData) => {
@@ -94,7 +96,11 @@ export function AnswerModal({ id }: { id: string }) {
                 <Avatar
                   id={String(id)}
                   variant="lg"
-                  imageUrl="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80"
+                  imageUrl={
+                    question?.questionData.author.avatar_url
+                      ? question?.questionData.author.avatar_url
+                      : null
+                  }
                 />
               </S.AvatarInfoContainer>
               <S.InfoWrapperr>
@@ -169,13 +175,14 @@ export function AnswerModal({ id }: { id: string }) {
             {isSubmitting ? (
               <Spinner size="sm" baseColor="blue_950" variant="primary" />
             ) : (
-              <Button
-                type="submit"
+              <S.AnswerButton
+                variant="lg"
                 rounding="rounded-full"
-                disabled={isSubmitting}
+                color="white"
+                backgroundColor="black"
               >
-                Fazer pergunta
-              </Button>
+                FAÇA A SUA PERGUNTA
+              </S.AnswerButton>
             )}
           </form>
         </S.FormAnsweringContainer>
