@@ -11,7 +11,7 @@ export const SignInContainer = styled.div`
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
-      padding: 0 2rem;
+      padding: 0 1.5rem;
     }
   `}
 `

@@ -100,7 +100,8 @@ export const Content = styled(Dialog.Content)`
     }
   `}
   ${({ theme }) => css`
-    @media (max-width: 820px) {
+    @media (max-width: 840px) {
+      padding: 2rem;
       max-height: 520px;
       top: 35%;
     }
@@ -108,15 +109,27 @@ export const Content = styled(Dialog.Content)`
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
+      padding: 4rem;
       max-height: 402px;
       top: 28%;
-      width: 90%;
+      width: 100%;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media (max-width: 740px) {
+      padding: 6rem;
+      width: 100%;
+      top: 20%;
     }
   `}
 
   ${({ theme }) => css`
     @media (max-width: 680px) {
       min-width: 25rem;
+      padding: 1rem;
+      width: 100%;
+      top: 28%;
     }
   `}
 
@@ -266,7 +279,7 @@ export const FormAnsweringContainer = styled.div`
   }
 
   @media (max-width: 960px) {
-    padding: 0 6rem;
+    padding: 0 4rem;
     margin-top: 2rem;
     width: 100%;
     /* flex-direction: column-reverse; */
@@ -359,14 +372,49 @@ export const BackButtonBox = styled.button`
   }
 `
 
+export const InnerBackButtonBox = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 0.5rem;
+  transition: 0.2s ease all;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.gray_100};
+  }
+
+  @media (max-width: 680px) {
+    display: none;
+  }
+`
+
 export const TextContainer = styled.div`
   padding: 0 2rem 0 0;
   max-height: 500px;
   width: 100%;
+  overflow-y: hidden;
 
   @media (max-width: 680px) {
     padding: 0;
-    max-height: 250px;
+    max-height: 220px;
+    margin-bottom: 1rem;
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   overflow-y: auto;

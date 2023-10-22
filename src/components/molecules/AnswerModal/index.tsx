@@ -135,9 +135,9 @@ export function AnswerModal({ id }: { id: string }) {
             })}
           >
             <S.HeadingContainer>
-              <S.BackButtonBox onClick={handleCloseModal}>
+              <S.InnerBackButtonBox onClick={handleCloseModal}>
                 <X size={24} />
-              </S.BackButtonBox>
+              </S.InnerBackButtonBox>
               <Text weight="bold" size="xl" color="blue_950">
                 Responda
               </Text>
