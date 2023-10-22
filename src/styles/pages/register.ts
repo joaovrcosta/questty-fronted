@@ -13,6 +13,7 @@ export const SignUpContainer = styled.div`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       padding: 0 2rem;
+      margin-top: 6rem;
     }
   `}
 `
@@ -27,6 +28,7 @@ export const FormContainer = styled.form``
 
 export const InputContainer = styled.div`
   margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
 `
 
 export const TermsAndPolicies = styled(Text)`
@@ -35,10 +37,11 @@ export const TermsAndPolicies = styled(Text)`
   text-decoration: none;
   margin-bottom: 1.75rem;
   font-family: Poppins;
+  text-align: center;
 `
 
 export const ButtonContainer = styled.div`
-  margin: 0rem 0 2.75rem 0;
+  margin: 1rem 0 0rem 0;
 `
 
 export const EnterWithContainer = styled.div``
@@ -81,13 +84,34 @@ export const RegisterButton = styled(Button)`
   }
 `
 
-export const AlreadyHaveAccount = styled.div`
+export const BackLink = styled.div`
   display: flex;
-  padding: 0.5rem 0 1.5rem 0;
-  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  color: ${({ theme }) => theme.colors.blue_950};
+`
+export const BackLinkText = styled(Link)`
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.blue_500};
 `
 
-export const AlreadyHaveAccountLink = styled(Link)`
+export const PolicyPrivacy = styled(Link)`
+  text-decoration: none;
+  font-size: ${({ theme }) => theme.typography.text.sm};
+  font-family: 'Poppins';
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.blue_500};
+
+  &:hover {
+    text-decoration: underline;
+    color: ${({ theme }) => theme.colors.blue_550};
+  }
+`
+export const Terms = styled(Link)`
   text-decoration: none;
   font-size: ${({ theme }) => theme.typography.text.sm};
   font-family: 'Poppins';

@@ -11,12 +11,12 @@ import { useForm } from 'react-hook-form'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import api from '@/services/api'
 import { setCookie } from 'nookies'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
 import Head from 'next/head'
@@ -34,9 +34,18 @@ const loginFormSchema = zod.object({
 
 export default function SignIn() {
   const [error, setError] = useState<string | null>(null)
-  const { register, handleSubmit, watch, formState } = useForm<FormData>({
-    resolver: zodResolver(loginFormSchema),
-  })
+  const { register, handleSubmit, watch, formState, setValue } =
+    useForm<FormData>({
+      resolver: zodResolver(loginFormSchema),
+    })
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query?.email) {
+      setValue('email', String(router.query.email))
+    }
+  }, [router.query?.email, setValue])
 
   const { isSubmitting } = formState
 
