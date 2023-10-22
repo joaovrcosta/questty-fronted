@@ -40,7 +40,7 @@ export const AnswersSection = styled.div`
 
   @media (max-width: 768px) {
     margin-left: 0;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
   }
 `
 

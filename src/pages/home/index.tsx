@@ -15,7 +15,7 @@ import api from '@/services/api'
 import { Footer } from '@/components/organisms/Footer'
 import Head from 'next/head'
 import { SkeletonBox, SkeletonLine } from '@/components/atoms/Skeleton'
-import { SkeletonBoxRows } from '@/components/atoms/Skeleton/styles'
+import { AiOutlinePlus } from 'react-icons/ai'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -57,12 +57,12 @@ export default function Home() {
               >
                 Últimas perguntas
               </Heading>
-              <S.Selected style={{ maxWidth: '184px' }}>
+              <S.Selected>
                 <option value="opcao1">Todas As Matérias</option>
                 <option value="opcao2">Opção 2</option>
                 <option value="opcao3">Opção 3</option>
               </S.Selected>
-              <S.SelectedAlreadyAnswering style={{ maxWidth: '156px' }}>
+              <S.SelectedAlreadyAnswering>
                 <option value="opcao1">Sem Resposta</option>
                 <option value="opcao3">Respondidas</option>
               </S.SelectedAlreadyAnswering>
@@ -188,6 +188,25 @@ export default function Home() {
           </S.RankingBox>
         </S.RankingSidebar>
       </S.HomePageContent>
+      <S.FloarButtonContainer>
+        <S.AddQuestionFloatingButton>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <S.FloatingButtonContainer>
+                <S.FloatingBoxName>
+                  <Text size="xs" color="white">
+                    Faça sua pergunta
+                  </Text>
+                </S.FloatingBoxName>
+                <S.CirclePlus>
+                  <AiOutlinePlus size={32} color="#fff" />
+                </S.CirclePlus>
+              </S.FloatingButtonContainer>
+            </Dialog.Trigger>
+            <NewTransactionModal />
+          </Dialog.Root>
+        </S.AddQuestionFloatingButton>
+      </S.FloarButtonContainer>
       <Footer />
     </>
   )

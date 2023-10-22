@@ -95,8 +95,10 @@ export const Content = styled(Dialog.Content)`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       max-height: 402px;
-      top: 35%;
-      width: 90%;
+      top: 23%;
+      width: 100%;
+      border: none;
+      border-radius: 0;
     }
   `}
 
@@ -109,7 +111,21 @@ export const Content = styled(Dialog.Content)`
 
   ${({ theme }) => css`
     @media (max-width: 512px) {
-      min-width: 24.375rem;
+      min-width: 17.5rem;
+    }
+  `}
+
+   ${({ theme }) => css`
+    @media (max-width: 412px) {
+      top: 23%;
+    }
+  `}
+  
+
+   ${({ theme }) => css`
+    @media (max-width: 375px) {
+      min-width: 17.5rem;
+      top: 30%;
     }
   `}
 `
@@ -127,6 +143,7 @@ export const CloseButton = styled(Dialog.Close)`
 
 export const QuestionTextarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.black};
+  width: 100%;
 
   border-radius: 26px;
   background-color: #ebf2f7;

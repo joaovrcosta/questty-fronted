@@ -23,4 +23,8 @@ export const SubjectSelect = styled.select`
   &:hover {
     opacity: 0.8;
   }
+
+  @media (max-width: 360px) {
+    width: 100%;
+  }
 `

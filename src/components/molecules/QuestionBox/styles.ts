@@ -44,7 +44,7 @@ export const QuestionBoxContainer = styled.div<IQuestionBoxProps>`
     width: 100%;
     background-color: transparent;
     padding: ${({ isLoggedIn }) =>
-      isLoggedIn ? '0rem 2rem 1.5rem 2rem' : '3rem 2rem 1.5rem 2rem'};
+      isLoggedIn ? '0rem 1.5rem 0rem 1.5rem' : '3rem 2rem 1.5rem 2rem'};
     border: none;
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
 

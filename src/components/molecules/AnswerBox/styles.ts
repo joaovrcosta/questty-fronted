@@ -60,6 +60,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       width: 100%;
+      padding: 1.5rem;
 
       &::before {
         display: none;
