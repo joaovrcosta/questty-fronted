@@ -7,6 +7,7 @@ import { NextPage } from 'next'
 import { GlobalStyle } from '@/styles/global'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import Cookies from 'js-cookie'
+
 import { getUserFromToken } from '@/lib/get-user-from-token'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
