@@ -181,6 +181,12 @@ export default function SignIn() {
                 </Button>
               )}
             </S.ButtonContainer>
+            <S.DontHaveAccountContainer>
+              <Text>
+                Ainda não tem uma conta?
+                <S.EnterLink href="/signup">Criar</S.EnterLink>
+              </Text>
+            </S.DontHaveAccountContainer>
             <S.EnterWithContainer>
               <Text weight="bold" size="lg">
                 Entre com:

@@ -1,20 +1,20 @@
 {
     "categories": [
         {
-            "id": "25981404-3dd4-4f10-a50e-9a6d261e9345",
+            "id": "a6f8a022-3e82-4d7e-88ee-2fcdb0de8147",
             "name": "Artes"
         },
         {
-            "id": "511a253d-b8b0-4bfa-8f56-056c1ff26420",
+            "id": "e6bf2a9b-0bbe-4300-8bb4-71b9e1ad28cf",
+            "name": "Biologia"
+        },
+        {
+            "id": "10564693-422d-475e-9dfb-4f8ceaac33ef",
+            "name": "Química"
+        },
+        {
+            "id": "a64371bd-ee53-4c38-b8eb-5747f5b3885a",
             "name": "Português"
-        },
-        {
-            "id": "e1c9f17a-8f5e-4f63-8c69-192478b3d53d",
-            "name": "Socialismo"
-        },
-        {
-            "id": "f00da6f4-e62f-4ad5-a0c5-cdd7f4d87186",
-            "name": "Direito"
         }
     ]
 }

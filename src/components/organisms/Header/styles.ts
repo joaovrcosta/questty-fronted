@@ -104,16 +104,16 @@ export const SearchInput = styled.input`
 
 export const AvatarContainer = styled.div`
   margin-left: 1rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `
 
 export const HeaderActionsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `
 
 export const StyledLink = styled(Link)`

@@ -12,6 +12,7 @@ export const SignInContainer = styled.div`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       padding: 0 1.5rem;
+      margin-top: 9rem;
     }
   `}
 `
@@ -37,7 +38,7 @@ export const ForgotMyPasswordLink = styled(Link)`
 `
 
 export const ButtonContainer = styled.div`
-  margin: 1rem 0 2.75rem 0;
+  margin: 1rem 0 0rem 0;
 `
 
 export const EmailInputContainer = styled.div`
@@ -90,4 +91,16 @@ export const HeadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+export const DontHaveAccountContainer = styled.div`
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const EnterLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.blue_500};
+  margin-left: 0.25rem;
+  font-weight: 600;
 `
