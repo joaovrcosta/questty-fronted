@@ -1,14 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
-import { X } from '@phosphor-icons/react'
-import { AiOutlinePaperClip, AiOutlinePlusCircle } from 'react-icons/ai'
-import { TbMathFunctionY } from 'react-icons/tb'
-import { MdOutlineEmojiSymbols } from 'react-icons/md'
-import { Tooltip } from '../Tooltip'
-import * as T from '../Tooltip/styles'
+import { AiOutlineClose } from 'react-icons/ai'
 import { Text } from '@/components/atoms/Text'
 import { Avatar } from '@/components/atoms/Avatar'
-import Link from 'next/link'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
@@ -18,7 +12,6 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { Spinner } from '@/components/atoms/Spinner'
-import { Button } from '@/components/atoms/Button'
 
 interface FormData {
   content: string
@@ -116,7 +109,7 @@ export function AnswerModal({ id }: { id: string }) {
             </S.AvatarInformationContainer>
             <S.CloseButtonMobile>
               <S.BackButtonBox onClick={handleCloseModal}>
-                <X size={24} />
+                <AiOutlineClose size={24} />
               </S.BackButtonBox>
             </S.CloseButtonMobile>
           </S.QuestionInfoWrapper>
@@ -136,7 +129,7 @@ export function AnswerModal({ id }: { id: string }) {
           >
             <S.HeadingContainer>
               <S.InnerBackButtonBox onClick={handleCloseModal}>
-                <X size={24} />
+                <AiOutlineClose size={24} />
               </S.InnerBackButtonBox>
               <Text weight="bold" size="xl" color="blue_950">
                 Responda

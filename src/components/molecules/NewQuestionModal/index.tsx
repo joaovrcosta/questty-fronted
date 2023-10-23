@@ -2,7 +2,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
 import * as T from '../Tooltip/styles'
 import * as zod from 'zod'
-import { X } from '@phosphor-icons/react'
+import { AiOutlineClose } from 'react-icons/ai'
 import { AiOutlinePaperClip } from 'react-icons/ai'
 import { TbMathFunctionY } from 'react-icons/tb'
 import { MdOutlineEmojiSymbols } from 'react-icons/md'
@@ -83,7 +83,7 @@ export function NewTransactionModal() {
         </Dialog.Title>
 
         <S.CloseButton>
-          <X size={24} />
+          <AiOutlineClose size={24} />
         </S.CloseButton>
 
         <form

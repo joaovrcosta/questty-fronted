@@ -1,7 +1,6 @@
 import { Text } from '@/components/atoms/Text'
 import * as S from './styles'
-import { AiOutlineFlag } from 'react-icons/ai'
-import { PlusCircle, Eye } from '@phosphor-icons/react'
+import { AiOutlineFlag, AiOutlinePlusCircle, AiFillEye } from 'react-icons/ai'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
@@ -160,7 +159,7 @@ export function QuestionBox({
                   color="white"
                   backgroundColor="black"
                 >
-                  <Eye size={24} weight="bold" />
+                  <AiFillEye size={24} />
                   <Text color="white" weight="medium">
                     VER {answersQuantity} RESPOSTAS
                   </Text>
@@ -194,7 +193,7 @@ export function QuestionBox({
                     color="white"
                     backgroundColor="black"
                   >
-                    <PlusCircle size={24} weight="bold" />
+                    <AiOutlinePlusCircle size={24} />
                     RESPONDER
                   </S.AnswerButton>
                 </Dialog.Trigger>
