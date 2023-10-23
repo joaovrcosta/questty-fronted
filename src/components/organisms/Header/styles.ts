@@ -8,6 +8,10 @@ interface IHeader {
   isfixed?: boolean
 }
 
+interface ContentProps {
+  existsToken?: boolean
+}
+
 export const HeaderContainer = styled.div<IHeader>`
   background-color: ${({ theme }) => theme.colors.primary};
   /* margin-bottom: 5rem; */
@@ -106,14 +110,18 @@ export const AvatarContainer = styled.div`
   margin-left: 1rem;
 
   @media (max-width: 768px) {
-    margin-left: 0;
+    margin-left: 1rem;
   }
 `
 
-export const HeaderActionsContainer = styled.div`
+export const HeaderActionsContainer = styled.div<ContentProps>`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    display: ${(props) => (props.existsToken ? 'none' : 'block')};
+  }
 `
 
 export const StyledLink = styled(Link)`

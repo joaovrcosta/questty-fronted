@@ -15,16 +15,16 @@ import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
 export function Header() {
   const [loading, setLoading] = useState(true)
 
-  const { isLoggedIn, user } = useAuthStore()
+  const { isLoggedIn, user, token } = useAuthStore()
   const { isOpen, setIsOpen } = useQuestionModalStore()
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      setLoading(true)
-    } else {
+    if (token === null) {
       setLoading(false)
+    } else {
+      setLoading(!isLoggedIn)
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, token])
 
   return (
     <S.HeaderContainer>
@@ -35,7 +35,7 @@ export function Header() {
           </Link>
           <SearchInput />
         </S.FirstBoxContent>
-        <S.HeaderActionsContainer>
+        <S.HeaderActionsContainer existsToken={token == null ? true : false}>
           {loading ? (
             <div style={{ display: 'flex', gap: '1rem' }}>
               <div>
@@ -99,31 +99,27 @@ export function Header() {
               <S.AvatarContainer>
                 {isLoggedIn && <Dropdown id={user?.id} />}
               </S.AvatarContainer>
-
-              {!isLoggedIn && (
-                <S.SubHeader>
-                  <S.SubHeaderContent>
-                    <S.StyledLink href="/signin">
-                      <S.SubSignInButton backgroundColor="transparent">
-                        ENTRAR
-                      </S.SubSignInButton>
-                    </S.StyledLink>
-
-                    <S.StyledLink href="/signin">
-                      <S.SubSignUpButton
-                        backgroundColor="blue_500"
-                        color="white"
-                      >
-                        CADASTRE-SE JÁ
-                      </S.SubSignUpButton>
-                    </S.StyledLink>
-                  </S.SubHeaderContent>
-                </S.SubHeader>
-              )}
             </>
           )}
         </S.HeaderActionsContainer>
       </S.HeaderContent>
+      {!isLoggedIn && (
+        <S.SubHeader>
+          <S.SubHeaderContent>
+            <S.StyledLink href="/signin">
+              <S.SubSignInButton backgroundColor="transparent">
+                ENTRAR
+              </S.SubSignInButton>
+            </S.StyledLink>
+
+            <S.StyledLink href="/signin">
+              <S.SubSignUpButton backgroundColor="blue_500" color="white">
+                CADASTRE-SE JÁ
+              </S.SubSignUpButton>
+            </S.StyledLink>
+          </S.SubHeaderContent>
+        </S.SubHeader>
+      )}
     </S.HeaderContainer>
   )
 }
