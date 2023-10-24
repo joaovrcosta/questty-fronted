@@ -170,17 +170,15 @@ export default function Register() {
               )}
             </S.InputContainer>
 
-            <S.ErrorContainer>
-              {error && (
-                <div style={{ color: 'red' }}>
-                  <Text size="sm" color="danger_500">
-                    {error === 'E-mail already exists'
-                      ? 'Usuário ou e-mail já existe'
-                      : error}
-                  </Text>
-                </div>
-              )}
-            </S.ErrorContainer>
+            {error && (
+              <S.ErrorContainer>
+                <Text size="sm" color="danger_500">
+                  {error === 'E-mail already exists'
+                    ? 'Usuário ou e-mail já existe'
+                    : error}
+                </Text>
+              </S.ErrorContainer>
+            )}
 
             <S.ButtonContainer>
               {isSubmitting ? (
