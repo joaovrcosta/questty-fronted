@@ -14,6 +14,7 @@ import { Tooltip } from '../Tooltip'
 import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
 import { useEffect, useState } from 'react'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
+import { LoginModal } from '../LoginModal'
 
 interface Question {
   id?: number | string
@@ -35,7 +36,7 @@ export function QuestionBox({
   const [loading, setLoading] = useState(true)
 
   const { question } = useQuestionStore()
-  const { user, isLoggedIn } = useAuthStore()
+  const { user, isLoggedIn, token } = useAuthStore()
   const { isOpen, setIsOpen } = useAnswerModalStore()
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
@@ -184,6 +185,21 @@ export function QuestionBox({
                   />
                 </div>
               </div>
+            ) : !token || !isLoggedIn ? (
+              <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+                <Dialog.Trigger asChild>
+                  <S.AnswerButton
+                    variant="lg"
+                    rounding="rounded-full"
+                    color="white"
+                    backgroundColor="black"
+                  >
+                    <AiOutlinePlusCircle size={24} />
+                    RESPONDER
+                  </S.AnswerButton>
+                </Dialog.Trigger>
+                <LoginModal />
+              </Dialog.Root>
             ) : (
               <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                 <Dialog.Trigger asChild>

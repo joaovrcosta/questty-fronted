@@ -12,6 +12,7 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { Spinner } from '@/components/atoms/Spinner'
+import { Router, useRouter } from 'next/router'
 
 interface FormData {
   content: string
@@ -39,15 +40,20 @@ export function AnswerModal({ id }: { id: string }) {
   })
   const { setIsOpen } = useAnswerModalStore()
   const { question } = useQuestionStore()
-  const { token } = useAuthStore()
+  const { token, isLoggedIn } = useAuthStore()
   const answerStore = useAnswerStore()
 
-  console.log()
+  const router = useRouter()
 
   const { isSubmitting } = formState
 
   const handleAnswerQuestion = async (data: FormData) => {
     try {
+      if (!token || !isLoggedIn) {
+        await router.push('/signin')
+        return
+      }
+
       const { content } = data
 
       const response = await api.post(
