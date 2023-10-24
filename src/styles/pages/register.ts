@@ -28,7 +28,11 @@ export const FormContainer = styled.form``
 
 export const InputContainer = styled.div`
   margin-top: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 440px) {
+    margin-top: 1.5rem;
+  }
 `
 
 export const TermsAndPolicies = styled(Text)`
@@ -122,4 +126,9 @@ export const Terms = styled(Link)`
     text-decoration: underline;
     color: ${({ theme }) => theme.colors.blue_550};
   }
+`
+export const ErrorContainer = styled.div`
+  background-color: rgba(210, 0, 50, 0.3);
+  border-radius: 6px;
+  padding: 1rem;
 `

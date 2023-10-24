@@ -22,34 +22,28 @@ const registerSchema = zod.object({
     .string()
     .min(3, 'O nome de usuário deve ter no mínimo 3 caracteres')
     .max(22, 'O nome de usuário deve ter no máximo 22 caracteres')
-    .refine((value) => /^[a-z]+$/.test(value), {
-      message: 'O nome de usuário deve conter apenas letras minúsculas',
-      path: ['username'],
-    }),
+    .regex(
+      /^[a-z]+$/,
+      'O nome de usuário deve conter apenas letras minúsculas'
+    ),
   email: zod.string().email('E-mail inválido'),
   password: zod
     .string()
     .min(6, 'A senha deve ter no mínimo 6 caracteres')
     .max(32, 'A senha deve ter no máximo 22 caracteres')
-    .refine((value) => /[A-Z]+/.test(value), {
-      message: 'A senha deve conter pelo menos uma letra maiúscula',
-      path: ['password'],
-    })
-    .refine((value) => /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]+/.test(value), {
-      message: 'A senha deve conter pelo menos um caractere especial',
-      path: ['password'],
-    })
-    .refine((value) => (value.match(/[0-9]/g) || []).length >= 2, {
-      message: 'A senha deve conter pelo menos dois números',
-      path: ['password'],
-    }),
+    .regex(/[A-Z]+/, 'A senha deve conter pelo menos uma letra maiúscula')
+    .regex(
+      /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]+/,
+      'A senha deve conter pelo menos um caractere especial'
+    )
+    .regex(/[0-9]+/, 'A senha deve conter pelo menos um número'),
   name: zod.string().min(3, 'O nome deve ter no mínimo 3 caracteres'),
 })
 
 type RegisterFormData = zod.infer<typeof registerSchema>
 
 export default function Register() {
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>('')
   const { register, handleSubmit, watch, formState, setValue } =
     useForm<RegisterFormData>({
       resolver: zodResolver(registerSchema),
@@ -65,7 +59,7 @@ export default function Register() {
 
   const { isSubmitting } = formState
 
-  const handleRegister = async (data: RegisterFormData) => {
+  const onSubmit = async (data: RegisterFormData) => {
     try {
       const { username, email, password, name } = data
 
@@ -75,7 +69,13 @@ export default function Register() {
         password,
         name,
       })
-      await Router.push(`/signin?email=${email}`)
+
+      // Verifique o status da resposta para detectar um erro 409
+      if (response.status === 409) {
+        setError('Usuário ou e-mail já existe')
+      } else {
+        await Router.push(`/signin?email=${email}`)
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError
@@ -105,29 +105,15 @@ export default function Register() {
           <Heading size="md" color="black" weight="bold">
             Complete seu cadastro:
           </Heading>
-          <S.FormContainer onSubmit={handleSubmit(handleRegister)}>
+          <S.FormContainer onSubmit={handleSubmit(onSubmit)}>
+            <pre>{formState.errors.username?.message}</pre>
             <S.InputContainer>
-              <Input
-                {...register('username')}
-                variant="lg"
-                hug={true}
-                showLabel={true}
-                label="Nome de usuário"
-                style={{ marginBottom: '1rem' }}
-                border={true}
-                name="username"
-              />
-              {formState.errors.username && (
-                <Text size="sm" style={{ color: '#D20032' }}>
-                  {formState.errors.username.message}
-                </Text>
-              )}
               <Input
                 {...register('name')}
                 variant="lg"
                 hug={true}
                 showLabel={true}
-                label="Seu nome e sobrenome"
+                label="Nome completo"
                 style={{ marginBottom: '1rem' }}
                 border={true}
                 name="name"
@@ -135,6 +121,21 @@ export default function Register() {
               {formState.errors.name && (
                 <Text size="sm" style={{ color: '#D20032' }}>
                   {formState.errors.name.message}
+                </Text>
+              )}
+              <Input
+                {...register('username')}
+                variant="lg"
+                hug={true}
+                showLabel={true}
+                label="Nome de usuário (exibido no perfil)"
+                style={{ marginBottom: '1rem' }}
+                border={true}
+                name="username"
+              />
+              {formState.errors.username && (
+                <Text size="sm" style={{ color: '#D20032' }}>
+                  {formState.errors.username.message}
                 </Text>
               )}
               <Input
@@ -159,7 +160,6 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="Senha"
-                style={{ marginBottom: '1rem' }}
                 border={true}
                 type="password"
               />
@@ -169,6 +169,18 @@ export default function Register() {
                 </Text>
               )}
             </S.InputContainer>
+
+            <S.ErrorContainer>
+              {error && (
+                <div style={{ color: 'red' }}>
+                  <Text size="sm" color="danger_500">
+                    {error === 'E-mail already exists'
+                      ? 'Usuário ou e-mail já existe'
+                      : error}
+                  </Text>
+                </div>
+              )}
+            </S.ErrorContainer>
 
             <S.ButtonContainer>
               {isSubmitting ? (
