@@ -1,10 +1,10 @@
 import { Footer } from '@/components/organisms/Footer'
 import { Header } from '@/components/organisms/Header'
-import * as S from '../../styles/pages/ask'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { Text } from '@/components/atoms/Text'
 import { withSession } from '@/lib/with-session'
 import { GetServerSideProps } from 'next'
+import * as S from '../../styles/pages/ask'
 
 export default function Ask() {
   return (
