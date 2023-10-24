@@ -1,4 +1,3 @@
-import { Header } from '@/components/organisms/Header'
 import * as S from '@/styles/pages/register'
 import { Heading } from '@/components/atoms/Heading'
 import { Input } from '@/components/atoms/Input'
@@ -106,7 +105,6 @@ export default function Register() {
             Complete seu cadastro:
           </Heading>
           <S.FormContainer onSubmit={handleSubmit(onSubmit)}>
-            <pre>{formState.errors.username?.message}</pre>
             <S.InputContainer>
               <Input
                 {...register('name')}
@@ -114,7 +112,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="Nome completo"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '0.5rem' }}
                 border={true}
                 name="name"
               />
@@ -129,7 +127,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="Nome de usuário (exibido no perfil)"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '0.5rem' }}
                 border={true}
                 name="username"
               />
@@ -145,7 +143,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="E-mail"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '0.5rem' }}
                 border={true}
                 name="email"
               />
@@ -164,7 +162,10 @@ export default function Register() {
                 type="password"
               />
               {formState.errors.password && (
-                <Text size="sm" style={{ color: '#D20032' }}>
+                <Text
+                  size="sm"
+                  style={{ color: '#D20032', marginTop: '0.5rem' }}
+                >
                   {formState.errors.password.message}
                 </Text>
               )}
