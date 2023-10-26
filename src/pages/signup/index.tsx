@@ -96,7 +96,6 @@ export default function SignUp() {
           </S.FormContainer>
         </S.SignUpContent>
       </S.SignUpContainer>
-      <Footer />
     </>
   )
 }

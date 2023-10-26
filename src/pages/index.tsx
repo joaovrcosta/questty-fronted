@@ -227,7 +227,6 @@ const Index = () => {
         <S.ThrdContainer>
           <S.ProposeContainer></S.ProposeContainer>
         </S.ThrdContainer>
-        <Footer />
       </S.MainContainer>
     </>
   )

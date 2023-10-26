@@ -213,7 +213,6 @@ export default function Register() {
           </S.FormContainer>
         </S.SignUpContent>
       </S.SignUpContainer>
-      <Footer />
     </>
   )
 }

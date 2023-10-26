@@ -58,7 +58,6 @@ export default function Ask() {
           </S.QuestionsContainer>
         </S.AskContent>
       </S.AskContainer>
-      <Footer />
     </>
   )
 }
