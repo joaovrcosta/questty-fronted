@@ -1,4 +1,6 @@
 import { SkeletonBox } from '@/components/atoms/Skeleton'
+import { Text } from '@/components/atoms/Text'
+import { BiPencil } from 'react-icons/bi'
 import styled, { css } from 'styled-components'
 
 export const HomePageContent = styled.div`
@@ -6,6 +8,7 @@ export const HomePageContent = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
+  justify-content: space-between;
 
   padding: 2.5rem 1rem 3rem 1rem;
 
@@ -34,7 +37,7 @@ export const SubjectsContainer = styled.div`
   align-items: center;
   gap: 1rem;
   justify-content: space-between;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   max-width: 836px;
 
   @media (max-width: 1168px) {
@@ -51,9 +54,12 @@ export const SubjectsContainer = styled.div`
 
 export const Selected = styled.select`
   padding: 0.5rem 1rem 0.5rem 1rem;
+  width: 184px;
+  background-color: ${({ theme }) => theme.colors.white};
   font-size: 14px;
-  height: 40px;
-  border-radius: 25px;
+  color: ${({ theme }) => theme.colors.black};
+  height: 46px;
+  border-radius: 8px;
   border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
 
@@ -71,9 +77,12 @@ export const Selected = styled.select`
 
 export const SelectedAlreadyAnswering = styled.select`
   padding: 0.5rem 1rem 0.5rem 1rem;
-  height: 40px;
+  height: 46px;
+  width: 184px;
   font-size: 14px;
-  border-radius: 25px;
+  border-radius: 8px;
+  color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
 
@@ -112,6 +121,7 @@ export const QuestionsContainer = styled.div`
 
 export const FeedContentWrapper = styled.div`
   max-width: 836px;
+  width: 100%;
 
   @media (max-width: 1168px) {
     max-width: 100%;
@@ -120,11 +130,15 @@ export const FeedContentWrapper = styled.div`
 `
 
 export const MakeQuestionButton = styled.button`
-  padding: 1.5rem;
+  display: flex;
+  padding: 0 2rem;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.blue_950};
   color: ${({ theme }) => theme.colors.white};
-  border-radius: 5px;
-  padding: 0.85rem 2.5rem;
+  border-radius: 16px;
+  height: 52px;
+  width: 184px;
   font-family: Poppins;
   font-weight: 600;
   font-size: 16px;
@@ -133,7 +147,7 @@ export const MakeQuestionButton = styled.button`
   transition: 0.3s ease all;
 
   &:hover {
-    background-color: transparent;
+    opacity: 0.9;
     color: ${({ theme }) => theme.colors.black};
   }
 
@@ -143,16 +157,36 @@ export const MakeQuestionButton = styled.button`
     transition: 0.2s ease all;
   }
 
+  @media (max-width: 1280px) {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    padding: 0;
+  }
+
   ${({ theme }) => css`
-    @media (max-width: 870px) {
+    @media (max-width: 768px) {
       display: none;
     }
   `}
 `
 
+export const TextAsk = styled(Text)`
+  @media (max-width: 1280px) {
+    display: none;
+  }
+`
+
+export const PlusIcon = styled(BiPencil)`
+  display: none;
+  @media (max-width: 1280px) {
+    display: block;
+  }
+`
+
 export const RankingSidebar = styled.div`
   padding: 0 0 0 2rem;
-  width: 100%;
+  min-width: 416px;
 
   @media (max-width: 1168px) {
     display: none;
@@ -258,4 +292,18 @@ export const CirclePlus = styled.div`
   background-color: ${({ theme }) => theme.colors.blue_950};
   width: 56px;
   height: 56px;
+`
+export const Welcome = styled.div`
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+`
+export const RankingTitle = styled.div`
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
 `

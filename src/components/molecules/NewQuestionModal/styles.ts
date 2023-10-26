@@ -13,11 +13,16 @@ export const Overlay = styled(Dialog.Overlay)`
 
 export const Content = styled(Dialog.Content)`
   min-width: 43.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999999;
+
   padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
-  z-index: 999999;
   max-height: 25.8rem;
   border-radius: 5px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -31,6 +36,7 @@ export const Content = styled(Dialog.Content)`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
 
     input {
       border-radius: 5px;
@@ -80,52 +86,14 @@ export const Content = styled(Dialog.Content)`
   }
 
   ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      top: 30%;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 820px) {
-      max-height: 520px;
-      top: 35%;
-    }
-  `}
-
-  ${({ theme }) => css`
     @media (max-width: 768px) {
+      min-width: 100%;
       max-height: 402px;
-      top: 23%;
       width: 100%;
       border: none;
       border-radius: 0;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 680px) {
-      min-width: 25rem;
-    }
-  `}
-
-
-  ${({ theme }) => css`
-    @media (max-width: 512px) {
-      min-width: 17.5rem;
-    }
-  `}
-
-   ${({ theme }) => css`
-    @media (max-width: 412px) {
-      top: 23%;
-    }
-  `}
-  
-
-   ${({ theme }) => css`
-    @media (max-width: 375px) {
-      min-width: 17.5rem;
-      top: 30%;
+      top: 50%;
+      left: 50%;
     }
   `}
 `

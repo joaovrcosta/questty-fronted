@@ -14,9 +14,11 @@ import api from '@/services/api'
 import Head from 'next/head'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { AiOutlinePlus } from 'react-icons/ai'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
+  const { user } = useAuthStore()
   const questions = useQuestionsStore((state) => state.questions)
   const [loading, setLoading] = useState(true)
 
@@ -44,16 +46,21 @@ export default function Home() {
 
       <S.HomePageContent>
         <S.FeedContentWrapper>
+          <S.Welcome>
+            <Heading
+              size="sm"
+              weight="bold"
+              color="blue_950"
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              Bem vindo(a) 👋
+            </Heading>
+            <Heading size="sm" weight="bold" color="blue_500">
+              {user?.username}
+            </Heading>
+          </S.Welcome>
           <S.SubjectsContainer>
             <S.SubjectContent>
-              <Heading
-                size="md"
-                weight="bold"
-                color="blue_950"
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                Últimas perguntas
-              </Heading>
               <S.Selected>
                 <option value="opcao1">Todas As Matérias</option>
                 <option value="opcao2">Opção 2</option>
@@ -66,7 +73,12 @@ export default function Home() {
             </S.SubjectContent>
             <Dialog.Root>
               <Dialog.Trigger asChild>
-                <S.MakeQuestionButton>Perguntar</S.MakeQuestionButton>
+                <S.MakeQuestionButton>
+                  <S.PlusIcon size={24} color="#fff" />
+                  <S.TextAsk size="md" color="white" weight="semibold">
+                    Perguntar
+                  </S.TextAsk>
+                </S.MakeQuestionButton>
               </Dialog.Trigger>
               <NewTransactionModal />
             </Dialog.Root>
@@ -132,16 +144,16 @@ export default function Home() {
           </S.QuestionsContainer>
         </S.FeedContentWrapper>
         <S.RankingSidebar>
-          <S.HeadingRankContainer>
+          <S.RankingTitle>
             <Heading
-              size="md"
+              size="sm"
               weight="bold"
               color="blue_950"
               style={{ whiteSpace: 'nowrap' }}
             >
               Ranking
             </Heading>
-          </S.HeadingRankContainer>
+          </S.RankingTitle>
           <S.RankingBox>
             <S.RankingHeading>
               <FaCrown size={24} color="#c98600" />

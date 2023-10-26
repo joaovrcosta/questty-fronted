@@ -158,6 +158,27 @@ export default function Question(props: IQuestionData) {
     <>
       <Head>
         <title>{textForTitle} | Questty</title>
+
+        <meta name="title" content={`${textForTitle} | Questty`} />
+        <meta name="description" content="Descrição da sua página aqui" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="URL_DA_SUA_PÁGINA" />
+        <meta property="og:title" content={`${textForTitle} | Questty`} />
+        <meta
+          property="og:description"
+          content="Descrição da sua página aqui"
+        />
+        <meta property="og:image" content="URL_DA_IMAGEM_DE_DESTAQUE" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="URL_DA_SUA_PÁGINA" />
+        <meta property="twitter:title" content={`${textForTitle} | Questty`} />
+        <meta
+          property="twitter:description"
+          content="Descrição da sua página aqui"
+        />
+        <meta property="twitter:image" content="URL_DA_IMAGEM_DE_DESTAQUE" />
       </Head>
 
       <S.QuestionContainer>
@@ -182,55 +203,7 @@ export default function Question(props: IQuestionData) {
               </S.TextSectionTitle>
             ) : null}
           </S.AnswersSection>
-          <S.AnswersContainer>
-            {/* {answer ? (
-              <AnswerBox
-                key={answer?.answer.id}
-                id={String(answer?.answer.id)}
-                authorId={String(answer?.answer.author_id)}
-                content={String(answer?.answer.content)}
-                createdAt={String(answer?.answer.createdAt)}
-                isGolden={answer?.answer.isGolden}
-                author={user?.name}
-                avatarUrl={answer?.answer.author.avatar_url}
-                likesQuantity={0}
-                isButtonDisabled={true}
-              />
-            ) : props?.questionData?.answers.length > 0 ? (
-              props?.questionData?.answers.map((answer) => (
-                <AnswerBox
-                  isButtonDisabled={
-                    isUserInList && answer?.author_id === userLogged
-                      ? true
-                      : false
-                  }
-                  key={answer?.id}
-                  id={answer?.id}
-                  authorId={answer?.author_id}
-                  content={answer?.content}
-                  createdAt={answer?.createdAt}
-                  isGolden={answer?.isGolden}
-                  author={answer?.author?.username}
-                  likesQuantity={answer?.likes?.length || 0}
-                  avatarUrl={answer?.author?.avatar_url}
-                />
-              ))
-            ) : (
-              <S.NeedHelpContainer>
-                {answer ? null : (
-                  <>
-                    <Image src={GirlLamp} alt="" />
-                    <Text size="xx1" weight="medium">
-                      {props.questionData?.author.name} precisa da sua ajuda.
-                    </Text>
-                    <Text>Essa pergunta não teve resposta ainda</Text>
-                    <S.AnswerButton>RESPONDER</S.AnswerButton>
-                  </>
-                )}
-              </S.NeedHelpContainer>
-            )} */}
-            {renderAnswers()}
-          </S.AnswersContainer>
+          <S.AnswersContainer>{renderAnswers()}</S.AnswersContainer>
           <S.HelpMorePeopleContainer>
             <Text size="xl" weight="semibold">
               Ajude outras pessoas com dúvidas sobre{' '}
