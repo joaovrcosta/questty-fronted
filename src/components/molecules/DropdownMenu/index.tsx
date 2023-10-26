@@ -43,7 +43,7 @@ export function Dropdown({ id }: DropdownProps) {
           </li>
           <li>
             <Link
-              href={`/profile/edit/${id}`}
+              href={`/profile/${id}/edit`}
               style={{ textDecoration: 'none' }}
             >
               <S.Item>
@@ -52,7 +52,10 @@ export function Dropdown({ id }: DropdownProps) {
             </Link>
           </li>
           <li>
-            <Link href={`/profile/${id}`} style={{ textDecoration: 'none' }}>
+            <Link
+              href={`/profile/${id}/edit`}
+              style={{ textDecoration: 'none' }}
+            >
               <S.Item>
                 <Text size="sm">Configurações da conta</Text>
               </S.Item>

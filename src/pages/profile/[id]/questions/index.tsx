@@ -16,6 +16,7 @@ import Link from 'next/link'
 import { MdQuestionAnswer } from 'react-icons/md'
 import Head from 'next/head'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
+import { FloatingButton } from '@/components/molecules/FloatingButton'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
@@ -66,7 +67,7 @@ export default function Questions(props: IProfileData) {
                       padding: '0.65rem 1.5rem',
                     }}
                   >
-                    Editar Perfil
+                    Editar
                   </S.EditButtonMobile>
                 </Link>
               )}
@@ -154,7 +155,7 @@ export default function Questions(props: IProfileData) {
                       padding: '0.65rem 1.5rem',
                     }}
                   >
-                    Editar Perfil
+                    Editar
                   </S.EditButton>
                 </Link>
               )}
@@ -217,6 +218,7 @@ export default function Questions(props: IProfileData) {
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>
+      <FloatingButton />
     </>
   )
 }

@@ -13,6 +13,7 @@ import { MoreQuestonCard } from '@/components/molecules/MoreQuestion'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import Head from 'next/head'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
+import { FloatingButton } from '@/components/molecules/FloatingButton'
 
 interface Question {
   id: number
@@ -217,6 +218,7 @@ export default function Question(props: IQuestionData) {
           </S.HelpMorePeopleContainer>
         </S.QuestionWrapper>
       </S.QuestionContainer>
+      <FloatingButton />
     </>
   )
 }

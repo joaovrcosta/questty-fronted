@@ -16,6 +16,7 @@ import Link from 'next/link'
 import { MdQuestionAnswer } from 'react-icons/md'
 import Head from 'next/head'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
+import { FloatingButton } from '@/components/molecules/FloatingButton'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
@@ -33,7 +34,7 @@ export default function Answers(props: IProfileData) {
   return (
     <>
       <Head>
-        <title>{user?.userData.name} | Questty</title>
+        <title>{user?.userData.username} | Questty</title>
       </Head>
 
       <S.ProfileContainer>
@@ -49,7 +50,7 @@ export default function Answers(props: IProfileData) {
               />
               {isLoggedIn && isCurrentUserProfile && (
                 <Link
-                  href={`edit/${props.userData.id}`}
+                  href={`/profile/${props.userData.id}/edit`}
                   style={{ textDecoration: 'none' }}
                 >
                   <S.EditButtonMobile
@@ -61,7 +62,7 @@ export default function Answers(props: IProfileData) {
                       padding: '0.65rem 1.5rem',
                     }}
                   >
-                    Editar Perfil
+                    Editar
                   </S.EditButtonMobile>
                 </Link>
               )}
@@ -139,7 +140,7 @@ export default function Answers(props: IProfileData) {
 
             <S.UserEditing>
               {isLoggedIn && isCurrentUserProfile && (
-                <Link href={`edit/${props.userData.id}`}>
+                <Link href={`/profile/${props.userData.id}/edit`}>
                   <S.EditButton
                     variant="lg"
                     rounding="rounded"
@@ -149,7 +150,7 @@ export default function Answers(props: IProfileData) {
                       padding: '0.65rem 1.5rem',
                     }}
                   >
-                    Editar Perfil
+                    Editar
                   </S.EditButton>
                 </Link>
               )}
@@ -212,6 +213,7 @@ export default function Answers(props: IProfileData) {
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>
+      <FloatingButton />
     </>
   )
 }

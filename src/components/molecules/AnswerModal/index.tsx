@@ -180,7 +180,7 @@ export function AnswerModal({ id }: { id: string }) {
                 color="white"
                 backgroundColor="black"
               >
-                FAÇA A SUA PERGUNTA
+                RESPONDER
               </S.AnswerButton>
             )}
           </form>

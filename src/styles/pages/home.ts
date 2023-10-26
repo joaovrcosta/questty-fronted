@@ -1,6 +1,6 @@
 import { SkeletonBox } from '@/components/atoms/Skeleton'
 import { Text } from '@/components/atoms/Text'
-import { BiPencil } from 'react-icons/bi'
+import { FiFeather } from 'react-icons/fi'
 import styled, { css } from 'styled-components'
 
 export const HomePageContent = styled.div`
@@ -58,10 +58,12 @@ export const Selected = styled.select`
   background-color: ${({ theme }) => theme.colors.white};
   font-size: 14px;
   color: ${({ theme }) => theme.colors.black};
-  height: 46px;
+  height: 52px;
   border-radius: 8px;
+  border: none;
   border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
 
   &:focus {
     border: 2px solid #6d83f3;
@@ -77,13 +79,15 @@ export const Selected = styled.select`
 
 export const SelectedAlreadyAnswering = styled.select`
   padding: 0.5rem 1rem 0.5rem 1rem;
-  height: 46px;
+  height: 52px;
   width: 184px;
   font-size: 14px;
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.black};
+  /* border: none; */
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
   font-family: Poppins;
 
   &:focus {
@@ -133,10 +137,11 @@ export const MakeQuestionButton = styled.button`
   display: flex;
   padding: 0 2rem;
   align-items: center;
+  height: 46px;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.blue_950};
+  background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.white};
-  border-radius: 16px;
+  border-radius: 30px;
   height: 52px;
   width: 184px;
   font-family: Poppins;
@@ -177,7 +182,7 @@ export const TextAsk = styled(Text)`
   }
 `
 
-export const PlusIcon = styled(BiPencil)`
+export const PlusIcon = styled(FiFeather)`
   display: none;
   @media (max-width: 1280px) {
     display: block;
@@ -187,6 +192,10 @@ export const PlusIcon = styled(BiPencil)`
 export const RankingSidebar = styled.div`
   padding: 0 0 0 2rem;
   min-width: 416px;
+
+  @media (max-width: 1280px) {
+    min-width: 384px;
+  }
 
   @media (max-width: 1168px) {
     display: none;
@@ -247,52 +256,6 @@ export const QuestionCardSkeleton = styled(SkeletonBox)`
   flex-direction: column;
 `
 
-export const FloarButtonContainer = styled.div`
-  position: fixed;
-  bottom: 20px;
-  right: 13px;
-  padding: 10px 0px;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: none;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`
-
-export const AddQuestionFloatingButton = styled.button`
-  background-color: transparent;
-  border: none;
-`
-
-export const FloatingButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-`
-
-export const FloatingButton = styled.button``
-
-export const FloatingBoxName = styled.div`
-  padding: 0.25rem;
-  background-color: ${({ theme }) => theme.colors.blue_950};
-  border-radius: 6px;
-`
-
-export const CirclePlus = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.blue_950};
-  width: 56px;
-  height: 56px;
-`
 export const Welcome = styled.div`
   gap: 0.5rem;
   display: flex;

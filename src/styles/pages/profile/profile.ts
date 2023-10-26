@@ -83,6 +83,11 @@ export const CreatedAt = styled.div`
   margin-top: 0.5rem;
   display: flex;
   gap: 0.25rem;
+
+  @media (max-width: 1100px) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(204, 204, 204, 1);
+  }
 `
 
 export const UserHistory = styled.div`

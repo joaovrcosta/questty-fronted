@@ -15,6 +15,7 @@ import Head from 'next/head'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { AiOutlinePlus } from 'react-icons/ai'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { FloatingButton } from '@/components/molecules/FloatingButton'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -197,25 +198,7 @@ export default function Home() {
           </S.RankingBox>
         </S.RankingSidebar>
       </S.HomePageContent>
-      <S.FloarButtonContainer>
-        <S.AddQuestionFloatingButton>
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <S.FloatingButtonContainer>
-                <S.FloatingBoxName>
-                  <Text size="xs" color="white">
-                    Faça sua pergunta
-                  </Text>
-                </S.FloatingBoxName>
-                <S.CirclePlus>
-                  <AiOutlinePlus size={32} color="#fff" />
-                </S.CirclePlus>
-              </S.FloatingButtonContainer>
-            </Dialog.Trigger>
-            <NewTransactionModal />
-          </Dialog.Root>
-        </S.AddQuestionFloatingButton>
-      </S.FloarButtonContainer>
+      <FloatingButton />
     </>
   )
 }
