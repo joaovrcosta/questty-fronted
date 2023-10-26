@@ -200,7 +200,7 @@ export default function Questions(props: IProfileData) {
               ) : (
                 <S.NotFindAnyAnswer>
                   <Text size="md" color="gray_500">
-                    Nenhuma resposta encontrada.
+                    Nenhuma pergunta encontrada.
                   </Text>
                 </S.NotFindAnyAnswer>
               )}
