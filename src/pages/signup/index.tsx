@@ -12,6 +12,7 @@ import Router from 'next/router'
 import { Spinner } from '@/components/atoms/Spinner'
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
+import { SignInLayout } from '@/components/layouts/signIn'
 
 const claimEmailSchema = zod.object({
   email: zod.string().email('E-mail inválido'),
@@ -99,6 +100,10 @@ export default function SignUp() {
     </>
   )
 }
+
+SignUp.getLayout = (page: React.ReactNode) => (
+  <SignInLayout>{page}</SignInLayout>
+)
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext

@@ -9,7 +9,6 @@ import * as S from '../../styles/pages/ask'
 export default function Ask() {
   return (
     <>
-      <Header />
       <S.AskContainer>
         <S.AskContent>
           <S.SearchHeader>

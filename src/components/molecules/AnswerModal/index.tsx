@@ -96,7 +96,7 @@ export function AnswerModal({ id }: { id: string }) {
                   id={String(id)}
                   variant="lg"
                   imageUrl={
-                    question?.questionData.author.avatar_url
+                    question?.questionData?.author.avatar_url
                       ? question?.questionData.author.avatar_url
                       : null
                   }
@@ -106,7 +106,7 @@ export function AnswerModal({ id }: { id: string }) {
                 <S.UserInfo>
                   <S.Username>
                     <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                      {question?.questionData.author.name}
+                      {question?.questionData?.author.name}
                     </Text>
                   </S.Username>
                   {/* <S.UserLevel>27</S.UserLevel> */}
@@ -123,7 +123,7 @@ export function AnswerModal({ id }: { id: string }) {
             Pergunta:
           </Dialog.Title>
           <S.TextContainer>
-            <Text>{question?.questionData.content}</Text>
+            <Text>{question?.questionData?.content}</Text>
           </S.TextContainer>
         </S.QuestionTextContainer>
         <S.FormAnsweringContainer>

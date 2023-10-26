@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
 
 export function Header() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const { isLoggedIn, user, token } = useAuthStore()
   const { isOpen, setIsOpen } = useQuestionModalStore()
@@ -126,8 +126,6 @@ export function Header() {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const tokenJwt = ctx.req.cookies['questty-token']
-
-  console.log(tokenJwt)
 
   const { login } = useAuthStore()
 

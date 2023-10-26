@@ -6,15 +6,13 @@ import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import { UserRankingBox } from '@/components/molecules/UserRakingBox'
 import { Text } from '@/components/atoms/Text'
 import { FaCrown } from 'react-icons/fa'
-import { Header } from '@/components/organisms/Header'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
 import { useEffect, useState } from 'react'
 import api from '@/services/api'
-import { Footer } from '@/components/organisms/Footer'
 import Head from 'next/head'
-import { SkeletonBox, SkeletonLine } from '@/components/atoms/Skeleton'
+import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { AiOutlinePlus } from 'react-icons/ai'
 
 export default function Home() {
@@ -44,7 +42,6 @@ export default function Home() {
         <title>Questões com respostas para todas as matérias | Questty</title>
       </Head>
 
-      <Header />
       <S.HomePageContent>
         <S.FeedContentWrapper>
           <S.SubjectsContainer>
@@ -207,7 +204,6 @@ export default function Home() {
           </Dialog.Root>
         </S.AddQuestionFloatingButton>
       </S.FloarButtonContainer>
-      <Footer />
     </>
   )
 }

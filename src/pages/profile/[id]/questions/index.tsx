@@ -1,32 +1,30 @@
-import { Header } from '@/components/organisms/Header'
-import * as S from '../../styles/pages/profile'
+import * as S from '@/styles/pages/profile/questions/questions'
 import { Text } from '@/components/atoms/Text'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { BiTimeFive } from 'react-icons/bi'
-import { ImExit } from 'react-icons/im'
 import { AiOutlineCalendar } from 'react-icons/ai'
-import { Footer } from '@/components/organisms/Footer'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import Cookies from 'js-cookie'
-import router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { PiMedalFill } from 'react-icons/pi'
 import api from '@/services/api'
 import { IProfileData } from '@/shared/types'
 import { useProfileStore } from '@/features/stores/profile/useProfileStore'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getDayOfYear } from '@/utils/getDayOfYear'
 import Link from 'next/link'
 import { MdQuestionAnswer } from 'react-icons/md'
-import starIcon from '../../assets/star.svg'
-import Image from 'next/image'
 import Head from 'next/head'
-import avatar_empty from '../../assets/avatar_empty.svg'
+import { UserActivityTabs } from '@/components/molecules/UserActivity'
 
-export default function Profile(props: IProfileData) {
+export default function Questions(props: IProfileData) {
   const router = useRouter()
-  const { logout, isLoggedIn } = useAuthStore()
+  const { isLoggedIn } = useAuthStore()
   const { setProfile, user } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
+
+  const [activeTab, setActiveTab] = useState('questions')
+
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
 
   useEffect(() => {
@@ -43,7 +41,6 @@ export default function Profile(props: IProfileData) {
         <title>{user?.userData.name} | Questty</title>
       </Head>
 
-      <Header />
       <S.ProfileContainer>
         <S.ProfileContent isLoggedIn={isLoggedIn}>
           <S.UserInfo>
@@ -134,7 +131,7 @@ export default function Profile(props: IProfileData) {
                     gap: '0.25rem',
                   }}
                 >
-                  <Image src={starIcon} alt="" />
+                  <S.hearthIconCSS></S.hearthIconCSS>
                   <Text weight="bold" color="blue_950">
                     0
                   </Text>
@@ -183,14 +180,11 @@ export default function Profile(props: IProfileData) {
             </S.UserEditing>
           </S.UserInfo>
           <S.UserHistoryContainer>
-            <Text
-              size="xl"
-              weight="semibold"
-              color="blue_950"
-              style={{ fontFamily: 'Poppins', marginTop: '1rem' }}
-            >
-              Ultimas respostas:
-            </Text>
+            <UserActivityTabs
+              userId={props.userData.id}
+              isActive={activeTab}
+              setActive={setActiveTab}
+            />
             <S.UserHistory>
               {props.userData?.answers && props.userData.answers.length > 0 ? (
                 props.userData.answers.map((question) => (
@@ -223,7 +217,6 @@ export default function Profile(props: IProfileData) {
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>
-      <Footer />
     </>
   )
 }

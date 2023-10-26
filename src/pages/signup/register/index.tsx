@@ -15,6 +15,7 @@ import { Text } from '@/components/atoms/Text'
 import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import api from '@/services/api'
+import { SignInLayout } from '@/components/layouts/signIn'
 
 const registerSchema = zod.object({
   username: zod
@@ -216,6 +217,10 @@ export default function Register() {
     </>
   )
 }
+
+Register.getLayout = (page: React.ReactNode) => (
+  <SignInLayout>{page}</SignInLayout>
+)
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext

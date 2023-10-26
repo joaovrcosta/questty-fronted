@@ -1,4 +1,3 @@
-import { Header } from '@/components/organisms/Header'
 import * as S from '../../styles/pages/signin'
 import { Heading } from '@/components/atoms/Heading'
 import { Input } from '@/components/atoms/Input'
@@ -6,11 +5,9 @@ import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import { SiFacebook } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
-import { Footer } from '@/components/organisms/Footer'
 import { useForm } from 'react-hook-form'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import api from '@/services/api'
-import { setCookie } from 'nookies'
 import Router, { useRouter } from 'next/router'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,9 +15,9 @@ import * as zod from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
-import { HeaderAuth } from '@/components/organisms/HeaderAuth'
 import Head from 'next/head'
 import Cookies from 'js-cookie'
+import { SignInLayout } from '@/components/layouts/signIn'
 
 interface FormData {
   email: string
@@ -109,7 +106,7 @@ export default function SignIn() {
       <Head>
         <title>Questty.com.br - Para estudantes. Por estudantes.</title>
       </Head>
-      <HeaderAuth />
+
       <S.SignInContainer>
         <S.SignInContent>
           <S.HeadingContainer>
@@ -203,10 +200,13 @@ export default function SignIn() {
           </S.FormContainer>
         </S.SignInContent>
       </S.SignInContainer>
-      <Footer />
     </>
   )
 }
+
+SignIn.getLayout = (page: React.ReactNode) => (
+  <SignInLayout>{page}</SignInLayout>
+)
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext

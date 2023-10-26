@@ -1,8 +1,6 @@
-import { Header } from '@/components/organisms/Header'
 import * as S from '../../styles/pages/tarefa'
 import { QuestionBox } from '@/components/molecules/QuestionBox'
 import { AnswerBox } from '@/components/molecules/AnswerBox'
-import { Footer } from '@/components/organisms/Footer'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestionData } from '@/shared/types'
@@ -162,7 +160,6 @@ export default function Question(props: IQuestionData) {
         <title>{textForTitle} | Questty</title>
       </Head>
 
-      <Header />
       <S.QuestionContainer>
         <S.QuestionWrapper>
           <QuestionBox
@@ -247,7 +244,6 @@ export default function Question(props: IQuestionData) {
           </S.HelpMorePeopleContainer>
         </S.QuestionWrapper>
       </S.QuestionContainer>
-      <Footer />
     </>
   )
 }

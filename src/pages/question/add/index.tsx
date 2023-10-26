@@ -1,7 +1,5 @@
 import * as S from '@/styles/pages/question'
 import { Text } from '@/components/atoms/Text'
-import { Header } from '@/components/organisms/Header'
-import { QuestionTextarea } from '@/components/molecules/AnswerModal/styles'
 import { SubjectSelect } from '@/components/atoms/SubjectSelect'
 import { Button } from '@/components/atoms/Button'
 import { Heading } from '@/components/atoms/Heading'
@@ -9,7 +7,6 @@ import { Heading } from '@/components/atoms/Heading'
 export default function Profile() {
   return (
     <>
-      <Header />
       <S.QuestionContainer>
         <S.NewQuestionFormContainer>
           <S.FormTitle>

@@ -1,6 +1,3 @@
-import { NextPageWithLayout } from './_app'
-import DefaultLayout from '@/components/templates/Default'
-import { ReactElement } from 'react'
 import { Heading } from '@/components/atoms/Heading'
 import * as S from '@/styles/pages/index'
 import { Text } from '@/components/atoms/Text'
@@ -17,8 +14,11 @@ import girlPuzzle from '@/assets/girl-puzzle.svg'
 import boyHeadphone from '@/assets/boy-img-icon.svg'
 import girlUniverse from '@/assets/girl-univerve.svg'
 import Head from 'next/head'
+import { HeaderLandingPage } from '@/components/organisms/HeaderLandingPage'
+import { Footer } from '@/components/organisms/Footer'
+import { LandingLayout } from '@/components/layouts/landing'
 
-const Landing: NextPageWithLayout = () => {
+const Index = () => {
   return (
     <>
       <Head>
@@ -227,16 +227,17 @@ const Landing: NextPageWithLayout = () => {
         <S.ThrdContainer>
           <S.ProposeContainer></S.ProposeContainer>
         </S.ThrdContainer>
+        <Footer />
       </S.MainContainer>
     </>
   )
 }
 
-Landing.getLayout = (pages: ReactElement) => {
-  return <DefaultLayout>{pages}</DefaultLayout>
-}
+Index.getLayout = (page: React.ReactNode) => (
+  <LandingLayout>{page}</LandingLayout>
+)
 
-export default Landing
+export default Index
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext

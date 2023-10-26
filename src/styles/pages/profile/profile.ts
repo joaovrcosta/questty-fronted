@@ -1,5 +1,6 @@
 import { Avatar } from '@/components/atoms/Avatar'
 import { Button } from '@/components/atoms/Button'
+import { AiFillHeart } from 'react-icons/ai'
 import styled from 'styled-components'
 
 interface IProfileProps {
@@ -175,4 +176,14 @@ export const AnswersQuantity = styled.div`
   @media (max-width: 1100px) {
     width: 33%;
   }
+`
+
+export const UserActivityContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`
+
+export const hearthIconCSS = styled(AiFillHeart)`
+  color: ${({ theme }) => theme.colors.hearth_500};
 `

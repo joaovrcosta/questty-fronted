@@ -25,12 +25,20 @@ export const Content = styled(Menu.Content)`
   margin-top: 0.5rem;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.colors.black};
+
+  ul {
+    padding: 0;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
 `
 
 export const Item = styled(Menu.Item)`
-  font-size: 1.1rem;
   padding: 1rem;
   border-radius: 6px;
+  text-decoration: none;
   cursor: pointer;
   &:hover,
   &:focus {
