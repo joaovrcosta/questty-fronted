@@ -155,18 +155,18 @@ export default function Home() {
               Ranking
             </Heading>
           </S.RankingTitle>
+          <S.SelectWrapper>
+            <S.Selected>
+              <option value="opcao1">Diario</option>
+              <option value="opcao2">Opção 2</option>
+              <option value="opcao3">Opção 3</option>
+            </S.Selected>
+          </S.SelectWrapper>
           <S.RankingBox>
             <S.RankingHeading>
               <FaCrown size={24} color="#c98600" />
               <Text weight="semibold">Melhores Estudantes</Text>
             </S.RankingHeading>
-            <S.SelectedContainer>
-              <S.SelectedRanking
-                style={{ maxWidth: '105px', maxHeight: '40px' }}
-              >
-                <option value="opcao1">Diário</option>
-              </S.SelectedRanking>
-            </S.SelectedContainer>
             <S.UserRankingWrapper>
               <UserRankingBox
                 username="matheusq2017"

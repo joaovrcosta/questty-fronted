@@ -9,7 +9,7 @@ interface IHeader {
 }
 
 export const HeaderContainer = styled.div<IHeader>`
-  background-color: ${({ theme }) => theme.colors.yellow_400};
+  background-color: ${({ theme }) => theme.colors.yellow_50};
   /* margin-bottom: 5rem; */
   margin-right: calc(-16px);
 
@@ -51,7 +51,6 @@ export const HeaderContent = styled.div`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       gap: 0;
-      padding: 0.5rem 1rem;
     }
   `}
 `
@@ -137,6 +136,10 @@ export const SignInButton = styled(Button)`
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const SignUpButton = styled(Button)`
@@ -198,5 +201,13 @@ export const SearchButton = styled.button`
 
   &:hover {
     opacity: 0.9;
+  }
+`
+export const ButtonsMobileContainer = styled.div`
+  display: none;
+  font-family: 'Poppins';
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `

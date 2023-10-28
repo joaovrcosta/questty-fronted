@@ -18,6 +18,11 @@ export const CardContainer = styled.div<ICard>`
   border: 1px solid ${({ theme }) => theme.colors.black};
   background-color: ${({ theme, backgroundColor }) =>
     theme.colors[backgroundColor]};
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
 `
 
 export const ContentContainer = styled.div``

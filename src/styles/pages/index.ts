@@ -1,7 +1,8 @@
+import { Heading } from '@/components/atoms/Heading'
 import styled, { css } from 'styled-components'
 
 export const MainContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow_400};
+  background-color: ${({ theme }) => theme.colors.yellow_50};
   /* height: 100vh; */
 `
 
@@ -10,7 +11,7 @@ export const LandingContent = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  background-color: ${({ theme }) => theme.colors.yellow_400};
+  background-color: ${({ theme }) => theme.colors.yellow_50};
 
   padding: 0.85rem 0rem 3rem 0rem;
 
@@ -25,10 +26,16 @@ export const LandingContent = styled.div`
     width: 100%;
   }
 
+  @media (max-width: 769px) {
+    padding: 1.5rem 1rem 0 1rem;
+  }
+
   ${({ theme }) => css`
     @media (max-width: 480px) {
       gap: 0;
       width: 100%;
+      margin: 0;
+      justify-content: flex-start;
     }
   `}
 `
@@ -42,9 +49,11 @@ export const LandingContainer = styled.div`
   max-width: 836px;
 
   ${({ theme }) => css`
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       width: 100%;
       flex-direction: column;
+      margin-top: 1rem;
+      margin-bottom: 0;
     }
   `}
 `
@@ -52,15 +61,29 @@ export const LandingContainer = styled.div`
 export const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const TextContainer = styled.div`
   width: 40rem;
   margin-top: 1rem;
   z-index: 99;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
-export const HeroHeading = styled.div``
+export const HeroHeadingContainer = styled.div``
+
+export const HeroHeading = styled(Heading)`
+  @media (max-width: 480px) {
+    font-size: 40px;
+  }
+`
 
 export const InputSearchFormContainer = styled.form`
   display: flex;
@@ -72,6 +95,11 @@ export const InputSearchFormContainer = styled.form`
   justify-content: space-between;
   z-index: 99;
   width: 40rem;
+
+  @media (max-width: 769px) {
+    width: 100%;
+    margin-top: 2rem;
+  }
 `
 
 export const InputSearch = styled.input`
@@ -117,6 +145,10 @@ export const CardsContainer = styled.div`
   gap: 1rem;
   background-color: ${({ theme }) => theme.colors.white};
   padding: 3rem 1rem 1rem 1rem;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 `
 
 export const CardWrapper = styled.div`
@@ -124,6 +156,11 @@ export const CardWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    flex-direction: column;
+  }
 `
 
 export const SecondContainer = styled.div`

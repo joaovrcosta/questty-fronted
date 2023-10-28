@@ -35,7 +35,12 @@ export function HeaderLandingPage() {
     <S.HeaderContainer>
       <S.HeaderContent>
         <Link href="/">
-          <S.LogoImage src={logoImg} width={160} height={52} alt="" />
+          <S.LogoImage
+            src={logoImg}
+            width={160}
+            height={52}
+            alt="Questty Logo"
+          />
         </Link>
         <S.HeaderActionsContainer>
           <S.StyledLink href="/signin">
@@ -61,8 +66,20 @@ export function HeaderLandingPage() {
             FAÇA SUA PERGUNTA
           </S.MakeYourQuestionButton>
         </S.HeaderActionsContainer>
+        <S.ButtonsMobileContainer>
+          <S.StyledLink href="/signin">
+            <Button backgroundColor="transparent" border={false}>
+              ENTRAR
+            </Button>
+          </S.StyledLink>
+          <S.StyledLink href="/signup">
+            <Button backgroundColor="transparent" border={false}>
+              CADASTRE-SE
+            </Button>
+          </S.StyledLink>
+        </S.ButtonsMobileContainer>
       </S.HeaderContent>
-      <S.SubHeader>
+      {/* <S.SubHeader>
         <S.SubHeaderContent>
           <S.StyledButton backgroundColor="transparent" border={false}>
             <S.StyledLink href="/signin">ENTRAR</S.StyledLink>
@@ -73,7 +90,7 @@ export function HeaderLandingPage() {
             </S.StyledLink>
           </Button>
         </S.SubHeaderContent>
-      </S.SubHeader>
+      </S.SubHeader> */}
     </S.HeaderContainer>
   )
 }

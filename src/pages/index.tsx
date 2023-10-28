@@ -29,10 +29,10 @@ const Index = () => {
         <S.LandingContent>
           <S.LandingContainer>
             <S.HeroContainer>
-              <S.HeroHeading>
-                <Heading color="blue_950" size="xxl" weight="bold">
+              <S.HeroHeadingContainer>
+                <S.HeroHeading color="blue_950" size="xxl" weight="bold">
                   Questtyone, aprenda
-                </Heading>
+                </S.HeroHeading>
                 <S.TextContainer>
                   <Text
                     color="blue_950"
@@ -46,7 +46,7 @@ const Index = () => {
                     o seu potencial.
                   </Text>
                 </S.TextContainer>
-              </S.HeroHeading>
+              </S.HeroHeadingContainer>
               <S.InputSearchFormContainer>
                 <S.InputSearch placeholder="Qual a sua dúvida?" />
                 <Button

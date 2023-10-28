@@ -270,3 +270,7 @@ export const RankingTitle = styled.div`
   justify-content: flex-start;
   margin-bottom: 2rem;
 `
+
+export const SelectWrapper = styled.div`
+  margin-bottom: 1.5rem;
+`
