@@ -39,11 +39,12 @@ const Index = () => {
                     weight="medium"
                     style={{ marginLeft: '8px' }}
                   >
-                    Você e seus filhos têm um problema com os estudos.
-                    Tranquilo. Do inglês à física, o Questty cuida da sua vida
-                    acadêmica. Seja qual for a sua dúvida, você vai encontrar a
-                    resposta, entender o que está por trás dela e alcançar todo
-                    o seu potencial.
+                    Enfrentando desafios nos estudos, seja você ou seus filhos?
+                    Não se preocupe. Desde o inglês até a física, o Questty está
+                    aqui para apoiar sua jornada acadêmica. Com cada pergunta,
+                    não apenas encontrará a resposta, mas também compreenderá a
+                    lógica por trás dela, permitindo que alcance o máximo de seu
+                    potencial.
                   </Text>
                 </S.TextContainer>
               </S.HeroHeadingContainer>

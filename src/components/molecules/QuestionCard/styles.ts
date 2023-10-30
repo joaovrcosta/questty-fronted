@@ -4,8 +4,9 @@ import styled, { css } from 'styled-components'
 
 export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.black};
-  border-radius: 5px;
+  /* border: 1px solid ${({ theme }) => theme.colors.black}; */
+  /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12); */
+  border-radius: 12px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
   padding: 0.875rem 2.5rem 0.875rem 1rem;
   margin-bottom: 0.5rem;

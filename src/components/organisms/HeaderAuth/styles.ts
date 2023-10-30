@@ -65,7 +65,6 @@ export const LogoImage = styled(Image)`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       width: 72px;
-      margin-right: 1rem;
     }
   `}
 `
@@ -106,6 +105,10 @@ export const HeaderActionsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
+  @media (max-width: 769px) {
+    display: none;
+  }
 `
 
 export const StyledLink = styled(Link)`

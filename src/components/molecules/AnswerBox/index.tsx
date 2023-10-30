@@ -6,9 +6,12 @@ import { MdVerified } from 'react-icons/md'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useEffect, useState } from 'react'
-import { AiOutlineFlag } from 'react-icons/ai'
+import { AiOutlineFlag, AiOutlineSisternode } from 'react-icons/ai'
 import { Tooltip } from '../Tooltip'
 import { AiFillHeart } from 'react-icons/ai'
+import { BsFillPeopleFill } from 'react-icons/bs'
+import { VscVerifiedFilled } from 'react-icons/vsc'
+import { AiOutlineNodeIndex } from 'react-icons/ai'
 
 interface Answer {
   id: string
@@ -139,6 +142,43 @@ export function AnswerBox({
             {content}
           </S.AnswerContentText>
         </S.AnswerContent>
+        {/* 
+        {isGolden && (
+          <S.ConnectionContainer>
+            <AiOutlineSisternode size={34} color="#10162f" />
+          </S.ConnectionContainer>
+        )}
+
+        {isGolden && (
+          <S.ExplanationContainer>
+            <S.ExplanationTitle>
+              <VscVerifiedFilled size={34} color="rgba(11, 172, 128, 1)" />
+              <Text weight="bold" color="blue_950" size="lg">
+                Verificação da Comunidade
+              </Text>
+            </S.ExplanationTitle>
+            <S.ExplanationText>
+              <Text
+                size="sm"
+                weight="regular"
+                color="black"
+                style={{ lineHeight: '24px' }}
+              >
+                A resposta acertadamente destaca a posição geográfica do Brasil,
+                situando a maior parte de seu território entre o Trópico de
+                Capricórnio e a Linha do Equador, uma região caracteristicamente
+                tropical. Além disso, ela oferece uma clara definição sobre o
+                que são os trópicos, ligando-os à variação da quantidade de luz
+                solar recebida durante o ano. Essa variação, conforme a Terra
+                orbita em torno do Sol, faz com que a luz solar se incline mais
+                para o norte ou para o sul em diferentes épocas do ano. O texto
+                então conclui, reforçando o motivo pelo qual o Brasil é
+                classificado como um país tropical, devido à sua localização
+                entre essas linhas demarcadoras, os trópicos.
+              </Text>
+            </S.ExplanationText>
+          </S.ExplanationContainer>
+        )} */}
         <S.UserHandleActionsContainer>
           <S.LikedButton
             variant="none"

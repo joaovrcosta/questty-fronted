@@ -104,3 +104,7 @@ export const EnterLink = styled(Link)`
   margin-left: 0.25rem;
   font-weight: 600;
 `
+
+export const SubTitle = styled.div`
+  text-align: center;
+`

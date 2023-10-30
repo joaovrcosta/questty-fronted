@@ -69,7 +69,7 @@ export default function SignIn() {
       const { token } = response.data
 
       Cookies.set('questty-token', token, {
-        expires: 60 * 60 * 24 * 1, // 7 day
+        expires: 60 * 60 * 24 * 3, // 7 day
         path: '/',
       })
 
@@ -114,6 +114,11 @@ export default function SignIn() {
               Entrar
             </Heading>
           </S.HeadingContainer>
+          <S.SubTitle>
+            <Heading size="xs" color="blue_950" style={{ textAlign: 'center' }}>
+              Onde perguntas se transformam em aprendizado eficaz.
+            </Heading>
+          </S.SubTitle>
           <S.FormContainer onSubmit={handleSubmit(handleSignIn)}>
             <S.InputContainer>
               <S.EmailInputContainer>

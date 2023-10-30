@@ -205,9 +205,8 @@ export const RankingSidebar = styled.div`
 export const RankingBox = styled.div`
   font-family: Poppins;
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.black};
   padding: 1.25rem;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
   max-height: 363px;
 `
@@ -220,7 +219,7 @@ export const HeadingRankContainer = styled.div`
 export const RankingHeading = styled.div`
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 0.5rem 0 1.25rem 0;
 `
 
 export const SelectedContainer = styled.div`

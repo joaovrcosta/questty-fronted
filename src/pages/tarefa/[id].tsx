@@ -180,6 +180,12 @@ export default function Question(props: IQuestionData) {
           content="Descrição da sua página aqui"
         />
         <meta property="twitter:image" content="URL_DA_IMAGEM_DE_DESTAQUE" />
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7665473143170681"
+          crossOrigin="anonymous"
+        ></script>
       </Head>
 
       <S.QuestionContainer>

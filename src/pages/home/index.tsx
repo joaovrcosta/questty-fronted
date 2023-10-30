@@ -54,7 +54,7 @@ export default function Home() {
               color="blue_950"
               style={{ whiteSpace: 'nowrap' }}
             >
-              Bem vindo(a) 👋
+              Olá, 👋
             </Heading>
             <Heading size="sm" weight="bold" color="blue_500">
               {user?.username}

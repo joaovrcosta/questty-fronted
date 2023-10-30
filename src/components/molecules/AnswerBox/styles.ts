@@ -305,3 +305,28 @@ export const HeartIconOutline = styled(AiOutlineHeart)`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.black};
 `
+
+export const ExplanationContainer = styled.div`
+  margin-top: 1rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+`
+export const ExplanationTitle = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+  background-color: rgba(11, 172, 128, 0.1);
+  padding: 1rem;
+  border-bottom: none;
+`
+export const ExplanationText = styled.div`
+  padding: 1rem;
+  border-radius: 0 0 12px 12px;
+`
+export const ConnectionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 0 0.5rem 0;
+`

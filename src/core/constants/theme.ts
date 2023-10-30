@@ -52,6 +52,7 @@ export const defaultTheme = {
       lg: '2rem',
       md: '1.75rem',
       sm: '1.25rem',
+      xs: '1rem',
     } as const,
     text: {
       xxl: '1.75rem',
