@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
+
   /* border: 1px solid ${({ theme }) => theme.colors.black}; */
   /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12); */
   border-radius: 12px;
@@ -207,10 +208,10 @@ export const StarContainer = styled.div`
   height: 24px;
   padding: 0 4px;
   border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  border: 1px solid ${({ theme }) => theme.colors.white};
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: #1cb0f6;
 `
 export const StarQuantity = styled.div`
   display: flex;

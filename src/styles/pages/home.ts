@@ -38,7 +38,7 @@ export const SubjectsContainer = styled.div`
   gap: 1rem;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  max-width: 836px;
+  max-width: 56rem;
 
   @media (max-width: 1168px) {
     max-width: 100%;
@@ -124,7 +124,7 @@ export const QuestionsContainer = styled.div`
 `
 
 export const FeedContentWrapper = styled.div`
-  max-width: 836px;
+  max-width: 56rem;
   width: 100%;
 
   @media (max-width: 1168px) {
@@ -137,13 +137,12 @@ export const MakeQuestionButton = styled.button`
   display: flex;
   padding: 0 2rem;
   align-items: center;
-  height: 46px;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.black};
   color: ${({ theme }) => theme.colors.white};
   border-radius: 30px;
   height: 52px;
-  width: 184px;
+  width: 192px;
   font-family: Poppins;
   font-weight: 600;
   font-size: 16px;
@@ -177,6 +176,8 @@ export const MakeQuestionButton = styled.button`
 `
 
 export const TextAsk = styled(Text)`
+  white-space: nowrap;
+  font-size: 15px;
   @media (max-width: 1280px) {
     display: none;
   }
@@ -190,8 +191,11 @@ export const PlusIcon = styled(FiFeather)`
 `
 
 export const RankingSidebar = styled.div`
-  padding: 0 0 0 2rem;
-  min-width: 416px;
+  min-width: 320px;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   @media (max-width: 1280px) {
     min-width: 384px;
@@ -205,10 +209,12 @@ export const RankingSidebar = styled.div`
 export const RankingBox = styled.div`
   font-family: Poppins;
   background-color: ${({ theme }) => theme.colors.white};
+  /* border: 1px solid #000; */
   padding: 1.25rem;
   border-radius: 12px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
-  max-height: 363px;
+  max-height: 22rem;
+  min-width: 320px;
 `
 
 export const HeadingRankContainer = styled.div`
@@ -218,7 +224,8 @@ export const HeadingRankContainer = styled.div`
 
 export const RankingHeading = styled.div`
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
   padding: 0.5rem 0 1.25rem 0;
 `
 
@@ -272,4 +279,104 @@ export const RankingTitle = styled.div`
 
 export const SelectWrapper = styled.div`
   margin-bottom: 1.5rem;
+`
+
+export const ProfileInfoSidebar = styled.div`
+  padding: 0 0 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 320px;
+  max-width: 320px;
+
+  @media (max-width: 1280px) {
+    min-width: 384px;
+  }
+
+  @media (max-width: 1168px) {
+    display: none;
+  }
+`
+
+export const UserAvatarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const QuestionPoints = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.gray_150};
+  border-radius: 25px;
+  padding: 0.25rem 0.25rem 0.25rem 0;
+  margin-bottom: 1rem;
+  width: 100%;
+`
+
+export const StarContainer = styled.div`
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+`
+
+export const StarQuantity = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+`
+
+export const MoreConfigurations = styled.div`
+  margin-top: 1rem;
+`
+export const MoreConfigurationsButton = styled.div`
+  display: flex;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_150};
+  }
+`
+export const AnswersBySubject = styled.div`
+  max-width: 320px;
+  margin-top: 1.5rem;
+
+  @media (max-width: 1280px) {
+    min-width: 384px;
+  }
+
+  @media (max-width: 1168px) {
+    display: none;
+  }
+`
+export const MoreTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem 1rem 1rem;
+`
+
+export const SubjectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1.25rem;
+`
+export const SideBar = styled.div`
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
 `

@@ -11,6 +11,8 @@ import { Dropdown } from '@/components/molecules/DropdownMenu'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 import { useEffect, useState } from 'react'
 import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
+import { SiCrystal } from 'react-icons/si'
+import { Text } from '@/components/atoms/Text'
 
 export function Header() {
   const [loading, setLoading] = useState(false)
@@ -56,19 +58,21 @@ export function Header() {
               </div>
             </div>
           ) : (
-            <S.MakeQuestionButton>
-              <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-                <Dialog.Trigger asChild>
-                  <S.MakeYourQuestionButton
-                    border={false}
-                    backgroundColor="transparent"
-                  >
-                    PERGUNTAR
-                  </S.MakeYourQuestionButton>
-                </Dialog.Trigger>
-                <NewTransactionModal />
-              </Dialog.Root>
-            </S.MakeQuestionButton>
+            <>
+              <S.MakeQuestionButton>
+                <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+                  <Dialog.Trigger asChild>
+                    <S.MakeYourQuestionButton
+                      border={false}
+                      backgroundColor="transparent"
+                    >
+                      PERGUNTAR
+                    </S.MakeYourQuestionButton>
+                  </Dialog.Trigger>
+                  <NewTransactionModal />
+                </Dialog.Root>
+              </S.MakeQuestionButton>
+            </>
           )}
 
           {loading ? (

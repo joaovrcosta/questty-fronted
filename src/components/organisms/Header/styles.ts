@@ -284,3 +284,9 @@ export const SubSignUpButton = styled(Button)`
     font-size: 0.75rem;
   } */
 `
+
+export const PointsContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+`

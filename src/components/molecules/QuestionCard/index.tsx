@@ -6,6 +6,8 @@ import { Avatar } from '@/components/atoms/Avatar'
 import starIcon from '@/assets/star.svg'
 import Image from 'next/image'
 import { GiRoundStar } from 'react-icons/gi'
+import { SiCrystal } from 'react-icons/si'
+import { Tooltip } from '../Tooltip'
 
 export type subjectsType =
   | 'math'
@@ -88,31 +90,39 @@ export function QuestionCard({
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
-          <S.QuestionPoints>
-            <S.StarContainer>
-              <GiRoundStar size={14} color="#fff" />
-            </S.StarContainer>
-            <S.StarQuantity>
-              <Text weight="medium" size="sm" style={{ whiteSpace: 'nowrap' }}>
-                +
-              </Text>{' '}
-              <Text
-                weight="semibold"
-                size="sm"
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                0
-              </Text>{' '}
-              <Text
-                weight="medium"
-                size="sm"
-                color="gray_700"
-                style={{ whiteSpace: 'nowrap' }}
-              >
-                pts
-              </Text>{' '}
-            </S.StarQuantity>
-          </S.QuestionPoints>
+          <Tooltip content="Cristais">
+            <S.QuestionPoints>
+              <S.StarContainer>
+                <SiCrystal size={14} color="#fff" />
+              </S.StarContainer>
+              <S.StarQuantity>
+                <Text
+                  weight="medium"
+                  color="blue_700"
+                  size="sm"
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  +
+                </Text>{' '}
+                <Text
+                  weight="semibold"
+                  size="sm"
+                  color="blue_950"
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  0
+                </Text>{' '}
+                <Text
+                  weight="medium"
+                  size="sm"
+                  color="blue_700"
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  pts
+                </Text>{' '}
+              </S.StarQuantity>
+            </S.QuestionPoints>
+          </Tooltip>
 
           <S.AswerContainer>
             <S.AnswerButtonContainer>
