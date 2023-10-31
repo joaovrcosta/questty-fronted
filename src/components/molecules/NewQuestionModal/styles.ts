@@ -6,7 +6,7 @@ export const Overlay = styled(Dialog.Overlay)`
   width: 100vw;
   height: 100vh;
   inset: 0;
-  background: rgba(253, 255, 244, 0.9);
+  background: rgba(32, 137, 234, 0.7);
   overflow: hidden;
   z-index: 999999;
 `
@@ -21,10 +21,9 @@ export const Content = styled(Dialog.Content)`
 
   padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
   max-height: 25.8rem;
-  border-radius: 5px;
+  border-radius: 16px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   position: fixed;
@@ -88,7 +87,7 @@ export const Content = styled(Dialog.Content)`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       min-width: 100%;
-      max-height: 402px;
+      max-height: 28rem;
       width: 100%;
       border: none;
       border-radius: 0;

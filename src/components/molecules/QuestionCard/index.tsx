@@ -3,6 +3,9 @@ import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
+import starIcon from '@/assets/star.svg'
+import Image from 'next/image'
+import { GiRoundStar } from 'react-icons/gi'
 
 export type subjectsType =
   | 'math'
@@ -59,10 +62,25 @@ export function QuestionCard({
                 <S.Subject size="xs" color="gray_800">
                   {category_id}
                 </S.Subject>
-              )}
+              )}{' '}
+              •{' '}
               <S.DateTime size="xs" color="gray_800">
                 {getTimeAgo(createdAt)}
               </S.DateTime>
+              {/* <S.AnswerQuantity>
+                {readOnly ? (
+                  ''
+                ) : (
+                  <Text
+                    weight="semibold"
+                    color="blue_550"
+                    size="xs"
+                    style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
+                  >
+                    {`${answerCount} respostas`}
+                  </Text>
+                )}
+              </S.AnswerQuantity> */}
             </S.SubjectAndDateTimeContainer>
             <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
@@ -70,20 +88,32 @@ export function QuestionCard({
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
-          <S.AnswerQuantity>
-            {readOnly ? (
-              ''
-            ) : (
+          <S.QuestionPoints>
+            <S.StarContainer>
+              <GiRoundStar size={14} color="#fff" />
+            </S.StarContainer>
+            <S.StarQuantity>
+              <Text weight="medium" size="sm" style={{ whiteSpace: 'nowrap' }}>
+                +
+              </Text>{' '}
               <Text
                 weight="semibold"
-                color="blue_550"
                 size="sm"
-                style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
+                style={{ whiteSpace: 'nowrap' }}
               >
-                {`${answerCount} respostas`}
-              </Text>
-            )}
-          </S.AnswerQuantity>
+                0
+              </Text>{' '}
+              <Text
+                weight="medium"
+                size="sm"
+                color="gray_700"
+                style={{ whiteSpace: 'nowrap' }}
+              >
+                pts
+              </Text>{' '}
+            </S.StarQuantity>
+          </S.QuestionPoints>
+
           <S.AswerContainer>
             <S.AnswerButtonContainer>
               <S.AnswerButton

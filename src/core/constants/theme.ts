@@ -25,7 +25,7 @@ export const defaultTheme = {
     success_500: '#32CA25',
     green_300: '#78E16F',
     green_500: 'rgba(11, 172, 128, 1)',
-    danger_500: '#D20032',
+    danger_500: '#cf1d00',
     hearth_500: '#ff341a',
     white: 'rgba(255, 255, 255, 255)',
     black: 'rgba(0, 0, 0, 1)',

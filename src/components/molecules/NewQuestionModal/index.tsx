@@ -17,6 +17,7 @@ import { useRouter } from 'next/router'
 import { Spinner } from '@/components/atoms/Spinner'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { Text } from '@/components/atoms/Text'
 
 interface FormData {
   content: string
@@ -97,9 +98,9 @@ export function NewTransactionModal() {
             placeholder="Escreva sua pergunta aqui. (Para conseguir uma ótima resposta, descreva sua dúvida de forma simples e clara"
           ></S.QuestionTextarea>
           {formState.errors.content && (
-            <span style={{ color: '#D20032' }}>
+            <Text color="danger_500" weight="medium">
               {formState.errors.content.message}
-            </span>
+            </Text>
           )}
           <S.QuestionMoreInfoContainer>
             <S.Tools>
@@ -127,7 +128,7 @@ export function NewTransactionModal() {
           </S.QuestionMoreInfoContainer>
 
           {isSubmitting ? (
-            <Spinner size="sm" baseColor="blue_950" variant="primary" />
+            <Spinner size="sm" baseColor="black" variant="primary" />
           ) : (
             <Button type="submit" disabled={isSubmitting}>
               Fazer pergunta

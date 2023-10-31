@@ -8,16 +8,16 @@ export const QuestionCardContainer = styled.div`
   /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12); */
   border-radius: 12px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
-  padding: 0.875rem 2.5rem 0.875rem 1rem;
+  padding: 0.875rem 1.5rem 0.875rem 1.5rem;
   margin-bottom: 0.5rem;
   opacity: 1;
   filter: brightness(100%);
   transition: opacity 0.3s ease all, filter 0.3s ease;
 
-  &:hover {
+  /* &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
-  }
+  } */
 
   &:hover::before {
     content: '';
@@ -114,7 +114,7 @@ export const QuestionText = styled.a`
 `
 
 export const QuestionInfo = styled.div`
-  width: 24rem;
+  width: 25rem;
   min-height: 64px;
 
   ${({ theme }) => css`
@@ -133,21 +133,17 @@ export const SubjectAndDateTimeContainer = styled.div`
 export const Subject = styled(Text)`
   font-family: Roboto;
   font-weight: 700;
-  font-size: 14px;
 `
 export const DateTime = styled(Text)`
   font-family: Roboto;
 `
 
-export const AswerContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
+export const AswerContainer = styled.div``
 
 export const AnswerButtonContainer = styled.div`
   display: flex;
   align-items: center;
+  /* margin-top: 1.125rem; */
 `
 
 export const AnswerButton = styled(Button)`
@@ -180,12 +176,12 @@ export const UserHandleContainer = styled.div`
   gap: 4rem;
 
   ${({ theme }) => css`
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      flex-direction: row-reverse;
+      /* flex-direction: row-reverse; */
 
       margin-top: 0.5rem;
     }
@@ -194,4 +190,31 @@ export const UserHandleContainer = styled.div`
 
 export const UserAvatarWrapper = styled.div`
   margin-right: 1rem;
+`
+
+export const QuestionPoints = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.5rem;
+  background-color: ${({ theme }) => theme.colors.gray_150};
+  border-radius: 25px;
+  padding: 0.25rem 0.25rem 0.25rem 0;
+`
+
+export const StarContainer = styled.div`
+  display: flex;
+  height: 24px;
+  padding: 0 4px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.black};
+`
+export const StarQuantity = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
 `
