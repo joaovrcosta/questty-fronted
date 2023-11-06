@@ -40,6 +40,7 @@ interface ISkeletonCircle {
 export const SkeletonLine = styled.div<ISkeletonLine>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
+  width: 100%;
 
   /* .. */
 
@@ -73,6 +74,7 @@ export const SkeletonBoxRows = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 
   ${baseProps}
 `

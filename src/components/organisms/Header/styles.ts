@@ -61,6 +61,7 @@ export const FirstBoxContent = styled.div`
   display: flex;
   width: 100%;
   gap: 1rem;
+  align-items: center;
 `
 
 export const MakeQuestionButton = styled.div``

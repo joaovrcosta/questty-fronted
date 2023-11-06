@@ -11,8 +11,7 @@ import { Dropdown } from '@/components/molecules/DropdownMenu'
 import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
 import { useEffect, useState } from 'react'
 import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
-import { SiCrystal } from 'react-icons/si'
-import { Text } from '@/components/atoms/Text'
+import Cookies from 'js-cookie'
 
 export function Header() {
   const [loading, setLoading] = useState(false)
@@ -21,12 +20,14 @@ export function Header() {
   const { isOpen, setIsOpen } = useQuestionModalStore()
 
   useEffect(() => {
-    if (token === null) {
-      setLoading(false)
+    const cookieToken = Cookies.get('questty-token')
+
+    if (cookieToken && !isLoggedIn) {
+      setLoading(true)
     } else {
-      setLoading(!isLoggedIn)
+      setLoading(false)
     }
-  }, [isLoggedIn, token])
+  }, [isLoggedIn])
 
   return (
     <S.HeaderContainer>
@@ -107,7 +108,9 @@ export function Header() {
           )}
         </S.HeaderActionsContainer>
       </S.HeaderContent>
-      {!isLoggedIn && (
+      {!loading ? (
+        <div></div>
+      ) : (
         <S.SubHeader>
           <S.SubHeaderContent>
             <S.StyledLink href="/signin">

@@ -57,7 +57,7 @@ export default function Home() {
 
       <S.HomePageContent>
         <S.FeedContentWrapper>
-          {/* <S.Welcome>
+          <S.Welcome>
             <Heading
               size="sm"
               weight="bold"
@@ -69,7 +69,7 @@ export default function Home() {
             <Heading size="sm" weight="bold" color="blue_500">
               {user?.username}
             </Heading>
-          </S.Welcome> */}
+          </S.Welcome>
           <S.SubjectsContainer>
             <S.SubjectContent>
               <S.Selected>
@@ -95,63 +95,89 @@ export default function Home() {
             </Dialog.Root>
           </S.SubjectsContainer>
           <S.QuestionsContainer>
-            {questions ? (
-              questions.map((question) => (
-                <QuestionCard
-                  author_id={question.author_id}
-                  id={question.id}
-                  key={question.id}
-                  content={question.content}
-                  category_id={question.category.name}
-                  createdAt={question.createdAt}
-                  answersQuantity={question.answers?.length}
-                  avatarUrl={question.author.avatar_url}
-                />
-              ))
-            ) : (
-              <>
-                <div style={{ marginBottom: '1rem' }}>
-                  <SkeletonLine
-                    width={820}
-                    rows={1}
-                    height={106}
-                    rounding="rounded"
+            <S.QuestionsWrapper>
+              {loading ? (
+                <>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <S.SkeletonLiner
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
+                    <SkeletonLine
+                      width={896}
+                      rows={1}
+                      height={106}
+                      rounding="rounded"
+                    />
+                  </div>
+                </>
+              ) : (
+                questions?.map((question) => (
+                  <QuestionCard
+                    author_id={question.author_id}
+                    id={question.id}
+                    key={question.id}
+                    content={question.content}
+                    category_id={question.category.name}
+                    createdAt={question.createdAt}
+                    answersQuantity={question.answers?.length}
+                    avatarUrl={question.author.avatar_url}
                   />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <SkeletonLine
-                    width={820}
-                    rows={1}
-                    height={106}
-                    rounding="rounded"
-                  />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <SkeletonLine
-                    width={820}
-                    rows={1}
-                    height={106}
-                    rounding="rounded"
-                  />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <SkeletonLine
-                    width={820}
-                    rows={1}
-                    height={106}
-                    rounding="rounded"
-                  />
-                </div>
-                <div style={{ marginBottom: '1rem' }}>
-                  <SkeletonLine
-                    width={820}
-                    rows={1}
-                    height={106}
-                    rounding="rounded"
-                  />
-                </div>
-              </>
-            )}
+                ))
+              )}
+            </S.QuestionsWrapper>
           </S.QuestionsContainer>
         </S.FeedContentWrapper>
         <S.SideBar>
@@ -319,13 +345,6 @@ export default function Home() {
           </S.RankingSidebar>
 
           <S.AnswersBySubject>
-            {/* <S.SelectWrapper>
-              <S.Selected>
-                <option value="opcao1">Diario</option>
-                <option value="opcao2">Opção 2</option>
-                <option value="opcao3">Opção 3</option>
-              </S.Selected>
-            </S.SelectWrapper> */}
             <S.RankingBox>
               <S.RankingHeading>
                 <SlGraph size={24} color="#45A6FF" />

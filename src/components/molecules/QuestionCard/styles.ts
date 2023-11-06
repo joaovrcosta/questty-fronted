@@ -3,24 +3,20 @@ import { Text } from '@/components/atoms/Text'
 import styled, { css } from 'styled-components'
 
 export const QuestionCardContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: none;
 
-  /* border: 1px solid ${({ theme }) => theme.colors.black}; */
-  /* box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12); */
-  border-radius: 12px;
-  box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
-  padding: 0.875rem 1.5rem 0.875rem 1.5rem;
-  margin-bottom: 0.5rem;
+  padding: 24px;
   opacity: 1;
   filter: brightness(100%);
   transition: opacity 0.3s ease all, filter 0.3s ease;
+  border-bottom: 2px solid #ebf2f7;
 
   /* &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
   } */
 
-  &:hover::before {
+  /* &:hover::before {
     content: '';
     position: absolute;
     border-radius: 5px 0 0px 5px;
@@ -29,6 +25,10 @@ export const QuestionCardContainer = styled.div`
     bottom: 0;
     width: 5px;
     background-color: ${({ theme }) => theme.colors.blue_500};
+  } */
+
+  &:hover {
+    background-color: rgba(235, 242, 247, 0.3);
   }
 
   ${({ theme }) => css`
@@ -40,9 +40,9 @@ export const QuestionCardContainer = styled.div`
 
 export const QuestionContentContainer = styled.div`
   display: flex;
-  align-items: center;
+  width: 100%;
   justify-content: space-between;
-  min-height: 80px;
+  min-height: 118px;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -64,7 +64,8 @@ export const UserAvatarContainer = styled.div`
 
 export const QuestionContent = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  /* align-items: center; */
 `
 
 export const QuestionText = styled.a`
@@ -115,18 +116,19 @@ export const QuestionText = styled.a`
 `
 
 export const QuestionInfo = styled.div`
-  width: 25rem;
-  min-height: 64px;
-
+  width: 100%;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   ${({ theme }) => css`
-    @media (max-width: 768px) {
+    @media (max-width: 916px) {
       width: 100%;
     }
-  `}
+  `};
 `
 
 export const SubjectAndDateTimeContainer = styled.div`
-  margin-bottom: 0.5rem;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -168,6 +170,20 @@ export const AnswerButton = styled(Button)`
 export const AnswerQuantity = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+
+  svg {
+  }
+
+  &:hover {
+    background-color: rgba(69, 166, 255, 0.1);
+  }
+
+  &:hover svg {
+    color: rgba(69, 166, 255, 1);
+  }
 `
 
 export const UserHandleContainer = styled.div`
@@ -175,6 +191,7 @@ export const UserHandleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
+  width: 100%;
 
   ${({ theme }) => css`
     @media (max-width: 769px) {
@@ -182,6 +199,7 @@ export const UserHandleContainer = styled.div`
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      gap: 1rem;
       /* flex-direction: row-reverse; */
 
       margin-top: 0.5rem;
@@ -211,11 +229,30 @@ export const StarContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.white};
   align-items: center;
   justify-content: center;
-  background-color: #1cb0f6;
+  background-color: ${({ theme }) => theme.colors.blue_950};
 `
 export const StarQuantity = styled.div`
   display: flex;
   gap: 0.25rem;
   margin-right: 0.25rem;
   margin-left: 0.25rem;
+`
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+`
+export const Wrapper = styled.div`
+  width: 100%;
+`
+export const QuestionTextContainer = styled.div`
+  margin-bottom: 1rem;
+`
+export const AnswerQuantityWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  &:hover p {
+    color: ${({ theme }) => theme.colors.blue_500};
+  }
 `

@@ -33,7 +33,7 @@ export const FloatingButton = styled.button``
 
 export const FloatingBoxName = styled.div`
   padding: 0.25rem;
-  background-color: ${({ theme }) => theme.colors.blue_950};
+  background-color: ${({ theme }) => theme.colors.black};
   border-radius: 6px;
 `
 
@@ -42,7 +42,7 @@ export const CirclePlus = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.blue_950};
+  background-color: ${({ theme }) => theme.colors.black};
   width: 56px;
   height: 56px;
 `

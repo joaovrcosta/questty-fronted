@@ -1,4 +1,4 @@
-import { SkeletonBox } from '@/components/atoms/Skeleton'
+import { SkeletonBox, SkeletonLine } from '@/components/atoms/Skeleton'
 import { Text } from '@/components/atoms/Text'
 import { FiFeather } from 'react-icons/fi'
 import styled, { css } from 'styled-components'
@@ -38,7 +38,6 @@ export const SubjectsContainer = styled.div`
   gap: 1rem;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  max-width: 56rem;
 
   @media (max-width: 1168px) {
     max-width: 100%;
@@ -118,6 +117,8 @@ export const SubjectContent = styled.div`
 `
 
 export const QuestionsContainer = styled.div`
+  /* max-width: 40rem; */
+
   &:last-child {
     margin-bottom: 20px;
   }
@@ -125,10 +126,8 @@ export const QuestionsContainer = styled.div`
 
 export const FeedContentWrapper = styled.div`
   max-width: 56rem;
-  width: 100%;
 
   @media (max-width: 1168px) {
-    max-width: 100%;
     width: 100%;
   }
 `
@@ -214,6 +213,7 @@ export const RankingBox = styled.div`
   border-radius: 12px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
   max-height: 22rem;
+  max-width: 320px;
   min-width: 320px;
 `
 
@@ -282,7 +282,7 @@ export const SelectWrapper = styled.div`
 `
 
 export const ProfileInfoSidebar = styled.div`
-  padding: 0 0 0 2rem;
+  /* padding: 0 0 0 2rem; */
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -351,6 +351,9 @@ export const MoreConfigurationsButton = styled.div`
 export const AnswersBySubject = styled.div`
   max-width: 320px;
   margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   @media (max-width: 1280px) {
     min-width: 384px;
@@ -377,6 +380,23 @@ export const SideBar = styled.div`
   max-width: 320px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   flex-direction: column;
+`
+export const SkeletonLiner = styled(SkeletonLine)`
+  height: 106px;
+  width: 400px !important;
+`
+
+export const QuestionsWrapper = styled.div`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 12px;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+`
+export const SubjectsOptions = styled.div`
+  width: 200px;
 `

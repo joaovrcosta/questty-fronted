@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const SearchInputContainer = styled.div`
   width: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
   margin-left: 1rem;

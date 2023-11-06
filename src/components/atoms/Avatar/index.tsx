@@ -1,6 +1,5 @@
 import * as S from './styles'
 import Link from 'next/link'
-import emptyProfileImg from '@/assets/avatar_empty.svg'
 import { BlankAvatar } from './BlankAvatar'
 
 interface AvatarProps {
@@ -13,7 +12,7 @@ export function Avatar({ variant, imageUrl, id }: AvatarProps) {
   return (
     <>
       <S.UserAvatarContainer variant={variant}>
-        <Link href={`/profile/${id}`}>
+        <Link href={`/profile/${id}/answers`}>
           {imageUrl !== null ? (
             <S.AvatarImage src={imageUrl} variant={variant} />
           ) : (

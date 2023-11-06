@@ -253,10 +253,9 @@ export const AvatarContainer = styled.div`
 `
 
 export const BestAnswerStamp = styled.div`
-  background-color: ${({ theme }) => theme.colors.green_500};
-  padding: 0.25rem 1rem;
-  border: 1px solid ${({ theme }) => theme.colors.black};
-  border-radius: 25px;
+  background-color: #00672e;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
   font-family: Poppins;
   display: flex;
   align-items: center;

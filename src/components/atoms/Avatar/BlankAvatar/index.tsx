@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import * as S from './styles'
-import blankAvatar from '@/assets/blank_user.svg'
+import blankAvatar from '@/assets/default_profile_400x400.png'
 
 interface AvatarProps {
   variant: S.sizeVariants

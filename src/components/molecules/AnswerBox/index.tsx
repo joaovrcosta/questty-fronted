@@ -8,10 +8,6 @@ import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useEffect, useState } from 'react'
 import { AiOutlineFlag, AiOutlineSisternode } from 'react-icons/ai'
 import { Tooltip } from '../Tooltip'
-import { AiFillHeart } from 'react-icons/ai'
-import { BsFillPeopleFill } from 'react-icons/bs'
-import { VscVerifiedFilled } from 'react-icons/vsc'
-import { AiOutlineNodeIndex } from 'react-icons/ai'
 
 interface Answer {
   id: string
@@ -125,7 +121,7 @@ export function AnswerBox({
                 <Text size="xs" weight="bold" color="white">
                   MELHOR RESPOSTA
                 </Text>
-                <MdVerified size={20} color="#fff" />
+                <MdVerified size={16} color="#fff" />
               </S.BestAnswerStamp>
             )}
             <S.StarsRating>
