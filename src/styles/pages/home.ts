@@ -193,12 +193,9 @@ export const RankingSidebar = styled.div`
   min-width: 320px;
   margin-top: 1.5rem;
   display: flex;
+  padding: 0 0 0 1rem;
   align-items: center;
   justify-content: flex-end;
-
-  @media (max-width: 1280px) {
-    min-width: 384px;
-  }
 
   @media (max-width: 1168px) {
     display: none;
@@ -214,7 +211,7 @@ export const RankingBox = styled.div`
   /* box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4); */
   max-height: 22rem;
   max-width: 320px;
-  min-width: 320px;
+  width: 100%;
 `
 
 export const HeadingRankContainer = styled.div`
@@ -282,16 +279,12 @@ export const SelectWrapper = styled.div`
 `
 
 export const ProfileInfoSidebar = styled.div`
-  /* padding: 0 0 0 2rem; */
+  padding: 0 0 0 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  min-width: 320px;
+  width: 100%;
   max-width: 320px;
-
-  @media (max-width: 1280px) {
-    min-width: 384px;
-  }
 
   @media (max-width: 1168px) {
     display: none;
@@ -354,10 +347,8 @@ export const AnswersBySubject = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
-  @media (max-width: 1280px) {
-    min-width: 384px;
-  }
+  padding: 0 0 0 1rem;
+  width: 100%;
 
   @media (max-width: 1168px) {
     display: none;
