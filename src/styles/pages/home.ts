@@ -37,7 +37,6 @@ export const SubjectsContainer = styled.div`
   align-items: center;
   gap: 1rem;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
 
   @media (max-width: 1168px) {
     max-width: 100%;
@@ -125,6 +124,7 @@ export const QuestionsContainer = styled.div`
 `
 
 export const FeedContentWrapper = styled.div`
+  width: 100%;
   max-width: 56rem;
 
   @media (max-width: 1168px) {
@@ -208,10 +208,10 @@ export const RankingSidebar = styled.div`
 export const RankingBox = styled.div`
   font-family: Poppins;
   background-color: ${({ theme }) => theme.colors.white};
-  /* border: 1px solid #000; */
+  border: 1px solid #000;
   padding: 1.25rem;
   border-radius: 12px;
-  box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4); */
   max-height: 22rem;
   max-width: 320px;
   min-width: 320px;
@@ -399,4 +399,12 @@ export const QuestionsWrapper = styled.div`
 `
 export const SubjectsOptions = styled.div`
   width: 200px;
+`
+
+export const HeadingBox = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #000;
+  margin-bottom: 1rem;
 `
