@@ -57,11 +57,10 @@ export const Selected = styled.select`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.black};
   height: 52px;
-  border-radius: 8px;
-  border: none;
+  border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.colors.black};
+  border-bottom: 3px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
 
   &:focus {
     border: 2px solid #6d83f3;
@@ -80,12 +79,12 @@ export const SelectedAlreadyAnswering = styled.select`
   height: 52px;
   width: 184px;
   font-size: 14px;
-  border-radius: 8px;
+  border-radius: 12px;
   color: ${({ theme }) => theme.colors.black};
   /* border: none; */
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  border-bottom: 3px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
 
   &:focus {
@@ -125,7 +124,7 @@ export const QuestionsContainer = styled.div`
 
 export const FeedContentWrapper = styled.div`
   width: 100%;
-  max-width: 56rem;
+  max-width: 58rem;
 
   @media (max-width: 1168px) {
     width: 100%;
@@ -191,7 +190,7 @@ export const PlusIcon = styled(FiFeather)`
 
 export const RankingSidebar = styled.div`
   min-width: 320px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: flex;
   padding: 0 0 0 1rem;
   align-items: center;
@@ -207,7 +206,7 @@ export const RankingBox = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid #000;
   padding: 1.25rem;
-  border-radius: 12px;
+  border-radius: 16px;
   /* box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4); */
   max-height: 22rem;
   max-width: 320px;
@@ -335,7 +334,7 @@ export const MoreConfigurationsButton = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 16px;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_150};
@@ -343,7 +342,7 @@ export const MoreConfigurationsButton = styled.div`
 `
 export const AnswersBySubject = styled.div`
   max-width: 320px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -382,7 +381,7 @@ export const SkeletonLiner = styled(SkeletonLine)`
 export const QuestionsWrapper = styled.div`
   width: 100%;
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 12px;
+  border-radius: 16px;
   border-top: 1px solid #000;
   border-left: 1px solid #000;
   border-right: 1px solid #000;
@@ -395,7 +394,43 @@ export const SubjectsOptions = styled.div`
 export const HeadingBox = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #000;
   margin-bottom: 1rem;
+
+  @media (max-width: 769px) {
+    display: none;
+  }
+`
+
+export const ProfileStatsMobileContainer = styled.div`
+  display: none;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid #000;
+  margin-bottom: 1rem;
+
+  @media (max-width: 769px) {
+    display: block;
+  }
+`
+export const ProfileStatsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+`
+
+export const AvatarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const StatsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  width: 100%;
 `

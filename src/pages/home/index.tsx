@@ -26,6 +26,7 @@ import { ImEarth } from 'react-icons/im'
 import { FaLeaf } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
 import Image from 'next/image'
+import { CardAlert } from '@/components/molecules/CardAlert'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -58,8 +59,8 @@ export default function Home() {
       <S.HomePageContent>
         <S.FeedContentWrapper>
           <S.HeadingBox>
-            {/* <S.Welcome>
-              <Heading
+            <S.Welcome>
+              {/* <Heading
                 size="sm"
                 weight="bold"
                 color="blue_950"
@@ -69,8 +70,13 @@ export default function Home() {
               </Heading>
               <Heading size="sm" weight="bold" color="blue_500">
                 {user?.username}
-              </Heading>
-            </S.Welcome> */}
+              </Heading> */}
+              <div style={{ maxWidth: '650px', marginBottom: '1rem' }}>
+                <Heading size="lgg" weight="extrabold" color="black">
+                  Esclareça suas dúvidas, pergunte para a comunidade
+                </Heading>
+              </div>
+            </S.Welcome>
             <S.SubjectsContainer>
               <Dialog.Root>
                 <Dialog.Trigger asChild>
@@ -96,6 +102,88 @@ export default function Home() {
               </S.SubjectContent>
             </S.SubjectsContainer>
           </S.HeadingBox>
+
+          <S.ProfileStatsMobileContainer>
+            <S.SubjectsContainer>
+              <S.ProfileStatsContainer>
+                <Heading
+                  size="sm"
+                  weight="bold"
+                  color="blue_950"
+                  style={{ whiteSpace: 'nowrap' }}
+                >
+                  Olá 👋,
+                </Heading>
+                <Heading size="md" weight="bold" color="blue_500">
+                  {user?.username}
+                </Heading>
+                <S.StatsContainer>
+                  <Tooltip content="Cristais">
+                    <S.QuestionPoints>
+                      <S.StarContainer>
+                        <SiCrystal size={16} color="#1cb0f6" />
+                      </S.StarContainer>
+                      <S.StarQuantity>
+                        <Text
+                          weight="semibold"
+                          color="blue_950"
+                          style={{ whiteSpace: 'nowrap' }}
+                        >
+                          0
+                        </Text>{' '}
+                      </S.StarQuantity>
+                    </S.QuestionPoints>
+                  </Tooltip>
+                  <Tooltip content="Cristais">
+                    <S.QuestionPoints>
+                      <S.StarContainer>
+                        <AiFillHeart size={16} color="#ff341a" />
+                      </S.StarContainer>
+                      <S.StarQuantity>
+                        <Text
+                          weight="semibold"
+                          color="blue_950"
+                          style={{ whiteSpace: 'nowrap' }}
+                        >
+                          0
+                        </Text>{' '}
+                      </S.StarQuantity>
+                    </S.QuestionPoints>
+                  </Tooltip>
+                  <Tooltip content="Cristais">
+                    <S.QuestionPoints>
+                      <S.StarContainer>
+                        <FaCrown size={16} color="#c98600" />
+                      </S.StarContainer>
+                      <S.StarQuantity>
+                        <Text
+                          weight="semibold"
+                          color="blue_950"
+                          style={{ whiteSpace: 'nowrap' }}
+                        >
+                          0
+                        </Text>{' '}
+                      </S.StarQuantity>
+                    </S.QuestionPoints>
+                  </Tooltip>
+                </S.StatsContainer>
+              </S.ProfileStatsContainer>
+              <S.SubjectContent>
+                <S.Selected>
+                  <option value="opcao1">Todas As Matérias</option>
+                  <option value="opcao2">Opção 2</option>
+                  <option value="opcao3">Opção 3</option>
+                </S.Selected>
+                <S.SelectedAlreadyAnswering>
+                  <option value="opcao1">Sem Resposta</option>
+                  <option value="opcao3">Respondidas</option>
+                </S.SelectedAlreadyAnswering>
+              </S.SubjectContent>
+            </S.SubjectsContainer>
+          </S.ProfileStatsMobileContainer>
+
+          <CardAlert />
+
           <S.QuestionsContainer>
             <S.QuestionsWrapper>
               {loading ? (

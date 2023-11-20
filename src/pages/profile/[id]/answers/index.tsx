@@ -17,6 +17,7 @@ import { MdQuestionAnswer } from 'react-icons/md'
 import Head from 'next/head'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
+import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
@@ -184,7 +185,7 @@ export default function Answers(props: IProfileData) {
             <S.UserHistory>
               {props.userData?.answers && props.userData.answers.length > 0 ? (
                 props.userData.answers.map((question) => (
-                  <QuestionCard
+                  <QuestionCardProfile
                     author_id={question.author_id}
                     readOnly={true}
                     key={question.id}

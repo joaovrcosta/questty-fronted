@@ -93,6 +93,9 @@ export const CreatedAt = styled.div`
 export const UserHistory = styled.div`
   font-family: Poppins;
   margin-top: 1rem;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
 `
 
 export const ActiveIn = styled.div`
