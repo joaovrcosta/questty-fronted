@@ -3,12 +3,8 @@ import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
-import starIcon from '@/assets/star.svg'
-import Image from 'next/image'
-import { GiRoundStar } from 'react-icons/gi'
 import { SiCrystal } from 'react-icons/si'
 import { Tooltip } from '../Tooltip'
-import { HiOutlineChatAlt2 } from 'react-icons/hi'
 
 export type subjectsType =
   | 'math'
@@ -22,6 +18,7 @@ export type subjectsType =
 interface Question {
   id: string
   author_id?: string
+  author_name?: string
   content: string
   category_id?: string
   createdAt: string
@@ -34,7 +31,7 @@ export function QuestionCardProfile({
   id,
   author_id,
   content,
-  category_id,
+  author_name,
   answersQuantity,
   createdAt,
   readOnly = false,
@@ -63,12 +60,10 @@ export function QuestionCardProfile({
                   />
                 </S.UserAvatarWrapper>
                 <S.SubjectAndDateTimeContainer>
-                  {!!category_id && (
-                    <S.Subject size="xs" color="gray_800">
-                      {category_id}
-                    </S.Subject>
-                  )}{' '}
-                  •{' '}
+                  <Text size="xs" weight="semibold">
+                    {author_name}
+                  </Text>
+                  <Text size="xs">Respondeu</Text>
                   <S.DateTime size="xs" color="gray_800">
                     {getTimeAgo(createdAt)}
                   </S.DateTime>
@@ -115,7 +110,7 @@ export function QuestionCardProfile({
             </S.QuestionTextContainer>
           </S.QuestionContent>
           <S.UserHandleContainer>
-            <Tooltip content="Respostas">
+            {/* <Tooltip content="Respostas">
               <S.AnswerQuantityWrapper>
                 <S.AnswerQuantity>
                   {readOnly ? (
@@ -134,7 +129,8 @@ export function QuestionCardProfile({
                 </S.AnswerQuantity>
                 <Text>{answerCount}</Text>
               </S.AnswerQuantityWrapper>
-            </Tooltip>
+            </Tooltip> */}
+            <div></div>
             <S.AswerContainer>
               <S.AnswerButtonContainer>
                 <S.AnswerButton

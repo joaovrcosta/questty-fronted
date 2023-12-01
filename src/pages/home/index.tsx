@@ -27,6 +27,7 @@ import { FaLeaf } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
 import Image from 'next/image'
 import { CardAlert } from '@/components/molecules/CardAlert'
+import Link from 'next/link'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -174,10 +175,10 @@ export default function Home() {
                   <option value="opcao2">Opção 2</option>
                   <option value="opcao3">Opção 3</option>
                 </S.Selected>
-                <S.SelectedAlreadyAnswering>
+                <S.Selected>
                   <option value="opcao1">Sem Resposta</option>
                   <option value="opcao3">Respondidas</option>
-                </S.SelectedAlreadyAnswering>
+                </S.Selected>
               </S.SubjectContent>
             </S.SubjectsContainer>
           </S.ProfileStatsMobileContainer>
@@ -292,7 +293,14 @@ export default function Home() {
                   />
                 </S.UserAvatarWrapper>
                 <div>
-                  <Text weight="semibold">{user?.username}</Text>
+                  <S.UsernameLinkContainer
+                    href={`/profile/${user?.id}/answers`}
+                    passHref
+                  >
+                    <S.Nickname weight="semibold" color="blue_950">
+                      {user?.username}
+                    </S.Nickname>
+                  </S.UsernameLinkContainer>
                   <Text size="sm">#{Number(user?.code)}</Text>
                 </div>
               </S.RankingHeading>

@@ -1,5 +1,6 @@
 import { SkeletonBox, SkeletonLine } from '@/components/atoms/Skeleton'
 import { Text } from '@/components/atoms/Text'
+import Link from 'next/link'
 import { FiFeather } from 'react-icons/fi'
 import styled, { css } from 'styled-components'
 
@@ -61,6 +62,7 @@ export const Selected = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-bottom: 3px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
+  cursor: pointer;
 
   &:focus {
     border: 2px solid #6d83f3;
@@ -434,3 +436,13 @@ export const StatsContainer = styled.div`
   margin-top: 1.5rem;
   width: 100%;
 `
+export const UsernameLink = styled.div``
+
+export const UsernameLinkContainer = styled(Link)`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+export const Nickname = styled(Text)``

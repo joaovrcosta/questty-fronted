@@ -32,13 +32,13 @@ const createNewQuestionFormSchema = zod.object({
 })
 
 export function NewTransactionModal() {
+  const [isVideoWatched, setIsVideoWatched] = useState(false)
+
   const { register, handleSubmit, watch, formState } = useForm<FormData>({
     resolver: zodResolver(createNewQuestionFormSchema),
   })
 
   const { isSubmitting } = formState
-
-  const isContentFilledIn = watch('content')
 
   const [subject, subjectSelect] = useState('')
   const { setIsOpen } = useQuestionModalStore()
@@ -73,6 +73,12 @@ export function NewTransactionModal() {
       console.error('Error creating new question:', error)
       throw error
     }
+  }
+
+  const handleWatchVideo = () => {
+    setTimeout(() => {
+      setIsVideoWatched(true)
+    }, 500)
   }
 
   return (
@@ -125,14 +131,45 @@ export function NewTransactionModal() {
             <S.Selects>
               <SubjectSelect onChange={handleSelectChange} />
             </S.Selects>
+            <S.SelectPointsContainer>
+              <S.SelectPoints>
+                <option value="">1 pt</option>
+                <option value="">2 pts</option>
+                <option value="">3 pts</option>
+                <option value="">4 pts</option>
+                <option value="">5 pts</option>
+                <option value="">6 pts</option>
+                <option value="">7 pts</option>
+                <option value="">8 pts</option>
+                <option value="">9 pts</option>
+                <option value="">10 pts</option>
+              </S.SelectPoints>
+            </S.SelectPointsContainer>
           </S.QuestionMoreInfoContainer>
 
-          {isSubmitting ? (
-            <Spinner size="sm" baseColor="black" variant="primary" />
-          ) : (
-            <Button type="submit" disabled={isSubmitting}>
-              Fazer pergunta
+          {!isVideoWatched ? (
+            <Button onClick={handleWatchVideo} backgroundColor="white">
+              <S.AdVideoLink
+                target="_blank"
+                href="https://www.youtube.com/watch?v=J8oy6Zo6zEo&ab_channel=UniversidadeAnhembiMorumbi"
+              >
+                Ver anuncio + 5pts
+              </S.AdVideoLink>
             </Button>
+          ) : (
+            <div>
+              {isSubmitting ? (
+                <Spinner size="sm" baseColor="black" variant="primary" />
+              ) : (
+                <Button
+                  type="submit"
+                  backgroundColor="black"
+                  disabled={isSubmitting}
+                >
+                  Fazer pergunta
+                </Button>
+              )}
+            </div>
           )}
         </form>
       </S.Content>

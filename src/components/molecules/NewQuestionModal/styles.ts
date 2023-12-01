@@ -207,3 +207,18 @@ export const SubjectSelect = styled.select`
     opacity: 0.8;
   }
 `
+
+export const SelectPointsContainer = styled.div``
+
+export const SelectPoints = styled.select`
+  height: 40px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  border-radius: 24px;
+  padding: 0 0 0 16px;
+  font-family: Poppins;
+  color: #46535f;
+`
+export const AdVideoLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+`

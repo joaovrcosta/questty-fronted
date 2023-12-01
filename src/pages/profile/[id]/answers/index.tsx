@@ -32,6 +32,8 @@ export default function Answers(props: IProfileData) {
     setProfile(props)
   }, [props])
 
+  console.log()
+
   return (
     <>
       <Head>
@@ -187,6 +189,7 @@ export default function Answers(props: IProfileData) {
                 props.userData.answers.map((question) => (
                   <QuestionCardProfile
                     author_id={question.author_id}
+                    author_name={String(props.userData.username)}
                     readOnly={true}
                     key={question.id}
                     id={question.question_id}

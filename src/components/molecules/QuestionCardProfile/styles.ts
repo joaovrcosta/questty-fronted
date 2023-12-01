@@ -6,7 +6,7 @@ export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
 
-  padding: 24px;
+  padding: 1rem 1.5rem;
   opacity: 1;
   filter: brightness(100%);
   transition: opacity 0.3s ease all, filter 0.3s ease;
