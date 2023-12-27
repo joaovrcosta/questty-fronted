@@ -1,3 +1,4 @@
+import { Button } from '@/components/atoms/Button'
 import { Heading } from '@/components/atoms/Heading'
 import styled, { css } from 'styled-components'
 
@@ -91,22 +92,30 @@ export const InputSearchFormContainer = styled.form`
   margin-top: 5rem;
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: 56px;
-  padding: 1.25rem;
+  align-items: center;
+  padding: 0 0.75rem 0 1.5rem;
   justify-content: space-between;
   z-index: 99;
   width: 40rem;
+  height: 5rem;
 
   @media (max-width: 769px) {
     width: 100%;
     margin-top: 2rem;
+    height: 56px;
   }
 `
 
 export const InputSearch = styled.input`
   border: none;
-  font-family: 'Poppins';
-  font-size: 1.25rem;
+  font-family: 'Proxima Nova';
+  font-size: 18px;
   width: 100%;
+  font-weight: 400;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray_400};
+  }
 
   &:focus {
     outline: none;
@@ -219,3 +228,18 @@ export const StepImage = styled.div`
 export const ThrdContainer = styled.div``
 
 export const ProposeContainer = styled.div``
+
+export const AskButton = styled(Button)`
+  @media (max-width: 769px) {
+    display: none;
+  }
+`
+export const AskButtonMobile = styled(Button)`
+  align-items: center;
+  justify-content: center;
+
+  display: none;
+  @media (max-width: 769px) {
+    display: block;
+  }
+`

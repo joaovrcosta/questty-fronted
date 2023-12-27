@@ -1,17 +1,17 @@
-import { INewAnswer } from '@/shared/types'
+import { IAnswer, INewAnswer } from '@/shared/types'
 import { create } from 'zustand'
 
 interface AnswerStore {
-  answer: INewAnswer | null
-  currentNewQuestion: INewAnswer | null
-  setAnswer: (question: INewAnswer | null) => void
-  setCurrentNewAnswer: (newQ: INewAnswer | null) => void
+  answers: IAnswer[] | null
+  currentNewQuestion: IAnswer | null
+  setAnswers: (answers: IAnswer[] | null) => void
+  setCurrentNewAnswer: (newQ: IAnswer | null) => void
 }
 
 export const useAnswerStore = create<AnswerStore>((set) => ({
-  answer: null,
+  answers: null,
   currentNewQuestion: null,
-  setAnswer: (newAnswer: INewAnswer | null) => set({ answer: newAnswer }),
-  setCurrentNewAnswer: (newAns: INewAnswer | null) =>
+  setAnswers: (newAnswers: IAnswer[] | null) => set({ answers: newAnswers }),
+  setCurrentNewAnswer: (newAns: IAnswer | null) =>
     set({ currentNewQuestion: newAns }),
 }))

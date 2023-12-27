@@ -32,7 +32,7 @@ export const ProfileContent = styled.div<IProfileProps>`
 export const UserInfo = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.black};
   padding: 0 4.5rem 0 0;
-  max-height: 25.8rem;
+  height: 100%;
 
   @media (max-width: 1100px) {
     border: none;
@@ -88,6 +88,9 @@ export const CreatedAt = styled.div`
 export const UserHistory = styled.div`
   font-family: Poppins;
   margin-top: 1rem;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
 `
 
 export const ActiveIn = styled.div`
@@ -186,4 +189,12 @@ export const UserActivityContainer = styled.div`
 
 export const hearthIconCSS = styled(AiFillHeart)`
   color: ${({ theme }) => theme.colors.hearth_500};
+`
+
+export const FriendsQuantity = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `

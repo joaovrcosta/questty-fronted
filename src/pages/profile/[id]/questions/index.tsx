@@ -13,10 +13,14 @@ import { useProfileStore } from '@/features/stores/profile/useProfileStore'
 import { useEffect, useState } from 'react'
 import { getDayOfYear } from '@/utils/getDayOfYear'
 import Link from 'next/link'
-import { MdQuestionAnswer } from 'react-icons/md'
+import { MdEmojiFlags, MdQuestionAnswer } from 'react-icons/md'
 import Head from 'next/head'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
+import { IoMdPersonAdd } from 'react-icons/io'
+import { Button } from '@/components/atoms/Button'
+import { Tooltip } from '@/components/molecules/Tooltip'
+import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
@@ -84,6 +88,56 @@ export default function Questions(props: IProfileData) {
               <span style={{ color: '#2089EA', fontWeight: 'bold' }}>@</span>{' '}
               {props.userData.username}
             </Text>
+
+            <S.FriendsQuantity>
+              {/* <IoMdPeople size={24} style={{ color: 'rgba(51, 51, 51, 1)' }} /> */}
+              <Text size="md" color="black">
+                <strong style={{ fontWeight: 'bold' }}>46</strong> Seguidores{' '}
+              </Text>
+              <Text size="md" color="black">
+                <strong style={{ fontWeight: 'bold' }}>82</strong> Segue{' '}
+              </Text>
+            </S.FriendsQuantity>
+
+            {!isCurrentUserProfile && (
+              <div
+                style={{
+                  marginTop: '1rem',
+                  marginBottom: '1rem',
+                  display: 'flex',
+                  gap: '1rem',
+                }}
+              >
+                <Button
+                  variant="lg"
+                  rounding="rounded"
+                  color="white"
+                  backgroundColor="blue_500"
+                  style={{
+                    padding: '0.65rem 1.5rem',
+                    width: '100%',
+                  }}
+                >
+                  <IoMdPersonAdd size={20} />
+                  Seguir
+                </Button>
+
+                <Tooltip content="Denunciar">
+                  <Button
+                    variant="lg"
+                    rounding="rounded"
+                    color="white"
+                    backgroundColor="white"
+                    style={{
+                      padding: '0.65rem 1.5rem',
+                      // width: '20%',
+                    }}
+                  >
+                    <MdEmojiFlags size={24} style={{ color: '#b0b0b0' }} />
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
 
             <S.UserDetailsBox>
               <S.AnswersQuantity>
@@ -187,13 +241,16 @@ export default function Questions(props: IProfileData) {
               setActive={setActiveTab}
             />
             <S.UserHistory>
-              {props.userData?.answers && props.userData.answers.length > 0 ? (
-                props.userData.answers.map((question) => (
-                  <QuestionCard
+              {props.userData?.questions &&
+              props.userData.questions.length > 0 ? (
+                props.userData.questions.map((question) => (
+                  <QuestionCardProfile
                     author_id={question.author_id}
+                    avatarUrl={question.author?.avatar_url}
+                    author_name={question.author?.username}
                     readOnly={true}
                     key={question.id}
-                    id={question.question_id}
+                    id={question.id}
                     content={question.content}
                     createdAt={question.createdAt}
                   />

@@ -17,6 +17,7 @@ import Head from 'next/head'
 import { HeaderLandingPage } from '@/components/organisms/HeaderLandingPage'
 import { Footer } from '@/components/organisms/Footer'
 import { LandingLayout } from '@/components/layouts/landing'
+import { IoSearchOutline } from 'react-icons/io5'
 
 const Index = () => {
   return (
@@ -50,13 +51,16 @@ const Index = () => {
               </S.HeroHeadingContainer>
               <S.InputSearchFormContainer>
                 <S.InputSearch placeholder="Qual a sua dúvida?" />
-                <Button
+                <S.AskButton
                   type="submit"
                   backgroundColor="yellow_800"
                   style={{ height: '46px' }}
                 >
                   PERGUNTE
-                </Button>
+                </S.AskButton>
+                <S.AskButtonMobile>
+                  <IoSearchOutline size={24} />
+                </S.AskButtonMobile>
               </S.InputSearchFormContainer>
             </S.HeroContainer>
           </S.LandingContainer>

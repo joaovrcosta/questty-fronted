@@ -7,13 +7,14 @@ export const Overlay = styled(Dialog.Overlay)`
   width: 100vw;
   height: 100vh;
   inset: 0;
-  background: ${({ theme }) => theme.colors.primary};
+  background: #f5f8fa;
   overflow: hidden;
   z-index: 999999;
 `
 
 export const Content = styled(Dialog.Content)`
-  min-width: 1000px;
+  height: 100%;
+  width: 100%;
   font-family: Poppins;
   padding: 0 1rem;
   z-index: 999999;
@@ -27,13 +28,17 @@ export const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
 
   form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 16px;
     background: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    /* border: 1px solid ${({ theme }) => theme.colors.black}; */
+    border: 1px solid #000;
+
+    border-bottom: 4px solid #000;
 
     input {
       border-radius: 5px;
@@ -50,17 +55,17 @@ export const Content = styled(Dialog.Content)`
     }
 
     button[type='submit'] {
-      height: 56px;
+      height: 44px;
       border: 0;
       width: 12rem;
-      background: ${({ theme }) => theme.colors.blue_500};
+      background: rgb(73, 192, 248);
       font-size: 14px;
       color: ${({ theme }) => theme.colors.white};
-      border: 1px solid ${({ theme }) => theme.colors.black};
+      border-bottom: 4px solid rgb(24 153 214);
       font-family: Poppins;
-      font-weight: 600;
+      font-weight: 800;
       padding: 0 1.25rem;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
       text-transform: uppercase;
       display: flex;
@@ -73,72 +78,21 @@ export const Content = styled(Dialog.Content)`
         cursor: not-allowed;
       }
 
-      :not(:disabled):hover {
+      /* :not(:disabled):hover {
         opacity: 0.95;
         transition: 0.2s;
-      }
+      } */
 
       &:hover {
-        border: 2px solid ${({ theme }) => theme.colors.white};
-        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_950};
-        transition: 0.2s ease all;
+        background-color: rgb(24 153 214);
+        transition: 0.4s;
+      }
+
+      @media (max-width: 420px) {
+        width: 100%;
       }
     }
   }
-
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      top: 50%;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 1080px) {
-      top: 65%;
-      flex-wrap: wrap;
-      /* flex-direction: column-reverse; */
-    }
-  `}
-  ${({ theme }) => css`
-    @media (max-width: 840px) {
-      padding: 2rem;
-      max-height: 520px;
-      top: 35%;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      padding: 4rem;
-      max-height: 402px;
-      top: 28%;
-      width: 100%;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 740px) {
-      padding: 6rem;
-      width: 100%;
-      top: 20%;
-    }
-  `}
-
-  ${({ theme }) => css`
-    @media (max-width: 680px) {
-      min-width: 25rem;
-      padding: 1rem;
-      width: 100%;
-      top: 28%;
-    }
-  `}
-
-
-  ${({ theme }) => css`
-    @media (max-width: 512px) {
-      min-width: 24.375rem;
-    }
-  `}
 `
 
 export const CloseButton = styled(Dialog.Close)`
@@ -155,8 +109,8 @@ export const CloseButton = styled(Dialog.Close)`
 export const QuestionTextarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.black};
 
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 24px;
+
   height: 28rem;
   padding: 1rem;
   font-family: Roboto;
@@ -165,6 +119,8 @@ export const QuestionTextarea = styled.textarea`
   outline: none;
   resize: none;
   color: ${({ theme }) => theme.colors.black};
+  background-color: #f7f7f7;
+  border: 1px solid #000;
 
   &::placeholder {
     font-size: 14px;
@@ -251,20 +207,30 @@ export const SubjectSelect = styled.select`
 
 export const QuestionTextContainer = styled.div`
   width: 360px;
+  height: 625px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 16px;
+  border: 1px solid #000;
 
-  @media (max-width: 1080px) {
+  border-bottom: 4px solid #000;
+  padding: 2rem 1rem 1rem 1rem;
+
+  @media (max-width: 1180px) {
     width: 100%;
+    max-height: 360px;
+
     /* flex-direction: column-reverse; */
   }
 
   @media (max-width: 960px) {
-    padding: 0 6rem;
+    height: 100%;
     /* flex-direction: column-reverse; */
   }
 
-  @media (max-width: 680px) {
-    padding: 0.5rem 0 0 0;
+  @media (max-width: 769px) {
     width: 100%;
+    max-height: 320px;
+    padding: 1.5rem 1rem 1rem 1rem;
     /* flex-direction: column-reverse; */
   }
 `
@@ -272,21 +238,20 @@ export const QuestionTextContainer = styled.div`
 export const FormAnsweringContainer = styled.div`
   width: 644px;
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1180px) {
     width: 100%;
     margin-top: 2rem;
     /* flex-direction: column-reverse; */
   }
 
-  @media (max-width: 960px) {
-    padding: 0 4rem;
+  @media (max-width: 820px) {
     margin-top: 2rem;
     width: 100%;
+
     /* flex-direction: column-reverse; */
   }
 
-  @media (max-width: 680px) {
-    padding: 0.5rem 0;
+  @media (max-width: 769px) {
     margin-top: 0;
     width: 100%;
     /* flex-direction: column-reverse; */
@@ -398,7 +363,7 @@ export const TextContainer = styled.div`
   width: 100%;
   overflow-y: hidden;
 
-  @media (max-width: 680px) {
+  @media (max-width: 1180px) {
     padding: 0;
     max-height: 220px;
     margin-bottom: 1rem;
@@ -438,19 +403,30 @@ export const AnswerButton = styled(Button)`
   font-weight: 600;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
-  &:focus {
-    border: 2px solid #000;
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
-    transition: 0.2s ease all;
-  }
-
-  &:hover {
-    border: 2px solid ${({ theme }) => theme.colors.white};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.black};
-    transition: 0.2s ease all;
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     width: 70%;
+  }
+
+  @media (max-width: 420px) {
+    width: 100%;
+  }
+`
+export const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+
+  @media (max-width: 1180px) {
+    flex-direction: column;
+    margin-top: 24rem;
+    width: 100%;
+  }
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    margin-top: 2rem;
+    width: 100%;
   }
 `

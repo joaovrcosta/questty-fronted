@@ -6,6 +6,7 @@ export interface IQuestion {
   author: {
     name: string
     avatar_url: string
+    username: string
   }
   deleted: boolean
   category_id: string
@@ -120,6 +121,7 @@ export interface IQuestionData {
     category: {
       name: string
     }
+    comments?: IComment[] | null
   }
 }
 
@@ -129,4 +131,21 @@ export interface ICategories {
   createdAt: string
   deletedAt: string
   deleted: boolean
+}
+
+export interface IComment {
+  id: string
+  content: string
+  categoryType?: string
+  author_id: string
+  answer_id: string
+  question_id: string
+  createdAt: Date
+  deletedAt?: Date
+  updated_at?: Date
+  deleted?: boolean
+  author?: {
+    avatar_url: string
+  }
+  avatar_url: string
 }

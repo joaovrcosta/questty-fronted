@@ -63,7 +63,7 @@ export function QuestionCardProfile({
                   <Text size="xs" weight="semibold">
                     {author_name}
                   </Text>
-                  <Text size="xs">Respondeu</Text>
+                  <Text size="xs">respondeu há</Text>
                   <S.DateTime size="xs" color="gray_800">
                     {getTimeAgo(createdAt)}
                   </S.DateTime>

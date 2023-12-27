@@ -44,7 +44,7 @@ export function HeaderAuth() {
 
           <S.StyledLink href="/signup">
             <S.SignUpButton backgroundColor="blue_550">
-              CADASTRAR
+              CRIAR CONTA
             </S.SignUpButton>
           </S.StyledLink>
         </S.HeaderActionsContainer>

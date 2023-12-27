@@ -357,3 +357,27 @@ export const BackButtonBox = styled.button`
 `
 
 export const ContentContainer = styled.div``
+
+export const CommentSection = styled.div``
+
+export const CommentForm = styled.form`
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+`
+export const SendButton = styled.button`
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  cursor: pointer;
+
+  & svg {
+    color: ${({ theme }) => theme.colors.blue_550};
+  }
+`

@@ -49,7 +49,7 @@ export function QuestionCard({
   const answerCount = answersQuantity || 0
 
   return (
-    <S.QuestionCardContainer>
+    <S.QuestionCardContainer onClick={handleResponderClick}>
       <S.QuestionContentContainer>
         <S.Wrapper>
           <S.QuestionContent>

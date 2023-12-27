@@ -1,9 +1,8 @@
 import * as S from './styles'
-import logoImg from '../../../assets/logo.svg'
+import logoImg from '../../../assets/questty-logo-header-answers.svg'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
 import Link from 'next/link'
-import { SearchInput } from '@/components/atoms/SearchInput'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { GetServerSideProps } from 'next'
 import api from '@/services/api'
@@ -13,24 +12,11 @@ import { useEffect, useState } from 'react'
 import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
 import Cookies from 'js-cookie'
 
-export function Header() {
+export function HeaderAnswer() {
   const [loading, setLoading] = useState(false)
 
   const { isLoggedIn, user, token } = useAuthStore()
   const { isOpen, setIsOpen } = useQuestionModalStore()
-
-  const [scrolled, setScrolled] = useState(false)
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   useEffect(() => {
     const cookieToken = Cookies.get('questty-token')
@@ -43,52 +29,22 @@ export function Header() {
   }, [isLoggedIn])
 
   return (
-    <S.HeaderContainer className={scrolled ? '--scrolled' : ''}>
+    <S.HeaderContainer>
       <S.HeaderContent>
         <S.FirstBoxContent>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <S.LogoImage src={logoImg} width={145} height={46} alt="" />
+          <Link
+            href="/"
+            style={{
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <S.LogoImage src={logoImg} width={110} height={36} alt="" />
           </Link>
-          <SearchInput />
         </S.FirstBoxContent>
         <S.HeaderActionsContainer existsToken={token == null ? true : false}>
-          {loading ? (
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <div>
-                <SkeletonLine
-                  width={29}
-                  rows={3}
-                  height={2}
-                  rounding="rounded"
-                />
-              </div>
-              <div>
-                <SkeletonLine
-                  width={30}
-                  rows={3}
-                  height={2}
-                  rounding="rounded"
-                />
-              </div>
-            </div>
-          ) : (
-            <>
-              <S.MakeQuestionButton>
-                <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-                  <Dialog.Trigger asChild>
-                    <S.MakeYourQuestionButton
-                      border={false}
-                      backgroundColor="transparent"
-                    >
-                      PERGUNTAR
-                    </S.MakeYourQuestionButton>
-                  </Dialog.Trigger>
-                  <NewTransactionModal />
-                </Dialog.Root>
-              </S.MakeQuestionButton>
-            </>
-          )}
-
           {loading ? (
             <div>
               <SkeletonCircle size={44} rows={1} />

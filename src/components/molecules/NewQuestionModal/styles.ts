@@ -52,17 +52,17 @@ export const Content = styled(Dialog.Content)`
     }
 
     button[type='submit'] {
-      height: 40px;
+      height: 44px;
       border: 0;
       width: 12rem;
-      background: ${({ theme }) => theme.colors.blue_950};
+      background: rgb(73, 192, 248);
       font-size: 14px;
       color: ${({ theme }) => theme.colors.white};
-      border: 1px solid ${({ theme }) => theme.colors.black};
+      border-bottom: 4px solid rgb(24 153 214);
       font-family: Poppins;
-      font-weight: 600;
+      font-weight: 800;
       padding: 0 1.25rem;
-      border-radius: 25px;
+      border-radius: 12px;
       cursor: pointer;
       text-transform: uppercase;
 
@@ -71,15 +71,14 @@ export const Content = styled(Dialog.Content)`
         cursor: not-allowed;
       }
 
-      :not(:disabled):hover {
+      /* :not(:disabled):hover {
         opacity: 0.95;
         transition: 0.2s;
-      }
+      } */
 
       &:hover {
-        border: 2px solid ${({ theme }) => theme.colors.white};
-        box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_950};
-        transition: 0.2s ease all;
+        background-color: rgb(24 153 214);
+        transition: 0.4s;
       }
     }
   }
@@ -112,8 +111,11 @@ export const QuestionTextarea = styled.textarea`
   border: 1px solid ${({ theme }) => theme.colors.black};
   width: 100%;
 
-  border-radius: 26px;
-  background-color: #ebf2f7;
+  border-radius: 24px;
+  background-color: #f7f7f7;
+  border: 1px solid #e6e6e6;
+  letter-spacing: 0;
+  border-bottom: 2px solid #e6e6e6;
   height: 10.5rem;
   padding: 1rem;
   font-family: Inter;
@@ -147,7 +149,7 @@ export const QuestionMoreInfoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.5rem;
+  gap: 1rem;
 `
 
 export const InputFile = styled.input`

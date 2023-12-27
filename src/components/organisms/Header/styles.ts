@@ -13,7 +13,7 @@ interface ContentProps {
 }
 
 export const HeaderContainer = styled.div<IHeader>`
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.white};
   /* margin-bottom: 5rem; */
   margin-right: calc(-16px);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
@@ -29,6 +29,11 @@ export const HeaderContainer = styled.div<IHeader>`
       width: 100%;
     }
   `}
+
+  &.--scrolled {
+    transition: 0.3s ease all;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
 `
 
 export const HeaderContent = styled.div`

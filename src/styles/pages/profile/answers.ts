@@ -32,7 +32,7 @@ export const ProfileContent = styled.div<IProfileProps>`
 export const UserInfo = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.black};
   padding: 0 4.5rem 0 0;
-  max-height: 25.8rem;
+  height: 100%;
 
   @media (max-width: 1100px) {
     border: none;
@@ -194,4 +194,11 @@ export const UserActivityContainer = styled.div`
 
 export const hearthIconCSS = styled(AiFillHeart)`
   color: ${({ theme }) => theme.colors.hearth_500};
+`
+export const FriendsQuantity = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `

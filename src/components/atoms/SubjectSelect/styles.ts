@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components'
 
 export const SubjectSelect = styled.select`
-  height: 2.5rem;
+  height: 44px;
   width: 180px;
   background-color: #fff;
-  border: none;
-  color: #46535f;
+  border: 1px solid #e5e5e5;
+  color: #777777;
+  font-weight: 600;
   font-family: Poppins;
   cursor: pointer;
-  border: 1px solid #000;
+  border-bottom: 4px solid #e5e5e5;
 
-  border-radius: 30px;
+  border-radius: 12px;
   padding: 0 0 0 16px;
 
   &:focus {

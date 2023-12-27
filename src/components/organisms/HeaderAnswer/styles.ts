@@ -8,6 +8,10 @@ interface IHeader {
   isfixed?: boolean
 }
 
+interface ContentProps {
+  existsToken?: boolean
+}
+
 export const HeaderContainer = styled.div<IHeader>`
   background-color: ${({ theme }) => theme.colors.white};
   /* margin-bottom: 5rem; */
@@ -15,6 +19,7 @@ export const HeaderContainer = styled.div<IHeader>`
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
 
   position: fixed;
+  height: 60px;
   top: 0;
   left: 0;
   z-index: 99999;
@@ -31,8 +36,7 @@ export const HeaderContent = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1.5rem 0 1.5rem 0;
-
+  padding: 0.5rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,6 +61,7 @@ export const FirstBoxContent = styled.div`
   display: flex;
   width: 100%;
   gap: 1rem;
+  align-items: center;
 `
 
 export const MakeQuestionButton = styled.div``
@@ -64,7 +69,8 @@ export const MakeQuestionButton = styled.div``
 export const LogoImage = styled(Image)`
   ${({ theme }) => css`
     @media (max-width: 768px) {
-      width: 72px;
+      width: 68px;
+      /* margin-right: 1rem; */
     }
   `}
 `
@@ -101,13 +107,21 @@ export const SearchInput = styled.input`
   }
 `
 
-export const HeaderActionsContainer = styled.div`
+export const AvatarContainer = styled.div`
+  margin-left: 1rem;
+
+  @media (max-width: 768px) {
+    margin-left: 1rem;
+  }
+`
+
+export const HeaderActionsContainer = styled.div<ContentProps>`
   display: flex;
   align-items: center;
   gap: 1.5rem;
 
-  @media (max-width: 769px) {
-    display: none;
+  @media (max-width: 768px) {
+    display: ${(props) => (props.existsToken ? 'none' : 'block')};
   }
 `
 
@@ -201,7 +215,6 @@ export const SubHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
 
   ${({ theme }) => css`
     @media (min-width: 768px) {
@@ -212,11 +225,11 @@ export const SubHeader = styled.div`
 
 export const SubHeaderContent = styled.div`
   width: 100%;
-  max-width: 500px;
-  padding: 1.5rem 5rem 1.5rem 5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   display: flex;
+  gap: 0.5rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `
 
 export const SearchIcon = styled(BiSearch)`
@@ -238,4 +251,43 @@ export const SearchButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
+`
+
+export const SubSignInButton = styled(Button)`
+  width: 10rem;
+
+  /* @media (max-width: 400px) {
+    width: 100%;
+    width: 10rem;
+  } */
+
+  @media (max-width: 364px) {
+    width: 100%;
+  }
+  /* @media (max-width: 280px) {
+    font-size: 0.75rem;
+  } */
+`
+
+export const SubSignUpButton = styled(Button)`
+  width: 12.25rem;
+  /* @media (max-width: 400px) {
+    width: 97%;
+  } */
+  @media (max-width: 364px) {
+    width: 100%;
+  }
+  /* @media (max-width: 310px) {
+    width: 85%;
+  } */
+  /* @media (max-width: 280px) {
+    width: 80%;
+    font-size: 0.75rem;
+  } */
+`
+
+export const PointsContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 `

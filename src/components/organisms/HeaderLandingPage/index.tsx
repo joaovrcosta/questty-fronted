@@ -8,23 +8,18 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export function HeaderLandingPage() {
-  // const [scrolling, setScrolling] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0)
+    }
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 40) {
-  //       setScrolling(true)
-  //     } else {
-  //       setScrolling(false)
-  //     }
-  //   }
+    window.addEventListener('scroll', handleScroll)
 
-  //   window.addEventListener('scroll', handleScroll)
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll)
-  //   }
-  // }, [])
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   const router = useRouter()
 
   const handleButtonClick = () => {
@@ -32,7 +27,7 @@ export function HeaderLandingPage() {
   }
 
   return (
-    <S.HeaderContainer>
+    <S.HeaderContainer className={scrolled ? '--scrolled' : ''}>
       <S.HeaderContent>
         <Link href="/">
           <S.LogoImage

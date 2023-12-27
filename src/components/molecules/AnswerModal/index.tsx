@@ -12,7 +12,9 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { Spinner } from '@/components/atoms/Spinner'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
+import { HeaderAnswer } from '@/components/organisms/HeaderAnswer'
+import { IAnswer } from '@/shared/types'
 
 interface FormData {
   content: string
@@ -68,8 +70,13 @@ export function AnswerModal({ id }: { id: string }) {
         }
       )
 
+      console.log(response.data)
+
       if (response.status === 201) {
-        answerStore.setAnswer(response.data)
+        const newAnswerData: IAnswer = response.data.answer
+        console.log(newAnswerData)
+
+        answerStore.setAnswers([newAnswerData, ...(answerStore.answers ?? [])])
       }
       if (response.status === 400) {
         console.log('Pergunta já respondida')
@@ -88,69 +95,48 @@ export function AnswerModal({ id }: { id: string }) {
     <Dialog.Portal>
       <S.Overlay />
       <S.Content>
-        <S.QuestionTextContainer>
-          <S.QuestionInfoWrapper>
-            <S.AvatarInformationContainer>
-              <S.AvatarInfoContainer>
-                <Avatar
-                  id={String(id)}
-                  variant="lg"
-                  imageUrl={
-                    question?.questionData?.author.avatar_url
-                      ? question?.questionData.author.avatar_url
-                      : null
-                  }
-                />
-              </S.AvatarInfoContainer>
-              <S.InfoWrapperr>
-                <S.UserInfo>
-                  <S.Username>
-                    <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                      {question?.questionData?.author.name}
-                    </Text>
-                  </S.Username>
-                  {/* <S.UserLevel>27</S.UserLevel> */}
-                </S.UserInfo>
-              </S.InfoWrapperr>
-            </S.AvatarInformationContainer>
-            <S.CloseButtonMobile>
-              <S.BackButtonBox onClick={handleCloseModal}>
-                <AiOutlineClose size={24} />
-              </S.BackButtonBox>
-            </S.CloseButtonMobile>
-          </S.QuestionInfoWrapper>
-          <Dialog.Title style={{ fontSize: '18px', marginBottom: '1rem' }}>
-            Pergunta:
-          </Dialog.Title>
-          <S.TextContainer>
-            <Text>{question?.questionData?.content}</Text>
-          </S.TextContainer>
-        </S.QuestionTextContainer>
-        <S.FormAnsweringContainer>
-          <form
-            onSubmit={handleSubmit(async (data) => {
-              await handleAnswerQuestion(data)
-              setIsOpen(false)
-            })}
-          >
-            <S.HeadingContainer>
-              <S.InnerBackButtonBox onClick={handleCloseModal}>
-                <AiOutlineClose size={24} />
-              </S.InnerBackButtonBox>
-              <Text weight="bold" size="xl" color="blue_950">
-                Responda
-              </Text>
-            </S.HeadingContainer>
-            <S.QuestionTextarea
-              {...register('content')}
-              placeholder="Explicação passo a passo:"
-            ></S.QuestionTextarea>
-            {formState.errors.content && (
-              <span style={{ color: '#D20032', fontSize: '14px' }}>
-                {formState.errors.content.message}
-              </span>
-            )}
-            {/* <S.QuestionMoreInfoContainer>
+        <HeaderAnswer />
+        <S.MainContainer>
+          <S.QuestionTextContainer>
+            <S.QuestionInfoWrapper>
+              <Dialog.Title style={{ fontSize: '20px' }}>
+                Pergunta:
+              </Dialog.Title>
+              <S.CloseButtonMobile>
+                <S.BackButtonBox onClick={handleCloseModal}>
+                  <AiOutlineClose size={24} />
+                </S.BackButtonBox>
+              </S.CloseButtonMobile>
+            </S.QuestionInfoWrapper>
+            <S.TextContainer>
+              <Text>{question?.questionData?.content}</Text>
+            </S.TextContainer>
+          </S.QuestionTextContainer>
+          <S.FormAnsweringContainer>
+            <form
+              onSubmit={handleSubmit(async (data) => {
+                await handleAnswerQuestion(data)
+                setIsOpen(false)
+              })}
+            >
+              <S.HeadingContainer>
+                <S.InnerBackButtonBox onClick={handleCloseModal}>
+                  <AiOutlineClose size={24} />
+                </S.InnerBackButtonBox>
+                <Text weight="bold" size="xl" color="blue_950">
+                  Sua resposta:
+                </Text>
+              </S.HeadingContainer>
+              <S.QuestionTextarea
+                {...register('content')}
+                placeholder="Explicação passo a passo:"
+              ></S.QuestionTextarea>
+              {formState.errors.content && (
+                <span style={{ color: '#D20032', fontSize: '14px' }}>
+                  {formState.errors.content.message}
+                </span>
+              )}
+              {/* <S.QuestionMoreInfoContainer>
               <S.Tools>
                 <Tooltip content="Anexe aqui">
                   <T.IconButton backgroundColor="white">
@@ -171,20 +157,22 @@ export function AnswerModal({ id }: { id: string }) {
                 </Tooltip>
               </S.Tools>
             </S.QuestionMoreInfoContainer> */}
-            {isSubmitting ? (
-              <Spinner size="sm" baseColor="blue_950" variant="primary" />
-            ) : (
-              <S.AnswerButton
-                variant="lg"
-                rounding="rounded-full"
-                color="white"
-                backgroundColor="black"
-              >
-                RESPONDER
-              </S.AnswerButton>
-            )}
-          </form>
-        </S.FormAnsweringContainer>
+              {isSubmitting ? (
+                <Spinner size="sm" baseColor="blue_950" variant="primary" />
+              ) : (
+                <S.AnswerButton
+                  variant="lg"
+                  rounding="rounded-full"
+                  color="white"
+                  backgroundColor="black"
+                  type="submit"
+                >
+                  RESPONDER
+                </S.AnswerButton>
+              )}
+            </form>
+          </S.FormAnsweringContainer>
+        </S.MainContainer>
       </S.Content>
     </Dialog.Portal>
   )

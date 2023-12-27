@@ -28,13 +28,20 @@ export const HeaderContainer = styled.div<IHeader>`
   .scrolled {
     background-color: #fff;
   }
+
+  &.--scrolled {
+    transition: 0.3s ease all;
+    padding: 1rem 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+  }
 `
 
 export const HeaderContent = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2.5rem 0 2.5rem 0;
+  padding: 1.25rem 0 1.25rem 0;
 
   display: flex;
   align-items: center;
@@ -44,7 +51,7 @@ export const HeaderContent = styled.div`
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 0;
-      padding: 1.5rem 1rem 1.5rem 1rem;
+      padding: 1.5rem;
     }
   `}
 

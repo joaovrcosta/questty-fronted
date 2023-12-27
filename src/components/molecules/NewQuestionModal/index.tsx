@@ -75,12 +75,6 @@ export function NewTransactionModal() {
     }
   }
 
-  const handleWatchVideo = () => {
-    setTimeout(() => {
-      setIsVideoWatched(true)
-    }, 500)
-  }
-
   return (
     <Dialog.Portal>
       <S.Overlay />
@@ -131,7 +125,7 @@ export function NewTransactionModal() {
             <S.Selects>
               <SubjectSelect onChange={handleSelectChange} />
             </S.Selects>
-            <S.SelectPointsContainer>
+            {/* <S.SelectPointsContainer>
               <S.SelectPoints>
                 <option value="">1 pt</option>
                 <option value="">2 pts</option>
@@ -144,33 +138,22 @@ export function NewTransactionModal() {
                 <option value="">9 pts</option>
                 <option value="">10 pts</option>
               </S.SelectPoints>
-            </S.SelectPointsContainer>
+            </S.SelectPointsContainer> */}
           </S.QuestionMoreInfoContainer>
 
-          {!isVideoWatched ? (
-            <Button onClick={handleWatchVideo} backgroundColor="white">
-              <S.AdVideoLink
-                target="_blank"
-                href="https://www.youtube.com/watch?v=J8oy6Zo6zEo&ab_channel=UniversidadeAnhembiMorumbi"
+          <div>
+            {isSubmitting ? (
+              <Spinner size="sm" baseColor="black" variant="primary" />
+            ) : (
+              <Button
+                type="submit"
+                backgroundColor="black"
+                disabled={isSubmitting}
               >
-                Ver anuncio + 5pts
-              </S.AdVideoLink>
-            </Button>
-          ) : (
-            <div>
-              {isSubmitting ? (
-                <Spinner size="sm" baseColor="black" variant="primary" />
-              ) : (
-                <Button
-                  type="submit"
-                  backgroundColor="black"
-                  disabled={isSubmitting}
-                >
-                  Fazer pergunta
-                </Button>
-              )}
-            </div>
-          )}
+                Fazer pergunta
+              </Button>
+            )}
+          </div>
         </form>
       </S.Content>
     </Dialog.Portal>

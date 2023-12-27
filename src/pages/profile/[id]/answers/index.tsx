@@ -1,5 +1,5 @@
 import { Header } from '@/components/organisms/Header'
-import * as S from '@/styles/pages/profile/profile'
+import * as S from '@/styles/pages/profile/answers'
 import { Text } from '@/components/atoms/Text'
 import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { BiTimeFive } from 'react-icons/bi'
@@ -18,6 +18,10 @@ import Head from 'next/head'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
 import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
+import { Button } from '@/components/atoms/Button'
+import { MdEmojiFlags } from 'react-icons/md'
+import { IoMdPersonAdd } from 'react-icons/io'
+import { Tooltip } from '@/components/molecules/Tooltip'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
@@ -51,6 +55,7 @@ export default function Answers(props: IProfileData) {
                   props.userData.avatar_url ? props.userData.avatar_url : null
                 }
               />
+
               {isLoggedIn && isCurrentUserProfile && (
                 <Link
                   href={`/profile/${props.userData.id}/edit`}
@@ -82,6 +87,56 @@ export default function Answers(props: IProfileData) {
               <span style={{ color: '#2089EA', fontWeight: 'bold' }}>@</span>{' '}
               {props.userData.username}
             </Text>
+
+            <S.FriendsQuantity>
+              {/* <IoMdPeople size={24} style={{ color: 'rgba(51, 51, 51, 1)' }} /> */}
+              <Text size="md" color="black">
+                <strong style={{ fontWeight: 'bold' }}>46</strong> Seguidores{' '}
+              </Text>
+              <Text size="md" color="black">
+                <strong style={{ fontWeight: 'bold' }}>82</strong> Segue{' '}
+              </Text>
+            </S.FriendsQuantity>
+
+            {!isCurrentUserProfile && (
+              <div
+                style={{
+                  marginTop: '1rem',
+                  marginBottom: '1rem',
+                  display: 'flex',
+                  gap: '1rem',
+                }}
+              >
+                <Button
+                  variant="lg"
+                  rounding="rounded"
+                  color="white"
+                  backgroundColor="blue_500"
+                  style={{
+                    padding: '0.65rem 1.5rem',
+                    width: '100%',
+                  }}
+                >
+                  <IoMdPersonAdd size={20} />
+                  Seguir
+                </Button>
+
+                <Tooltip content="Denunciar">
+                  <Button
+                    variant="lg"
+                    rounding="rounded"
+                    color="white"
+                    backgroundColor="white"
+                    style={{
+                      padding: '0.65rem 1.5rem',
+                      // width: '20%',
+                    }}
+                  >
+                    <MdEmojiFlags size={24} style={{ color: '#b0b0b0' }} />
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
 
             <S.UserDetailsBox>
               <S.AnswersQuantity>
@@ -189,6 +244,7 @@ export default function Answers(props: IProfileData) {
                 props.userData.answers.map((question) => (
                   <QuestionCardProfile
                     author_id={question.author_id}
+                    avatarUrl={question.author?.avatar_url}
                     author_name={String(props.userData.username)}
                     readOnly={true}
                     key={question.id}

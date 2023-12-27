@@ -6,8 +6,9 @@ export const FooterContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   /* justify-content: space-between; */
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.white};
   width: 100%;
+  height: 100%;
   border-top: 1px solid ${({ theme }) => theme.colors.gray_100};
 `
 

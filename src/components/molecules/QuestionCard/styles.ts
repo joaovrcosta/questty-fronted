@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 export const QuestionCardContainer = styled.div`
   background-color: none;
+  cursor: pointer;
 
   padding: 24px;
   opacity: 1;
@@ -134,11 +135,13 @@ export const SubjectAndDateTimeContainer = styled.div`
   align-items: center;
 `
 export const Subject = styled(Text)`
-  font-family: Roboto;
+  font-family: Poppins;
   font-weight: 700;
+  font-size: 14px;
 `
 export const DateTime = styled(Text)`
-  font-family: Roboto;
+  font-family: Poppins;
+  font-size: 14px;
 `
 
 export const AswerContainer = styled.div``
