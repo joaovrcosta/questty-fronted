@@ -268,7 +268,8 @@ export default function Answers(props: IProfileData) {
                     id={question.question_id}
                     content={question.content}
                     createdAt={question.createdAt}
-                    answeredText="respondeu há"
+                    answeredText="respondeu"
+                    // subjectName={question.category.name}
                   />
                 ))
               ) : (
@@ -279,7 +280,7 @@ export default function Answers(props: IProfileData) {
                 </S.NotFindAnyAnswer>
               )}
             </S.UserHistory>
-            <S.ShowmoreQuestionsButtonContainer>
+            {/* <S.ShowmoreQuestionsButtonContainer>
               <S.showMoreButton
                 rounding="rounded-thin"
                 backgroundColor="transparent"
@@ -287,7 +288,7 @@ export default function Answers(props: IProfileData) {
               >
                 Mostrar mais
               </S.showMoreButton>
-            </S.ShowmoreQuestionsButtonContainer>
+            </S.ShowmoreQuestionsButtonContainer> */}
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>

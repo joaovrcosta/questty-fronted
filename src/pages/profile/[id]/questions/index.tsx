@@ -21,6 +21,8 @@ import { IoMdPersonAdd } from 'react-icons/io'
 import { Button } from '@/components/atoms/Button'
 import { Tooltip } from '@/components/molecules/Tooltip'
 import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
+import handleFollowUser from '@/utils/handle/handleFollowUser'
+import { FollowButton } from '@/components/molecules/FollowButton'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
@@ -37,10 +39,38 @@ export default function Questions(props: IProfileData) {
     setProfile(props)
   }, [props])
 
+  useEffect(() => {
+    const fetchFollowData = async () => {
+      try {
+        if (props.userData && props.userData.id) {
+          const res = await api.get(`follow-status/${props.userData.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          if (res.status === 200) {
+            const data = res.data
+            setIsAlreadyFollowing(data.isFollowing === true)
+          } else {
+            console.log(res.status)
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error)
+      }
+    }
+    fetchFollowData()
+  }, [props.userData.id, token])
+
+  const handleFollow = () => {
+    handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
+  }
+
   return (
     <>
       <Head>
-        <title>{user?.userData.name} | Questty</title>
+        <title>{user?.userData.username} | Questty</title>
       </Head>
 
       <S.ProfileContainer>
@@ -105,19 +135,10 @@ export default function Questions(props: IProfileData) {
                   gap: '1rem',
                 }}
               >
-                <Button
-                  variant="lg"
-                  rounding="rounded"
-                  color="white"
-                  backgroundColor="blue_500"
-                  style={{
-                    padding: '0.65rem 1.5rem',
-                    width: '100%',
-                  }}
-                >
-                  <IoMdPersonAdd size={20} />
-                  Seguir
-                </Button>
+                <FollowButton
+                  isAlreadyFollowing={isAlreadyFollowing}
+                  onClick={handleFollow}
+                />
 
                 <Tooltip content="Denunciar">
                   <Button

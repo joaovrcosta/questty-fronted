@@ -15,6 +15,7 @@ import Head from 'next/head'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
 import { useQuestionCommentStore } from '@/features/stores/questionComments/useQuestionCommentStore'
+import { GoPlus } from 'react-icons/go'
 
 interface Question {
   id: number
@@ -36,7 +37,7 @@ export default function Question(props: IQuestionData) {
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const answerStore = useAnswerStore()
 
-  const { user } = useAuthStore()
+  const { user, isLoggedIn } = useAuthStore()
   const { question } = useQuestionStore()
   const { answers } = useAnswerStore()
   const textForTitle = question?.questionData?.content.substring(0, 100)
@@ -140,6 +141,7 @@ export default function Question(props: IQuestionData) {
               </Text>
               <Text>Essa pergunta não teve resposta ainda</Text>
               <S.AnswerButton backgroundColor="black" color="white">
+                <GoPlus size={24} />
                 RESPONDER
               </S.AnswerButton>
             </>
@@ -216,6 +218,11 @@ export default function Question(props: IQuestionData) {
               <MoreQuestonCard />
             </div>
           </S.HelpMorePeopleContainer>
+          {!isLoggedIn && (
+            <>
+              <h1>Deslogado</h1>
+            </>
+          )}
         </S.QuestionWrapper>
       </S.QuestionContainer>
       <FloatingButton />
