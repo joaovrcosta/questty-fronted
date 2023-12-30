@@ -24,21 +24,18 @@ import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
-  const { isLoggedIn } = useAuthStore()
+  const { isLoggedIn, token } = useAuthStore()
   const { setProfile, user } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
 
   const [activeTab, setActiveTab] = useState('questions')
 
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
+  const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
 
   useEffect(() => {
     setProfile(props)
   }, [props])
-
-  const handleLogoutClick = () => {
-    useAuthStore.getState().logout(router)
-  }
 
   return (
     <>
@@ -253,6 +250,7 @@ export default function Questions(props: IProfileData) {
                     id={question.id}
                     content={question.content}
                     createdAt={question.createdAt}
+                    answeredText="perguntou há"
                   />
                 ))
               ) : (

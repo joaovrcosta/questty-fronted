@@ -351,7 +351,7 @@ export const BackButtonBox = styled.button`
     background: ${({ theme }) => theme.colors.gray_100};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     display: none;
   }
 `
@@ -364,6 +364,10 @@ export const CommentForm = styled.form`
   width: 100%;
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 769px) {
+    gap: 0.5rem;
+  }
 `
 export const SendButton = styled.button`
   border-radius: 50%;

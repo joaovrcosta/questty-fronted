@@ -1,7 +1,5 @@
-import { Header } from '@/components/organisms/Header'
 import * as S from '@/styles/pages/profile/answers'
 import { Text } from '@/components/atoms/Text'
-import { QuestionCard } from '@/components/molecules/QuestionCard'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
@@ -22,21 +20,49 @@ import { Button } from '@/components/atoms/Button'
 import { MdEmojiFlags } from 'react-icons/md'
 import { IoMdPersonAdd } from 'react-icons/io'
 import { Tooltip } from '@/components/molecules/Tooltip'
+import { BsFillPersonCheckFill } from 'react-icons/bs'
+import handleFollowUser from '@/utils/handle/handleFollowUser'
+import { FollowButton } from '@/components/molecules/FollowButton'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
-  const { isLoggedIn } = useAuthStore()
+  const { isLoggedIn, token } = useAuthStore()
   const { setProfile, user } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
-
-  console.log()
+  const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
 
   useEffect(() => {
     setProfile(props)
   }, [props])
 
-  console.log()
+  useEffect(() => {
+    const fetchFollowData = async () => {
+      try {
+        if (props.userData && props.userData.id) {
+          const res = await api.get(`follow-status/${props.userData.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          if (res.status === 200) {
+            const data = res.data
+            setIsAlreadyFollowing(data.isFollowing === true)
+          } else {
+            console.log(res.status)
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error)
+      }
+    }
+    fetchFollowData()
+  }, [props.userData.id, token])
+
+  const handleFollow = () => {
+    handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
+  }
 
   return (
     <>
@@ -107,19 +133,10 @@ export default function Answers(props: IProfileData) {
                   gap: '1rem',
                 }}
               >
-                <Button
-                  variant="lg"
-                  rounding="rounded"
-                  color="white"
-                  backgroundColor="blue_500"
-                  style={{
-                    padding: '0.65rem 1.5rem',
-                    width: '100%',
-                  }}
-                >
-                  <IoMdPersonAdd size={20} />
-                  Seguir
-                </Button>
+                <FollowButton
+                  isAlreadyFollowing={isAlreadyFollowing}
+                  onClick={handleFollow}
+                />
 
                 <Tooltip content="Denunciar">
                   <Button
@@ -251,6 +268,7 @@ export default function Answers(props: IProfileData) {
                     id={question.question_id}
                     content={question.content}
                     createdAt={question.createdAt}
+                    answeredText="respondeu há"
                   />
                 ))
               ) : (

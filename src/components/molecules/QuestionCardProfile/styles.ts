@@ -139,7 +139,7 @@ export const Subject = styled(Text)`
   font-weight: 700;
 `
 export const DateTime = styled(Text)`
-  font-family: Roboto;
+  font-family: Poppins;
 `
 
 export const AswerContainer = styled.div``

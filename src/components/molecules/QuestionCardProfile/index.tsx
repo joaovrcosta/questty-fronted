@@ -25,6 +25,7 @@ interface Question {
   readOnly?: boolean
   answersQuantity?: number
   avatarUrl?: string
+  answeredText?: string
 }
 
 export function QuestionCardProfile({
@@ -36,6 +37,7 @@ export function QuestionCardProfile({
   createdAt,
   readOnly = false,
   avatarUrl,
+  answeredText,
 }: Question) {
   const router = useRouter()
 
@@ -63,7 +65,7 @@ export function QuestionCardProfile({
                   <Text size="xs" weight="semibold">
                     {author_name}
                   </Text>
-                  <Text size="xs">respondeu há</Text>
+                  <Text size="xs">{answeredText}</Text>
                   <S.DateTime size="xs" color="gray_800">
                     {getTimeAgo(createdAt)}
                   </S.DateTime>
