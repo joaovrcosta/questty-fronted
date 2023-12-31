@@ -13,43 +13,36 @@ import rocketGirl from '@/assets/girl-rocket.svg'
 import girlPuzzle from '@/assets/girl-puzzle.svg'
 import boyHeadphone from '@/assets/boy-img-icon.svg'
 import girlUniverse from '@/assets/girl-univerve.svg'
-import Head from 'next/head'
-import { HeaderLandingPage } from '@/components/organisms/HeaderLandingPage'
-import { Footer } from '@/components/organisms/Footer'
 import { LandingLayout } from '@/components/layouts/landing'
-import { IoSearchOutline } from 'react-icons/io5'
+import { NextSeo } from 'next-seo'
 
 const Index = () => {
   return (
     <>
-      <Head>
-        <title>Questty.com.br - Para estudantes. Por estudantes.</title>
-      </Head>
+      <NextSeo
+        title="Questty.com - Para curiosos. Para todo mundo"
+        description="O Questty é a plataforma onde estudantes e especialistas convergem para desvendar os enigmas acadêmicos mais desafiadores, criando uma comunidade dinâmica de aprendizado colaborativo."
+      />
 
       <S.MainContainer>
         <S.LandingContent>
           <S.LandingContainer>
             <S.HeroContainer>
               <S.HeroHeadingContainer>
-                <S.HeroHeading color="blue_950" size="xxl" weight="bold">
-                  Questtyone, aprenda
+                <S.HeroHeading>
+                  Obtenha resposta <strong>Verificadas</strong> para sua lição
+                  de casa
                 </S.HeroHeading>
                 <S.TextContainer>
-                  <Text
-                    color="blue_950"
-                    weight="medium"
-                    style={{ marginLeft: '8px' }}
-                  >
-                    Enfrentando desafios nos estudos, seja você ou seus filhos?
-                    Não se preocupe. Desde o inglês até a física, o Questty está
-                    aqui para apoiar sua jornada acadêmica. Com cada pergunta,
-                    não apenas encontrará a resposta, mas também compreenderá a
-                    lógica por trás dela, permitindo que alcance o máximo de seu
-                    potencial.
-                  </Text>
+                  <S.SubTitle color="white" weight="medium">
+                    O Questty é a plataforma onde estudantes e especialistas
+                    convergem para desvendar os enigmas acadêmicos mais
+                    desafiadores, criando uma comunidade dinâmica de aprendizado
+                    colaborativo.
+                  </S.SubTitle>
                 </S.TextContainer>
               </S.HeroHeadingContainer>
-              <S.InputSearchFormContainer>
+              {/* <S.InputSearchFormContainer>
                 <S.InputSearch placeholder="Qual a sua dúvida?" />
                 <S.AskButton
                   type="submit"
@@ -61,7 +54,7 @@ const Index = () => {
                 <S.AskButtonMobile>
                   <IoSearchOutline size={24} />
                 </S.AskButtonMobile>
-              </S.InputSearchFormContainer>
+              </S.InputSearchFormContainer> */}
             </S.HeroContainer>
           </S.LandingContainer>
           <div>
@@ -76,29 +69,37 @@ const Index = () => {
             </S.RocketGirlContainer>
           </div>
         </S.LandingContent>
-        <Wave backgroundColor="yellow_400" />
+        <S.Waving backgroundColor="yellow_400" />
 
         <S.SecondContainer>
           <S.CardsContainer>
+            <S.HeadingHero>
+              <h4>Aprenda, da sua forma</h4>
+
+              <Heading size="lg" weight="extrabold" color="black">
+                Esteja preparado para qualquer prova
+              </Heading>
+            </S.HeadingHero>
             <S.CardWrapper>
               <Card
                 image={<Image src={eye} width={80} height={80} alt="" />}
                 titleColor="blue_950"
                 descriptionColor="blue_950"
-                backgroundColor="yellow_600"
+                backgroundColor="white"
                 title="Visualize sem limite"
                 description="Visualize sem restrições. Pois nossa missão é o seu conhecimento."
               />
               <Card
                 image={<Image src={starCount} width={80} height={80} alt="" />}
-                backgroundColor="blue_950"
+                backgroundColor="white"
+                titleColor="blue_950"
                 title="Avalie as melhores respostas"
                 description="Tenha controle das respostas mais exatas para suas dúvidas"
-                descriptionColor="white"
+                descriptionColor="blue_950"
               />
               <Card
                 image={<Image src={stars} width={80} height={80} alt="" />}
-                backgroundColor="yellow_600"
+                backgroundColor="white"
                 title="Respostas de ouro"
                 titleColor="blue_950"
                 descriptionColor="blue_950"

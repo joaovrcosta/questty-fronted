@@ -14,7 +14,7 @@ export const ProfileContainer = styled.div`
 `
 export const ProfileContent = styled.div<IProfileProps>`
   display: flex;
-  padding: 3.25em;
+  padding: 4.25rem 3.25rem 4.25rem 3.25rem;
 
   @media (max-width: 1100px) {
     flex-wrap: wrap;
@@ -32,7 +32,6 @@ export const ProfileContent = styled.div<IProfileProps>`
 export const UserInfo = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.black};
   padding: 0 4.5rem 0 0;
-  height: 100%;
 
   @media (max-width: 1100px) {
     border: none;

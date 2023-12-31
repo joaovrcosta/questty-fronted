@@ -14,14 +14,14 @@ export const ProfileContainer = styled.div`
 `
 export const ProfileContent = styled.div<IProfileProps>`
   display: flex;
-  padding: 3.25em;
+  padding: 3.25rem;
 
   @media (max-width: 1100px) {
     flex-wrap: wrap;
     padding: 1;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     flex-wrap: wrap;
     padding: ${({ isLoggedIn }) =>
       isLoggedIn ? '0rem 1rem 1rem 1rem' : '4rem 1rem 1rem 1rem'};
@@ -32,7 +32,6 @@ export const ProfileContent = styled.div<IProfileProps>`
 export const UserInfo = styled.aside`
   border-right: 1px solid ${({ theme }) => theme.colors.black};
   padding: 0 4.5rem 0 0;
-  height: 100%;
 
   @media (max-width: 1100px) {
     border: none;
@@ -40,7 +39,7 @@ export const UserInfo = styled.aside`
     width: 100%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     border: none;
     padding: 0;
     width: 100%;
@@ -52,7 +51,7 @@ export const SeenIn = styled.div`
   font-family: Poppins;
   white-space: nowrap;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin-top: 1rem;
   }
 `
@@ -60,7 +59,7 @@ export const SeenIn = styled.div`
 export const UserEditing = styled.div`
   margin-top: 2rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin-top: 1.5rem;
   }
 `
@@ -73,7 +72,7 @@ export const UserHistoryContainer = styled.div`
     padding: 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     padding: 0;
     margin-top: 1.5rem;
   }
@@ -143,7 +142,7 @@ export const EditButton = styled(Button)`
 `
 
 export const UserAvatarPhoto = styled(Avatar)`
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     height: 32px;
     width: 32px;
   }

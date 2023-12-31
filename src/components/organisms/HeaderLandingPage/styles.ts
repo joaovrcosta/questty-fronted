@@ -6,10 +6,11 @@ import { BiSearch } from 'react-icons/bi'
 
 interface IHeader {
   isfixed?: boolean
+  isScrolled?: boolean
 }
 
 export const HeaderContainer = styled.div<IHeader>`
-  background-color: ${({ theme }) => theme.colors.yellow_50};
+  background: transparent;
   /* margin-bottom: 5rem; */
   margin-right: calc(-16px);
 
@@ -18,6 +19,7 @@ export const HeaderContainer = styled.div<IHeader>`
   left: 0;
   z-index: 99999;
   width: 100%;
+  height: 94px;
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
@@ -31,22 +33,32 @@ export const HeaderContainer = styled.div<IHeader>`
 
   &.--scrolled {
     transition: 0.3s ease all;
-    padding: 1rem 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+
+    background-color: transparent;
+    border-radius: 60px;
+    height: 72px;
+    margin-top: 16px;
   }
 `
 
-export const HeaderContent = styled.div`
+export const HeaderContent = styled.div<IHeader>`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1.25rem 0 1.25rem 0;
+
+  ${({ isScrolled, theme }) =>
+    isScrolled
+      ? css`
+          padding: 1rem;
+        `
+      : css`
+          padding: 1rem;
+        `}
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem; //Spacing Items
+  gap: 1.5rem; // Spacing Items
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
@@ -58,8 +70,15 @@ export const HeaderContent = styled.div`
   ${({ theme }) => css`
     @media (max-width: 768px) {
       gap: 0;
+      padding: 16px;
     }
   `}
+
+  &.--scrolled {
+    border-radius: 60px;
+    background-color: #fff;
+    box-shadow: 0 8px 32px 0 rgba(50, 60, 69, 0.2);
+  }
 `
 
 export const LogoImage = styled(Image)`
@@ -107,7 +126,7 @@ export const SearchInput = styled.input`
 export const HeaderActionsContainer = styled.div`
   display: flex;
   align-items: center;
-  /* gap: 1.5rem; */
+  gap: 1rem;
 `
 
 export const StyledLink = styled(Link)`
@@ -125,7 +144,6 @@ export const StyledButton = styled(Button)`
 `
 
 export const MakeYourQuestionButton = styled(Button)`
-  margin-left: 1rem;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
@@ -150,7 +168,6 @@ export const SignInButton = styled(Button)`
 `
 
 export const SignUpButton = styled(Button)`
-  margin-left: 1rem;
   color: ${({ theme }) => theme.colors.black};
 
   &:hover {
@@ -199,8 +216,6 @@ export const SearchButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
   border-radius: 20px;
   border: none;
   background-color: ${({ theme }) => theme.colors.black};
@@ -213,8 +228,27 @@ export const SearchButton = styled.button`
 export const ButtonsMobileContainer = styled.div`
   display: none;
   font-family: 'Poppins';
+  gap: 1rem;
 
   @media (max-width: 768px) {
     display: block;
+  }
+`
+
+export const NavigationButton = styled.button<IHeader>`
+  background-color: transparent;
+  border: none;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  &.--scrolled {
+    svg {
+      color: ${({ theme }) => theme.colors.black};
+    }
   }
 `

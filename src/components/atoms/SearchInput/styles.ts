@@ -1,7 +1,12 @@
+import { ColorThemeType } from '@/core/constants/theme'
 import { BiSearch } from 'react-icons/bi'
 import styled from 'styled-components'
 
-export const SearchInputContainer = styled.div`
+interface ISearchInput {
+  backgroundColor?: ColorThemeType
+}
+
+export const SearchInputContainer = styled.div<ISearchInput>`
   width: 100%;
   height: 40px;
   display: flex;
@@ -9,7 +14,8 @@ export const SearchInputContainer = styled.div`
   margin-left: 1rem;
   border-radius: 46px;
   border: 1px solid ${({ theme }) => theme.colors.black};
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor || theme.colors.white};
 
   @media (max-width: 768px) {
     margin-left: 0;

@@ -21,30 +21,61 @@ import { IoMdPersonAdd } from 'react-icons/io'
 import { Button } from '@/components/atoms/Button'
 import { Tooltip } from '@/components/molecules/Tooltip'
 import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
+import handleFollowUser from '@/utils/handle/handleFollowUser'
+import { FollowButton } from '@/components/molecules/FollowButton'
+import { NextSeo } from 'next-seo'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
-  const { isLoggedIn } = useAuthStore()
+  const { isLoggedIn, token } = useAuthStore()
   const { setProfile, user } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
 
   const [activeTab, setActiveTab] = useState('questions')
 
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
+  const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+
+  const usernameDisplay = `${props.userData.username} | Questty.com`
 
   useEffect(() => {
     setProfile(props)
   }, [props])
 
-  const handleLogoutClick = () => {
-    useAuthStore.getState().logout(router)
+  useEffect(() => {
+    const fetchFollowData = async () => {
+      try {
+        if (props.userData && props.userData.id) {
+          const res = await api.get(`follow-status/${props.userData.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          if (res.status === 200) {
+            const data = res.data
+            setIsAlreadyFollowing(data.isFollowing === true)
+          } else {
+            console.log(res.status)
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error)
+      }
+    }
+    fetchFollowData()
+  }, [props.userData.id, token])
+
+  const handleFollow = () => {
+    handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
   }
 
   return (
     <>
-      <Head>
-        <title>{user?.userData.name} | Questty</title>
-      </Head>
+      <NextSeo
+        title={usernameDisplay}
+        description="O Questty é a plataforma onde estudantes e especialistas convergem para desvendar os enigmas acadêmicos mais desafiadores, criando uma comunidade dinâmica de aprendizado colaborativo."
+      />
 
       <S.ProfileContainer>
         <S.ProfileContent isLoggedIn={isLoggedIn}>
@@ -108,19 +139,10 @@ export default function Questions(props: IProfileData) {
                   gap: '1rem',
                 }}
               >
-                <Button
-                  variant="lg"
-                  rounding="rounded"
-                  color="white"
-                  backgroundColor="blue_500"
-                  style={{
-                    padding: '0.65rem 1.5rem',
-                    width: '100%',
-                  }}
-                >
-                  <IoMdPersonAdd size={20} />
-                  Seguir
-                </Button>
+                <FollowButton
+                  isAlreadyFollowing={isAlreadyFollowing}
+                  onClick={handleFollow}
+                />
 
                 <Tooltip content="Denunciar">
                   <Button
@@ -253,6 +275,7 @@ export default function Questions(props: IProfileData) {
                     id={question.id}
                     content={question.content}
                     createdAt={question.createdAt}
+                    answeredText="perguntou há"
                   />
                 ))
               ) : (

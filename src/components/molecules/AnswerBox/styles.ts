@@ -97,7 +97,6 @@ export const UserAvatarContainer = styled.div`
 
 export const AnswerInfo = styled.div`
   display: flex;
-  display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
@@ -109,7 +108,8 @@ export const AnswerInfoWrapper = styled.div`
   gap: 1rem;
 
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
+    align-items: center;
   }
 `
 
@@ -179,7 +179,6 @@ export const StarsRating = styled.div`
   font-family: Poppins;
 
   @media (max-width: 768px) {
-    display: none;
   }
 `
 
@@ -273,7 +272,6 @@ export const BestAnswerStamp = styled.div`
 
 export const CreatedAtContainer = styled.div`
   @media (max-width: 768px) {
-    margin-top: 0.5rem;
   }
 `
 

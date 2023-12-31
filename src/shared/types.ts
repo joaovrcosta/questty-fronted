@@ -35,6 +35,9 @@ export interface IAnswer {
   updatedAt: string
   deleted: boolean
   likes: ILike[]
+  category: {
+    name: string
+  }
 }
 
 export interface INewAnswer {

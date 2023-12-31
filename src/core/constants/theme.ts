@@ -25,6 +25,7 @@ export const defaultTheme = {
     green_200: '#AAE10E',
     success_500: '#32CA25',
     green_300: '#78E16F',
+    green_400: '#58cc02',
     green_500: 'rgba(11, 172, 128, 1)',
     danger_500: '#cf1d00',
     hearth_500: '#ff341a',
@@ -43,6 +44,7 @@ export const defaultTheme = {
     gray_800: 'rgba(51, 51, 51, 1)',
     gray_900: 'rgba(18, 18, 18, 1)',
     transparent: 'rgba(255, 255, 255, 0)',
+    transparent_glass: 'rgba(255, 255, 255, 0.2)',
   } as const,
   typography: {
     heading: {

@@ -374,6 +374,10 @@ export const SideBar = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+
+  @media (max-width: 1168px) {
+    display: none;
+  }
 `
 export const SkeletonLiner = styled(SkeletonLine)`
   height: 106px;

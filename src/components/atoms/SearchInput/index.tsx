@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import * as S from './styles'
 import Link from 'next/link'
+import { ColorThemeType } from '@/core/constants/theme'
 
-export function SearchInput() {
+interface SearchInputProps {
+  backgroundColor?: ColorThemeType
+}
+
+export function SearchInput({ backgroundColor = 'white' }: SearchInputProps) {
   const [inputValue, setInputValue] = useState('')
 
   const handleInputChange = (event: any) => {
@@ -10,7 +15,7 @@ export function SearchInput() {
   }
 
   return (
-    <S.SearchInputContainer>
+    <S.SearchInputContainer backgroundColor={backgroundColor}>
       <S.SearchInput
         placeholder="Qual a sua dúvida?"
         value={inputValue}

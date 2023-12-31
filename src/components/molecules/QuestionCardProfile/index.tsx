@@ -25,6 +25,8 @@ interface Question {
   readOnly?: boolean
   answersQuantity?: number
   avatarUrl?: string
+  answeredText?: string
+  subjectName?: string
 }
 
 export function QuestionCardProfile({
@@ -36,6 +38,8 @@ export function QuestionCardProfile({
   createdAt,
   readOnly = false,
   avatarUrl,
+  answeredText,
+  subjectName,
 }: Question) {
   const router = useRouter()
 
@@ -59,49 +63,23 @@ export function QuestionCardProfile({
                     imageUrl={avatarUrl ? avatarUrl : null}
                   />
                 </S.UserAvatarWrapper>
-                <S.SubjectAndDateTimeContainer>
-                  <Text size="xs" weight="semibold">
-                    {author_name}
-                  </Text>
-                  <Text size="xs">respondeu há</Text>
-                  <S.DateTime size="xs" color="gray_800">
-                    {getTimeAgo(createdAt)}
-                  </S.DateTime>
-                </S.SubjectAndDateTimeContainer>
+                <div>
+                  <S.SubjectAndDateTimeContainer>
+                    <Text size="xs" weight="semibold">
+                      {author_name}
+                    </Text>
+                    <Text size="xs">{answeredText}</Text>
+                  </S.SubjectAndDateTimeContainer>
+                  <div>
+                    <S.DateTime size="xs" color="gray_800">
+                      {getTimeAgo(createdAt)}
+                    </S.DateTime>
+                    <Text size="xs" weight="semibold">
+                      {subjectName}
+                    </Text>
+                  </div>
+                </div>
               </S.UserInfo>
-              <Tooltip content="Cristais">
-                <S.QuestionPoints>
-                  <S.StarContainer>
-                    <SiCrystal size={14} color="#fff" />
-                  </S.StarContainer>
-                  <S.StarQuantity>
-                    <Text
-                      weight="medium"
-                      color="blue_950"
-                      size="sm"
-                      style={{ whiteSpace: 'nowrap' }}
-                    >
-                      +
-                    </Text>{' '}
-                    <Text
-                      weight="semibold"
-                      size="sm"
-                      color="blue_950"
-                      style={{ whiteSpace: 'nowrap' }}
-                    >
-                      0
-                    </Text>{' '}
-                    <Text
-                      weight="medium"
-                      size="sm"
-                      color="blue_950"
-                      style={{ whiteSpace: 'nowrap' }}
-                    >
-                      pts
-                    </Text>{' '}
-                  </S.StarQuantity>
-                </S.QuestionPoints>
-              </Tooltip>
             </S.QuestionInfo>
             <S.QuestionTextContainer>
               <S.QuestionText onClick={handleResponderClick}>

@@ -40,7 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <S.Container>{getLayout(<Component {...pageProps} />)}</S.Container>
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   )
 }

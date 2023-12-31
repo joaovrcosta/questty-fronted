@@ -10,7 +10,7 @@ export const CardContainer = styled.div<ICard>`
   width: 24rem;
   display: flex;
   padding: 4rem 1rem;
-  border-radius: 6px;
+  border-radius: 26px;
   align-items: center;
   justify-content: space-between;
   text-align: center;

@@ -3,7 +3,7 @@ import { QuestionBox } from '@/components/molecules/QuestionBox'
 import { AnswerBox } from '@/components/molecules/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
-import { IAnswer, IQuestionData } from '@/shared/types'
+import { IQuestionData } from '@/shared/types'
 import { useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
@@ -11,10 +11,11 @@ import GirlLamp from '@/assets/GirlLamp.svg'
 import Image from 'next/image'
 import { MoreQuestonCard } from '@/components/molecules/MoreQuestion'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
-import Head from 'next/head'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
-import { useQuestionCommentStore } from '@/features/stores/questionComments/useQuestionCommentStore'
+import { GoPlus } from 'react-icons/go'
+import { FaCircleCheck } from 'react-icons/fa6'
+import { NextSeo } from 'next-seo'
 
 interface Question {
   id: number
@@ -36,10 +37,13 @@ export default function Question(props: IQuestionData) {
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const answerStore = useAnswerStore()
 
-  const { user } = useAuthStore()
+  const { user, isLoggedIn } = useAuthStore()
   const { question } = useQuestionStore()
   const { answers } = useAnswerStore()
-  const textForTitle = question?.questionData?.content.substring(0, 100)
+  const textForTitle = `${question?.questionData?.content.substring(
+    0,
+    100
+  )} - Questty.com`
 
   const answersAuthorIds = question?.questionData?.answers.map(
     (resposta) => resposta.author_id
@@ -140,6 +144,7 @@ export default function Question(props: IQuestionData) {
               </Text>
               <Text>Essa pergunta não teve resposta ainda</Text>
               <S.AnswerButton backgroundColor="black" color="white">
+                <GoPlus size={24} />
                 RESPONDER
               </S.AnswerButton>
             </>
@@ -151,37 +156,10 @@ export default function Question(props: IQuestionData) {
 
   return (
     <>
-      <Head>
-        <title>{textForTitle} | Questty</title>
-
-        <meta name="title" content={`${textForTitle} | Questty`} />
-        <meta name="description" content="Descrição da sua página aqui" />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="URL_DA_SUA_PÁGINA" />
-        <meta property="og:title" content={`${textForTitle} | Questty`} />
-        <meta
-          property="og:description"
-          content="Descrição da sua página aqui"
-        />
-        <meta property="og:image" content="URL_DA_IMAGEM_DE_DESTAQUE" />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="URL_DA_SUA_PÁGINA" />
-        <meta property="twitter:title" content={`${textForTitle} | Questty`} />
-        <meta
-          property="twitter:description"
-          content="Descrição da sua página aqui"
-        />
-        <meta property="twitter:image" content="URL_DA_IMAGEM_DE_DESTAQUE" />
-
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7665473143170681"
-          crossOrigin="anonymous"
-        ></script>
-      </Head>
-
+      <NextSeo
+        title={textForTitle}
+        description="Rede social educativa onde os alunos se ajudam uns aos outros com as lições de casa, trocam conhecimento, estudam em grupo e fazem amizades."
+      />
       <S.QuestionContainer>
         <S.QuestionWrapper>
           <QuestionBox
@@ -193,6 +171,57 @@ export default function Question(props: IQuestionData) {
             author={props.questionData?.author.username}
             avatarUrl={props.questionData?.author?.avatar_url}
           />
+          {!isLoggedIn && (
+            <>
+              <S.CallToActionCard>
+                {answers?.length === 0 && (
+                  <>
+                    <Text size="xx1" weight="extrabold">
+                      Garanta acesso para ver outras respostas
+                    </Text>
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: '1rem',
+                        padding: '1rem 0',
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                        }}
+                      >
+                        <FaCircleCheck size={16} style={{ color: '#0089e3' }} />
+                        <Text>Veja mais respostas</Text>
+                      </div>
+
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                        }}
+                      >
+                        <FaCircleCheck size={16} style={{ color: '#0089e3' }} />
+                        <Text>Faça novas perguntas</Text>
+                      </div>
+                    </div>
+                    <S.ButtonsContainer>
+                      <S.AnswerButton backgroundColor="black" color="white">
+                        ENTRAR
+                      </S.AnswerButton>
+                      <S.AnswerButton backgroundColor="black" color="white">
+                        CADASTRE-SE
+                      </S.AnswerButton>
+                    </S.ButtonsContainer>
+                  </>
+                )}
+              </S.CallToActionCard>
+            </>
+          )}
+
           <S.AnswersSection>
             {answers && answers.length > 0 ? (
               <S.TextSectionTitle

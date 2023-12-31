@@ -12,4 +12,8 @@ export const UserActivityContainer = styled.div`
 export const Item = styled.button`
   background-color: transparent;
   border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 `

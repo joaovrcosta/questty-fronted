@@ -49,7 +49,7 @@ export function Header() {
           <Link href="/" style={{ textDecoration: 'none' }}>
             <S.LogoImage src={logoImg} width={145} height={46} alt="" />
           </Link>
-          <SearchInput />
+          <SearchInput backgroundColor="white" />
         </S.FirstBoxContent>
         <S.HeaderActionsContainer existsToken={token == null ? true : false}>
           {loading ? (

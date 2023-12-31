@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
+  height: 100%;
 
   padding: 1rem 1.5rem;
   opacity: 1;
@@ -33,8 +34,9 @@ export const QuestionCardContainer = styled.div`
   }
 
   ${({ theme }) => css`
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       padding: 0.875rem 1rem 0.875rem 1rem;
+      min-height: 100%;
     }
   `}
 `
@@ -131,7 +133,7 @@ export const QuestionInfo = styled.div`
 
 export const SubjectAndDateTimeContainer = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   align-items: center;
 `
 export const Subject = styled(Text)`
@@ -139,7 +141,7 @@ export const Subject = styled(Text)`
   font-weight: 700;
 `
 export const DateTime = styled(Text)`
-  font-family: Roboto;
+  font-family: Poppins;
 `
 
 export const AswerContainer = styled.div``

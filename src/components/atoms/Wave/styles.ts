@@ -53,9 +53,7 @@ export const SecondWave = styled.div<WaveProps>`
   }
 
   @media (max-width: 850px) {
-    &::after {
-      display: none;
-    }
+    display: none;
   }
 `
 
