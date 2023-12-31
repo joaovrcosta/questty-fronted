@@ -76,12 +76,14 @@ export const LinksColumn = styled.div`
   }
 `
 
-export const ColumnTitle = styled(Text)`
+export const ColumnTitle = styled.h3`
   margin-bottom: 1rem;
+  font-size: 20px;
+  font-family: Poppins;
 `
 
 export const Link = styled.a`
-  font-size: ${({ theme }) => theme.typography.text.md};
+  font-size: ${({ theme }) => theme.typography.text.xs};
   margin-bottom: 1rem;
   color: ${({ theme }) => theme.colors.black};
 

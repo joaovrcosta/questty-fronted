@@ -23,6 +23,7 @@ import { Tooltip } from '@/components/molecules/Tooltip'
 import { QuestionCardProfile } from '@/components/molecules/QuestionCardProfile'
 import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { FollowButton } from '@/components/molecules/FollowButton'
+import { NextSeo } from 'next-seo'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
@@ -34,6 +35,8 @@ export default function Questions(props: IProfileData) {
 
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
   const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+
+  const usernameDisplay = `${props.userData.username} | Questty.com`
 
   useEffect(() => {
     setProfile(props)
@@ -69,9 +72,10 @@ export default function Questions(props: IProfileData) {
 
   return (
     <>
-      <Head>
-        <title>{user?.userData.username} | Questty</title>
-      </Head>
+      <NextSeo
+        title={usernameDisplay}
+        description="O Questty é a plataforma onde estudantes e especialistas convergem para desvendar os enigmas acadêmicos mais desafiadores, criando uma comunidade dinâmica de aprendizado colaborativo."
+      />
 
       <S.ProfileContainer>
         <S.ProfileContent isLoggedIn={isLoggedIn}>

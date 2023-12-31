@@ -1,10 +1,16 @@
 import { Button } from '@/components/atoms/Button'
 import { Heading } from '@/components/atoms/Heading'
+import { Text } from '@/components/atoms/Text'
+import { Wave } from '@/components/atoms/Wave'
 import styled, { css } from 'styled-components'
 
 export const MainContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.yellow_50};
-  /* height: 100vh; */
+  background: linear-gradient(180deg, #0c124e 0%, #014981 20%);
+  height: 100%;
+
+  @media (max-width: 480px) {
+    background: white;
+  }
 `
 
 export const LandingContent = styled.div`
@@ -12,14 +18,14 @@ export const LandingContent = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  background-color: ${({ theme }) => theme.colors.yellow_50};
+  background: transparent;
 
-  padding: 0.85rem 0rem 3rem 0rem;
+  padding: 6.5rem 0rem 3rem 0rem;
 
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 0;
-      padding: 1.5rem 1rem 3rem 1rem;
+      padding: 6.5rem 0rem 3rem 0rem;
     }
   `}
 
@@ -28,17 +34,18 @@ export const LandingContent = styled.div`
   }
 
   @media (max-width: 769px) {
-    padding: 1.5rem 1rem 0 1rem;
+    padding: 6.5rem 1rem 4.5rem 1rem;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 480px) {
-      gap: 0;
-      width: 100%;
-      margin: 0;
-      justify-content: flex-start;
-    }
-  `}
+  @media (max-width: 480px) {
+    gap: 0;
+    width: 100%;
+    margin: 0;
+    justify-content: flex-start;
+    border-radius: 0 0 40px 40px;
+    background: linear-gradient(180deg, #0c124e 0%, #014981 100%);
+    /* padding: 10px; */
+  }
 `
 export const LandingContainer = styled.div`
   display: flex;
@@ -80,9 +87,14 @@ export const TextContainer = styled.div`
 
 export const HeroHeadingContainer = styled.div``
 
-export const HeroHeading = styled(Heading)`
-  @media (max-width: 480px) {
-    font-size: 40px;
+export const HeroHeading = styled.h1`
+  font-family: Poppins;
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: 400;
+  font-size: 52px;
+
+  @media (max-width: 769px) {
+    font-size: 28px;
   }
 `
 
@@ -151,12 +163,17 @@ export const CardsContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   background-color: ${({ theme }) => theme.colors.white};
   padding: 3rem 1rem 1rem 1rem;
 
   @media (max-width: 1200px) {
     width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4rem 1rem 1rem 1rem;
   }
 `
 
@@ -169,6 +186,10 @@ export const CardWrapper = styled.div`
   @media (max-width: 1200px) {
     width: 100%;
     flex-direction: column;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 40px;
   }
 `
 
@@ -240,6 +261,35 @@ export const AskButtonMobile = styled(Button)`
 
   display: none;
   @media (max-width: 769px) {
+    display: block;
+  }
+`
+
+export const Waving = styled(Wave)`
+  @media (max-width: 850px) {
+    display: none;
+  }
+`
+
+export const SubTitle = styled(Text)`
+  margin-left: 8px;
+
+  @media (max-width: 769px) {
+    margin-left: 0px;
+  }
+`
+
+export const HeadingHero = styled.section`
+  display: none;
+
+  h4 {
+    font-family: untitled serif;
+    font-weight: 300;
+    font-size: 28px;
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 24px;
     display: block;
   }
 `

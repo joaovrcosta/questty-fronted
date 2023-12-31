@@ -23,6 +23,7 @@ import { Tooltip } from '@/components/molecules/Tooltip'
 import { BsFillPersonCheckFill } from 'react-icons/bs'
 import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { FollowButton } from '@/components/molecules/FollowButton'
+import { NextSeo } from 'next-seo'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
@@ -31,6 +32,8 @@ export default function Answers(props: IProfileData) {
   const authenticatedUser = useAuthStore((state) => state.user)
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
   const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+
+  const usernameDisplay = `${props.userData.username} | Questty.com`
 
   useEffect(() => {
     setProfile(props)
@@ -66,9 +69,10 @@ export default function Answers(props: IProfileData) {
 
   return (
     <>
-      <Head>
-        <title>{user?.userData.username} | Questty</title>
-      </Head>
+      <NextSeo
+        title={usernameDisplay}
+        description="O Questty é a plataforma onde estudantes e especialistas convergem para desvendar os enigmas acadêmicos mais desafiadores, criando uma comunidade dinâmica de aprendizado colaborativo."
+      />
 
       <S.ProfileContainer>
         <S.ProfileContent isLoggedIn={isLoggedIn}>

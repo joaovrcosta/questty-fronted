@@ -1,11 +1,11 @@
 import * as S from './styles'
-import logoImg from '../../../assets/logo.svg'
+import logoImg from '../../../assets/questty-logo-landing.svg'
+import blackLogo from '../../../assets/logo.svg'
 import { Button } from '@/components/atoms/Button'
-import * as Dialog from '@radix-ui/react-dialog'
-import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { SearchInput } from '@/components/atoms/SearchInput'
+import { RiMenu5Fill } from 'react-icons/ri'
 
 export function HeaderLandingPage() {
   const [scrolled, setScrolled] = useState(false)
@@ -28,15 +28,25 @@ export function HeaderLandingPage() {
 
   return (
     <S.HeaderContainer className={scrolled ? '--scrolled' : ''}>
-      <S.HeaderContent>
-        <Link href="/">
+      <S.HeaderContent className={scrolled ? '--scrolled' : ''}>
+        {scrolled ? (
+          <S.LogoImage
+            src={blackLogo}
+            width={160}
+            height={40}
+            alt="Questty Logo Scrolled"
+          />
+        ) : (
           <S.LogoImage
             src={logoImg}
             width={160}
-            height={52}
+            height={48}
             alt="Questty Logo"
           />
-        </Link>
+        )}
+
+        <SearchInput backgroundColor="white" />
+
         <S.HeaderActionsContainer>
           <S.StyledLink href="/signin">
             <S.SignInButton backgroundColor="white" boxShadow={true}>
@@ -44,34 +54,18 @@ export function HeaderLandingPage() {
             </S.SignInButton>
           </S.StyledLink>
 
-          <S.StyledLink href="/signup">
-            <S.SignUpButton
-              backgroundColor="white"
-              borderColor="yellow_650"
-              boxShadow={true}
-            >
-              CADASTRAR
-            </S.SignUpButton>
-          </S.StyledLink>
-
           <S.MakeYourQuestionButton
-            backgroundColor="yellow_600"
+            backgroundColor="blue_500"
+            color="white"
             onClick={handleButtonClick}
           >
             FAÇA SUA PERGUNTA
           </S.MakeYourQuestionButton>
         </S.HeaderActionsContainer>
         <S.ButtonsMobileContainer>
-          <S.StyledLink href="/signin">
-            <Button backgroundColor="transparent" border={false}>
-              ENTRAR
-            </Button>
-          </S.StyledLink>
-          <S.StyledLink href="/signup">
-            <Button backgroundColor="transparent" border={false}>
-              CADASTRE-SE
-            </Button>
-          </S.StyledLink>
+          <S.NavigationButton className={scrolled ? '--scrolled' : ''}>
+            <RiMenu5Fill size={24} />
+          </S.NavigationButton>
         </S.ButtonsMobileContainer>
       </S.HeaderContent>
       {/* <S.SubHeader>

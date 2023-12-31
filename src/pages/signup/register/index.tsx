@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import api from '@/services/api'
 import { SignInLayout } from '@/components/layouts/signIn'
+import { NextSeo } from 'next-seo'
 
 const registerSchema = zod.object({
   username: zod
@@ -95,9 +96,10 @@ export default function Register() {
 
   return (
     <>
-      <Head>
-        <title>Questty.com.br - Para estudantes. Por estudantes.</title>
-      </Head>
+      <NextSeo
+        title="Questty.com - Para curiosos. Para todo mundo"
+        description="O Questty é a plataforma onde estudantes e especialistas convergem para desvendar os enigmas acadêmicos mais desafiadores, criando uma comunidade dinâmica de aprendizado colaborativo."
+      />
 
       <HeaderAuth />
       <S.SignUpContainer>

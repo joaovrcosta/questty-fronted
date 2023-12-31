@@ -20,14 +20,12 @@ import { Tooltip } from '@/components/molecules/Tooltip'
 import { SiCrystal } from 'react-icons/si'
 import { MdArrowForwardIos } from 'react-icons/md'
 import { SlGraph } from 'react-icons/sl'
-import mathIcon from '@/assets/subjects/math-icon.svg'
 import { PiMathOperationsFill } from 'react-icons/pi'
 import { ImEarth } from 'react-icons/im'
 import { FaLeaf } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
-import Image from 'next/image'
 import { CardAlert } from '@/components/molecules/CardAlert'
-import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -53,9 +51,10 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Questões com respostas para todas as matérias | Questty</title>
-      </Head>
+      <NextSeo
+        title="Questões com respostas para todas as matérias | Questty"
+        description="Dúvidas resolvidas, conhecimento ampliado. No Questty, oferecemos respostas para todas as disciplinas, provenientes de especialistas e colegas estudantes. Nosso conteúdo é verificado, sendo uma fonte confiável para tarefas, provas e preparação para o ENEM. Desbrave o caminho do aprendizado conosco!"
+      />
 
       <S.HomePageContent>
         <S.FeedContentWrapper>

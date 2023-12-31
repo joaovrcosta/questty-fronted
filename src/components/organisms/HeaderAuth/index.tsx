@@ -19,7 +19,7 @@ export function HeaderAuth() {
           <Link href="/">
             <S.LogoImage src={logoImg} width={145} height={46} alt="" />
           </Link>
-          <SearchInput />
+          <SearchInput backgroundColor="white" />
         </S.FirstBoxContent>
         <S.HeaderActionsContainer>
           <S.MakeQuestionButton>

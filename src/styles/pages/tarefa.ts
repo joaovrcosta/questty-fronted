@@ -89,3 +89,32 @@ export const HelpMorePeopleContainer = styled.div`
     margin: 0 auto;
   }
 `
+export const CallToActionCard = styled.div`
+  width: 90%;
+  background-color: ${({ theme }) => theme.colors.white};
+  margin-left: auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #e5e5e5;
+  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+
+  @media (max-width: 768px) {
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 420px) {
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  }
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`

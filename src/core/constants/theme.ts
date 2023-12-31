@@ -44,6 +44,7 @@ export const defaultTheme = {
     gray_800: 'rgba(51, 51, 51, 1)',
     gray_900: 'rgba(18, 18, 18, 1)',
     transparent: 'rgba(255, 255, 255, 0)',
+    transparent_glass: 'rgba(255, 255, 255, 0.2)',
   } as const,
   typography: {
     heading: {
