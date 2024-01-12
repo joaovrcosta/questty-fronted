@@ -15,6 +15,7 @@ import boyHeadphone from '@/assets/boy-img-icon.svg'
 import girlUniverse from '@/assets/girl-univerve.svg'
 import { LandingLayout } from '@/components/layouts/landing'
 import { NextSeo } from 'next-seo'
+import Link from 'next/link'
 
 const Index = () => {
   return (
@@ -29,12 +30,21 @@ const Index = () => {
           <S.LandingContainer>
             <S.HeroContainer>
               <S.HeroHeadingContainer>
+                <S.RocketGirlMobile>
+                  <Image
+                    src={rocketGirl}
+                    width={250}
+                    height={250}
+                    alt=""
+                    style={{ marginTop: '1rem' }}
+                  />
+                </S.RocketGirlMobile>
                 <S.HeroHeading>
                   Obtenha resposta <strong>Verificadas</strong> para sua lição
                   de casa
                 </S.HeroHeading>
                 <S.TextContainer>
-                  <S.SubTitle color="white" weight="medium">
+                  <S.SubTitle color="blue_950" weight="medium">
                     O Questty é a plataforma onde estudantes e especialistas
                     convergem para desvendar os enigmas acadêmicos mais
                     desafiadores, criando uma comunidade dinâmica de aprendizado
@@ -42,19 +52,30 @@ const Index = () => {
                   </S.SubTitle>
                 </S.TextContainer>
               </S.HeroHeadingContainer>
-              {/* <S.InputSearchFormContainer>
-                <S.InputSearch placeholder="Qual a sua dúvida?" />
-                <S.AskButton
-                  type="submit"
-                  backgroundColor="yellow_800"
-                  style={{ height: '46px' }}
-                >
-                  PERGUNTE
-                </S.AskButton>
-                <S.AskButtonMobile>
-                  <IoSearchOutline size={24} />
-                </S.AskButtonMobile>
-              </S.InputSearchFormContainer> */}
+              <S.CallToActionButton>
+                <Link href="/signup" style={{ width: '100%' }}>
+                  <Button
+                    rounding="rounded-xxl"
+                    backgroundColor="blue_500"
+                    color="white"
+                    hug={true}
+                    style={{ height: '46px' }}
+                  >
+                    COMECE AGORA
+                  </Button>
+                </Link>
+                <Link href="/signin" style={{ width: '100%' }}>
+                  <Button
+                    rounding="rounded-xxl"
+                    backgroundColor="white"
+                    color="blue_500"
+                    hug={true}
+                    style={{ height: '46px' }}
+                  >
+                    JÁ TENHO UMA CONTA
+                  </Button>
+                </Link>
+              </S.CallToActionButton>
             </S.HeroContainer>
           </S.LandingContainer>
           <div>

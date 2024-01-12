@@ -5,7 +5,7 @@ import { Wave } from '@/components/atoms/Wave'
 import styled, { css } from 'styled-components'
 
 export const MainContainer = styled.div`
-  background: linear-gradient(180deg, #0c124e 0%, #014981 20%);
+  background: linear-gradient(180deg, #014981 0%, #ebf2f7 20%);
   height: 100%;
 
   @media (max-width: 480px) {
@@ -22,6 +22,10 @@ export const LandingContent = styled.div`
 
   padding: 6.5rem 0rem 3rem 0rem;
 
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
+
   ${({ theme }) => css`
     @media (max-width: 1280px) {
       gap: 0;
@@ -34,7 +38,7 @@ export const LandingContent = styled.div`
   }
 
   @media (max-width: 769px) {
-    padding: 6.5rem 1rem 4.5rem 1rem;
+    padding: 6.5rem 2.5rem 4.5rem 2.5rem;
   }
 
   @media (max-width: 480px) {
@@ -43,7 +47,7 @@ export const LandingContent = styled.div`
     margin: 0;
     justify-content: flex-start;
     border-radius: 0 0 40px 40px;
-    background: linear-gradient(180deg, #0c124e 0%, #014981 100%);
+    background: linear-gradient(180deg, #014981 0%, #ebf2f7 100%);
     /* padding: 10px; */
   }
 `
@@ -55,6 +59,10 @@ export const LandingContainer = styled.div`
   margin-top: 6rem;
   margin-bottom: 2.5rem;
   max-width: 836px;
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 
   ${({ theme }) => css`
     @media (max-width: 769px) {
@@ -72,6 +80,8 @@ export const HeroContainer = styled.div`
 
   @media (max-width: 769px) {
     width: 100%;
+    height: 100%;
+    justify-content: space-between;
   }
 `
 
@@ -82,6 +92,7 @@ export const TextContainer = styled.div`
 
   @media (max-width: 769px) {
     width: 100%;
+    display: none;
   }
 `
 
@@ -89,12 +100,19 @@ export const HeroHeadingContainer = styled.div``
 
 export const HeroHeading = styled.h1`
   font-family: Poppins;
-  color: ${({ theme }) => theme.colors.white};
-  font-weight: 400;
+  color: ${({ theme }) => theme.colors.blue_950};
+  font-weight: 800;
   font-size: 52px;
 
+  @media (max-width: 1200px) {
+    text-align: center;
+    width: 100%;
+  }
+
   @media (max-width: 769px) {
+    margin-top: 10px;
     font-size: 28px;
+    text-align: center;
   }
 `
 
@@ -291,5 +309,23 @@ export const HeadingHero = styled.section`
   @media (max-width: 480px) {
     margin-left: 24px;
     display: block;
+  }
+`
+export const CallToActionButton = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  flex-direction: column;
+  gap: 12px;
+`
+export const RocketGirlMobile = styled.div`
+  display: none;
+
+  @media (max-width: 769px) {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `

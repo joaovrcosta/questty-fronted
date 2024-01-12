@@ -8,7 +8,7 @@ interface ISearchInput {
 
 export const SearchInputContainer = styled.div<ISearchInput>`
   width: 100%;
-  height: 40px;
+  height: 48px;
   display: flex;
   align-items: center;
   margin-left: 1rem;
