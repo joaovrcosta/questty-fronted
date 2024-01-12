@@ -71,7 +71,7 @@ export const ButtonContainer = styled.div`
 `
 export const ForgotMyPasswordLink = styled(Link)`
   font-size: ${({ theme }) => theme.typography.text.sm};
-  color: ${({ theme }) => theme.colors.blue_600};
+  color: ${({ theme }) => theme.colors.blue_500};
   font-weight: 600;
   text-decoration: none;
 `
