@@ -11,7 +11,6 @@ import { withSession } from '@/lib/with-session'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
 import { useEffect, useState } from 'react'
 import api from '@/services/api'
-import Head from 'next/head'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
@@ -26,6 +25,7 @@ import { FaLeaf } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
 import { CardAlert } from '@/components/molecules/CardAlert'
 import { NextSeo } from 'next-seo'
+import { SubjectList } from '@/components/molecules/SubjectList'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -73,7 +73,7 @@ export default function Home() {
               </Heading> */}
               <div style={{ maxWidth: '650px', marginBottom: '1rem' }}>
                 <Heading size="lgg" weight="extrabold" color="black">
-                  Esclareça suas dúvidas, pergunte para a comunidade
+                  Não fique com dúvidas, pergunte agora mesmo
                 </Heading>
               </div>
             </S.Welcome>
@@ -185,6 +185,7 @@ export default function Home() {
           <CardAlert />
 
           <S.QuestionsContainer>
+            <SubjectList />
             <S.QuestionsWrapper>
               {loading ? (
                 <>
@@ -398,13 +399,6 @@ export default function Home() {
           </S.ProfileInfoSidebar>
 
           <S.RankingSidebar>
-            {/* <S.SelectWrapper>
-              <S.Selected>
-                <option value="opcao1">Diario</option>
-                <option value="opcao2">Opção 2</option>
-                <option value="opcao3">Opção 3</option>
-              </S.Selected>
-            </S.SelectWrapper> */}
             <S.RankingBox>
               <S.RankingHeading>
                 <FaCrown size={24} color="#c98600" />

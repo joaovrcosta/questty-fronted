@@ -35,7 +35,7 @@ export const HeaderContainer = styled.div<IHeader>`
     transition: 0.3s ease all;
 
     background-color: transparent;
-    border-radius: 16px;
+    border-radius: 40px;
     height: 72px;
     margin-top: 16px;
   }
@@ -75,7 +75,7 @@ export const HeaderContent = styled.div<IHeader>`
   `}
 
   &.--scrolled {
-    border-radius: 16px;
+    border-radius: 24px;
     background-color: #fff;
     box-shadow: 0 8px 32px 0 rgba(50, 60, 69, 0.2);
   }
