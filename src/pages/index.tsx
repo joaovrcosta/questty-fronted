@@ -59,7 +59,7 @@ const Index = () => {
                     backgroundColor="blue_500"
                     color="white"
                     hug={true}
-                    style={{ height: '46px' }}
+                    style={{ height: '48px', borderRadius: '16px' }}
                   >
                     COMECE AGORA
                   </Button>
@@ -70,7 +70,7 @@ const Index = () => {
                     backgroundColor="white"
                     color="blue_500"
                     hug={true}
-                    style={{ height: '46px' }}
+                    style={{ height: '48px', borderRadius: '16px' }}
                   >
                     JÁ TENHO UMA CONTA
                   </Button>
@@ -130,9 +130,35 @@ const Index = () => {
           </S.CardsContainer>
           <S.HowWorksContainer>
             <S.HeadingContainer>
-              <Heading size="lg" weight="bold" color="blue_950">
-                Como funciona nossa plataforma?
-              </Heading>
+              <S.HeadingText size="lgg" weight="extrabold" color="blue_950">
+                O que os alunos estão falando?
+              </S.HeadingText>
+              <S.StudentsComments>
+                <S.BoxComment>
+                  <Text>João Victor</Text>
+                  <Text>Estudante em Fatec Zona Leste</Text>
+                  <Text>
+                    “I like the visual aspects of it. I think it would be a huge
+                    asset for our kids”
+                  </Text>
+                </S.BoxComment>
+                <S.BoxComment>
+                  <Text>João Victor</Text>
+                  <Text>Estudante em Fatec Zona Leste</Text>
+                  <Text>
+                    “I like the visual aspects of it. I think it would be a huge
+                    asset for our kids”
+                  </Text>
+                </S.BoxComment>
+                <S.BoxComment>
+                  <Text>João Victor</Text>
+                  <Text>Estudante em Fatec Zona Leste</Text>
+                  <Text>
+                    “I like the visual aspects of it. I think it would be a huge
+                    asset for our kids”
+                  </Text>
+                </S.BoxComment>
+              </S.StudentsComments>
             </S.HeadingContainer>
             <S.StepContainer>
               <S.FirstStepWrapper>
@@ -157,7 +183,7 @@ const Index = () => {
                   <div style={{ marginTop: '6rem' }}>
                     <Button
                       backgroundColor="yellow_800"
-                      rounding="rounded-none"
+                      style={{ borderRadius: '16px' }}
                     >
                       PERGUNTE
                     </Button>

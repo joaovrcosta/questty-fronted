@@ -47,7 +47,7 @@ export const LandingContent = styled.div`
     margin: 0;
     justify-content: flex-start;
     border-radius: 0 0 40px 40px;
-    background: linear-gradient(180deg, #014981 0%, #ebf2f7 100%);
+    background: linear-gradient(180deg, #014981 0%, #ebf2f7 65%);
     /* padding: 10px; */
   }
 `
@@ -188,6 +188,7 @@ export const CardsContainer = styled.div`
 
   @media (max-width: 1200px) {
     width: 100%;
+    padding: 4rem;
   }
 
   @media (max-width: 480px) {
@@ -232,10 +233,14 @@ export const HowWorksContainer = styled.div`
 
 export const HeadingContainer = styled.div`
   width: 100%;
-  padding: 6rem 0 4rem 0;
+  padding: 4rem 1rem 4rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 40px;
+  background: #ebf2f7;
+  flex-direction: column;
+  margin: 2rem 0 2rem 0;
 `
 
 export const StepContainer = styled.div``
@@ -251,6 +256,12 @@ export const FirstStepWrapper = styled.div`
   @media (max-width: 1200px) {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  @media (max-width: 870px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
 
@@ -312,12 +323,16 @@ export const HeadingHero = styled.section`
   }
 `
 export const CallToActionButton = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 3rem;
-  flex-direction: column;
-  gap: 12px;
+  display: none;
+
+  @media (max-width: 769px) {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-direction: column;
+    gap: 12px;
+  }
 `
 export const RocketGirlMobile = styled.div`
   display: none;
@@ -327,5 +342,34 @@ export const RocketGirlMobile = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+`
+
+export const StudentsComments = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  @media (max-width: 1280px) {
+    display: block;
+    width: 100%;
+    gap: 1rem;
+  }
+`
+export const BoxComment = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 24px;
+  padding: 2rem;
+  width: 22rem;
+  font-family: untitled;
+
+  @media (max-width: 1280px) {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+`
+export const HeadingText = styled(Heading)`
+  margin-bottom: 1.5rem;
+  @media (max-width: 1280px) {
+    text-align: center;
   }
 `

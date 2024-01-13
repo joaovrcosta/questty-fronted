@@ -117,7 +117,7 @@ export const SubjectContent = styled.div`
 `
 
 export const QuestionsContainer = styled.div`
-  /* max-width: 40rem; */
+  display: flex;
 
   &:last-child {
     margin-bottom: 20px;
@@ -398,10 +398,15 @@ export const SubjectsOptions = styled.div`
 `
 
 export const HeadingBox = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
+  background: linear-gradient(
+    76deg,
+    #63d0ff 0.41%,
+    #ac95dd 50.12%,
+    #012d81 100%
+  );
   padding: 2rem;
   border-radius: 16px;
-  border: 1px solid #000;
+
   margin-bottom: 1rem;
 
   @media (max-width: 769px) {
