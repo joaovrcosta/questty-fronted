@@ -9,6 +9,8 @@ import { GiRoundStar } from 'react-icons/gi'
 import { SiCrystal } from 'react-icons/si'
 import { Tooltip } from '../Tooltip'
 import { HiOutlineChatAlt2 } from 'react-icons/hi'
+import { Button } from '@/components/atoms/Button'
+import { IoFlagOutline } from 'react-icons/io5'
 
 export type subjectsType =
   | 'math'
@@ -136,6 +138,13 @@ export function QuestionCard({
               </S.AnswerQuantityWrapper>
             </Tooltip>
             <S.AswerContainer>
+              <Tooltip content="Denunciar">
+                <S.ReportButtonContainer>
+                  <S.ReportButton>
+                    <IoFlagOutline size={20} />
+                  </S.ReportButton>
+                </S.ReportButtonContainer>
+              </Tooltip>
               <S.AnswerButtonContainer>
                 <S.AnswerButton
                   backgroundColor="white"

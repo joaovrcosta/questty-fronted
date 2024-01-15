@@ -84,7 +84,7 @@ export default function SignIn() {
 
       login(user, token)
 
-      await Router.push('/home')
+      await Router.back()
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError

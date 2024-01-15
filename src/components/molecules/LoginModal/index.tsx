@@ -78,8 +78,6 @@ export function LoginModal() {
       const user = userResponse.data.user
 
       login(user, token)
-
-      await router.push('/home')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError
@@ -104,10 +102,10 @@ export function LoginModal() {
         <S.LoginContainerContent>
           <S.EnterHeader>
             <Heading
-              weight="semibold"
-              size="lg"
+              weight="bold"
+              size="md"
               color="blue_950"
-              style={{ marginBottom: '1rem' }}
+              style={{ marginBottom: '1rem', textAlign: 'center' }}
             >
               Olá novamente
             </Heading>
@@ -185,6 +183,9 @@ export function LoginModal() {
                 Ainda não tem uma conta?
                 <S.EnterLink href="/signup">Criar</S.EnterLink>
               </Text>
+            </S.DontHaveAccountContainer>
+            <S.DontHaveAccountContainer>
+              <Text>Não, obrigado</Text>
             </S.DontHaveAccountContainer>
           </S.FormContainer>
         </S.LoginContainerContent>

@@ -224,7 +224,14 @@ export const RankingHeading = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.5rem 0 1.25rem 0;
+  padding: 0.5rem 0 0.5rem 0;
+`
+
+export const ProfileSiderbarHeading = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0 1.5rem 0;
 `
 
 export const SelectedContainer = styled.div`
@@ -386,6 +393,7 @@ export const SkeletonLiner = styled(SkeletonLine)`
 
 export const QuestionsWrapper = styled.div`
   width: 100%;
+  height: 100%;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   border-top: 1px solid #000;

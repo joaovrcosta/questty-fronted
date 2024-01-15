@@ -1,6 +1,16 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import styled from 'styled-components'
+import { PiStarFourFill } from 'react-icons/pi'
+import styled, { keyframes } from 'styled-components'
+
+const borderAnimation = keyframes`
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+`
 
 export const QuestionContainer = styled.div`
   width: 100%;
@@ -91,10 +101,17 @@ export const HelpMorePeopleContainer = styled.div`
 `
 export const CallToActionCard = styled.div`
   width: 90%;
-  background-color: ${({ theme }) => theme.colors.white};
+  background: linear-gradient(
+    79deg,
+    #bce8ce 24.91%,
+    #f4e5db 57.2%,
+    #fde5dd 62.4%,
+    #bbc3f8 100%
+  );
   margin-left: auto;
+  margin-bottom: 2.5rem;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 16px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -102,7 +119,7 @@ export const CallToActionCard = styled.div`
   flex-direction: column;
   text-align: center;
   border: 1px solid #e5e5e5;
-  /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
+  box-shadow: 0px 4px 4px 5px rgba(100, 208, 255, 0.15);
 
   @media (max-width: 768px) {
     margin: 0 auto;
@@ -114,7 +131,44 @@ export const CallToActionCard = styled.div`
     margin-bottom: 3rem;
   }
 `
+
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 1rem;
+`
+
+export const HeadingCallToAction = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`
+
+export const SignInButton = styled(Button)`
+  width: 100%;
+  margin-top: 1rem;
+`
+
+export const SignUpButton = styled(Button)`
+  width: 100%;
+  margin-top: 1rem;
+`
+
+export const CheckIcon = styled(PiStarFourFill)`
+  color: #163bf3;
+  height: 20px;
+  width: 20px;
+
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+`
+export const AdvantagesContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+  }
 `
