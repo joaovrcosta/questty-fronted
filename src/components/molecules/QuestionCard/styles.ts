@@ -144,7 +144,11 @@ export const DateTime = styled(Text)`
   font-size: 14px;
 `
 
-export const AswerContainer = styled.div``
+export const AswerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
 
 export const AnswerButtonContainer = styled.div`
   display: flex;
@@ -257,5 +261,19 @@ export const AnswerQuantityWrapper = styled.div`
 
   &:hover p {
     color: ${({ theme }) => theme.colors.blue_500};
+  }
+`
+
+export const ReportButtonContainer = styled.div``
+
+export const ReportButton = styled.button`
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
   }
 `

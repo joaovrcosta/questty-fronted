@@ -121,7 +121,7 @@ export function Header() {
           )}
         </S.HeaderActionsContainer>
       </S.HeaderContent>
-      {!loading ? (
+      {isLoggedIn ? (
         <div></div>
       ) : (
         <S.SubHeader>

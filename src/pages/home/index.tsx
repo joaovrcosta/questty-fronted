@@ -26,6 +26,7 @@ import { AiFillHeart } from 'react-icons/ai'
 import { CardAlert } from '@/components/molecules/CardAlert'
 import { NextSeo } from 'next-seo'
 import { SubjectList } from '@/components/molecules/SubjectList'
+import { HomeLayout } from '@/components/layouts/home'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -284,7 +285,7 @@ export default function Home() {
               </Heading>
             </S.RankingTitle> */}
             <S.RankingBox>
-              <S.RankingHeading>
+              <S.ProfileSiderbarHeading>
                 <S.UserAvatarWrapper>
                   <Avatar
                     id={user?.id}
@@ -303,7 +304,7 @@ export default function Home() {
                   </S.UsernameLinkContainer>
                   <Text size="sm">#{Number(user?.code)}</Text>
                 </div>
-              </S.RankingHeading>
+              </S.ProfileSiderbarHeading>
               <div
                 style={{
                   display: 'flex',
@@ -402,7 +403,7 @@ export default function Home() {
             <S.RankingBox>
               <S.RankingHeading>
                 <FaCrown size={24} color="#c98600" />
-                <Text weight="semibold">Melhores Estudantes</Text>
+                <Text weight="semibold">Ranking Semanal</Text>
               </S.RankingHeading>
               <S.UserRankingWrapper>
                 <UserRankingBox
@@ -481,6 +482,8 @@ export default function Home() {
     </>
   )
 }
+
+Home.getLayout = (page: React.ReactNode) => <HomeLayout>{page}</HomeLayout>
 
 export const getServerSideProps: GetServerSideProps = withSession(
   async (_ctx) => {

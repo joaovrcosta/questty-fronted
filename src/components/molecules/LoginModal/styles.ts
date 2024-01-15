@@ -8,29 +8,33 @@ export const Overlay = styled(Dialog.Overlay)`
   width: 100vw;
   height: 100vh;
   inset: 0;
-  background: ${({ theme }) => theme.colors.primary};
+  background-color: rgba(0, 0, 0, 0.3);
   overflow: hidden;
   z-index: 999999;
 `
 
 export const Content = styled(Dialog.Content)`
-  min-width: 1000px;
+  max-width: 50rem;
   font-family: Poppins;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 24px;
+  padding: 2.5rem;
   z-index: 999999;
-  max-height: 980px;
-  border-radius: 5px;
+  max-height: 42rem;
   display: flex;
   background-color: ${({ theme }) => theme.colors.white};
   width: 100%;
   height: 100vh;
-
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (max-width: 769px) {
+    padding: 2.5rem 0rem;
+  }
 `
 
 export const CloseButton = styled(Dialog.Close)`
@@ -64,7 +68,9 @@ export const EmailInputContainer = styled.div``
 
 export const InputContainer = styled.div``
 
-export const FormContainer = styled.form``
+export const FormContainer = styled.form`
+  gap: 1rem;
+`
 
 export const ButtonContainer = styled.div`
   margin: 1rem 0 0rem 0;
@@ -80,6 +86,7 @@ export const DontHaveAccountContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `
 export const EnterLink = styled(Link)`
   color: ${({ theme }) => theme.colors.blue_500};

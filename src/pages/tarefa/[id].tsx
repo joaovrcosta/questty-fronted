@@ -16,6 +16,9 @@ import { FloatingButton } from '@/components/molecules/FloatingButton'
 import { GoPlus } from 'react-icons/go'
 import { FaCircleCheck } from 'react-icons/fa6'
 import { NextSeo } from 'next-seo'
+import { FaLockOpen } from 'react-icons/fa6'
+import Link from 'next/link'
+import { parseCookies } from 'nookies'
 
 interface Question {
   id: number
@@ -174,50 +177,59 @@ export default function Question(props: IQuestionData) {
           {!isLoggedIn && (
             <>
               <S.CallToActionCard>
-                {answers?.length === 0 && (
-                  <>
+                <>
+                  <S.HeadingCallToAction>
                     <Text size="xx1" weight="extrabold">
-                      Garanta acesso para ver outras respostas
+                      Garanta acesso grátis para outras respostas
                     </Text>
+                  </S.HeadingCallToAction>
+                  <S.AdvantagesContainer>
                     <div
                       style={{
                         display: 'flex',
-                        gap: '1rem',
-                        padding: '1rem 0',
+                        alignItems: 'center',
+                        gap: '0.5rem',
                       }}
                     >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                      >
-                        <FaCircleCheck size={16} style={{ color: '#0089e3' }} />
-                        <Text>Veja mais respostas</Text>
-                      </div>
-
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                        }}
-                      >
-                        <FaCircleCheck size={16} style={{ color: '#0089e3' }} />
-                        <Text>Faça novas perguntas</Text>
-                      </div>
+                      <S.CheckIcon />
+                      <Text>Veja mais respostas</Text>
                     </div>
-                    <S.ButtonsContainer>
-                      <S.AnswerButton backgroundColor="black" color="white">
+
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <S.CheckIcon />
+                      <Text>Aprenda em comunidade</Text>
+                    </div>
+
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <S.CheckIcon />
+                      <Text>Pergunte quanto quiser</Text>
+                    </div>
+                  </S.AdvantagesContainer>
+                  <S.ButtonsContainer>
+                    <Link href="/signin">
+                      <S.SignInButton backgroundColor="white" color="black">
                         ENTRAR
-                      </S.AnswerButton>
-                      <S.AnswerButton backgroundColor="black" color="white">
+                      </S.SignInButton>
+                    </Link>
+                    <Link href="/signup">
+                      <S.SignUpButton backgroundColor="white" color="black">
                         CADASTRE-SE
-                      </S.AnswerButton>
-                    </S.ButtonsContainer>
-                  </>
-                )}
+                      </S.SignUpButton>
+                    </Link>
+                  </S.ButtonsContainer>
+                </>
               </S.CallToActionCard>
             </>
           )}
@@ -253,9 +265,17 @@ export default function Question(props: IQuestionData) {
 }
 
 export const getServerSideProps = async (ctx: any) => {
-  const { id } = ctx.params as { id: string }
+  const { id } = ctx.params
 
   try {
+    const cookies = parseCookies(ctx)
+    const existingToken = cookies['questty-token']
+
+    if (existingToken) {
+      // Token existe, você pode fazer alguma coisa se necessário
+      console.log('Token encontrado nos cookies:', existingToken)
+    }
+
     const res = await api.get(`questions/${id}`)
     const questionData = res.data.question
 
