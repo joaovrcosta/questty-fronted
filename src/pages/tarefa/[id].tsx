@@ -17,8 +17,11 @@ import { GoPlus } from 'react-icons/go'
 import { FaCircleCheck } from 'react-icons/fa6'
 import { NextSeo } from 'next-seo'
 import { FaLockOpen } from 'react-icons/fa6'
+import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
 import { parseCookies } from 'nookies'
+import { useAuthModalStore } from '@/features/stores/authModal/authModal'
+import { LoginModal } from '@/components/molecules/LoginModal'
 
 interface Question {
   id: number
@@ -39,10 +42,13 @@ export default function Question(props: IQuestionData) {
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const answerStore = useAnswerStore()
+  const { isOpening, setIsOpening } = useAuthModalStore()
 
-  const { user, isLoggedIn } = useAuthStore()
+  const { user } = useAuthStore()
   const { question } = useQuestionStore()
   const { answers } = useAnswerStore()
+  const isLoggedIn = props.isLoggedIn
+
   const textForTitle = `${question?.questionData?.content.substring(
     0,
     100
@@ -218,13 +224,17 @@ export default function Question(props: IQuestionData) {
                     </div>
                   </S.AdvantagesContainer>
                   <S.ButtonsContainer>
-                    <Link href="/signin">
-                      <S.SignInButton backgroundColor="white" color="black">
-                        ENTRAR
-                      </S.SignInButton>
-                    </Link>
+                    <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                      <Dialog.Trigger asChild>
+                        <S.SignInButton backgroundColor="black" color="white">
+                          ENTRAR
+                        </S.SignInButton>
+                      </Dialog.Trigger>
+                      <LoginModal />
+                    </Dialog.Root>
+
                     <Link href="/signup">
-                      <S.SignUpButton backgroundColor="white" color="black">
+                      <S.SignUpButton backgroundColor="black" color="white">
                         CADASTRE-SE
                       </S.SignUpButton>
                     </Link>
@@ -270,17 +280,17 @@ export const getServerSideProps = async (ctx: any) => {
   try {
     const cookies = parseCookies(ctx)
     const existingToken = cookies['questty-token']
+    let isLoggedIn = false
 
     if (existingToken) {
-      // Token existe, você pode fazer alguma coisa se necessário
-      console.log('Token encontrado nos cookies:', existingToken)
+      isLoggedIn = true
     }
 
     const res = await api.get(`questions/${id}`)
     const questionData = res.data.question
 
     if (questionData !== undefined) {
-      return { props: { questionData } }
+      return { props: { questionData, isLoggedIn } }
     } else {
       return { props: {} }
     }

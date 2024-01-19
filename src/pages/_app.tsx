@@ -2,7 +2,6 @@ import type { AppProps } from 'next/app'
 import { defaultTheme } from '@/core/constants/theme'
 import { DefaultLayout } from '@/components/layouts/default'
 import { ThemeProvider } from 'styled-components'
-import * as S from '../styles/pages/app'
 import { ReactNode, useEffect } from 'react'
 import { GlobalStyle } from '@/styles/global'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
@@ -35,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const defaultLayout = (page: ReactNode) => (
     <DefaultLayout>{page}</DefaultLayout>
   )
+
   const getLayout = (Component as any).getLayout || defaultLayout
 
   return (

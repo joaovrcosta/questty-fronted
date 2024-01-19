@@ -24,6 +24,7 @@ import { MdOutlineSend } from 'react-icons/md'
 import { Spinner } from '@/components/atoms/Spinner'
 import { IComment } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
+import { useAuthModalStore } from '@/features/stores/authModal/authModal'
 
 interface Question {
   id?: number | string
@@ -78,6 +79,7 @@ export function QuestionBox({
   const { user, isLoggedIn, token } = useAuthStore()
   const router = useRouter()
   const { isOpen, setIsOpen } = useAnswerModalStore()
+  const { isOpening, setIsOpening } = useAuthModalStore()
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
 
@@ -264,7 +266,7 @@ export function QuestionBox({
                 </div>
               </div>
             ) : !token || !isLoggedIn ? (
-              <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+              <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
                 <Dialog.Trigger asChild>
                   <S.AnswerButton
                     variant="lg"

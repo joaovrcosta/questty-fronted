@@ -126,6 +126,7 @@ export interface IQuestionData {
     }
     comments?: IComment[] | null
   }
+  isLoggedIn?: boolean
 }
 
 export interface ICategories {
