@@ -32,14 +32,14 @@ const loginFormSchema = zod.object({
   password: zod.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
 })
 
-export function LoginModal() {
+export function RegisterModal() {
   const [error, setError] = useState<string | null>(null)
   const { register, handleSubmit, watch, formState, setValue } =
     useForm<FormData>({
       resolver: zodResolver(loginFormSchema),
     })
 
-  const { setIsOpening } = useAuthModalStore()
+  const { setIsOpening, isOpening } = useAuthModalStore()
 
   const { question } = useQuestionStore()
   const { token, isLoggedIn, login } = useAuthStore()
@@ -120,7 +120,7 @@ export function LoginModal() {
                 color="blue_950"
                 style={{ marginBottom: '1rem', textAlign: 'center' }}
               >
-                Olá novamente
+                Crie uma conta
               </Heading>
               <Text style={{ textAlign: 'center' }}>
                 Receba respostas em minutos e termine a lição de casa mais

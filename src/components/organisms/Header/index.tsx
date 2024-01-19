@@ -107,7 +107,7 @@ export function Header() {
                   </S.StyledLink>
 
                   <S.StyledLink href="/signup">
-                    <S.SignUpButton backgroundColor="blue_550">
+                    <S.SignUpButton backgroundColor="blue_500">
                       CRIAR CONTA
                     </S.SignUpButton>
                   </S.StyledLink>

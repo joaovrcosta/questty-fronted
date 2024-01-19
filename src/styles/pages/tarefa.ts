@@ -1,6 +1,6 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import { PiStarFourFill } from 'react-icons/pi'
+import { FaCircleCheck } from 'react-icons/fa6'
 import styled, { keyframes } from 'styled-components'
 
 const borderAnimation = keyframes`
@@ -102,11 +102,10 @@ export const HelpMorePeopleContainer = styled.div`
 export const CallToActionCard = styled.div`
   width: 90%;
   background: linear-gradient(
-    79deg,
-    #bce8ce 24.91%,
-    #f4e5db 57.2%,
-    #fde5dd 62.4%,
-    #bbc3f8 100%
+    76deg,
+    #45a6ff -0.68%,
+    #a3ddcf 52.05%,
+    #8869de 100%
   );
   margin-left: auto;
   margin-bottom: 2.5rem;
@@ -146,6 +145,7 @@ export const HeadingCallToAction = styled.div`
 export const SignInButton = styled(Button)`
   width: 100%;
   margin-top: 1rem;
+  box-shadow: 255 255 255;
 `
 
 export const SignUpButton = styled(Button)`
@@ -153,8 +153,8 @@ export const SignUpButton = styled(Button)`
   margin-top: 1rem;
 `
 
-export const CheckIcon = styled(PiStarFourFill)`
-  color: #163bf3;
+export const CheckIcon = styled(FaCircleCheck)`
+  color: #000000;
   height: 20px;
   width: 20px;
 

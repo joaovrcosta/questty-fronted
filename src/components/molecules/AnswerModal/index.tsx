@@ -70,8 +70,6 @@ export function AnswerModal({ id }: { id: string }) {
         }
       )
 
-      console.log(response.data)
-
       if (response.status === 201) {
         const newAnswerData: IAnswer = response.data.answer
         console.log(newAnswerData)
