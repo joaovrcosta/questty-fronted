@@ -115,8 +115,10 @@ export function QuestionBox({
     question?.questionData.answers.length === 3
 
   const hasAnswer =
-    Array.isArray(question?.questionData?.answers) &&
-    question?.questionData.answers.length > 0
+    question &&
+    question.questionData &&
+    Array.isArray(question.questionData.answers) &&
+    question.questionData.answers.length > 0
 
   const MAX_DISPLAY_COMMENTS = 3
 
