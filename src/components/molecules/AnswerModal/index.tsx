@@ -2,7 +2,6 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Text } from '@/components/atoms/Text'
-import { Avatar } from '@/components/atoms/Avatar'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
@@ -24,6 +23,7 @@ const AnswerFormSchema = zod.object({
   content: zod
     .string()
     .min(20, 'Mas já?! Escreva no mínimo 20 caracteres para explicar melhor.')
+    .max(2500, 'A resposta deve ter no máximo 2500 caracteres')
     .refine(
       (content) => {
         const words = content.split(/\s+/)

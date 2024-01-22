@@ -1,6 +1,6 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import { FaCircleCheck } from 'react-icons/fa6'
+import { BsFillPatchCheckFill } from 'react-icons/bs'
 import styled, { keyframes } from 'styled-components'
 
 const borderAnimation = keyframes`
@@ -55,9 +55,10 @@ export const AnswersSection = styled.div`
 `
 
 export const TextSectionTitle = styled(Text)`
-  margin-right: 2rem;
-  font-size: 24px;
+  font-size: 16px;
   font-family: Poppins;
+  font-weight: 300;
+  color: ${({ theme }) => theme.colors.black};
 `
 
 export const NeedHelpContainer = styled.div`
@@ -101,12 +102,13 @@ export const HelpMorePeopleContainer = styled.div`
 `
 export const CallToActionCard = styled.div`
   width: 90%;
-  background: linear-gradient(
+  /* background: linear-gradient(
     76deg,
     #45a6ff -0.68%,
     #a3ddcf 52.05%,
     #8869de 100%
-  );
+  ); */
+  background-color: white;
   margin-left: auto;
   margin-bottom: 2.5rem;
   padding: 1.5rem;
@@ -117,8 +119,7 @@ export const CallToActionCard = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0px 4px 4px 5px rgba(100, 208, 255, 0.15);
+  border: 1px solid #000;
 
   @media (max-width: 768px) {
     margin: 0 auto;
@@ -153,8 +154,8 @@ export const SignUpButton = styled(Button)`
   margin-top: 1rem;
 `
 
-export const CheckIcon = styled(FaCircleCheck)`
-  color: #000000;
+export const CheckIcon = styled(BsFillPatchCheckFill)`
+  color: #1888d4;
   height: 20px;
   width: 20px;
 
@@ -171,4 +172,10 @@ export const AdvantagesContainer = styled.div`
   @media (max-width: 769px) {
     flex-direction: column;
   }
+`
+export const AnswerHeading = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_400};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

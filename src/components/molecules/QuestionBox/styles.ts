@@ -12,7 +12,7 @@ export const QuestionBoxContainer = styled.div<IQuestionBoxProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
   padding: 1.5rem 2rem 1.5rem 2rem;
-  border-radius: 8px;
+  border-radius: 16px;
   width: 90%;
   box-shadow: 0px 4px 5px 10px rgba(0, 0, 0, 0.05);
 
@@ -171,7 +171,7 @@ export const UserHandleActionsContainer = styled.div`
   /* margin-top: 3rem; */
 
   @media (max-width: 768px) {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 `
 
@@ -191,12 +191,13 @@ export const AnswerButton = styled(Button)`
     transition: 0.2s ease all;
   }
 
-  @media (max-width: 768px) {
-    width: 85%;
+  @media (max-width: 769px) {
+    width: 100%;
   }
 `
 export const SeeAnswerButton = styled(Button)`
   font-weight: 600;
+  height: 48px;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
   &:focus {
@@ -210,11 +211,20 @@ export const SeeAnswerButton = styled(Button)`
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.blue_950};
     transition: 0.2s ease all;
   }
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const ModerationWrapper = styled.div`
-  @media (max-width: 340px) {
-    margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20%;
+
+  @media (max-width: 769px) {
+    /* margin-top: 1rem; */
   }
 `
 
@@ -225,6 +235,7 @@ export const ModerateLabel = styled.div`
   padding: 0.5rem;
   border-radius: 12px;
   cursor: pointer;
+  justify-content: flex-end;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -258,6 +269,39 @@ export const MoreDetailsInput = styled.input`
   font-family: Poppins;
 `
 
+export const NoLoggedMoreDetailsInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0rem 1.5rem;
+
+  border-radius: 33px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
+  cursor: pointer;
+  height: 38px;
+
+  @media (max-width: 769px) {
+    background-color: #fff;
+  }
+`
+
+export const NoLoggedMoreDetailsInput = styled.input`
+  width: 100%;
+  padding: 0 0.5rem;
+  border-radius: 33px;
+  border: none;
+  font-family: Poppins;
+  outline: 0;
+  cursor: pointer;
+  font-size: 15px;
+
+  @media (max-width: 769px) {
+    background-color: #fff;
+  }
+`
+
 export const QuestionWrapper = styled.div`
   max-width: 912px;
   margin: 0 auto;
@@ -278,7 +322,7 @@ export const UserAvatarContainer = styled.div`
   margin-right: 2.4rem;
 
   ${({ theme }) => css`
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       display: none;
     }
   `}
@@ -383,5 +427,15 @@ export const SendButton = styled.button`
 
   & svg {
     color: ${({ theme }) => theme.colors.blue_550};
+  }
+`
+
+export const LoginLink = styled(Text)`
+  text-decoration: none;
+  font-size: 15px;
+  color: #014a82;
+
+  &:hover {
+    text-decoration: underline;
   }
 `

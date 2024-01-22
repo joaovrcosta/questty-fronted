@@ -28,7 +28,7 @@ const createNewQuestionFormSchema = zod.object({
   content: zod
     .string()
     .min(20, 'Sua pergunta é muito curta. Use pelo menos 20 caracteres')
-    .max(5000, 'A pergunta deve ter no máximo 5000 caracteres'),
+    .max(2500, 'A pergunta deve ter no máximo 2500 caracteres'),
 })
 
 export function NewTransactionModal() {

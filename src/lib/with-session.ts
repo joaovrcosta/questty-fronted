@@ -54,16 +54,28 @@ export function withSession(handler: GetServerSideProps) {
           }
         } else if (err instanceof JsonWebTokenError) {
           console.error('Erro de autenticação JWT:', err.message)
+
+          ctx.res.setHeader(
+            'Set-Cookie',
+            'questty-token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/;'
+          )
+          return {
+            redirect: {
+              permanent: false,
+              destination: '/signin',
+            },
+            props: {},
+          }
         } else {
           console.error('Erro desconhecido:', err)
-        }
 
-        return {
-          redirect: {
-            permanent: false,
-            destination: '/signin',
-          },
-          props: {},
+          return {
+            redirect: {
+              permanent: false,
+              destination: '/signin',
+            },
+            props: {},
+          }
         }
       }
     }
