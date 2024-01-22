@@ -5,12 +5,12 @@ import { ColorThemeType } from '@/core/constants/theme'
 import React from 'react'
 
 interface CardProps {
-  title: string
-  description: string
+  title?: string
+  description?: string
   image?: React.ReactNode
   backgroundColor: ColorThemeType
   titleColor?: ColorThemeType
-  descriptionColor: ColorThemeType
+  descriptionColor?: ColorThemeType
 }
 
 export function Card({

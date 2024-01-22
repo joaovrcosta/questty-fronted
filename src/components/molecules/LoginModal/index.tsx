@@ -81,6 +81,7 @@ export function LoginModal() {
       const user = userResponse.data.user
 
       login(user, token)
+      setIsOpening(false)
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError

@@ -9,7 +9,7 @@ interface DropdownProps {
   id?: string
 }
 export function Dropdown({ id }: DropdownProps) {
-  const { logout, user } = useAuthStore()
+  const { user } = useAuthStore()
   const router = useRouter()
 
   const handleLogoutClick = () => {

@@ -23,7 +23,7 @@ export const AnswerBoxContainer = styled.div<IAnswerBox>`
     ${({ theme, isGolden }) =>
       isGolden ? theme.colors.green_500 : theme.colors.black};
   padding: 1.5rem 2rem;
-  border-radius: 8px;
+  border-radius: 16px;
   width: 90%;
   box-shadow: ${({ theme, isGolden }) =>
     isGolden

@@ -22,6 +22,7 @@ import Link from 'next/link'
 import { parseCookies } from 'nookies'
 import { useAuthModalStore } from '@/features/stores/authModal/authModal'
 import { LoginModal } from '@/components/molecules/LoginModal'
+import Divider from '@/components/molecules/Divider'
 
 interface Question {
   id: number
@@ -49,7 +50,7 @@ export default function Question(props: IQuestionData) {
   const { answers } = useAnswerStore()
   const isLoggedIn = props.isLoggedIn
 
-  const textForTitle = `${question?.questionData?.content.substring(
+  const textForTitle = `${props.questionData.content.substring(
     0,
     100
   )} - Questty.com`
@@ -180,6 +181,7 @@ export default function Question(props: IQuestionData) {
             author={props.questionData?.author.username}
             avatarUrl={props.questionData?.author?.avatar_url}
           />
+
           {!isLoggedIn && (
             <>
               <S.CallToActionCard>
@@ -246,13 +248,9 @@ export default function Question(props: IQuestionData) {
 
           <S.AnswersSection>
             {answers && answers.length > 0 ? (
-              <S.TextSectionTitle
-                weight="bold"
-                color="blue_950"
-                id="#respostas"
-              >
-                Respostas:
-              </S.TextSectionTitle>
+              <Divider>
+                <S.TextSectionTitle>Respostas</S.TextSectionTitle>
+              </Divider>
             ) : null}
           </S.AnswersSection>
           <S.AnswersContainer>{renderAnswers()}</S.AnswersContainer>

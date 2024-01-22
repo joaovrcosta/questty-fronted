@@ -1,4 +1,5 @@
 import { Text } from '@/components/atoms/Text'
+import React, { Suspense } from 'react'
 import * as S from './styles'
 import { AiOutlineFlag, AiOutlinePlusCircle, AiFillEye } from 'react-icons/ai'
 import { Avatar } from '@/components/atoms/Avatar'
@@ -25,6 +26,10 @@ import { Spinner } from '@/components/atoms/Spinner'
 import { IComment } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
 import { useAuthModalStore } from '@/features/stores/authModal/authModal'
+import { parseCookies } from 'nookies'
+import { GetServerSideProps } from 'next'
+import { withSession } from '@/lib/with-session'
+import PulsingEffect from '../PulseEffect'
 
 interface Question {
   id?: number | string
@@ -76,7 +81,7 @@ export function QuestionBox({
   const [loading, setLoading] = useState(true)
   const [showAllComments, setShowAllComments] = useState(false)
   const { question } = useQuestionStore()
-  const { user, isLoggedIn, token } = useAuthStore()
+  const { user, token, isLoggedIn } = useAuthStore()
   const router = useRouter()
   const { isOpen, setIsOpen } = useAnswerModalStore()
   const { isOpening, setIsOpening } = useAuthModalStore()
@@ -108,6 +113,12 @@ export function QuestionBox({
   const hasThreeAnswers =
     Array.isArray(question?.questionData?.answers) &&
     question?.questionData.answers.length === 3
+
+  const hasAnswer =
+    question &&
+    question.questionData &&
+    Array.isArray(question.questionData.answers) &&
+    question.questionData.answers.length > 0
 
   const MAX_DISPLAY_COMMENTS = 3
 
@@ -219,9 +230,25 @@ export function QuestionBox({
             ></S.QuestionTitleText>
           </S.QuestionTitle>
           <S.ContentContainer>
-            <Text size="xl" color="blue_950" weight="semibold">
-              {largeText}
-            </Text>
+            {loading ? (
+              <div>
+                <SkeletonLine
+                  width={29}
+                  rows={2}
+                  height={6}
+                  rounding="rounded-none"
+                />
+              </div>
+            ) : (
+              <Text
+                color="blue_950"
+                size="xl"
+                weight="semibold"
+                style={{ marginTop: '1rem', lineHeight: '24px' }}
+              >
+                {largeText}
+              </Text>
+            )}
             <Text
               color="blue_950"
               style={{ marginTop: '1rem', lineHeight: '24px' }}
@@ -230,10 +257,65 @@ export function QuestionBox({
             </Text>
           </S.ContentContainer>
         </S.QuestionContent>
-        {!isAuthor && !isAlreadyAnsweredByUser && (
-          <S.UserHandleActionsContainer>
-            {hasThreeAnswers ? (
-              <a href="#respostas">
+        <S.UserHandleActionsContainer>
+          {!isAuthor && !isAlreadyAnsweredByUser ? (
+            <div>
+              {hasThreeAnswers ? (
+                <></>
+              ) : loading ? (
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div>
+                    <SkeletonLine
+                      width={29}
+                      rows={3}
+                      height={10}
+                      rounding="rounded"
+                    />
+                  </div>
+                  <div>
+                    <SkeletonLine
+                      width={30}
+                      rows={3}
+                      height={10}
+                      rounding="rounded"
+                    />
+                  </div>
+                </div>
+              ) : !token || !isLoggedIn ? (
+                <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                  <Dialog.Trigger asChild>
+                    <S.AnswerButton
+                      variant="lg"
+                      rounding="rounded-full"
+                      color="white"
+                      backgroundColor="black"
+                    >
+                      <AiOutlinePlusCircle size={24} />
+                      RESPONDER
+                    </S.AnswerButton>
+                  </Dialog.Trigger>
+                  <LoginModal />
+                </Dialog.Root>
+              ) : (
+                <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
+                  <Dialog.Trigger asChild>
+                    <S.AnswerButton
+                      variant="lg"
+                      rounding="rounded-full"
+                      color="white"
+                      backgroundColor="black"
+                    >
+                      <AiOutlinePlusCircle size={24} />
+                      RESPONDER
+                    </S.AnswerButton>
+                  </Dialog.Trigger>
+                  <AnswerModal id={String(question?.questionData?.author_id)} />
+                </Dialog.Root>
+              )}
+            </div>
+          ) : (
+            <>
+              {hasAnswer && (
                 <S.SeeAnswerButton
                   variant="lg"
                   rounding="rounded-full"
@@ -245,57 +327,10 @@ export function QuestionBox({
                     VER {answersQuantity} RESPOSTAS
                   </Text>
                 </S.SeeAnswerButton>
-              </a>
-            ) : loading ? (
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <div>
-                  <SkeletonLine
-                    width={29}
-                    rows={3}
-                    height={10}
-                    rounding="rounded"
-                  />
-                </div>
-                <div>
-                  <SkeletonLine
-                    width={30}
-                    rows={3}
-                    height={10}
-                    rounding="rounded"
-                  />
-                </div>
-              </div>
-            ) : !token || !isLoggedIn ? (
-              <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
-                <Dialog.Trigger asChild>
-                  <S.AnswerButton
-                    variant="lg"
-                    rounding="rounded-full"
-                    color="white"
-                    backgroundColor="black"
-                  >
-                    <AiOutlinePlusCircle size={24} />
-                    RESPONDER
-                  </S.AnswerButton>
-                </Dialog.Trigger>
-                <LoginModal />
-              </Dialog.Root>
-            ) : (
-              <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-                <Dialog.Trigger asChild>
-                  <S.AnswerButton
-                    variant="lg"
-                    rounding="rounded-full"
-                    color="white"
-                    backgroundColor="black"
-                  >
-                    <AiOutlinePlusCircle size={24} />
-                    RESPONDER
-                  </S.AnswerButton>
-                </Dialog.Trigger>
-                <AnswerModal id={String(question?.questionData?.author_id)} />
-              </Dialog.Root>
-            )}
+              )}
+            </>
+          )}
+          {!isAuthor && (
             <S.ModerationWrapper>
               <Tooltip content="Denunciar">
                 <S.ModerateLabel>
@@ -303,53 +338,87 @@ export function QuestionBox({
                 </S.ModerateLabel>
               </Tooltip>
             </S.ModerationWrapper>
-          </S.UserHandleActionsContainer>
-        )}
-        <S.MoreDetailsInputContainer>
-          <Avatar
-            variant="sm"
-            imageUrl={user?.avatar_url ? user?.avatar_url : null}
-          />
-          <S.CommentForm
-            onSubmit={handleSubmit(async (data) => {
-              const formData = {
-                content: data.content,
-                oneOfFields: {
-                  questionId: question?.questionData.id ?? '',
-                  answerId: null,
-                },
-                categoryType: 'question',
-              }
+          )}
+        </S.UserHandleActionsContainer>
 
-              await handleCreateNewComment(formData)
-            })}
-          >
-            <S.MoreDetailsInput
-              {...register('content')}
-              placeholder={`Pedir detalhes ao usuário ${author}`}
-            />
-            {isSubmitting ? (
-              <Spinner size="md" baseColor="blue_950" variant="secondary" />
+        {!token || !isLoggedIn ? (
+          <Link href="/signin" style={{ textDecoration: 'none' }}>
+            <S.NoLoggedMoreDetailsInputContainer>
+              <S.LoginLink weight="semibold">Entrar</S.LoginLink>
+              <S.NoLoggedMoreDetailsInput
+                {...register('content')}
+                placeholder={`Para adicionar um comentário`}
+              />
+            </S.NoLoggedMoreDetailsInputContainer>
+          </Link>
+        ) : (
+          <>
+            {' '}
+            {loading ? (
+              <>
+                <SkeletonLine
+                  width={29}
+                  rows={3}
+                  height={6}
+                  rounding="rounded-none"
+                />
+              </>
             ) : (
-              <S.SendButton type="submit">
-                <MdOutlineSend size={16} />
-              </S.SendButton>
+              <>
+                <S.MoreDetailsInputContainer>
+                  <Avatar
+                    variant="sm"
+                    imageUrl={user?.avatar_url ? user?.avatar_url : null}
+                  />
+                  <S.CommentForm
+                    onSubmit={handleSubmit(async (data) => {
+                      const formData = {
+                        content: data.content,
+                        oneOfFields: {
+                          questionId: question?.questionData.id ?? '',
+                          answerId: null,
+                        },
+                        categoryType: 'question',
+                      }
+
+                      await handleCreateNewComment(formData)
+                    })}
+                  >
+                    <S.MoreDetailsInput
+                      {...register('content')}
+                      placeholder={`Pedir detalhes ao usuário ${author}`}
+                    />
+                    {isSubmitting ? (
+                      <Spinner
+                        size="md"
+                        baseColor="blue_950"
+                        variant="secondary"
+                      />
+                    ) : (
+                      <S.SendButton type="submit">
+                        <MdOutlineSend size={16} />
+                      </S.SendButton>
+                    )}
+                  </S.CommentForm>
+                </S.MoreDetailsInputContainer>
+                {formState.errors.content && (
+                  <div style={{ marginTop: '1.5rem' }}>
+                    <span
+                      style={{
+                        color: '#D20032',
+                        fontFamily: 'Poppins',
+                        fontWeight: 300,
+                      }}
+                    >
+                      {formState.errors.content.message}
+                    </span>
+                  </div>
+                )}
+              </>
             )}
-          </S.CommentForm>
-        </S.MoreDetailsInputContainer>
-        {formState.errors.content && (
-          <div style={{ marginTop: '1.5rem' }}>
-            <span
-              style={{
-                color: '#D20032',
-                fontFamily: 'Poppins',
-                fontWeight: 300,
-              }}
-            >
-              {formState.errors.content.message}
-            </span>
-          </div>
+          </>
         )}
+
         <>
           <S.CommentSection>
             {commentsToDisplay.map((comment) => (
@@ -389,3 +458,18 @@ export function QuestionBox({
     </S.QuestionWrapper>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSession(
+  async (_ctx) => {
+    try {
+      const cookies = parseCookies(_ctx)
+      const existingToken = cookies['questty-token']
+      const isLoggedIn = !!existingToken
+
+      return { props: { isLoggedIn } }
+    } catch (error) {
+      console.error('Erro ao buscar dados:', error)
+      return { props: { questionData: null } }
+    }
+  }
+)

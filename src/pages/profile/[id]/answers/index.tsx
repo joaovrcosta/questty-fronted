@@ -3,6 +3,7 @@ import { Text } from '@/components/atoms/Text'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import * as Dialog from '@radix-ui/react-dialog'
 import Cookies from 'js-cookie'
 import { PiMedalFill } from 'react-icons/pi'
 import api from '@/services/api'
@@ -24,10 +25,13 @@ import { BsFillPersonCheckFill } from 'react-icons/bs'
 import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { FollowButton } from '@/components/molecules/FollowButton'
 import { NextSeo } from 'next-seo'
+import { useAuthModalStore } from '@/features/stores/authModal/authModal'
+import { LoginModal } from '@/components/molecules/LoginModal'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
   const { isLoggedIn, token } = useAuthStore()
+  const { isOpening, setIsOpening } = useAuthModalStore()
   const { setProfile, user } = useProfileStore()
   const authenticatedUser = useAuthStore((state) => state.user)
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
@@ -137,10 +141,25 @@ export default function Answers(props: IProfileData) {
                   gap: '1rem',
                 }}
               >
-                <FollowButton
-                  isAlreadyFollowing={isAlreadyFollowing}
-                  onClick={handleFollow}
-                />
+                {!token || !isLoggedIn ? (
+                  <>
+                    {' '}
+                    <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                      <Dialog.Trigger asChild>
+                        <FollowButton
+                          isAlreadyFollowing={isAlreadyFollowing}
+                          onClick={handleFollow}
+                        />
+                      </Dialog.Trigger>
+                      <LoginModal />
+                    </Dialog.Root>
+                  </>
+                ) : (
+                  <FollowButton
+                    isAlreadyFollowing={isAlreadyFollowing}
+                    onClick={handleFollow}
+                  />
+                )}
 
                 <Tooltip content="Denunciar">
                   <Button
