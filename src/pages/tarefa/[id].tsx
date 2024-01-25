@@ -23,6 +23,7 @@ import { parseCookies } from 'nookies'
 import { useAuthModalStore } from '@/features/stores/authModal/authModal'
 import { LoginModal } from '@/components/molecules/LoginModal'
 import Divider from '@/components/molecules/Divider'
+import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 
 interface Question {
   id: number
@@ -40,6 +41,7 @@ interface Question {
 
 export default function Question(props: IQuestionData) {
   const [loading, setLoading] = useState(true)
+  const { isMobile, setIsMobile } = useIsMobileStore()
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const answerStore = useAnswerStore()
@@ -77,6 +79,22 @@ export default function Question(props: IQuestionData) {
       setLoading(false)
     }
   })
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 769) {
+        setIsMobile(true)
+      } else {
+        setIsMobile(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   const renderAnswers = () => {
     if (loading) {
@@ -180,6 +198,7 @@ export default function Question(props: IQuestionData) {
             createdAt={props.questionData?.createdAt}
             author={props.questionData?.author.username}
             avatarUrl={props.questionData?.author?.avatar_url}
+            isMobile={isMobile}
           />
 
           {!isLoggedIn && (

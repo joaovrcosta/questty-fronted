@@ -83,18 +83,20 @@ export const Content = styled(Dialog.Content)`
     }
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      min-width: 100%;
-      max-height: 28rem;
-      width: 100%;
-      border: none;
-      border-radius: 0;
-      top: 50%;
-      left: 50%;
-    }
-  `}
+  @media (max-width: 769px) {
+    min-width: 100%;
+    max-height: 28rem;
+    display: flex;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `
+
+export const QuestionModal = styled.div``
 
 export const CloseButton = styled(Dialog.Close)`
   position: absolute;

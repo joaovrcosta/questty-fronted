@@ -4,19 +4,23 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { Text } from '@/components/atoms/Text'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
-import api from '@/services/api'
 import { useForm } from 'react-hook-form'
 import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { Spinner } from '@/components/atoms/Spinner'
-import { useRouter } from 'next/router'
 import { HeaderAnswer } from '@/components/organisms/HeaderAnswer'
-import { IAnswer } from '@/shared/types'
+import { useEffect } from 'react'
+import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
 
 interface FormData {
   content: string
+}
+
+interface AnswerModalProps {
+  isMobile: boolean
+  id: string
 }
 
 const AnswerFormSchema = zod.object({
@@ -36,61 +40,44 @@ const AnswerFormSchema = zod.object({
     ),
 })
 
-export function AnswerModal({ id }: { id: string }) {
+export function AnswerModal({ isMobile }: AnswerModalProps) {
   const { register, handleSubmit, formState } = useForm<FormData>({
     resolver: zodResolver(AnswerFormSchema),
   })
-  const { setIsOpen } = useAnswerModalStore()
+  const { setIsOpen, isOpen, isAnswering, setIsAnswering } =
+    useAnswerModalStore()
   const { question } = useQuestionStore()
   const { token, isLoggedIn } = useAuthStore()
   const answerStore = useAnswerStore()
-
-  const router = useRouter()
+  const { handleAnswerQuestion } = useAnswerHandler()
 
   const { isSubmitting } = formState
 
-  const handleAnswerQuestion = async (data: FormData) => {
-    try {
-      if (!token || !isLoggedIn) {
-        await router.push('/signin')
-        return
-      }
-
-      const { content } = data
-
-      const response = await api.post(
-        `/answers/${question?.questionData.id}`,
-        {
-          content,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-
-      if (response.status === 201) {
-        const newAnswerData: IAnswer = response.data.answer
-        console.log(newAnswerData)
-
-        answerStore.setAnswers([newAnswerData, ...(answerStore.answers ?? [])])
-      }
-      if (response.status === 400) {
-        console.log('Pergunta já respondida')
-      }
-    } catch (error) {
-      console.error('Error creating answer:', error)
-      throw error
-    }
-  }
-
   const handleCloseModal = () => {
     setIsOpen(false)
+    setIsAnswering(false)
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768 && isOpen) {
+        setIsOpen(false)
+      }
+
+      if (window.innerWidth >= 768 && !isOpen && isAnswering) {
+        setIsOpen(true)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [isOpen])
+
   return (
-    <Dialog.Portal>
+    <S.Portal>
       <S.Overlay />
       <S.Content>
         <HeaderAnswer />
@@ -172,6 +159,6 @@ export function AnswerModal({ id }: { id: string }) {
           </S.FormAnsweringContainer>
         </S.MainContainer>
       </S.Content>
-    </Dialog.Portal>
+    </S.Portal>
   )
 }

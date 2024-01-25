@@ -125,20 +125,6 @@ export function NewTransactionModal() {
             <S.Selects>
               <SubjectSelect onChange={handleSelectChange} />
             </S.Selects>
-            {/* <S.SelectPointsContainer>
-              <S.SelectPoints>
-                <option value="">1 pt</option>
-                <option value="">2 pts</option>
-                <option value="">3 pts</option>
-                <option value="">4 pts</option>
-                <option value="">5 pts</option>
-                <option value="">6 pts</option>
-                <option value="">7 pts</option>
-                <option value="">8 pts</option>
-                <option value="">9 pts</option>
-                <option value="">10 pts</option>
-              </S.SelectPoints>
-            </S.SelectPointsContainer> */}
           </S.QuestionMoreInfoContainer>
 
           <div>

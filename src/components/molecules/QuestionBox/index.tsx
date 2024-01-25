@@ -30,14 +30,17 @@ import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import PulsingEffect from '../PulseEffect'
+import { set } from 'date-fns'
+import { IoMdClose } from 'react-icons/io'
 
-interface Question {
+interface QuestionBoxProps {
   id?: number | string
   content?: string
   createdAt?: string
   answersQuantity?: number
   author?: string
   avatarUrl?: string
+  isMobile: boolean
 }
 
 interface FormData {
@@ -73,7 +76,8 @@ export function QuestionBox({
   createdAt,
   answersQuantity,
   avatarUrl,
-}: Question) {
+  isMobile,
+}: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
   })
@@ -83,7 +87,14 @@ export function QuestionBox({
   const { question } = useQuestionStore()
   const { user, token, isLoggedIn } = useAuthStore()
   const router = useRouter()
-  const { isOpen, setIsOpen } = useAnswerModalStore()
+  const {
+    isOpen,
+    setIsOpen,
+    setIsAnswering,
+    isAnswering,
+    isAnsweringMobile,
+    setIsAnsweringMobile,
+  } = useAnswerModalStore()
   const { isOpening, setIsOpening } = useAuthModalStore()
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
@@ -150,6 +161,19 @@ export function QuestionBox({
       console.error('Error creating comment:', error)
       throw error
     }
+  }
+
+  useEffect(() => {
+    if (isMobile && isAnswering) {
+      setIsAnsweringMobile(true)
+    } else {
+      setIsAnsweringMobile(false)
+    }
+  }, [isMobile, isAnswering, setIsAnsweringMobile])
+
+  const handleIsAnswering = () => {
+    setIsAnswering(true)
+    setIsAnsweringMobile(true)
   }
 
   return (
@@ -257,6 +281,33 @@ export function QuestionBox({
             </Text>
           </S.ContentContainer>
         </S.QuestionContent>
+        {isAnsweringMobile && (
+          <S.AnswerEditorContainer>
+            <S.UserInformationsContainer>
+              <div
+                style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+              >
+                <Avatar
+                  id={String(question?.questionData?.author_id)}
+                  variant="sm"
+                  imageUrl={avatarUrl ? avatarUrl : null}
+                />
+                <Text>{user?.username}</Text>
+              </div>
+              <div>
+                <S.CloseButtonMobile
+                  onClick={() => {
+                    setIsAnsweringMobile(false)
+                  }}
+                >
+                  <IoMdClose size={24} color="#000" />
+                </S.CloseButtonMobile>
+              </div>
+            </S.UserInformationsContainer>
+            <S.TextArea></S.TextArea>
+          </S.AnswerEditorContainer>
+        )}
+
         <S.UserHandleActionsContainer>
           {!isAuthor && !isAlreadyAnsweredByUser ? (
             <div>
@@ -296,7 +347,7 @@ export function QuestionBox({
                   </Dialog.Trigger>
                   <LoginModal />
                 </Dialog.Root>
-              ) : (
+              ) : !isMobile ? (
                 <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                   <Dialog.Trigger asChild>
                     <S.AnswerButton
@@ -304,13 +355,28 @@ export function QuestionBox({
                       rounding="rounded-full"
                       color="white"
                       backgroundColor="black"
+                      onClick={handleIsAnswering}
                     >
                       <AiOutlinePlusCircle size={24} />
                       RESPONDER
                     </S.AnswerButton>
                   </Dialog.Trigger>
-                  <AnswerModal id={String(question?.questionData?.author_id)} />
+                  <AnswerModal
+                    id={String(question?.questionData?.author_id)}
+                    isMobile={isMobile}
+                  />
                 </Dialog.Root>
+              ) : (
+                <S.AnswerButton
+                  variant="lg"
+                  rounding="rounded-full"
+                  color="white"
+                  backgroundColor="black"
+                  onClick={handleIsAnswering}
+                >
+                  <AiOutlinePlusCircle size={24} />
+                  RESPONDER
+                </S.AnswerButton>
               )}
             </div>
           ) : (
@@ -330,6 +396,7 @@ export function QuestionBox({
               )}
             </>
           )}
+
           {!isAuthor && (
             <S.ModerationWrapper>
               <Tooltip content="Denunciar">
