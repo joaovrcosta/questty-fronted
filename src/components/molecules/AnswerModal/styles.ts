@@ -430,3 +430,9 @@ export const MainContainer = styled.div`
     width: 100%;
   }
 `
+
+export const Portal = styled(Dialog.Portal)`
+  @media (max-width: 769px) {
+    display: none;
+  }
+`

@@ -2,7 +2,7 @@ import { SkeletonBox, SkeletonLine } from '@/components/atoms/Skeleton'
 import { Text } from '@/components/atoms/Text'
 import Link from 'next/link'
 import { FiFeather } from 'react-icons/fi'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const HomePageContent = styled.div`
   width: 100%;
@@ -13,24 +13,20 @@ export const HomePageContent = styled.div`
 
   padding: 2.5rem 1rem 3rem 1rem;
 
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      gap: 0;
-      padding: 1rem 1rem 3rem 1rem;
-    }
-  `}
+  @media (max-width: 1280px) {
+    gap: 0;
+    padding: 1rem 1rem 3rem 1rem;
+  }
 
   @media (max-width: 1168px) {
     width: 100%;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 480px) {
-      gap: 0;
-      width: 100%;
-      padding: 0.5rem 1rem 1.5rem 1rem;
-    }
-  `}
+  @media (max-width: 480px) {
+    gap: 0;
+    width: 100%;
+    padding: 0.5rem 1rem 1.5rem 1rem;
+  }
 `
 
 export const SubjectsContainer = styled.div`
@@ -43,12 +39,10 @@ export const SubjectsContainer = styled.div`
     max-width: 100%;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      width: 100%;
-      flex-direction: column;
-    }
-  `}
+  @media (max-width: 769px) {
+    width: 100%;
+    flex-direction: column;
+  }
 `
 
 export const Selected = styled.select`
@@ -69,11 +63,9 @@ export const Selected = styled.select`
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-  `}
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const SelectedAlreadyAnswering = styled.select`
@@ -94,11 +86,9 @@ export const SelectedAlreadyAnswering = styled.select`
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-  `}
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const MakeQuestionButtonContainer = styled.div``
@@ -108,12 +98,10 @@ export const SubjectContent = styled.div`
   align-items: center;
   gap: 1rem;
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      flex-direction: column;
-      width: 100%;
-    }
-  `}
+  @media (max-width: 769px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `
 
 export const QuestionsContainer = styled.div`
@@ -168,11 +156,9 @@ export const MakeQuestionButton = styled.button`
     padding: 0;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      display: none;
-    }
-  `}
+  @media (max-width: 769px) {
+    display: none;
+  }
 `
 
 export const TextAsk = styled(Text)`
@@ -209,7 +195,6 @@ export const RankingBox = styled.div`
   border: 1px solid #000;
   padding: 1.25rem;
   border-radius: 16px;
-  /* box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4); */
   max-height: 22rem;
   max-width: 320px;
   width: 100%;
@@ -253,12 +238,10 @@ export const SelectedRanking = styled.select`
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      width: 100%;
-      border: 2px solid ${({ theme }) => theme.colors.blue_950};
-    }
-  `}
+  @media (max-width: 769px) {
+    width: 100%;
+    border: 2px solid ${({ theme }) => theme.colors.blue_950};
+  }
 `
 
 export const QuestionCardSkeleton = styled(SkeletonBox)`
@@ -453,7 +436,6 @@ export const StatsContainer = styled.div`
   margin-top: 1.5rem;
   width: 100%;
 `
-export const UsernameLink = styled.div``
 
 export const UsernameLinkContainer = styled(Link)`
   text-decoration: none;

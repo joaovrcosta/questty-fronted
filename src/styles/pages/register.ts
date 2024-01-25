@@ -1,7 +1,7 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import Link from 'next/link'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const SignUpContainer = styled.div`
   width: 100%;
@@ -10,12 +10,10 @@ export const SignUpContainer = styled.div`
   margin-top: 10rem;
   margin-bottom: 8rem;
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      padding: 0 1.5rem;
-      margin-top: 6rem;
-    }
-  `}
+  @media (max-width: 769px) {
+    padding: 0 1.5rem;
+    margin-top: 6rem;
+  }
 `
 
 export const SignUpContent = styled.div`
@@ -23,9 +21,6 @@ export const SignUpContent = styled.div`
   margin: 0 auto;
   margin-top: 2.5rem;
 `
-
-export const FormContainer = styled.form``
-
 export const InputContainer = styled.div`
   margin-top: 2.5rem;
   margin-bottom: 1rem;

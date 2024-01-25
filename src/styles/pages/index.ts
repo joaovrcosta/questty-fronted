@@ -26,12 +26,10 @@ export const LandingContent = styled.div`
     width: 100%;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      gap: 0;
-      padding: 6.5rem 0rem 3rem 0rem;
-    }
-  `}
+  @media (max-width: 1280px) {
+    gap: 0;
+    padding: 6.5rem 0rem 3rem 0rem;
+  }
 
   @media (max-width: 1168px) {
     width: 100%;
@@ -48,7 +46,6 @@ export const LandingContent = styled.div`
     justify-content: flex-start;
     border-radius: 0 0 40px 40px;
     background: linear-gradient(180deg, #014981 0%, #ebf2f7 65%);
-    /* padding: 10px; */
   }
 `
 export const LandingContainer = styled.div`
@@ -64,14 +61,12 @@ export const LandingContainer = styled.div`
     width: 100%;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 769px) {
-      width: 100%;
-      flex-direction: column;
-      margin-top: 1rem;
-      margin-bottom: 0;
-    }
-  `}
+  @media (max-width: 769px) {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
 `
 
 export const HeroContainer = styled.div`

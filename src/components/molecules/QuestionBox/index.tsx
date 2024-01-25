@@ -1,5 +1,4 @@
 import { Text } from '@/components/atoms/Text'
-import React, { Suspense } from 'react'
 import * as S from './styles'
 import { AiOutlineFlag, AiOutlinePlusCircle, AiFillEye } from 'react-icons/ai'
 import { Avatar } from '@/components/atoms/Avatar'
@@ -29,15 +28,20 @@ import { useAuthModalStore } from '@/features/stores/authModal/authModal'
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
-import PulsingEffect from '../PulseEffect'
+import { AnswerMobileEditor } from '@/components/page/tarefa/AnswerMobileEditor'
+import { is } from 'date-fns/locale'
 
-interface Question {
+interface QuestionBoxProps {
   id?: number | string
   content?: string
   createdAt?: string
   answersQuantity?: number
   author?: string
   avatarUrl?: string
+  isMobile: boolean
+  authorId: string
+
+  hasAnswered: any
 }
 
 interface FormData {
@@ -67,13 +71,15 @@ const CommentFormSchema = zod.object({
 })
 
 export function QuestionBox({
-  id,
   content,
   author,
+  authorId,
   createdAt,
   answersQuantity,
   avatarUrl,
-}: Question) {
+  isMobile,
+  hasAnswered,
+}: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
   })
@@ -83,7 +89,14 @@ export function QuestionBox({
   const { question } = useQuestionStore()
   const { user, token, isLoggedIn } = useAuthStore()
   const router = useRouter()
-  const { isOpen, setIsOpen } = useAnswerModalStore()
+  const {
+    isOpen,
+    setIsOpen,
+    setIsAnswering,
+    isAnswering,
+    isAnsweringMobile,
+    setIsAnsweringMobile,
+  } = useAnswerModalStore()
   const { isOpening, setIsOpening } = useAuthModalStore()
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
@@ -118,7 +131,7 @@ export function QuestionBox({
     question &&
     question.questionData &&
     Array.isArray(question.questionData.answers) &&
-    question.questionData.answers.length > 0
+    hasAnswered.length > 0
 
   const MAX_DISPLAY_COMMENTS = 3
 
@@ -152,6 +165,19 @@ export function QuestionBox({
     }
   }
 
+  useEffect(() => {
+    if (isMobile && isAnswering) {
+      setIsAnsweringMobile(true)
+    } else {
+      setIsAnsweringMobile(false)
+    }
+  }, [isMobile, isAnswering, setIsAnsweringMobile])
+
+  const handleIsAnswering = () => {
+    setIsAnswering(true)
+    setIsAnsweringMobile(true)
+  }
+
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
@@ -174,9 +200,14 @@ export function QuestionBox({
             <S.InfoWrapperr>
               <S.UserInfo>
                 <S.Username>
-                  <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                    {author}
-                  </Text>
+                  <Link
+                    style={{ textDecoration: 'none' }}
+                    href={`/profile/${authorId}/answers`}
+                  >
+                    <Text style={{ fontFamily: 'Poppins' }} weight="medium">
+                      {author}
+                    </Text>
+                  </Link>
                 </S.Username>
                 <S.UserLevel>0</S.UserLevel>
               </S.UserInfo>
@@ -244,7 +275,11 @@ export function QuestionBox({
                 color="blue_950"
                 size="xl"
                 weight="semibold"
-                style={{ marginTop: '1rem', lineHeight: '24px' }}
+                style={{
+                  marginTop: '1rem',
+                  lineHeight: '24px',
+                  fontSize: '22px',
+                }}
               >
                 {largeText}
               </Text>
@@ -257,6 +292,9 @@ export function QuestionBox({
             </Text>
           </S.ContentContainer>
         </S.QuestionContent>
+
+        {isAnsweringMobile && <AnswerMobileEditor avatarUrl={avatarUrl} />}
+
         <S.UserHandleActionsContainer>
           {!isAuthor && !isAlreadyAnsweredByUser ? (
             <div>
@@ -296,7 +334,7 @@ export function QuestionBox({
                   </Dialog.Trigger>
                   <LoginModal />
                 </Dialog.Root>
-              ) : (
+              ) : !isMobile ? (
                 <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                   <Dialog.Trigger asChild>
                     <S.AnswerButton
@@ -304,13 +342,30 @@ export function QuestionBox({
                       rounding="rounded-full"
                       color="white"
                       backgroundColor="black"
+                      onClick={handleIsAnswering}
+                      isAnswering={isAnswering}
                     >
                       <AiOutlinePlusCircle size={24} />
                       RESPONDER
                     </S.AnswerButton>
                   </Dialog.Trigger>
-                  <AnswerModal id={String(question?.questionData?.author_id)} />
+                  <AnswerModal
+                    id={String(question?.questionData?.author_id)}
+                    isMobile={isMobile}
+                  />
                 </Dialog.Root>
+              ) : (
+                <S.AnswerButton
+                  variant="lg"
+                  rounding="rounded-full"
+                  color="white"
+                  backgroundColor="black"
+                  onClick={handleIsAnswering}
+                  isAnswering={isAnswering}
+                >
+                  <AiOutlinePlusCircle size={24} />
+                  RESPONDER
+                </S.AnswerButton>
               )}
             </div>
           ) : (
@@ -330,6 +385,7 @@ export function QuestionBox({
               )}
             </>
           )}
+
           {!isAuthor && (
             <S.ModerationWrapper>
               <Tooltip content="Denunciar">

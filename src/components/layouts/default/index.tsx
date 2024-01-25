@@ -20,6 +20,6 @@ export const Container = styled.main`
   margin-top: 6.25rem;
 
   @media (max-width: 769px) {
-    margin-top: 7.6rem;
+    margin-top: 6rem;
   }
 `

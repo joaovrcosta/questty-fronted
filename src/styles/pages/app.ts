@@ -1,11 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   margin-top: 5.875rem;
 
-  ${({ theme }) => css`
-    @media (max-width: 770px) {
-      margin-top: 6.25rem;
-    }
-  `}
+  @media (max-width: 769px) {
+    margin-top: 6.25rem;
+  }
 `

@@ -1,10 +1,15 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
+import { intercept } from 'mobx'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 interface IQuestionBoxProps {
   isLoggedIn: boolean
+}
+
+interface IAnswerButton {
+  isAnswering?: boolean
 }
 
 export const QuestionBoxContainer = styled.div<IQuestionBoxProps>`
@@ -175,7 +180,7 @@ export const UserHandleActionsContainer = styled.div`
   }
 `
 
-export const AnswerButton = styled(Button)`
+export const AnswerButton = styled(Button)<IAnswerButton>`
   font-weight: 600;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
@@ -194,7 +199,14 @@ export const AnswerButton = styled(Button)`
   @media (max-width: 769px) {
     width: 100%;
   }
+
+  ${({ isAnswering }) =>
+    isAnswering &&
+    `
+    display: none;
+  `}
 `
+
 export const SeeAnswerButton = styled(Button)`
   font-weight: 600;
   height: 48px;
@@ -439,3 +451,5 @@ export const LoginLink = styled(Text)`
     text-decoration: underline;
   }
 `
+
+export const MobileAnswerButton = styled.button``

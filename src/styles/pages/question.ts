@@ -15,7 +15,7 @@ export const QuestionContainer = styled.div`
     flex-wrap: wrap;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     padding: 3rem 2rem;
   }
 `
@@ -31,7 +31,7 @@ export const NewQuestionFormContainer = styled.div`
     padding: 1.75rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     padding: 1.5rem;
   }
 `
