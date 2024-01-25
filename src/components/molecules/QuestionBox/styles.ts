@@ -1,10 +1,15 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
+import { intercept } from 'mobx'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 interface IQuestionBoxProps {
   isLoggedIn: boolean
+}
+
+interface IAnswerButton {
+  isAnswering?: boolean
 }
 
 export const QuestionBoxContainer = styled.div<IQuestionBoxProps>`
@@ -175,7 +180,7 @@ export const UserHandleActionsContainer = styled.div`
   }
 `
 
-export const AnswerButton = styled(Button)`
+export const AnswerButton = styled(Button)<IAnswerButton>`
   font-weight: 600;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
@@ -194,7 +199,14 @@ export const AnswerButton = styled(Button)`
   @media (max-width: 769px) {
     width: 100%;
   }
+
+  ${({ isAnswering }) =>
+    isAnswering &&
+    `
+    display: none;
+  `}
 `
+
 export const SeeAnswerButton = styled(Button)`
   font-weight: 600;
   height: 48px;
@@ -440,35 +452,4 @@ export const LoginLink = styled(Text)`
   }
 `
 
-export const AnswerEditorContainer = styled.div`
-  width: 100%;
-  padding: 1rem;
-  background-color: #9ce8c2;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-`
-export const TextArea = styled.textarea`
-  width: 100%;
-  margin-top: 1rem;
-  overflow-wrap: anywhere;
-  white-space: pre-wrap;
-  padding: 8px 16px;
-  overflow-y: auto;
-  height: 168px;
-  border-radius: 8px;
-`
-export const UserInformationsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-`
-
-export const CloseButtonMobile = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-`
 export const MobileAnswerButton = styled.button``

@@ -10,12 +10,10 @@ export const SignUpContainer = styled.div`
   margin-top: 10rem;
   margin-bottom: 8rem;
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      padding: 0 1.5rem;
-      margin-top: 8rem;
-    }
-  `}
+  @media (max-width: 769px) {
+    padding: 0 1.5rem;
+    margin-top: 8rem;
+  }
 `
 
 export const SignUpContent = styled.div`
@@ -23,8 +21,6 @@ export const SignUpContent = styled.div`
   margin: 0 auto;
   margin-top: 2.5rem;
 `
-
-export const FormContainer = styled.form``
 
 export const InputContainer = styled.div`
   margin-top: 2.5rem;

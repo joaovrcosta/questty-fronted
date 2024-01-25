@@ -2,10 +2,8 @@ import * as S from '@/styles/pages/register'
 import { Heading } from '@/components/atoms/Heading'
 import { Input } from '@/components/atoms/Input'
 import { useForm } from 'react-hook-form'
-import { Footer } from '@/components/organisms/Footer'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
-import Head from 'next/head'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Router, { useRouter } from 'next/router'
@@ -107,7 +105,7 @@ export default function Register() {
           <Heading size="md" color="black" weight="bold">
             Complete seu cadastro:
           </Heading>
-          <S.FormContainer onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <S.InputContainer>
               <Input
                 {...register('name')}
@@ -212,7 +210,7 @@ export default function Register() {
               </S.PolicyPrivacy>{' '}
               do Questty .
             </S.TermsAndPolicies>
-          </S.FormContainer>
+          </form>
         </S.SignUpContent>
       </S.SignUpContainer>
     </>

@@ -1,7 +1,7 @@
 import * as S from './styles'
 import logoImg from '../../../assets/logo.svg'
 import { Text } from '@/components/atoms/Text'
-import { BsChat, BsYoutube, BsInstagram } from 'react-icons/bs'
+import { BsYoutube, BsInstagram } from 'react-icons/bs'
 import Image from 'next/image'
 
 export function Footer() {
@@ -9,7 +9,7 @@ export function Footer() {
     <S.FooterContainer>
       <S.FooterContent>
         <S.LogoColumn>
-          <Image src={logoImg} alt="" />
+          <Image src={logoImg} alt="" width={120} height={44} />
           <S.FollowUs>
             <Text size="lg">Redes sociais</Text>
           </S.FollowUs>
@@ -51,9 +51,9 @@ export function Footer() {
           </Text>
         </S.LinksColumn>
       </S.FooterContent>
-      {/* <S.AllRightsText size="xs">
-        2023 © Questty - Todos os direitos reservados
-      </S.AllRightsText> */}
+      <S.AllRightsText size="xs">
+        2024 © Questty - Todos os direitos reservados
+      </S.AllRightsText>
     </S.FooterContainer>
   )
 }

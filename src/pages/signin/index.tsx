@@ -191,7 +191,7 @@ export default function SignIn() {
                 <S.EnterLink href="/signup">Criar</S.EnterLink>
               </Text>
             </S.DontHaveAccountContainer>
-            <S.EnterWithContainer>
+            {/* <S.EnterWithContainer>
               <Text weight="bold" size="lg">
                 Entre com:
               </Text>
@@ -203,7 +203,7 @@ export default function SignIn() {
                   <SiFacebook size={24} color="#3b5998" />
                 </S.WithFacebook>
               </S.SocialAuthContainer>
-            </S.EnterWithContainer>
+            </S.EnterWithContainer> */}
           </S.FormContainer>
         </S.SignInContent>
       </S.SignInContainer>

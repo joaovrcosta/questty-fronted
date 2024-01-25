@@ -4,12 +4,16 @@ import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IAnswer } from '@/shared/types'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
+import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
 
 const useAnswerHandler = () => {
   const router = useRouter()
   const { token, isLoggedIn } = useAuthStore()
   const { question } = useQuestionStore()
   const answerStore = useAnswerStore()
+  const { setIsAnswering, isAnswering } = useAnswerModalStore()
+
+  console.log(isAnswering)
 
   const handleAnswerQuestion = async (data: any) => {
     try {
@@ -35,7 +39,7 @@ const useAnswerHandler = () => {
       if (response.status === 201) {
         const newAnswerData: IAnswer = response.data.answer
         console.log(newAnswerData)
-
+        setIsAnswering(false)
         answerStore.setAnswers([newAnswerData, ...(answerStore.answers ?? [])])
       }
       if (response.status === 400) {

@@ -48,7 +48,7 @@ export default function SignUp() {
           <Heading size="md" color="black" weight="bold">
             Começe agora mesmo:
           </Heading>
-          <S.FormContainer onSubmit={handleSubmit(handleClaimEmail)}>
+          <form onSubmit={handleSubmit(handleClaimEmail)}>
             <S.InputContainer>
               <Input
                 {...register('email')}
@@ -95,7 +95,7 @@ export default function SignUp() {
               Ao se inscrever no Questty você concorda com os Termos de Serviço
               e Política de Privacidade do Questty .
             </S.TermsAndPolicies>
-          </S.FormContainer>
+          </form>
         </S.SignUpContent>
       </S.SignUpContainer>
     </>

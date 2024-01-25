@@ -82,14 +82,12 @@ export default function Question(props: IQuestionData) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 769) {
-        setIsMobile(true)
-      } else {
-        setIsMobile(false)
-      }
+      setIsMobile(window.innerWidth <= 769)
     }
 
     window.addEventListener('resize', handleResize)
+
+    handleResize()
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -199,6 +197,7 @@ export default function Question(props: IQuestionData) {
             author={props.questionData?.author.username}
             avatarUrl={props.questionData?.author?.avatar_url}
             isMobile={isMobile}
+            authorId={props.questionData.author_id}
           />
 
           {!isLoggedIn && (

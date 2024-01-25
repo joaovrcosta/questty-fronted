@@ -13,6 +13,7 @@ import { Spinner } from '@/components/atoms/Spinner'
 import { HeaderAnswer } from '@/components/organisms/HeaderAnswer'
 import { useEffect } from 'react'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
+import { AnswerFormSchema } from '@/utils/zodSchemas'
 
 interface FormData {
   content: string
@@ -23,23 +24,6 @@ interface AnswerModalProps {
   id: string
 }
 
-const AnswerFormSchema = zod.object({
-  content: zod
-    .string()
-    .min(20, 'Mas já?! Escreva no mínimo 20 caracteres para explicar melhor.')
-    .max(2500, 'A resposta deve ter no máximo 2500 caracteres')
-    .refine(
-      (content) => {
-        const words = content.split(/\s+/)
-        return !words.some((word) => word.length > 46)
-      },
-      {
-        message: 'Nenhuma palavra deve ter mais de 46 letras.',
-        path: ['content'],
-      }
-    ),
-})
-
 export function AnswerModal({ isMobile }: AnswerModalProps) {
   const { register, handleSubmit, formState } = useForm<FormData>({
     resolver: zodResolver(AnswerFormSchema),
@@ -47,8 +31,6 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
   const { setIsOpen, isOpen, isAnswering, setIsAnswering } =
     useAnswerModalStore()
   const { question } = useQuestionStore()
-  const { token, isLoggedIn } = useAuthStore()
-  const answerStore = useAnswerStore()
   const { handleAnswerQuestion } = useAnswerHandler()
 
   const { isSubmitting } = formState

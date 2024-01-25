@@ -1,5 +1,4 @@
 import { Text } from '@/components/atoms/Text'
-import React, { Suspense } from 'react'
 import * as S from './styles'
 import { AiOutlineFlag, AiOutlinePlusCircle, AiFillEye } from 'react-icons/ai'
 import { Avatar } from '@/components/atoms/Avatar'
@@ -29,9 +28,7 @@ import { useAuthModalStore } from '@/features/stores/authModal/authModal'
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
-import PulsingEffect from '../PulseEffect'
-import { set } from 'date-fns'
-import { IoMdClose } from 'react-icons/io'
+import { AnswerMobileEditor } from '@/components/page/tarefa/AnswerMobileEditor'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -41,6 +38,7 @@ interface QuestionBoxProps {
   author?: string
   avatarUrl?: string
   isMobile: boolean
+  authorId: string
 }
 
 interface FormData {
@@ -70,9 +68,9 @@ const CommentFormSchema = zod.object({
 })
 
 export function QuestionBox({
-  id,
   content,
   author,
+  authorId,
   createdAt,
   answersQuantity,
   avatarUrl,
@@ -198,9 +196,14 @@ export function QuestionBox({
             <S.InfoWrapperr>
               <S.UserInfo>
                 <S.Username>
-                  <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                    {author}
-                  </Text>
+                  <Link
+                    style={{ textDecoration: 'none' }}
+                    href={`/profile/${authorId}/answers`}
+                  >
+                    <Text style={{ fontFamily: 'Poppins' }} weight="medium">
+                      {author}
+                    </Text>
+                  </Link>
                 </S.Username>
                 <S.UserLevel>0</S.UserLevel>
               </S.UserInfo>
@@ -281,32 +284,8 @@ export function QuestionBox({
             </Text>
           </S.ContentContainer>
         </S.QuestionContent>
-        {isAnsweringMobile && (
-          <S.AnswerEditorContainer>
-            <S.UserInformationsContainer>
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-              >
-                <Avatar
-                  id={String(question?.questionData?.author_id)}
-                  variant="sm"
-                  imageUrl={avatarUrl ? avatarUrl : null}
-                />
-                <Text>{user?.username}</Text>
-              </div>
-              <div>
-                <S.CloseButtonMobile
-                  onClick={() => {
-                    setIsAnsweringMobile(false)
-                  }}
-                >
-                  <IoMdClose size={24} color="#000" />
-                </S.CloseButtonMobile>
-              </div>
-            </S.UserInformationsContainer>
-            <S.TextArea></S.TextArea>
-          </S.AnswerEditorContainer>
-        )}
+
+        {isAnsweringMobile && <AnswerMobileEditor avatarUrl={avatarUrl} />}
 
         <S.UserHandleActionsContainer>
           {!isAuthor && !isAlreadyAnsweredByUser ? (
@@ -356,6 +335,7 @@ export function QuestionBox({
                       color="white"
                       backgroundColor="black"
                       onClick={handleIsAnswering}
+                      isAnswering={isAnswering}
                     >
                       <AiOutlinePlusCircle size={24} />
                       RESPONDER
@@ -373,6 +353,7 @@ export function QuestionBox({
                   color="white"
                   backgroundColor="black"
                   onClick={handleIsAnswering}
+                  isAnswering={isAnswering}
                 >
                   <AiOutlinePlusCircle size={24} />
                   RESPONDER

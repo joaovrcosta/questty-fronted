@@ -9,12 +9,10 @@ export const SignInContainer = styled.div`
   margin-bottom: 6rem;
   font-family: Poppins;
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      padding: 0 1.5rem;
-      margin-top: 9rem;
-    }
-  `}
+  @media (max-width: 769px) {
+    padding: 0 1.5rem;
+    margin-top: 9rem;
+  }
 `
 
 export const SignInContent = styled.div`
