@@ -14,9 +14,7 @@ import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
 import { GoPlus } from 'react-icons/go'
-import { FaCircleCheck } from 'react-icons/fa6'
 import { NextSeo } from 'next-seo'
-import { FaLockOpen } from 'react-icons/fa6'
 import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
 import { parseCookies } from 'nookies'
@@ -49,7 +47,7 @@ export default function Question(props: IQuestionData) {
 
   const { user } = useAuthStore()
   const { question } = useQuestionStore()
-  const { answers } = useAnswerStore()
+  const { answers, currentNewAnswer } = useAnswerStore()
   const isLoggedIn = props.isLoggedIn
 
   const textForTitle = `${props.questionData.content.substring(
@@ -67,10 +65,6 @@ export default function Question(props: IQuestionData) {
   useEffect(() => {
     setQuestion(props)
   }, [props])
-
-  useEffect(() => {
-    answerStore.setAnswers(props?.questionData?.answers ?? [])
-  }, [question])
 
   useEffect(() => {
     if (question === null) {
@@ -93,6 +87,11 @@ export default function Question(props: IQuestionData) {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  const allAnswers = [
+    ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
+    ...(props.questionData.answers || []),
+  ]
 
   const renderAnswers = () => {
     if (loading) {
@@ -142,8 +141,8 @@ export default function Question(props: IQuestionData) {
           </div>
         </>
       )
-    } else if (props.questionData.answers.length > 0) {
-      return answers?.map((answer) => (
+    } else if (allAnswers.length > 0) {
+      return allAnswers.map((answer) => (
         <AnswerBox
           isButtonDisabled={
             isUserInList && answer?.author_id === userLogged ? true : false
@@ -162,7 +161,7 @@ export default function Question(props: IQuestionData) {
     } else {
       return (
         <S.NeedHelpContainer>
-          {answers?.length === 0 && (
+          {allAnswers.length === 0 && (
             <>
               <Image src={GirlLamp} alt="" />
               <Text size="xx1" weight="medium">
@@ -198,6 +197,7 @@ export default function Question(props: IQuestionData) {
             avatarUrl={props.questionData?.author?.avatar_url}
             isMobile={isMobile}
             authorId={props.questionData.author_id}
+            hasAnswered={allAnswers}
           />
 
           {!isLoggedIn && (

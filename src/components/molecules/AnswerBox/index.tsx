@@ -10,14 +10,14 @@ import { AiOutlineFlag, AiOutlineSisternode } from 'react-icons/ai'
 import { Tooltip } from '../Tooltip'
 
 interface Answer {
-  id: string
-  content: string
+  id: string | undefined
+  content: string | undefined
   author?: string
-  createdAt: string
+  createdAt: string | undefined
   isGolden?: boolean
   likesQuantity?: number
   isButtonDisabled: boolean
-  authorId: string
+  authorId: string | undefined
   avatarUrl?: string
 }
 

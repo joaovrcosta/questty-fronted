@@ -29,6 +29,7 @@ import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import { AnswerMobileEditor } from '@/components/page/tarefa/AnswerMobileEditor'
+import { is } from 'date-fns/locale'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -39,6 +40,8 @@ interface QuestionBoxProps {
   avatarUrl?: string
   isMobile: boolean
   authorId: string
+
+  hasAnswered: any
 }
 
 interface FormData {
@@ -75,6 +78,7 @@ export function QuestionBox({
   answersQuantity,
   avatarUrl,
   isMobile,
+  hasAnswered,
 }: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
@@ -127,7 +131,7 @@ export function QuestionBox({
     question &&
     question.questionData &&
     Array.isArray(question.questionData.answers) &&
-    question.questionData.answers.length > 0
+    hasAnswered.length > 0
 
   const MAX_DISPLAY_COMMENTS = 3
 
@@ -271,7 +275,11 @@ export function QuestionBox({
                 color="blue_950"
                 size="xl"
                 weight="semibold"
-                style={{ marginTop: '1rem', lineHeight: '24px' }}
+                style={{
+                  marginTop: '1rem',
+                  lineHeight: '24px',
+                  fontSize: '22px',
+                }}
               >
                 {largeText}
               </Text>

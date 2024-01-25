@@ -11,9 +11,8 @@ const useAnswerHandler = () => {
   const { token, isLoggedIn } = useAuthStore()
   const { question } = useQuestionStore()
   const answerStore = useAnswerStore()
-  const { setIsAnswering, isAnswering } = useAnswerModalStore()
-
-  console.log(isAnswering)
+  const { setIsAnswering, isAnswering, setIsAnsweringMobile } =
+    useAnswerModalStore()
 
   const handleAnswerQuestion = async (data: any) => {
     try {
@@ -38,11 +37,13 @@ const useAnswerHandler = () => {
 
       if (response.status === 201) {
         const newAnswerData: IAnswer = response.data.answer
-        console.log(newAnswerData)
         setIsAnswering(false)
+        setIsAnsweringMobile(false)
+
+        answerStore.setCurrentNewAnswer(newAnswerData)
+
         answerStore.setAnswers([newAnswerData, ...(answerStore.answers ?? [])])
-      }
-      if (response.status === 400) {
+      } else if (response.status === 400) {
         console.log('Pergunta já respondida')
       }
     } catch (error) {
