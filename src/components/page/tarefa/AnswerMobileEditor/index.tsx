@@ -1,7 +1,7 @@
 import { Avatar } from '@/components/atoms/Avatar'
 import * as S from './styles'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
-import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
+import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuestionModal/useAnswerQuestionModal'
 import { IoMdClose } from 'react-icons/io'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
@@ -11,6 +11,7 @@ import { AnswerFormSchema } from '@/utils/zodSchemas'
 import { Button } from '@/components/atoms/Button'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
 import { Spinner } from '@/components/atoms/Spinner'
+import { IoMdSend } from 'react-icons/io'
 
 interface AnswerMobileEditor {
   avatarUrl: string | undefined
@@ -72,8 +73,10 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
                 color="white"
                 backgroundColor="black"
                 type="submit"
+                style={{ height: '3rem', width: '100%', marginTop: '1rem' }}
               >
-                RESPONDER
+                <IoMdSend size={24} />
+                ENVIAR
               </Button>
             )}
           </div>

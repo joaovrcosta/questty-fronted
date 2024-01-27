@@ -1,13 +1,13 @@
 import * as S from './styles'
 import logoImg from '../../../assets/logo.svg'
 import * as Dialog from '@radix-ui/react-dialog'
-import { NewTransactionModal } from '@/components/molecules/NewQuestionModal'
+import { NewTransactionModal } from '@/components/modals/NewQuestionModal'
 import Link from 'next/link'
 import { SearchInput } from '@/components/atoms/SearchInput'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { GetServerSideProps } from 'next'
 import api from '@/services/api'
-import { useQuestionModalStore } from '@/features/stores/newQuestionModal/useNewQuestionModal'
+import { useQuestionModalStore } from '@/features/stores/modals-stores/newQuestionModal/useNewQuestionModal'
 
 export function HeaderAuth() {
   const { isOpen, setIsOpen } = useQuestionModalStore()

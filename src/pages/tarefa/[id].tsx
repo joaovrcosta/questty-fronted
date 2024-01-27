@@ -1,6 +1,6 @@
 import * as S from '../../styles/pages/tarefa'
-import { QuestionBox } from '@/components/molecules/QuestionBox'
-import { AnswerBox } from '@/components/molecules/AnswerBox'
+import { QuestionBox } from '@/components/Boxes/QuestionBox'
+import { AnswerBox } from '@/components/Boxes/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestionData } from '@/shared/types'
@@ -18,8 +18,8 @@ import { NextSeo } from 'next-seo'
 import * as Dialog from '@radix-ui/react-dialog'
 import Link from 'next/link'
 import { parseCookies } from 'nookies'
-import { useAuthModalStore } from '@/features/stores/authModal/authModal'
-import { LoginModal } from '@/components/molecules/LoginModal'
+import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/authModal'
+import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 
@@ -203,6 +203,7 @@ export default function Question(props: IQuestionData) {
             isMobile={isMobile}
             authorId={props.questionData.author_id}
             hasAnswered={allAnswers}
+            subject={props.questionData?.category.name}
           />
 
           {!isLoggedIn && (

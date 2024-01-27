@@ -1,14 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
-import { AiOutlineClose } from 'react-icons/ai'
 import { Text } from '@/components/atoms/Text'
-import { Avatar } from '@/components/atoms/Avatar'
-import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
-import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
-import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { Input } from '@/components/atoms/Input'
 import * as zod from 'zod'
 import { useForm } from 'react-hook-form'
@@ -19,7 +14,7 @@ import axios, { AxiosError } from 'axios'
 import { Spinner } from '@/components/atoms/Spinner'
 import { Button } from '@/components/atoms/Button'
 import { Heading } from '@/components/atoms/Heading'
-import { useAuthModalStore } from '@/features/stores/authModal/authModal'
+import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/authModal'
 import { IoMdClose } from 'react-icons/io'
 
 interface FormData {
@@ -40,11 +35,7 @@ export function LoginModal() {
     })
 
   const { setIsOpening } = useAuthModalStore()
-
-  const { question } = useQuestionStore()
-  const { token, isLoggedIn, login } = useAuthStore()
-  const answerStore = useAnswerStore()
-
+  const { login } = useAuthStore()
   const { isSubmitting } = formState
 
   const router = useRouter()
