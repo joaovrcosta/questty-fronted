@@ -342,6 +342,7 @@ export function QuestionBox({
                   <Avatar
                     variant="sm"
                     imageUrl={user?.avatar_url ? user?.avatar_url : null}
+                    id={String(user?.id)}
                   />
                   <S.CommentForm
                     onSubmit={handleSubmit(async (data) => {
