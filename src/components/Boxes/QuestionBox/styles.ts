@@ -75,7 +75,7 @@ export const QuestionInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `
 
 export const QuestionInfoWrapper = styled.div`
