@@ -196,7 +196,6 @@ export function AnswerBox({
             <Tooltip content="Denunciar">
               <S.ModerateLabel>
                 <AiOutlineFlag size={24} color="#10162f" />
-                {/* <Text size="lg">Moderar</Text> */}
               </S.ModerateLabel>
             </Tooltip>
           </S.ModerationWrapper>
@@ -206,6 +205,7 @@ export function AnswerBox({
           <Avatar
             variant="sm"
             imageUrl={user?.avatar_url ? user?.avatar_url : null}
+            id={String(user?.id)}
           />
           <S.MoreDetailsInput placeholder={`Escreva seu comentário`} />
         </S.MoreDetailsInputContainer>

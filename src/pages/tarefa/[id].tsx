@@ -270,7 +270,7 @@ export default function Question(props: IQuestionData) {
           )}
 
           <S.AnswersSection>
-            {answers && answers.length > 0 ? (
+            {allAnswers.length > 0 ? (
               <Divider>
                 <S.TextSectionTitle>Respostas</S.TextSectionTitle>
               </Divider>
