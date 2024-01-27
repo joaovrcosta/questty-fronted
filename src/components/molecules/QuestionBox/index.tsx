@@ -114,12 +114,16 @@ export function QuestionBox({
 
   useEffect(() => {
     const isAlreadyAnsweredByUser =
-      Array.isArray(question?.questionData?.answers) &&
-      question?.questionData.answers.some(
+      question?.questionData?.answers && // Ensure questionData and answers are non-null
+      Array.isArray(question.questionData.answers) &&
+      question.questionData.answers.some(
         (answer) => answer.author_id === user?.id
       )
-    setIsAlreadyAnswered(isAlreadyAnsweredByUser)
-  }, [question])
+
+    if (isAlreadyAnsweredByUser !== undefined) {
+      setIsAlreadyAnswered(isAlreadyAnsweredByUser)
+    }
+  }, [question, user])
 
   const hasThreeAnswers =
     Array.isArray(question?.questionData?.answers) &&
