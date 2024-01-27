@@ -24,11 +24,9 @@ export const HeaderContainer = styled.div<IHeader>`
   z-index: 99999;
   width: 100%;
 
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      width: 100%;
-    }
-  `}
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 
   &.--scrolled {
     transition: 0.3s ease all;

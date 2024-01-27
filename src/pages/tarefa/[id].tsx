@@ -4,7 +4,7 @@ import { AnswerBox } from '@/components/molecules/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestionData } from '@/shared/types'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
 import GirlLamp from '@/assets/GirlLamp.svg'
@@ -46,7 +46,7 @@ export default function Question(props: IQuestionData) {
   const { isOpening, setIsOpening } = useAuthModalStore()
 
   const { user } = useAuthStore()
-  const { question } = useQuestionStore()
+  const { question, setAnswerQuantity, answerQuantity } = useQuestionStore()
   const { answers, currentNewAnswer } = useAnswerStore()
   const isLoggedIn = props.isLoggedIn
 
@@ -87,6 +87,11 @@ export default function Question(props: IQuestionData) {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  useEffect(() => {
+    const quantity = props.questionData.answers.length
+    setAnswerQuantity(quantity)
+  }, [props.questionData.answers])
 
   const allAnswers = [
     ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
@@ -191,7 +196,7 @@ export default function Question(props: IQuestionData) {
             id={props.questionData?.id}
             key={props.questionData?.id}
             content={props.questionData?.content}
-            answersQuantity={props.questionData?.answers.length || 0}
+            answersQuantity={answerQuantity}
             createdAt={props.questionData?.createdAt}
             author={props.questionData?.author.username}
             avatarUrl={props.questionData?.author?.avatar_url}

@@ -5,15 +5,12 @@ import { Avatar } from '@/components/atoms/Avatar'
 import { getFormattedDateAndTime } from '@/utils/getTimeAgo'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
-import * as Dialog from '@radix-ui/react-dialog'
-import { AnswerModal } from '../AnswerModal'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Tooltip } from '../Tooltip'
 import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
 import { useEffect, useState } from 'react'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
-import { LoginModal } from '../LoginModal'
 import { CommentBox } from '../CommentBox'
 import api from '@/services/api'
 import { useRouter } from 'next/router'
@@ -24,12 +21,11 @@ import { MdOutlineSend } from 'react-icons/md'
 import { Spinner } from '@/components/atoms/Spinner'
 import { IComment } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
-import { useAuthModalStore } from '@/features/stores/authModal/authModal'
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import { AnswerMobileEditor } from '@/components/page/tarefa/AnswerMobileEditor'
-import { is } from 'date-fns/locale'
+import { AnswerButton } from '@/components/page/tarefa/AnswerButton'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -90,14 +86,13 @@ export function QuestionBox({
   const { user, token, isLoggedIn } = useAuthStore()
   const router = useRouter()
   const {
-    isOpen,
-    setIsOpen,
-    setIsAnswering,
     isAnswering,
     isAnsweringMobile,
     setIsAnsweringMobile,
+    setIsAlreadyAnswered,
+    alreadyAnswered,
   } = useAnswerModalStore()
-  const { isOpening, setIsOpening } = useAuthModalStore()
+
   const largeText = content?.substring(0, 380)
   const normalText = content?.substring(380)
 
@@ -117,11 +112,14 @@ export function QuestionBox({
 
   const isAuthor = question?.questionData?.author_id === user?.id
 
-  const isAlreadyAnsweredByUser =
-    Array.isArray(question?.questionData?.answers) &&
-    question?.questionData.answers.some(
-      (answer) => answer.author_id === user?.id
-    )
+  useEffect(() => {
+    const isAlreadyAnsweredByUser =
+      Array.isArray(question?.questionData?.answers) &&
+      question?.questionData.answers.some(
+        (answer) => answer.author_id === user?.id
+      )
+    setIsAlreadyAnswered(isAlreadyAnsweredByUser)
+  }, [question])
 
   const hasThreeAnswers =
     Array.isArray(question?.questionData?.answers) &&
@@ -172,11 +170,6 @@ export function QuestionBox({
       setIsAnsweringMobile(false)
     }
   }, [isMobile, isAnswering, setIsAnsweringMobile])
-
-  const handleIsAnswering = () => {
-    setIsAnswering(true)
-    setIsAnsweringMobile(true)
-  }
 
   return (
     <S.QuestionWrapper>
@@ -296,95 +289,15 @@ export function QuestionBox({
         {isAnsweringMobile && <AnswerMobileEditor avatarUrl={avatarUrl} />}
 
         <S.UserHandleActionsContainer>
-          {!isAuthor && !isAlreadyAnsweredByUser ? (
-            <div>
-              {hasThreeAnswers ? (
-                <></>
-              ) : loading ? (
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                  <div>
-                    <SkeletonLine
-                      width={29}
-                      rows={3}
-                      height={10}
-                      rounding="rounded"
-                    />
-                  </div>
-                  <div>
-                    <SkeletonLine
-                      width={30}
-                      rows={3}
-                      height={10}
-                      rounding="rounded"
-                    />
-                  </div>
-                </div>
-              ) : !token || !isLoggedIn ? (
-                <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
-                  <Dialog.Trigger asChild>
-                    <S.AnswerButton
-                      variant="lg"
-                      rounding="rounded-full"
-                      color="white"
-                      backgroundColor="black"
-                    >
-                      <AiOutlinePlusCircle size={24} />
-                      RESPONDER
-                    </S.AnswerButton>
-                  </Dialog.Trigger>
-                  <LoginModal />
-                </Dialog.Root>
-              ) : !isMobile ? (
-                <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
-                  <Dialog.Trigger asChild>
-                    <S.AnswerButton
-                      variant="lg"
-                      rounding="rounded-full"
-                      color="white"
-                      backgroundColor="black"
-                      onClick={handleIsAnswering}
-                      isAnswering={isAnswering}
-                    >
-                      <AiOutlinePlusCircle size={24} />
-                      RESPONDER
-                    </S.AnswerButton>
-                  </Dialog.Trigger>
-                  <AnswerModal
-                    id={String(question?.questionData?.author_id)}
-                    isMobile={isMobile}
-                  />
-                </Dialog.Root>
-              ) : (
-                <S.AnswerButton
-                  variant="lg"
-                  rounding="rounded-full"
-                  color="white"
-                  backgroundColor="black"
-                  onClick={handleIsAnswering}
-                  isAnswering={isAnswering}
-                >
-                  <AiOutlinePlusCircle size={24} />
-                  RESPONDER
-                </S.AnswerButton>
-              )}
-            </div>
-          ) : (
-            <>
-              {hasAnswer && (
-                <S.SeeAnswerButton
-                  variant="lg"
-                  rounding="rounded-full"
-                  color="white"
-                  backgroundColor="black"
-                >
-                  <AiFillEye size={24} />
-                  <Text color="white" weight="medium">
-                    VER {answersQuantity} RESPOSTAS
-                  </Text>
-                </S.SeeAnswerButton>
-              )}
-            </>
-          )}
+          <AnswerButton
+            isMobile={isMobile}
+            answersQuantity={answersQuantity}
+            hasAnswer={hasAnswer}
+            isAuthor={isAuthor}
+            hasThreeAnswers={hasThreeAnswers}
+            isAlreadyAnsweredByUser={alreadyAnswered}
+            loading={loading}
+          />
 
           {!isAuthor && (
             <S.ModerationWrapper>

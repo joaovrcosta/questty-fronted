@@ -9,9 +9,9 @@ import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAn
 const useAnswerHandler = () => {
   const router = useRouter()
   const { token, isLoggedIn } = useAuthStore()
-  const { question } = useQuestionStore()
+  const { question, setAnswerQuantity, answerQuantity } = useQuestionStore()
   const answerStore = useAnswerStore()
-  const { setIsAnswering, isAnswering, setIsAnsweringMobile } =
+  const { setIsAnswering, setIsAnsweringMobile, setIsAlreadyAnswered } =
     useAnswerModalStore()
 
   const handleAnswerQuestion = async (data: any) => {
@@ -39,6 +39,10 @@ const useAnswerHandler = () => {
         const newAnswerData: IAnswer = response.data.answer
         setIsAnswering(false)
         setIsAnsweringMobile(false)
+        setIsAlreadyAnswered(true)
+
+        const updatedAnswerQuantity = answerQuantity + 1
+        setAnswerQuantity(updatedAnswerQuantity)
 
         answerStore.setCurrentNewAnswer(newAnswerData)
 

@@ -57,8 +57,6 @@ export function HeaderAuth() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const tokenJwt = ctx.req.cookies['questty-token']
 
-  console.log(tokenJwt)
-
   const { login } = useAuthStore()
 
   if (tokenJwt) {

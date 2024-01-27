@@ -15,12 +15,8 @@ function redirectToSignIn(req: NextRequest) {
 }
 
 export function middleware(req: NextRequest) {
-  console.log('passou aqui')
-
   const cookies = parseCookies()
   const tokenJwt = cookies['questty-token']
-
-  console.log(tokenJwt, 'token')
 
   const url = req.url
 
