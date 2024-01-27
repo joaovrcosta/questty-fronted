@@ -15,7 +15,7 @@ export function CardAlert() {
       <S.CardAlertContainer>
         <S.TextContainer>
           <IoMdAlert size={24} color="#fbbe2e" />
-          <Text color="white">Sistemas de pontos indisponível no momento</Text>
+          <Text color="white">Sistema de pontos indisponível no momento</Text>
         </S.TextContainer>
         <S.ButtonContainer>
           <S.CloseButton onClick={handleClose}>

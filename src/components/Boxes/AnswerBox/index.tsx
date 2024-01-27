@@ -7,7 +7,8 @@ import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useEffect, useState } from 'react'
 import { AiOutlineFlag, AiOutlineSisternode } from 'react-icons/ai'
-import { Tooltip } from '../Tooltip'
+import { Tooltip } from '../../molecules/Tooltip'
+import { VscVerifiedFilled } from 'react-icons/vsc'
 
 interface Answer {
   id: string | undefined
@@ -138,7 +139,7 @@ export function AnswerBox({
             {content}
           </S.AnswerContentText>
         </S.AnswerContent>
-        {/* 
+
         {isGolden && (
           <S.ConnectionContainer>
             <AiOutlineSisternode size={34} color="#10162f" />
@@ -174,7 +175,8 @@ export function AnswerBox({
               </Text>
             </S.ExplanationText>
           </S.ExplanationContainer>
-        )} */}
+        )}
+
         <S.UserHandleActionsContainer>
           <S.LikedButton
             variant="none"

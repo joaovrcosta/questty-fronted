@@ -2,7 +2,7 @@ import { Text } from '@/components/atoms/Text'
 import * as S from './styles'
 import * as Dialog from '@radix-ui/react-dialog'
 import { FiFeather } from 'react-icons/fi'
-import { NewTransactionModal } from '../NewQuestionModal'
+import { NewTransactionModal } from '../../modals/NewQuestionModal'
 
 export function FloatingButton() {
   return (

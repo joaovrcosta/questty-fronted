@@ -7,7 +7,7 @@ export const CardAlertContainer = styled.div`
   margin-bottom: 1rem;
   background-color: ${({ theme }) => theme.colors.black};
   border-radius: 16px;
-  padding: 1rem 1.5rem;
+  padding: 0.92rem 1.5rem;
 `
 
 export const TextContainer = styled.div`

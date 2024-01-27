@@ -395,7 +395,7 @@ export const HeadingBox = styled.div`
     #ac95dd 50.12%,
     #012d81 100%
   );
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   border-radius: 16px;
 
   margin-bottom: 1rem;

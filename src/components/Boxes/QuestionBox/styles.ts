@@ -75,7 +75,7 @@ export const QuestionInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 `
 
 export const QuestionInfoWrapper = styled.div`
@@ -240,7 +240,7 @@ export const ModerationWrapper = styled.div`
   }
 `
 
-export const ModerateLabel = styled.div`
+export const ModerateButton = styled.button`
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -248,9 +248,11 @@ export const ModerateLabel = styled.div`
   border-radius: 12px;
   cursor: pointer;
   justify-content: flex-end;
+  border: none;
+  background-color: transparent;
 
   ${({ theme }) => css`
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
       font-size: 16px;
     }
   `}
@@ -379,7 +381,7 @@ export const DateTimeText = styled(Text)`
 `
 export const UserInfo = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 
   @media (max-width: 280px) {
     display: none;
@@ -390,6 +392,11 @@ export const InfoWrapperr = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media (max-width: 440px) {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 `
 
 export const BackButtonBox = styled.button`
@@ -453,3 +460,31 @@ export const LoginLink = styled(Text)`
 `
 
 export const MobileAnswerButton = styled.button``
+
+export const HasAnsweredContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`
+
+export const SubInfosContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
+
+export const SubjectText = styled(Text)`
+  font-family: Inter;
+`
+
+export const AnwseredStamp = styled.div`
+  background-color: ${({ theme }) => theme.colors.blue_550};
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  font-family: Poppins;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+`

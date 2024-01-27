@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const AnswerEditorContainer = styled.div`
   width: 100%;
   padding: 1rem;
-  background-color: #9ce8c2;
+  background-color: ${({ theme }) => theme.colors.blue_500};
   margin-bottom: 1rem;
   border-radius: 8px;
 `

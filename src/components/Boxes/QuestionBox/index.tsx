@@ -7,8 +7,8 @@ import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
-import { Tooltip } from '../Tooltip'
-import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
+import { Tooltip } from '../../molecules/Tooltip'
+import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuestionModal/useAnswerQuestionModal'
 import { useEffect, useState } from 'react'
 import { SkeletonLine } from '@/components/atoms/Skeleton'
 import { CommentBox } from '../CommentBox'
@@ -26,6 +26,10 @@ import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
 import { AnswerMobileEditor } from '@/components/page/tarefa/AnswerMobileEditor'
 import { AnswerButton } from '@/components/page/tarefa/AnswerButton'
+import { FiCheckCircle } from 'react-icons/fi'
+import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
+import * as Dialog from '@radix-ui/react-dialog'
+import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -38,6 +42,7 @@ interface QuestionBoxProps {
   authorId: string
 
   hasAnswered: any
+  subject: string
 }
 
 interface FormData {
@@ -75,6 +80,7 @@ export function QuestionBox({
   avatarUrl,
   isMobile,
   hasAnswered,
+  subject,
 }: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
@@ -84,6 +90,7 @@ export function QuestionBox({
   const [showAllComments, setShowAllComments] = useState(false)
   const { question } = useQuestionStore()
   const { user, token, isLoggedIn } = useAuthStore()
+  const { isOpening, setIsOpening } = useReportQuestionStore()
   const router = useRouter()
   const {
     isAnswering,
@@ -208,13 +215,16 @@ export function QuestionBox({
                 </S.Username>
                 <S.UserLevel>0</S.UserLevel>
               </S.UserInfo>
-              <S.DateTimeText
-                size="xs"
-                weight="regular"
-                style={{ fontFamily: 'Inter' }}
-              >
-                {getFormattedDateAndTime(createdAt)}
-              </S.DateTimeText>
+              <S.SubInfosContainer>
+                <S.DateTimeText
+                  size="xs"
+                  weight="regular"
+                  style={{ fontFamily: 'Inter' }}
+                >
+                  {getFormattedDateAndTime(createdAt)}
+                </S.DateTimeText>
+                <S.SubjectText size="xs">{subject}</S.SubjectText>
+              </S.SubInfosContainer>
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
 
@@ -249,6 +259,18 @@ export function QuestionBox({
             </S.AnswerQuantityBox>
           )}
         </S.QuestionInfo>
+
+        {hasAnswer ? (
+          <S.HasAnsweredContainer>
+            <S.AnwseredStamp>
+              <FiCheckCircle size={16} color="#fff" />
+              <Text size="xs" weight="bold" color="white">
+                RESPONDIDO
+              </Text>
+            </S.AnwseredStamp>
+          </S.HasAnsweredContainer>
+        ) : null}
+
         <S.QuestionContent>
           <S.QuestionTitle>
             <S.QuestionTitleText
@@ -273,9 +295,8 @@ export function QuestionBox({
                 size="xl"
                 weight="semibold"
                 style={{
-                  marginTop: '1rem',
+                  marginTop: '1.5rem',
                   lineHeight: '24px',
-                  fontSize: '22px',
                 }}
               >
                 {largeText}
@@ -306,9 +327,14 @@ export function QuestionBox({
           {!isAuthor && (
             <S.ModerationWrapper>
               <Tooltip content="Denunciar">
-                <S.ModerateLabel>
-                  <AiOutlineFlag size={24} color="#10162f" />
-                </S.ModerateLabel>
+                <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                  <Dialog.Trigger asChild>
+                    <S.ModerateButton>
+                      <AiOutlineFlag size={24} color="#000" />
+                    </S.ModerateButton>
+                  </Dialog.Trigger>
+                  <ReportQuestionModal />
+                </Dialog.Root>
               </Tooltip>
             </S.ModerationWrapper>
           )}
@@ -360,7 +386,7 @@ export function QuestionBox({
                   >
                     <S.MoreDetailsInput
                       {...register('content')}
-                      placeholder={`Pedir detalhes ao usuário ${author}`}
+                      placeholder={`Pedir detalhes para ${author}`}
                     />
                     {isSubmitting ? (
                       <Spinner

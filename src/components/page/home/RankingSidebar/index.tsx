@@ -1,7 +1,7 @@
 import { FaCrown } from 'react-icons/fa6'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
-import { UserRankingBox } from '@/components/molecules/UserRakingBox'
+import { UserRankingBox } from '@/components/Boxes/UserRakingBox'
 
 export const RankingSideBar = () => {
   return (

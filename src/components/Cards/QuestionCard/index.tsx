@@ -3,8 +3,18 @@ import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
+import starIcon from '@/assets/star.svg'
+import Image from 'next/image'
+import { GiRoundStar } from 'react-icons/gi'
 import { SiCrystal } from 'react-icons/si'
-import { Tooltip } from '../Tooltip'
+import { Tooltip } from '../../molecules/Tooltip'
+import { HiOutlineChatAlt2 } from 'react-icons/hi'
+import { Button } from '@/components/atoms/Button'
+import { IoFlagOutline } from 'react-icons/io5'
+import { AiOutlineFlag } from 'react-icons/ai'
+import * as Dialog from '@radix-ui/react-dialog'
+import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
+import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
 
 export type subjectsType =
   | 'math'
@@ -18,30 +28,26 @@ export type subjectsType =
 interface Question {
   id: string
   author_id?: string
-  author_name?: string
   content: string
   category_id?: string
   createdAt: string
   readOnly?: boolean
   answersQuantity?: number
   avatarUrl?: string
-  answeredText?: string
-  subjectName?: string
 }
 
-export function QuestionCardProfile({
+export function QuestionCard({
   id,
   author_id,
   content,
-  author_name,
+  category_id,
   answersQuantity,
   createdAt,
   readOnly = false,
   avatarUrl,
-  answeredText,
-  subjectName,
 }: Question) {
   const router = useRouter()
+  const { isOpening, setIsOpening } = useReportQuestionStore()
 
   const handleResponderClick = () => {
     router.push(`/tarefa/${id}`)
@@ -63,23 +69,51 @@ export function QuestionCardProfile({
                     imageUrl={avatarUrl ? avatarUrl : null}
                   />
                 </S.UserAvatarWrapper>
-                <div>
-                  <S.SubjectAndDateTimeContainer>
-                    <Text size="xs" weight="semibold">
-                      {author_name}
-                    </Text>
-                    <Text size="xs">{answeredText}</Text>
-                  </S.SubjectAndDateTimeContainer>
-                  <div>
-                    <S.DateTime size="xs" color="gray_800">
-                      {getTimeAgo(createdAt)}
-                    </S.DateTime>
-                    <Text size="xs" weight="semibold">
-                      {subjectName}
-                    </Text>
-                  </div>
-                </div>
+                <S.SubjectAndDateTimeContainer>
+                  {!!category_id && (
+                    <S.Subject size="xs" color="gray_800">
+                      {category_id}
+                    </S.Subject>
+                  )}{' '}
+                  •{' '}
+                  <S.DateTime size="xs" color="gray_800">
+                    {getTimeAgo(createdAt)}
+                  </S.DateTime>
+                </S.SubjectAndDateTimeContainer>
               </S.UserInfo>
+              <Tooltip content="Cristais">
+                <S.QuestionPoints>
+                  <S.StarContainer>
+                    <SiCrystal size={14} color="#fff" />
+                  </S.StarContainer>
+                  <S.StarQuantity>
+                    <Text
+                      weight="medium"
+                      color="blue_950"
+                      size="sm"
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      +
+                    </Text>{' '}
+                    <Text
+                      weight="semibold"
+                      size="sm"
+                      color="blue_950"
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      0
+                    </Text>{' '}
+                    <Text
+                      weight="medium"
+                      size="sm"
+                      color="blue_950"
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      pts
+                    </Text>{' '}
+                  </S.StarQuantity>
+                </S.QuestionPoints>
+              </Tooltip>
             </S.QuestionInfo>
             <S.QuestionTextContainer>
               <S.QuestionText onClick={handleResponderClick}>
@@ -88,7 +122,7 @@ export function QuestionCardProfile({
             </S.QuestionTextContainer>
           </S.QuestionContent>
           <S.UserHandleContainer>
-            {/* <Tooltip content="Respostas">
+            <Tooltip content="Respostas">
               <S.AnswerQuantityWrapper>
                 <S.AnswerQuantity>
                   {readOnly ? (
@@ -107,9 +141,20 @@ export function QuestionCardProfile({
                 </S.AnswerQuantity>
                 <Text>{answerCount}</Text>
               </S.AnswerQuantityWrapper>
-            </Tooltip> */}
-            <div></div>
+            </Tooltip>
             <S.AswerContainer>
+              <Tooltip content="Denunciar">
+                <S.ReportButtonContainer>
+                  <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                    <Dialog.Trigger asChild>
+                      <S.ReportButton>
+                        <AiOutlineFlag size={20} color="#000" />
+                      </S.ReportButton>
+                    </Dialog.Trigger>
+                    <ReportQuestionModal />
+                  </Dialog.Root>
+                </S.ReportButtonContainer>
+              </Tooltip>
               <S.AnswerButtonContainer>
                 <S.AnswerButton
                   backgroundColor="white"

@@ -4,7 +4,7 @@ import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IAnswer } from '@/shared/types'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
-import { useAnswerModalStore } from '@/features/stores/answerQuestionModal/useAnswerQuestionModal'
+import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuestionModal/useAnswerQuestionModal'
 
 const useAnswerHandler = () => {
   const router = useRouter()
