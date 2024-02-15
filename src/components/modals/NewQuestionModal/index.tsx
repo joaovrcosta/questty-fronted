@@ -32,8 +32,6 @@ const createNewQuestionFormSchema = zod.object({
 })
 
 export function NewTransactionModal() {
-  const [isVideoWatched, setIsVideoWatched] = useState(false)
-
   const { register, handleSubmit, watch, formState } = useForm<FormData>({
     resolver: zodResolver(createNewQuestionFormSchema),
   })

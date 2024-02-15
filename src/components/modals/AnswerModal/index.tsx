@@ -14,6 +14,7 @@ import { HeaderAnswer } from '@/components/organisms/HeaderAnswer'
 import { useEffect } from 'react'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
 import { AnswerFormSchema } from '@/utils/zodSchemas'
+import { Editor } from '@/components/molecules/Editor'
 
 interface FormData {
   content: string
@@ -94,10 +95,11 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
                   Sua resposta:
                 </Text>
               </S.HeadingContainer>
-              <S.QuestionTextarea
+              {/* <S.QuestionTextarea
                 {...register('content')}
                 placeholder="Explicação passo a passo:"
-              ></S.QuestionTextarea>
+              ></S.QuestionTextarea> */}
+              <Editor />
               {formState.errors.content && (
                 <span style={{ color: '#D20032', fontSize: '14px' }}>
                   {formState.errors.content.message}

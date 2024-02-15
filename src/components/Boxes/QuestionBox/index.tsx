@@ -30,6 +30,7 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
+import FormattedText from '@/components/atoms/FormattedText'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -92,6 +93,7 @@ export function QuestionBox({
   const { user, token, isLoggedIn } = useAuthStore()
   const { isOpening, setIsOpening } = useReportQuestionStore()
   const router = useRouter()
+
   const {
     isAnswering,
     isAnsweringMobile,
