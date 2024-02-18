@@ -140,7 +140,7 @@ export function AnswerBox({
           </S.AnswerContentText>
         </S.AnswerContent>
 
-        {isGolden && (
+        {/* {isGolden && (
           <S.ConnectionContainer>
             <AiOutlineSisternode size={34} color="#10162f" />
           </S.ConnectionContainer>
@@ -175,7 +175,7 @@ export function AnswerBox({
               </Text>
             </S.ExplanationText>
           </S.ExplanationContainer>
-        )}
+        )} */}
 
         <S.UserHandleActionsContainer>
           <S.LikedButton

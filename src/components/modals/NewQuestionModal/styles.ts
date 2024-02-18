@@ -4,7 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   inset: 0;
   background: rgba(32, 137, 234, 0.7);
   overflow: hidden;
@@ -18,6 +18,7 @@ export const Content = styled(Dialog.Content)`
   justify-content: center;
   flex-direction: column;
   z-index: 999999;
+  height: 10;
 
   padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};

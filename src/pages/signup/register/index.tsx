@@ -113,7 +113,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="Nome completo"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
                 name="name"
               />
@@ -128,7 +128,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="Nome de usuário (exibido no perfil)"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
                 name="username"
               />
@@ -144,7 +144,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="E-mail"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
                 name="email"
               />
@@ -161,6 +161,7 @@ export default function Register() {
                 label="Senha"
                 border={true}
                 type="password"
+                style={{ height: '52px' }}
               />
               {formState.errors.password && (
                 <Text

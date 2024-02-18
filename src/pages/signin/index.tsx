@@ -131,7 +131,7 @@ export default function SignIn() {
                   hug={true}
                   showLabel={true}
                   label="E-mail"
-                  style={{ marginBottom: '0.5rem' }}
+                  style={{ marginBottom: '0.5rem', height: '52px' }}
                   border={true}
                 />
                 {formState.errors.email && (
@@ -148,7 +148,7 @@ export default function SignIn() {
                 hug={true}
                 showLabel={true}
                 label="Senha"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
               />
 
