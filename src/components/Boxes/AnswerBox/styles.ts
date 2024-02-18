@@ -99,7 +99,7 @@ export const AnswerInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `
 
 export const AnswerInfoWrapper = styled.div`
@@ -147,6 +147,18 @@ export const AnswerContentText = styled(Text)`
   font-family: Nunito;
   line-height: 24px;
   height: 100%;
+
+  & > p {
+    margin-bottom: 1rem;
+  }
+
+  & > ul {
+    margin-bottom: 0.5rem;
+  }
+
+  & > h3 {
+    margin-bottom: 1rem;
+  }
 `
 
 export const AnswerInfoWrapperContainer = styled.div``
@@ -283,7 +295,7 @@ export const QuestionInfo = styled.div`
 export const MoreDetailsInputContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 `
 
 export const MoreDetailsInput = styled.input`

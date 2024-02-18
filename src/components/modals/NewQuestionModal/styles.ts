@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   inset: 0;
   background: rgba(32, 137, 234, 0.7);

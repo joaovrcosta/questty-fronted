@@ -1,8 +1,28 @@
-import { useEditor, EditorContent, EditorEvents } from '@tiptap/react'
+import styled from 'styled-components'
+import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { initialContent } from './initialContent'
 import { Toolbar } from './Toolbar'
 import { useEffect } from 'react'
+
+const StyledEditorContainer = styled.div`
+  background-color: #f8f8f8;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+`
+
+const StyledEditorContent = styled.div`
+  outline: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  min-height: 355px;
+
+  @media (max-width: 1180px) {
+    padding: 5px;
+    min-height: 250px;
+  }
+`
 
 interface EditorProps {
   onChange?: (content: string) => void
@@ -14,7 +34,9 @@ export function Editor({ onChange }: EditorProps) {
     content: initialContent,
     editorProps: {
       attributes: {
-        class: 'outline-none',
+        class: 'styled-editor-content', // Adicione sua classe personalizada aqui
+        style:
+          'outline: none; font-family: Nunito; font-size: 18px; padding: 0.5rem;',
       },
     },
   })
@@ -36,9 +58,11 @@ export function Editor({ onChange }: EditorProps) {
   }, [editor, onChange])
 
   return (
-    <>
-      <EditorContent editor={editor} />
+    <StyledEditorContainer>
+      <StyledEditorContent>
+        <EditorContent editor={editor} />
+      </StyledEditorContent>
       <Toolbar editor={editor} />
-    </>
+    </StyledEditorContainer>
   )
 }

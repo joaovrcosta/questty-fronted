@@ -13,6 +13,7 @@ export const ToolButton = styled.button`
   border-radius: 50%;
   height: 40px;
   width: 40px;
+  margin-top: 2rem;
 
   &:hover {
     transition: 0.2s;

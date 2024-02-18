@@ -26,6 +26,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.12.16",
+    "html-react-parser": "^5.1.6",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "mobx": "^6.10.2",

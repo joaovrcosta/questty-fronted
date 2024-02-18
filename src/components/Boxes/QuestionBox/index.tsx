@@ -218,11 +218,7 @@ export function QuestionBox({
                 <S.UserLevel>0</S.UserLevel>
               </S.UserInfo>
               <S.SubInfosContainer>
-                <S.DateTimeText
-                  size="xs"
-                  weight="regular"
-                  style={{ fontFamily: 'Inter' }}
-                >
+                <S.DateTimeText size="xs" weight="regular">
                   {getFormattedDateAndTime(createdAt)}
                 </S.DateTimeText>
                 <S.SubjectText size="xs">{subject}</S.SubjectText>

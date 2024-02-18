@@ -15,7 +15,6 @@ import { useEffect, useState } from 'react'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
 import { AnswerFormSchema } from '@/utils/zodSchemas'
 import { Editor } from '@/components/molecules/Editor'
-import { initialContent } from '@/components/molecules/Editor/initialContent'
 
 interface FormData {
   content: string

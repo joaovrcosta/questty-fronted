@@ -272,7 +272,7 @@ export const ModerateButton = styled.button`
 export const MoreDetailsInputContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 `
 
 export const MoreDetailsInput = styled.input`
