@@ -39,6 +39,7 @@ export interface IAnswer {
     name: string
   }
   question: {
+    content: string
     category: {
       name: string
     }

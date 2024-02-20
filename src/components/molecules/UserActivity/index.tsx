@@ -50,20 +50,48 @@ export function UserActivityTabs({
               </Text>
             </Link>
           </S.Item>
-          {/* <S.Item>
-          <Link
-            href={`/profile/${userId}/friends`}
-            style={{ textDecoration: 'none' }}
-          >
-            <Text
-              weight="semibold"
-              color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
-              onClick={() => handleTabClick('friends')}
+          <S.Item>
+            <Link
+              href={`/profile/${userId}/badges`}
+              style={{ textDecoration: 'none' }}
             >
-              Amigos
-            </Text>
-          </Link>
-        </S.Item> */}
+              <Text
+                weight="semibold"
+                color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
+                onClick={() => handleTabClick('friends')}
+              >
+                Emblemas
+              </Text>
+            </Link>
+          </S.Item>
+          <S.Item>
+            <Link
+              href={`/profile/${userId}/followers`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Text
+                weight="semibold"
+                color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
+                onClick={() => handleTabClick('friends')}
+              >
+                Seguidores
+              </Text>
+            </Link>
+          </S.Item>
+          <S.Item>
+            <Link
+              href={`/profile/${userId}/following`}
+              style={{ textDecoration: 'none' }}
+            >
+              <Text
+                weight="semibold"
+                color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
+                onClick={() => handleTabClick('friends')}
+              >
+                Seguindo
+              </Text>
+            </Link>
+          </S.Item>
         </nav>
       </S.UserActivityContainer>
     </>

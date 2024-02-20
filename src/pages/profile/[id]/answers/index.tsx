@@ -71,8 +71,6 @@ export default function Answers(props: IProfileData) {
     handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
   }
 
-  console.log(props.answersData)
-
   return (
     <>
       <NextSeo
@@ -111,26 +109,50 @@ export default function Answers(props: IProfileData) {
                 </Link>
               )}
             </S.AvatarContainer>
-            <Text
-              size="xl"
-              weight="semibold"
-              color="blue_950"
-              style={{
-                fontFamily: 'Poppins',
-                marginTop: '1rem',
-              }}
-            >
-              <span style={{ color: '#2089EA', fontWeight: 'bold' }}>@</span>{' '}
-              {props.userData.username}
-            </Text>
+            <div>
+              <Text
+                size="xx1"
+                weight="semibold"
+                color="blue_950"
+                style={{
+                  fontFamily: 'Poppins',
+                  marginTop: '1.25rem',
+                }}
+              >
+                {props.userData.name}
+              </Text>
+
+              <Text
+                size="md"
+                weight="regular"
+                color="gray_400"
+                style={{
+                  fontFamily: 'Poppins',
+                  marginTop: '0.25rem',
+                }}
+              >
+                {/* <span
+                  style={{
+                    color: '#2089EA',
+                    fontWeight: 'bold',
+                    userSelect: 'none',
+                  }}
+                >
+                  @
+                </span>{' '} */}
+                {props.userData.username}
+              </Text>
+            </div>
 
             <S.FriendsQuantity>
               {/* <IoMdPeople size={24} style={{ color: 'rgba(51, 51, 51, 1)' }} /> */}
               <Text size="md" color="black">
-                <strong style={{ fontWeight: 'bold' }}>46</strong> Seguidores{' '}
+                <strong style={{ fontWeight: '900', color: 'black' }}>0</strong>{' '}
+                Seguidores{' '}
               </Text>
               <Text size="md" color="black">
-                <strong style={{ fontWeight: 'bold' }}>82</strong> Segue{' '}
+                <strong style={{ fontWeight: '900', color: 'black' }}>0</strong>{' '}
+                Segue{' '}
               </Text>
             </S.FriendsQuantity>
 
@@ -192,7 +214,7 @@ export default function Answers(props: IProfileData) {
                 >
                   <MdQuestionAnswer size={16} color="#2089EA" />
                   <Text weight="bold" color="blue_950">
-                    {props.userData.answers.length}
+                    {props.answersData.answers.length}
                   </Text>
                 </div>
 
@@ -295,6 +317,9 @@ export default function Answers(props: IProfileData) {
                     content={answer.content}
                     createdAt={answer.createdAt}
                     answeredText="respondeu"
+                    questionAnswered={answer.question.content}
+                    questionId={answer.question_id}
+                    likesQuantity={answer.likes.length}
                     // subjectName={answer.category.name}
                   />
                 ))
@@ -306,15 +331,17 @@ export default function Answers(props: IProfileData) {
                 </S.NotFindAnyAnswer>
               )}
             </S.UserHistory>
-            <S.ShowmoreQuestionsButtonContainer>
-              <S.showMoreButton
-                rounding="rounded-thin"
-                backgroundColor="transparent"
-                border={false}
-              >
-                Mostrar mais
-              </S.showMoreButton>
-            </S.ShowmoreQuestionsButtonContainer>
+            {props.answersData?.answers.length >= 5 && (
+              <S.ShowmoreQuestionsButtonContainer>
+                <S.showMoreButton
+                  rounding="rounded-thin"
+                  backgroundColor="transparent"
+                  border={false}
+                >
+                  Mostrar mais
+                </S.showMoreButton>
+              </S.ShowmoreQuestionsButtonContainer>
+            )}
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>

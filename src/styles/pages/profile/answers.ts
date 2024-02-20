@@ -92,9 +92,9 @@ export const CreatedAt = styled.div`
 export const UserHistory = styled.div`
   font-family: Poppins;
   margin-top: 1rem;
-  background-color: ${({ theme }) => theme.colors.white};
+  /* background-color: ${({ theme }) => theme.colors.white}; */
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  /* border: 1px solid ${({ theme }) => theme.colors.black}; */
 `
 
 export const ActiveIn = styled.div`
@@ -119,6 +119,8 @@ export const ShowmoreQuestionsButtonContainer = styled.div`
 `
 
 export const showMoreButton = styled(Button)`
+  border-radius: 16px;
+
   &:hover {
     background-color: #cdd8e0;
     transition: 0.3s ease all;

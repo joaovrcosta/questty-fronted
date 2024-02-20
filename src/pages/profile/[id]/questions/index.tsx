@@ -123,10 +123,10 @@ export default function Questions(props: IProfileData) {
             <S.FriendsQuantity>
               {/* <IoMdPeople size={24} style={{ color: 'rgba(51, 51, 51, 1)' }} /> */}
               <Text size="md" color="black">
-                <strong style={{ fontWeight: 'bold' }}>46</strong> Seguidores{' '}
+                <strong style={{ fontWeight: 'bold' }}>0</strong> Seguidores{' '}
               </Text>
               <Text size="md" color="black">
-                <strong style={{ fontWeight: 'bold' }}>82</strong> Segue{' '}
+                <strong style={{ fontWeight: 'bold' }}>0</strong> Segue{' '}
               </Text>
             </S.FriendsQuantity>
 

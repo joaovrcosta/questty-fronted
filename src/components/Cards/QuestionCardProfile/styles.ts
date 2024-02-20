@@ -1,18 +1,20 @@
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
+import Link from 'next/link'
+import { AiFillHeart } from 'react-icons/ai'
 import styled, { css } from 'styled-components'
 
 export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  border-radius: 12px;
   height: 100%;
+  margin-bottom: 0.5rem;
 
   padding: 1rem 1.5rem;
   opacity: 1;
   filter: brightness(100%);
   transition: opacity 0.3s ease all, filter 0.3s ease;
-  border-bottom: 2px solid #ebf2f7;
-
   /* &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
     transition: 0.3s ease all;
@@ -28,10 +30,6 @@ export const QuestionCardContainer = styled.div`
     width: 5px;
     background-color: ${({ theme }) => theme.colors.blue_500};
   } */
-
-  &:hover {
-    background-color: rgba(235, 242, 247, 0.3);
-  }
 
   ${({ theme }) => css`
     @media (max-width: 769px) {
@@ -258,4 +256,22 @@ export const AnswerQuantityWrapper = styled.div`
   &:hover p {
     color: ${({ theme }) => theme.colors.blue_500};
   }
+`
+
+export const FollowQuestionLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.blue_950};
+  font-weight: 600;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+export const hearthIconCSS = styled(AiFillHeart)`
+  color: ${({ theme }) => theme.colors.hearth_500};
+`
+export const LikesContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `
