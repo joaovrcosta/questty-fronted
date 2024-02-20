@@ -175,8 +175,9 @@ export const UserHandleActionsContainer = styled.div`
   padding: 0 0 1rem 0;
   /* margin-top: 3rem; */
 
-  @media (max-width: 768px) {
-    /* flex-wrap: wrap; */
+  @media (max-width: 769px) {
+    border-bottom: 0;
+    margin-bottom: 1rem;
   }
 `
 
@@ -465,6 +466,23 @@ export const HasAnsweredContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  display: block;
+
+  @media (max-width: 769px) {
+    display: none;
+  }
+`
+
+export const HasAnsweredContainerMobile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  display: none;
+  width: 120px;
+
+  @media (max-width: 769px) {
+    display: block;
+  }
 `
 
 export const SubInfosContainer = styled.div`
@@ -475,10 +493,15 @@ export const SubInfosContainer = styled.div`
 
 export const SubjectText = styled(Text)`
   font-family: Inter;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `
 
 export const AnwseredStamp = styled.div`
-  background-color: ${({ theme }) => theme.colors.blue_550};
+  background-color: ${({ theme }) => theme.colors.black};
   padding: 0.25rem 0.5rem;
   border-radius: 8px;
   font-family: Poppins;

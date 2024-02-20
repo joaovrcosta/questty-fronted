@@ -98,6 +98,8 @@ export default function Question(props: IQuestionData) {
     ...(props.questionData.answers || []),
   ]
 
+  console.log(allAnswers, 'allAnswers')
+
   const renderAnswers = () => {
     if (loading) {
       return (

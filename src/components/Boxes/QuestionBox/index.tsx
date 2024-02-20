@@ -30,7 +30,6 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
-import FormattedText from '@/components/atoms/FormattedText'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -215,58 +214,41 @@ export function QuestionBox({
                     </Text>
                   </Link>
                 </S.Username>
-                <S.UserLevel>0</S.UserLevel>
+                {/* <S.UserLevel>0</S.UserLevel> */}
               </S.UserInfo>
               <S.SubInfosContainer>
                 <S.DateTimeText size="xs" weight="regular">
                   {getFormattedDateAndTime(createdAt)}
                 </S.DateTimeText>
-                <S.SubjectText size="xs">{subject}</S.SubjectText>
+                <span>•</span>
+                <S.SubjectText size="xs" weight="semibold">
+                  {subject}
+                </S.SubjectText>
               </S.SubInfosContainer>
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
 
-          {hasThreeAnswers ? (
-            <Link href="/">
-              <S.BackButtonBox>
-                <AiOutlineArrowLeft size={24} />
-              </S.BackButtonBox>
-            </Link>
-          ) : (
-            <S.AnswerQuantityBox>
-              <div id="answers">
-                <Text
-                  weight="bold"
-                  size="xl"
-                  color="blue_950"
-                  style={{ fontFamily: 'Poppins' }}
-                >
-                  Respostas:
+          {hasAnswer ? (
+            <S.HasAnsweredContainer>
+              <S.AnwseredStamp>
+                <FiCheckCircle size={16} color="#fff" />
+                <Text size="xs" weight="bold" color="white">
+                  respondida
                 </Text>
-              </div>
-              <S.AnswerQuantity>
-                <Text
-                  size="xx1"
-                  weight="bold"
-                  color="blue_950"
-                  style={{ fontFamily: 'Poppins' }}
-                >
-                  {answersQuantity}
-                </Text>
-              </S.AnswerQuantity>
-            </S.AnswerQuantityBox>
-          )}
+              </S.AnwseredStamp>
+            </S.HasAnsweredContainer>
+          ) : null}
         </S.QuestionInfo>
 
         {hasAnswer ? (
-          <S.HasAnsweredContainer>
+          <S.HasAnsweredContainerMobile>
             <S.AnwseredStamp>
               <FiCheckCircle size={16} color="#fff" />
               <Text size="xs" weight="bold" color="white">
-                RESPONDIDO
+                respondida
               </Text>
             </S.AnwseredStamp>
-          </S.HasAnsweredContainer>
+          </S.HasAnsweredContainerMobile>
         ) : null}
 
         <S.QuestionContent>

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
+import { BlankAvatar } from '@/components/atoms/Avatar/BlankAvatar'
 
 export type subjectsType =
   | 'math'
@@ -44,16 +45,15 @@ export function MoreQuestonCard({
   const answerCount = answersQuantity || 0
   const limitedAnswerCount = 3
 
+  const createdIn = '2024-02-16T13:00:00.000Z'
+  const subject = 'Matemática'
+
   return (
     <S.QuestionCardContainer>
       <S.QuestionContentContainer>
         <S.QuestionContent>
           <S.UserAvatarWrapper>
-            <Avatar
-              id={author_id}
-              variant="lg"
-              imageUrl="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
-            />
+            <BlankAvatar id={author_id} variant="lg" />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
             <S.SubjectAndDateTimeContainer>
@@ -63,13 +63,22 @@ export function MoreQuestonCard({
                 </S.Subject>
               )}
               <S.DateTime size="xs" color="gray_800">
-                • {getTimeAgo(createdAt)}
+                {getTimeAgo(createdIn)}
               </S.DateTime>
+              <span>•</span>
+              <Text
+                size="xs"
+                color="gray_800"
+                style={{ fontFamily: 'Inter' }}
+                weight="semibold"
+              >
+                {subject}
+              </Text>
             </S.SubjectAndDateTimeContainer>
             {/* <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
             </S.QuestionText> */}
-            <Text>Uma pergunta qualquer ai</Text>
+            <Text>Pergunta meramente ilustrativa</Text>
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
@@ -79,7 +88,7 @@ export function MoreQuestonCard({
             ) : (
               <Text
                 weight="semibold"
-                color="blue_550"
+                color="blue_950"
                 size="sm"
                 style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
               >
@@ -93,7 +102,7 @@ export function MoreQuestonCard({
                 backgroundColor="white"
                 variant="sm"
                 rounding="rounded-xxl"
-                onClick={handleResponderClick}
+                // onClick={handleResponderClick}
               >
                 {readOnly
                   ? 'VISUALIZAR'

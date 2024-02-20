@@ -7,6 +7,7 @@ interface IAnswerButton {
 export const AnswerButton = styled(Button)<IAnswerButton>`
   font-weight: 600;
   border: 2px solid ${({ theme }) => theme.colors.black};
+  height: 40px;
 
   &:focus {
     border: 2px solid #000;
@@ -32,7 +33,7 @@ export const AnswerButton = styled(Button)<IAnswerButton>`
 `
 export const SeeAnswerButton = styled(Button)`
   font-weight: 600;
-  height: 48px;
+  height: 40px;
   border: 2px solid ${({ theme }) => theme.colors.black};
 
   &:focus {
