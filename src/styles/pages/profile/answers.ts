@@ -112,11 +112,15 @@ export const ShowmoreQuestionsButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media (max-width: 769px) {
+    margin-bottom: 1rem;
+  }
 `
 
 export const showMoreButton = styled(Button)`
   &:hover {
-    background-color: #eaece1;
+    background-color: #cdd8e0;
     transition: 0.3s ease all;
   }
 `

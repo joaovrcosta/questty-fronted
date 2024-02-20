@@ -38,6 +38,11 @@ export interface IAnswer {
   category: {
     name: string
   }
+  question: {
+    category: {
+      name: string
+    }
+  }
 }
 
 export interface INewAnswer {
@@ -101,6 +106,10 @@ export interface IProfileData {
     email: string
     createdAt: string
     questions: IQuestion[]
+    answers: IAnswer[]
+  }
+
+  answersData: {
     answers: IAnswer[]
   }
 }

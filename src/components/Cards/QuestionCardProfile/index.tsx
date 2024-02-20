@@ -3,8 +3,6 @@ import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
-import { SiCrystal } from 'react-icons/si'
-import { Tooltip } from '../../molecules/Tooltip'
 
 export type subjectsType =
   | 'math'

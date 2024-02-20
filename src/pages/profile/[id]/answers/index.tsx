@@ -37,7 +37,7 @@ export default function Answers(props: IProfileData) {
   const isCurrentUserProfile = authenticatedUser?.id === props.userData.id
   const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
 
-  const usernameDisplay = `${props.userData.username} | Questty.com`
+  const usernameDisplay = `${props.userData.username} - questty.com`
 
   useEffect(() => {
     setProfile(props)
@@ -70,6 +70,8 @@ export default function Answers(props: IProfileData) {
   const handleFollow = () => {
     handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
   }
+
+  console.log(props.answersData)
 
   return (
     <>
@@ -280,19 +282,20 @@ export default function Answers(props: IProfileData) {
               setActive={setActiveTab}
             />
             <S.UserHistory>
-              {props.userData?.answers && props.userData.answers.length > 0 ? (
-                props.userData.answers.map((question) => (
+              {props.answersData?.answers &&
+              props.answersData?.answers.length > 0 ? (
+                props.answersData?.answers.map((answer) => (
                   <QuestionCardProfile
-                    author_id={question.author_id}
-                    avatarUrl={question.author?.avatar_url}
+                    author_id={answer.author_id}
+                    avatarUrl={answer.author?.avatar_url}
                     author_name={String(props.userData.username)}
                     readOnly={true}
-                    key={question.id}
-                    id={question.question_id}
-                    content={question.content}
-                    createdAt={question.createdAt}
+                    key={answer.id}
+                    id={answer.question_id}
+                    content={answer.content}
+                    createdAt={answer.createdAt}
                     answeredText="respondeu"
-                    // subjectName={question.category.name}
+                    // subjectName={answer.category.name}
                   />
                 ))
               ) : (
@@ -303,7 +306,7 @@ export default function Answers(props: IProfileData) {
                 </S.NotFindAnyAnswer>
               )}
             </S.UserHistory>
-            {/* <S.ShowmoreQuestionsButtonContainer>
+            <S.ShowmoreQuestionsButtonContainer>
               <S.showMoreButton
                 rounding="rounded-thin"
                 backgroundColor="transparent"
@@ -311,7 +314,7 @@ export default function Answers(props: IProfileData) {
               >
                 Mostrar mais
               </S.showMoreButton>
-            </S.ShowmoreQuestionsButtonContainer> */}
+            </S.ShowmoreQuestionsButtonContainer>
           </S.UserHistoryContainer>
         </S.ProfileContent>
       </S.ProfileContainer>
@@ -331,12 +334,23 @@ export const getServerSideProps = async (ctx: any) => {
 
   try {
     const res = await api.get(`profile/${id}`)
-
     const userData = res.data.user
 
-    return { props: { userData, id } }
+    try {
+      const answersRes = await api.get(`/user-answers/${id}`)
+      const answersData = answersRes.data
+
+      return { props: { userData, answersData, id } }
+    } catch (answersError: any) {
+      if (answersError.response && answersError.response.status === 404) {
+        return { props: { userData, answersData: null, id } }
+      } else {
+        console.error('Error fetching answers data:', answersError)
+        return { props: { userData, answersData: null, id } }
+      }
+    }
   } catch (error) {
-    console.error('Erro ao buscar dados:', error)
+    console.error('Error fetching data:', error)
     return { props: { userData: null } }
   }
 }
