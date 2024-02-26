@@ -124,7 +124,7 @@ export function QuestionCard({
           <S.UserHandleContainer>
             <Tooltip content="Respostas">
               <S.AnswerQuantityWrapper>
-                <S.AnswerQuantity>
+                <S.AnswerQuantity onClick={handleResponderClick}>
                   {readOnly ? (
                     ''
                   ) : (

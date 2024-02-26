@@ -104,10 +104,19 @@ export interface IProfileData {
     username: string
     code: Number
     avatar_url: string
+    points: number
     email: string
     createdAt: string
     questions: IQuestion[]
     answers: IAnswer[]
+    rank: {
+      id: number
+      name: string
+      color: string
+      description: string
+      points: number
+      bestResponses: number
+    }
   }
 
   answersData: {

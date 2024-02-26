@@ -2,7 +2,7 @@ import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import { intercept } from 'mobx'
 import Image from 'next/image'
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface IQuestionBoxProps {
   isLoggedIn: boolean
@@ -430,7 +430,7 @@ export const CommentForm = styled.form`
   gap: 1rem;
 
   @media (max-width: 769px) {
-    gap: 0.5rem;
+    gap: 1rem;
   }
 `
 export const SendButton = styled.button`
@@ -500,6 +500,15 @@ export const SubjectText = styled(Text)`
   }
 `
 
+const pulseAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+  }
+`
+
 export const AnwseredStamp = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
   padding: 0.25rem 0.5rem;
@@ -510,4 +519,15 @@ export const AnwseredStamp = styled.div`
   justify-content: center;
   gap: 0.5rem;
   white-space: nowrap;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 0px 0px 1px 1px #0000001a;
+    animation: ${pulseAnimation} 2s infinite;
+  }
 `

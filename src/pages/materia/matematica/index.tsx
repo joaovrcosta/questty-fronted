@@ -1,4 +1,4 @@
-import * as S from '../../styles/pages/home'
+import * as S from '@/styles/pages/materia/enem/styles'
 import { Heading } from '@/components/atoms/Heading'
 import { QuestionCard } from '@/components/Cards/QuestionCard'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -24,7 +24,7 @@ import { YourSubjectsSideBar } from '@/components/page/home/SubjectsSidebar'
 import { RankingSideBar } from '@/components/page/home/RankingSidebar'
 import { GameBoxFacade } from '@/components/page/home/GameBoxFacade'
 
-export default function Home() {
+export default function MatematicaPage() {
   const questionStore = useQuestionsStore()
   const questions = useQuestionsStore((state) => state.questions)
   const [loading, setLoading] = useState(true)
@@ -59,7 +59,7 @@ export default function Home() {
             <S.Welcome>
               <div style={{ maxWidth: '650px', marginBottom: '1rem' }}>
                 <Heading size="lgg" weight="extrabold" color="black">
-                  Não fique com dúvidas, pergunte agora mesmo
+                  Perguntas de Matemática
                 </Heading>
               </div>
             </S.Welcome>
@@ -171,7 +171,7 @@ export default function Home() {
           <CardAlert />
 
           <S.QuestionsContainer>
-            <SubjectList subject="home" />
+            <SubjectList subject="enem" />
             <S.QuestionsWrapper>
               {loading ? (
                 <>
@@ -279,7 +279,9 @@ export default function Home() {
   )
 }
 
-Home.getLayout = (page: React.ReactNode) => <HomeLayout>{page}</HomeLayout>
+MatematicaPage.getLayout = (page: React.ReactNode) => (
+  <HomeLayout>{page}</HomeLayout>
+)
 
 export const getServerSideProps: GetServerSideProps = withSession(
   async (_ctx) => {

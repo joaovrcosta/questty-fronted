@@ -13,20 +13,20 @@ import { useEffect, useState } from 'react'
 import { getDayOfYear } from '@/utils/getDayOfYear'
 import Link from 'next/link'
 import { MdQuestionAnswer } from 'react-icons/md'
-import Head from 'next/head'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
 import { QuestionCardProfile } from '@/components/Cards/QuestionCardProfile'
 import { Button } from '@/components/atoms/Button'
 import { MdEmojiFlags } from 'react-icons/md'
-import { IoMdPersonAdd } from 'react-icons/io'
 import { Tooltip } from '@/components/molecules/Tooltip'
-import { BsFillPersonCheckFill } from 'react-icons/bs'
 import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { FollowButton } from '@/components/molecules/FollowButton'
 import { NextSeo } from 'next-seo'
 import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/authModal'
 import { LoginModal } from '@/components/modals/LoginModal'
+import { motion } from 'framer-motion'
+import { SiCrystal } from 'react-icons/si'
+import { IoMdArrowDropup } from 'react-icons/io'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
@@ -70,6 +70,8 @@ export default function Answers(props: IProfileData) {
   const handleFollow = () => {
     handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
   }
+
+  const rank = props.userData.rank
 
   return (
     <>
@@ -156,6 +158,54 @@ export default function Answers(props: IProfileData) {
               </Text>
             </S.FriendsQuantity>
 
+            <S.UserBadges>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <S.StarContainer>
+                  <SiCrystal size={14} color="#fff" />
+                </S.StarContainer>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginLeft: '0.25rem',
+                  }}
+                >
+                  {/* <IoMdArrowDropup size={20} /> */}
+                  <S.StarQuantity>
+                    <Text
+                      weight="semibold"
+                      size="lg"
+                      color="blue_950"
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      {props.userData.points ?? 0}
+                    </Text>{' '}
+                    <Text
+                      weight="medium"
+                      size="sm"
+                      color="blue_950"
+                      style={{ whiteSpace: 'nowrap' }}
+                    >
+                      pts
+                    </Text>{' '}
+                  </S.StarQuantity>
+                </div>
+              </div>
+              <S.VerticalDivider>|</S.VerticalDivider>
+              <Tooltip content={rank?.description}>
+                <S.UserRankContainer color={rank.color}>
+                  <Text size="sm" color="white">
+                    {rank.name}
+                  </Text>
+                </S.UserRankContainer>
+              </Tooltip>
+            </S.UserBadges>
+
             {!isCurrentUserProfile && (
               <div
                 style={{
@@ -214,7 +264,7 @@ export default function Answers(props: IProfileData) {
                 >
                   <MdQuestionAnswer size={16} color="#2089EA" />
                   <Text weight="bold" color="blue_950">
-                    {props.answersData.answers.length}
+                    {props.answersData?.answers?.length ?? 0}
                   </Text>
                 </div>
 
@@ -307,21 +357,28 @@ export default function Answers(props: IProfileData) {
               {props.answersData?.answers &&
               props.answersData?.answers.length > 0 ? (
                 props.answersData?.answers.map((answer) => (
-                  <QuestionCardProfile
-                    author_id={answer.author_id}
-                    avatarUrl={answer.author?.avatar_url}
-                    author_name={String(props.userData.username)}
-                    readOnly={true}
-                    key={answer.id}
-                    id={answer.question_id}
-                    content={answer.content}
-                    createdAt={answer.createdAt}
-                    answeredText="respondeu"
-                    questionAnswered={answer.question.content}
-                    questionId={answer.question_id}
-                    likesQuantity={answer.likes.length}
-                    // subjectName={answer.category.name}
-                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <QuestionCardProfile
+                      author_id={answer.author_id}
+                      avatarUrl={answer.author?.avatar_url}
+                      author_name={String(props.userData.username)}
+                      readOnly={true}
+                      key={answer.id}
+                      id={answer.question_id}
+                      content={answer.content}
+                      createdAt={answer.createdAt}
+                      answeredText="respondeu"
+                      questionAnswered={answer.question.content}
+                      questionId={answer.question_id}
+                      likesQuantity={answer.likes.length}
+                      // subjectName={answer.category.name}
+                    />
+                  </motion.div>
                 ))
               ) : (
                 <S.NotFindAnyAnswer>

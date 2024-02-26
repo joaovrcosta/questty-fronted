@@ -51,9 +51,9 @@ export function Footer() {
           </Text>
         </S.LinksColumn>
       </S.FooterContent>
-      <S.AllRightsText size="xs">
+      {/* <S.AllRightsText size="xs">
         2024 © Questty - Todos os direitos reservados
-      </S.AllRightsText>
+      </S.AllRightsText> */}
     </S.FooterContainer>
   )
 }

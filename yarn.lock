@@ -2243,10 +2243,10 @@
   "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.2.0.tgz"
   "version" "4.2.0"
 
-"framer-motion@^10.12.16":
-  "integrity" "sha512-w/SfWEIWJkYSgRHYBmln7EhcNo31ao8Xexol8lGXf1pR/tlnBtf1HcxoUmEiEh6pacB4/geku5ami53AAQWHMQ=="
-  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-10.12.16.tgz"
-  "version" "10.12.16"
+"framer-motion@^10.18.0":
+  "integrity" "sha512-oGlDh1Q1XqYPksuTD/usb0I70hq95OUzmL9+6Zd+Hs4XV0oaISBa/UUMSjYiq6m8EUF32132mOJ8xVZS+I0S6w=="
+  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-10.18.0.tgz"
+  "version" "10.18.0"
   dependencies:
     "tslib" "^2.4.0"
   optionalDependencies:

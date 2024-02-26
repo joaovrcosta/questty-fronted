@@ -129,7 +129,7 @@ export function AnswerButton({
               backgroundColor="black"
             >
               <AiFillEye size={24} />
-              <Text color="white" weight="medium">
+              <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
                 VER {answersQuantity} RESPOSTAS
               </Text>
             </S.SeeAnswerButton>
@@ -145,7 +145,7 @@ export function AnswerButton({
               backgroundColor="black"
             >
               <AiFillEye size={24} />
-              <Text color="white" weight="medium">
+              <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
                 VER {answersQuantity} RESPOSTAS
               </Text>
             </S.SeeAnswerButton>

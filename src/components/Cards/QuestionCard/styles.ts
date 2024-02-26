@@ -174,12 +174,14 @@ export const AnswerButton = styled(Button)`
   }
 `
 
-export const AnswerQuantity = styled.div`
+export const AnswerQuantity = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
+  border: none;
+  background-color: transparent;
 
   svg {
   }

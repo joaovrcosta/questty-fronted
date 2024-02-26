@@ -22,6 +22,7 @@ import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/aut
 import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
+import { motion } from 'framer-motion'
 
 interface Question {
   id: number
@@ -98,8 +99,6 @@ export default function Question(props: IQuestionData) {
     ...(props.questionData.answers || []),
   ]
 
-  console.log(allAnswers, 'allAnswers')
-
   const renderAnswers = () => {
     if (loading) {
       return (
@@ -109,12 +108,13 @@ export default function Question(props: IQuestionData) {
               marginBottom: '1rem',
               display: 'flex',
               justifyContent: 'flex-end',
+              width: '100%',
             }}
           >
             <SkeletonLine
-              width={820}
+              width={700}
               rows={1}
-              height={200}
+              height={280}
               rounding="rounded"
             />
           </div>
@@ -128,7 +128,7 @@ export default function Question(props: IQuestionData) {
             <SkeletonLine
               width={820}
               rows={1}
-              height={200}
+              height={280}
               rounding="rounded"
             />
           </div>
@@ -142,7 +142,7 @@ export default function Question(props: IQuestionData) {
             <SkeletonLine
               width={820}
               rows={1}
-              height={200}
+              height={280}
               rounding="rounded"
             />
           </div>
@@ -150,20 +150,27 @@ export default function Question(props: IQuestionData) {
       )
     } else if (allAnswers.length > 0) {
       return allAnswers.map((answer) => (
-        <AnswerBox
-          isButtonDisabled={
-            isUserInList && answer?.author_id === userLogged ? true : false
-          }
-          key={answer?.id}
-          id={answer?.id}
-          authorId={answer?.author_id}
-          content={answer?.content}
-          createdAt={answer?.createdAt}
-          isGolden={answer?.isGolden}
-          author={answer?.author?.username}
-          likesQuantity={answer?.likes?.length || 0}
-          avatarUrl={answer?.author?.avatar_url}
-        />
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <AnswerBox
+            isButtonDisabled={
+              isUserInList && answer?.author_id === userLogged ? true : false
+            }
+            key={answer?.id}
+            id={answer?.id}
+            authorId={answer?.author_id}
+            content={answer?.content}
+            createdAt={answer?.createdAt}
+            isGolden={answer?.isGolden}
+            author={answer?.author?.username}
+            likesQuantity={answer?.likes?.length || 0}
+            avatarUrl={answer?.author?.avatar_url}
+          />
+        </motion.div>
       ))
     } else {
       return (
@@ -194,19 +201,26 @@ export default function Question(props: IQuestionData) {
       />
       <S.QuestionContainer>
         <S.QuestionWrapper>
-          <QuestionBox
-            id={props.questionData?.id}
-            key={props.questionData?.id}
-            content={props.questionData?.content}
-            answersQuantity={answerQuantity}
-            createdAt={props.questionData?.createdAt}
-            author={props.questionData?.author.username}
-            avatarUrl={props.questionData?.author?.avatar_url}
-            isMobile={isMobile}
-            authorId={props.questionData.author_id}
-            hasAnswered={allAnswers}
-            subject={props.questionData?.category.name}
-          />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <QuestionBox
+              id={props.questionData?.id}
+              key={props.questionData?.id}
+              content={props.questionData?.content}
+              answersQuantity={answerQuantity}
+              createdAt={props.questionData?.createdAt}
+              author={props.questionData?.author.username}
+              avatarUrl={props.questionData?.author?.avatar_url}
+              isMobile={isMobile}
+              authorId={props.questionData.author_id}
+              hasAnswered={allAnswers}
+              subject={props.questionData?.category.name}
+            />
+          </motion.div>
 
           {!isLoggedIn && (
             <>

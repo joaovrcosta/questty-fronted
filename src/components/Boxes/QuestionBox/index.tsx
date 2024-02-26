@@ -293,32 +293,34 @@ export function QuestionBox({
 
         {isAnsweringMobile && <AnswerMobileEditor avatarUrl={avatarUrl} />}
 
-        <S.UserHandleActionsContainer>
-          <AnswerButton
-            isMobile={isMobile}
-            answersQuantity={answersQuantity}
-            hasAnswer={hasAnswer}
-            isAuthor={isAuthor}
-            hasThreeAnswers={hasThreeAnswers}
-            isAlreadyAnsweredByUser={alreadyAnswered}
-            loading={loading}
-          />
+        {!isAuthor && (
+          <S.UserHandleActionsContainer>
+            <AnswerButton
+              isMobile={isMobile}
+              answersQuantity={answersQuantity}
+              hasAnswer={hasAnswer}
+              isAuthor={isAuthor}
+              hasThreeAnswers={hasThreeAnswers}
+              isAlreadyAnsweredByUser={alreadyAnswered}
+              loading={loading}
+            />
 
-          {!isAuthor && (
-            <S.ModerationWrapper>
-              <Tooltip content="Denunciar">
-                <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
-                  <Dialog.Trigger asChild>
-                    <S.ModerateButton>
-                      <AiOutlineFlag size={24} color="#000" />
-                    </S.ModerateButton>
-                  </Dialog.Trigger>
-                  <ReportQuestionModal />
-                </Dialog.Root>
-              </Tooltip>
-            </S.ModerationWrapper>
-          )}
-        </S.UserHandleActionsContainer>
+            {!isAuthor && (
+              <S.ModerationWrapper>
+                <Tooltip content="Denunciar">
+                  <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                    <Dialog.Trigger asChild>
+                      <S.ModerateButton>
+                        <AiOutlineFlag size={24} color="#000" />
+                      </S.ModerateButton>
+                    </Dialog.Trigger>
+                    <ReportQuestionModal />
+                  </Dialog.Root>
+                </Tooltip>
+              </S.ModerationWrapper>
+            )}
+          </S.UserHandleActionsContainer>
+        )}
 
         {!token || !isLoggedIn ? (
           <Link href="/signin" style={{ textDecoration: 'none' }}>
