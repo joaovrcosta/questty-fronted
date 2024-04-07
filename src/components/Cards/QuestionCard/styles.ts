@@ -225,7 +225,7 @@ export const QuestionPoints = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.gray_150};
+  /* background-color: ${({ theme }) => theme.colors.gray_150}; */
   border-radius: 25px;
   padding: 0.25rem 0.25rem 0.25rem 0;
 `
@@ -243,6 +243,7 @@ export const StarContainer = styled.div`
 export const StarQuantity = styled.div`
   display: flex;
   gap: 0.25rem;
+  align-items: center;
   margin-right: 0.25rem;
   margin-left: 0.25rem;
 `

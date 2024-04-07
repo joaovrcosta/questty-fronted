@@ -56,6 +56,8 @@ export default function Question(props: IQuestionData) {
     100
   )} - Questty.com`
 
+  const isAuthor = question?.questionData?.author_id === user?.id
+
   const answersAuthorIds = question?.questionData?.answers.map(
     (resposta) => resposta.author_id
   )
@@ -155,12 +157,12 @@ export default function Question(props: IQuestionData) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
+          key={answer?.id}
         >
           <AnswerBox
             isButtonDisabled={
               isUserInList && answer?.author_id === userLogged ? true : false
             }
-            key={answer?.id}
             id={answer?.id}
             authorId={answer?.author_id}
             content={answer?.content}
@@ -173,7 +175,7 @@ export default function Question(props: IQuestionData) {
         </motion.div>
       ))
     } else {
-      return (
+      return !isAuthor ? (
         <S.NeedHelpContainer>
           {allAnswers.length === 0 && (
             <>
@@ -189,6 +191,18 @@ export default function Question(props: IQuestionData) {
             </>
           )}
         </S.NeedHelpContainer>
+      ) : (
+        <S.ShareYourKnowledgeContainer>
+          <S.ShareKnowledgeText size="xx1" weight="medium">
+            Compartilhe seu conhecimento enquanto você espera
+          </S.ShareKnowledgeText>
+          <Link href="/" style={{ width: '100%' }}>
+            <S.ShareKnowButton backgroundColor="black" color="white">
+              <GoPlus size={24} />
+              RESPONDER UMA PERGUNTA
+            </S.ShareKnowButton>
+          </Link>
+        </S.ShareYourKnowledgeContainer>
       )
     }
   }
@@ -218,7 +232,7 @@ export default function Question(props: IQuestionData) {
               isMobile={isMobile}
               authorId={props.questionData.author_id}
               hasAnswered={allAnswers}
-              subject={props.questionData?.category.name}
+              subject={props.questionData?.subject.name}
             />
           </motion.div>
 
@@ -297,7 +311,7 @@ export default function Question(props: IQuestionData) {
           <S.HelpMorePeopleContainer>
             <Text size="xl" weight="semibold">
               Ajude outras pessoas com dúvidas sobre{' '}
-              {props?.questionData?.category.name}
+              {props?.questionData?.subject.name}
             </Text>
             <div style={{ marginTop: '1.5rem' }}>
               <MoreQuestonCard />

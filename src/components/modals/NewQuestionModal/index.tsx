@@ -40,6 +40,7 @@ export function NewTransactionModal() {
 
   const [subject, subjectSelect] = useState('')
   const { setIsOpen } = useQuestionModalStore()
+  const { user } = useAuthStore()
   const router = useRouter()
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -53,7 +54,7 @@ export function NewTransactionModal() {
       const { content } = data
 
       const response = await api.post(
-        `/questions/${subject}`,
+        `/questions/${subject}/${user?.grade_id}`,
         {
           content,
         },

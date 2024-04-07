@@ -23,6 +23,7 @@ import { HomeLayout } from '@/components/layouts/home'
 import { YourSubjectsSideBar } from '@/components/page/home/SubjectsSidebar'
 import { RankingSideBar } from '@/components/page/home/RankingSidebar'
 import { GameBoxFacade } from '@/components/page/home/GameBoxFacade'
+import { IQuestion } from '@/shared/types'
 
 export default function Home() {
   const questionStore = useQuestionsStore()
@@ -241,16 +242,17 @@ export default function Home() {
                   </div>
                 </>
               ) : questions && questions.length > 0 ? (
-                questions.map((question) => (
+                questions.map((question: IQuestion) => (
                   <QuestionCard
                     author_id={question.author_id}
                     id={question.id}
                     key={question.id}
                     content={question.content}
-                    category_id={question.category.name}
+                    category_id={question.subject.name}
                     createdAt={question.createdAt}
                     answersQuantity={question.answers?.length}
                     avatarUrl={question.author.avatar_url}
+                    points={question.points}
                   />
                 ))
               ) : (

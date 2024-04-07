@@ -418,22 +418,14 @@ export function QuestionBox({
           </S.CommentSection>
 
           {comments.length > MAX_DISPLAY_COMMENTS && !showAllComments && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '1rem',
-              }}
-            >
-              <Button
+            <S.SeeMoreContainer>
+              <S.SeeMoreButton
                 onClick={() => setShowAllComments(true)}
-                backgroundColor="transparent"
                 border={false}
               >
                 VER MAIS COMENTÁRIOS
-              </Button>
-            </div>
+              </S.SeeMoreButton>
+            </S.SeeMoreContainer>
           )}
         </>
       </S.QuestionBoxContainer>

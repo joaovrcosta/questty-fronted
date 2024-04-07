@@ -9,11 +9,12 @@ export interface IQuestion {
     username: string
   }
   deleted: boolean
-  category_id: string
+  subject_id: string
   updatedAt: string
   deletedAt: string
   createdAt: string
-  category: {
+  points: number
+  subject: {
     name: string
   }
   answers: IAnswer[]
@@ -93,6 +94,7 @@ export interface ICurrentUserData {
   code: Number
   email: string
   createdAt: string
+  grade_id: number
   answers: IAnswer[]
   questions: IQuestion[]
 }
@@ -133,14 +135,15 @@ export interface IQuestionData {
     createdAt: string
     deletedAt: string
     updated_at: string
-    category_id: string
+    subject_id: string
     answers: IAnswer[]
     author: {
       name: string
       username: string
       avatar_url: string
     }
-    category: {
+    subject: {
+      id: string
       name: string
     }
     comments?: IComment[] | null

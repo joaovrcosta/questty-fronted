@@ -531,3 +531,22 @@ export const AnwseredStamp = styled.div`
     animation: ${pulseAnimation} 2s infinite;
   }
 `
+
+export const SeeMoreButton = styled(Button)`
+  background-color: transparent;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.5s ease all;
+  }
+`
+export const SeeMoreContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+
+  @media (max-width: 769px) {
+    margin-top: 2rem;
+  }
+`

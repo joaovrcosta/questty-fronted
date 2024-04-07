@@ -34,6 +34,7 @@ interface Question {
   readOnly?: boolean
   answersQuantity?: number
   avatarUrl?: string
+  points: number
 }
 
 export function QuestionCard({
@@ -45,6 +46,7 @@ export function QuestionCard({
   createdAt,
   readOnly = false,
   avatarUrl,
+  points,
 }: Question) {
   const router = useRouter()
   const { isOpening, setIsOpening } = useReportQuestionStore()
@@ -90,18 +92,18 @@ export function QuestionCard({
                     <Text
                       weight="medium"
                       color="blue_950"
-                      size="sm"
+                      size="md"
                       style={{ whiteSpace: 'nowrap' }}
                     >
                       +
                     </Text>{' '}
                     <Text
                       weight="semibold"
-                      size="sm"
+                      size="lg"
                       color="blue_950"
                       style={{ whiteSpace: 'nowrap' }}
                     >
-                      0
+                      {points}
                     </Text>{' '}
                     <Text
                       weight="medium"
@@ -109,7 +111,7 @@ export function QuestionCard({
                       color="blue_950"
                       style={{ whiteSpace: 'nowrap' }}
                     >
-                      pts
+                      QI
                     </Text>{' '}
                   </S.StarQuantity>
                 </S.QuestionPoints>

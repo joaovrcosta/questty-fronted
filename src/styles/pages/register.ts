@@ -127,3 +127,46 @@ export const ErrorContainer = styled.div`
   border-radius: 6px;
   padding: 1rem;
 `
+export const SelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+`
+export const GenderSelectionContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  & > select {
+    height: 54px;
+    border: 1px solid ${({ theme }) => theme.colors.black};
+    width: 100%;
+    min-width: 154px;
+    font-family: Poppins;
+  }
+
+  & > label {
+    font-family: Poppins;
+    font-weight: ${({ theme }) => theme.typography.weight.medium};
+    font-size: ${({ theme }) => theme.typography.text.sm};
+  }
+`
+
+export const DateBirthContainer = styled.div`
+  & > label {
+    font-family: Poppins;
+    font-weight: ${({ theme }) => theme.typography.weight.medium};
+    font-size: ${({ theme }) => theme.typography.text.sm};
+    margin-bottom: 3px;
+  }
+`
+
+export const DateBirthInput = styled.input`
+  height: 54px;
+  border: 1px solid #000;
+  width: 100%;
+  padding: 0rem 1rem;
+  font-family: Poppins;
+`
