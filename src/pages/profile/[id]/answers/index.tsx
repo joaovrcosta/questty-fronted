@@ -199,7 +199,7 @@ export default function Answers(props: IProfileData) {
               <S.VerticalDivider>|</S.VerticalDivider>
               <Tooltip content={rank?.description}>
                 <S.UserRankContainer color={rank.color}>
-                  <Text size="sm" color="white">
+                  <Text size="sm" color="black">
                     {rank.name}
                   </Text>
                 </S.UserRankContainer>

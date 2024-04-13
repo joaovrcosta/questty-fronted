@@ -34,6 +34,7 @@ const registerSchema = zod.object({
     .regex(/[0-9]+/, 'A senha deve conter pelo menos um número'),
   name: zod.string().min(3, 'O nome deve ter no mínimo 3 caracteres'),
   gender: zod.enum(['1', '2', '3']).optional(),
+  gradeId: zod.enum(['1', '2', '3', '4']).optional(),
   dateOfBirth: zod
     .string()
     .refine(
@@ -75,18 +76,22 @@ export default function Register() {
   const { isSubmitting } = formState
 
   const onSubmit = async (data: RegisterFormData) => {
+    console.log(data)
     try {
-      const { username, email, password, name, gender, dateOfBirth } = data
+      const { username, email, password, name, gender, gradeId, dateOfBirth } =
+        data
 
       const lowercaseUsername = username.toLowerCase()
 
       const genderNumber = gender ? parseInt(gender, 10) : undefined
+      const gradeIdNumber = gradeId ? parseInt(gradeId, 10) : undefined
 
       const response = await api.post('/users', {
         username: lowercaseUsername,
         email,
         password,
         name,
+        gradeId: gradeIdNumber,
         gender: genderNumber,
         dateOfBirth,
       })
@@ -193,6 +198,24 @@ export default function Register() {
                 </Text>
               )}
             </S.InputContainer>
+
+            <S.SelectContainer>
+              <S.GradeSelectionContainer>
+                <label>Escolaridade</label>
+                <select {...register('gradeId')}>
+                  <option value=""></option>
+                  <option value="2">Ensino Fundamental</option>
+                  <option value="3">Ensino médio</option>
+                  <option value="1">Ensino Superior</option>
+                  <option value="4">Outros</option>
+                </select>
+                {formState.errors.gradeId && (
+                  <Text size="sm" style={{ color: '#D20032' }}>
+                    {formState.errors.gradeId.message}
+                  </Text>
+                )}
+              </S.GradeSelectionContainer>
+            </S.SelectContainer>
 
             <S.SelectContainer>
               <S.GenderSelectionContainer>
