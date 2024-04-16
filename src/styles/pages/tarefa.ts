@@ -149,6 +149,11 @@ export const CallToActionCard = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 1rem;
+  flex-direction: column;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const HeadingCallToAction = styled.div`
@@ -222,5 +227,25 @@ export const ShareYourKnowledgeContainer = styled.div`
 export const ShareKnowledgeText = styled(Text)`
   @media (max-width: 440px) {
     font-size: 20px;
+  }
+`
+export const SignInContainer = styled.div`
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+
+  @media (max-width: 769px) {
+    align-items: center;
+    justify-content: center;
+  }
+`
+export const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+export const TermsBox = styled.div`
+  @media (max-width: 769px) {
+    width: 100%;
   }
 `

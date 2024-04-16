@@ -126,6 +126,32 @@ export interface IProfileData {
   }
 }
 
+export interface IUserInfo {
+  userData: {
+    id: string
+    name: string
+    username: string
+    code: Number
+    avatar_url: string
+    points: number
+    email: string
+    createdAt: string
+    questions: IQuestion[]
+    answers: IAnswer[]
+    rank: {
+      id: number
+      name: string
+      color: string
+      description: string
+      points: number
+      bestResponses: number
+    }
+  }
+  answersData: {
+    answers: IAnswer[]
+  }
+}
+
 export interface IQuestionData {
   questionData: {
     id: string

@@ -187,7 +187,12 @@ export const Tools = styled.div`
   gap: 0.5rem;
 `
 
-export const Selects = styled.div``
+export const Selects = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+`
 
 export const SubjectSelect = styled.select`
   height: 2.5rem;

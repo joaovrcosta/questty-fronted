@@ -24,6 +24,8 @@ import { QuestionCardProfile } from '@/components/Cards/QuestionCardProfile'
 import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { FollowButton } from '@/components/molecules/FollowButton'
 import { NextSeo } from 'next-seo'
+import { motion } from 'framer-motion'
+import { UserInfo } from '@/components/organisms/UserInfo'
 
 export default function Questions(props: IProfileData) {
   const router = useRouter()
@@ -79,183 +81,7 @@ export default function Questions(props: IProfileData) {
 
       <S.ProfileContainer>
         <S.ProfileContent isLoggedIn={isLoggedIn}>
-          <S.UserInfo>
-            <S.AvatarContainer>
-              <S.UserAvatarPhoto
-                id={props.userData.id}
-                variant="xl"
-                imageUrl={
-                  props.userData.avatar_url ? props.userData.avatar_url : null
-                }
-              />
-              {isLoggedIn && isCurrentUserProfile && (
-                <Link
-                  href={`edit/${props.userData.id}`}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <S.EditButtonMobile
-                    variant="lg"
-                    rounding="rounded"
-                    color="white"
-                    backgroundColor="blue_500"
-                    style={{
-                      padding: '0.65rem 1.5rem',
-                    }}
-                  >
-                    Editar
-                  </S.EditButtonMobile>
-                </Link>
-              )}
-            </S.AvatarContainer>
-            <Text
-              size="xl"
-              weight="semibold"
-              color="blue_950"
-              style={{
-                fontFamily: 'Poppins',
-                marginTop: '1rem',
-              }}
-            >
-              <span style={{ color: '#2089EA', fontWeight: 'bold' }}>@</span>{' '}
-              {props.userData.username}
-            </Text>
-
-            <S.FriendsQuantity>
-              {/* <IoMdPeople size={24} style={{ color: 'rgba(51, 51, 51, 1)' }} /> */}
-              <Text size="md" color="black">
-                <strong style={{ fontWeight: 'bold' }}>0</strong> Seguidores{' '}
-              </Text>
-              <Text size="md" color="black">
-                <strong style={{ fontWeight: 'bold' }}>0</strong> Segue{' '}
-              </Text>
-            </S.FriendsQuantity>
-
-            {!isCurrentUserProfile && (
-              <div
-                style={{
-                  marginTop: '1rem',
-                  marginBottom: '1rem',
-                  display: 'flex',
-                  gap: '1rem',
-                }}
-              >
-                <FollowButton
-                  isAlreadyFollowing={isAlreadyFollowing}
-                  onClick={handleFollow}
-                />
-
-                <Tooltip content="Denunciar">
-                  <Button
-                    variant="lg"
-                    rounding="rounded"
-                    color="white"
-                    backgroundColor="white"
-                    style={{
-                      padding: '0.65rem 1.5rem',
-                      // width: '20%',
-                    }}
-                  >
-                    <MdEmojiFlags size={24} style={{ color: '#b0b0b0' }} />
-                  </Button>
-                </Tooltip>
-              </div>
-            )}
-
-            <S.UserDetailsBox>
-              <S.AnswersQuantity>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.25rem',
-                  }}
-                >
-                  <MdQuestionAnswer size={16} color="#2089EA" />
-                  <Text weight="bold" color="blue_950">
-                    {props.userData.answers.length}
-                  </Text>
-                </div>
-
-                <Text size="xs" color="blue_950">
-                  Respostas
-                </Text>
-              </S.AnswersQuantity>
-              <S.AnswersQuantity>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.25rem',
-                  }}
-                >
-                  <PiMedalFill size={16} color="#EBA900" />
-                  <Text weight="bold" color="blue_950">
-                    0
-                  </Text>
-                </div>
-                <Text size="xs" color="blue_950">
-                  Melhores
-                </Text>
-              </S.AnswersQuantity>
-              <S.AnswersQuantity>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.25rem',
-                  }}
-                >
-                  <S.hearthIconCSS></S.hearthIconCSS>
-                  <Text weight="bold" color="blue_950">
-                    0
-                  </Text>
-                </div>
-                <Text size="xs" color="blue_950">
-                  Valeus
-                </Text>
-              </S.AnswersQuantity>
-            </S.UserDetailsBox>
-
-            <S.UserEditing>
-              {isLoggedIn && isCurrentUserProfile && (
-                <Link href={`edit/${props.userData.id}`}>
-                  <S.EditButton
-                    variant="lg"
-                    rounding="rounded"
-                    color="white"
-                    backgroundColor="blue_500"
-                    style={{
-                      padding: '0.65rem 1.5rem',
-                    }}
-                  >
-                    Editar
-                  </S.EditButton>
-                </Link>
-              )}
-
-              <S.SeenIn>
-                <S.ActiveIn>
-                  <BiTimeFive size={18} />
-                  <S.ActiveAtContainer>
-                    <Text size="xs">Ativo pela última vez </Text>
-                    <Text weight="semibold" size="xs">
-                      há 2 dias
-                    </Text>
-                  </S.ActiveAtContainer>
-                </S.ActiveIn>
-                <S.CreatedAt>
-                  <AiOutlineCalendar size={18} />
-                  <Text size="xs">Por aqui desde </Text>
-                  <Text weight="semibold" size="xs">
-                    {getDayOfYear(props.userData.createdAt)}
-                  </Text>
-                </S.CreatedAt>
-              </S.SeenIn>
-            </S.UserEditing>
-          </S.UserInfo>
+          <UserInfo data={props} />
           <S.UserHistoryContainer>
             <UserActivityTabs
               userId={props.userData.id}
@@ -266,17 +92,25 @@ export default function Questions(props: IProfileData) {
               {props.userData?.questions &&
               props.userData.questions.length > 0 ? (
                 props.userData.questions.map((question) => (
-                  <QuestionCardProfile
-                    author_id={question.author_id}
-                    avatarUrl={question.author?.avatar_url}
-                    author_name={question.author?.username}
-                    readOnly={true}
-                    key={question.id}
-                    id={question.id}
-                    content={question.content}
-                    createdAt={question.createdAt}
-                    answeredText="perguntou há"
-                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <QuestionCardProfile
+                      author_id={question.author_id}
+                      avatarUrl={question.author?.avatar_url}
+                      author_name={question.author?.username}
+                      readOnly={true}
+                      key={question.id}
+                      id={question.id}
+                      content={question.content}
+                      createdAt={question.createdAt}
+                      // likesQuantity={question}
+                      answeredText="perguntou em"
+                    />
+                  </motion.div>
                 ))
               ) : (
                 <S.NotFindAnyAnswer>

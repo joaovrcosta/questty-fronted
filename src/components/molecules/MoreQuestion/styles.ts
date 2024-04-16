@@ -8,7 +8,7 @@ export const QuestionCardContainer = styled.div`
   /* border-bottom: 3px solid ${({ theme }) => theme.colors.black}; */
   border-radius: 16px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
-  padding: 0.875rem 2.5rem 0.875rem 1.5rem;
+  padding: 0.15rem 2.5rem 0.15rem 1.5rem;
   margin-bottom: 0.5rem;
   opacity: 1;
   filter: brightness(100%);
@@ -127,7 +127,7 @@ export const QuestionInfo = styled.div`
 `
 
 export const SubjectAndDateTimeContainer = styled.div`
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -152,6 +152,7 @@ export const AnswerButtonContainer = styled.div`
 
 export const AnswerButton = styled(Button)`
   border: 1px solid ${({ theme }) => theme.colors.black};
+  max-width: 144px;
   font-family: Poppins;
   color: ${({ theme }) => theme.colors.blue_950};
 

@@ -18,6 +18,7 @@ import { Spinner } from '@/components/atoms/Spinner'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
+import { PointsSelect } from '@/components/atoms/PointsSelect'
 
 interface FormData {
   content: string
@@ -29,6 +30,7 @@ const createNewQuestionFormSchema = zod.object({
     .string()
     .min(20, 'Sua pergunta é muito curta. Use pelo menos 20 caracteres')
     .max(2500, 'A pergunta deve ter no máximo 2500 caracteres'),
+  points: zod.enum(['10', '20', '30', '40', '50']).optional(),
 })
 
 export function NewTransactionModal() {
@@ -39,12 +41,21 @@ export function NewTransactionModal() {
   const { isSubmitting } = formState
 
   const [subject, subjectSelect] = useState('')
+  const [pointsSelected, setPointsSelected] = useState('')
   const { setIsOpen } = useQuestionModalStore()
   const { user } = useAuthStore()
   const router = useRouter()
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectSubjectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     subjectSelect(event.target.value)
+  }
+
+  const handleSelectPointsChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setPointsSelected(event.target.value)
   }
 
   const { token } = useAuthStore()
@@ -52,11 +63,13 @@ export function NewTransactionModal() {
   const handleCreateNewQuestion = async (data: FormData) => {
     try {
       const { content } = data
+      const points = parseInt(pointsSelected, 10)
 
       const response = await api.post(
         `/questions/${subject}/${user?.grade_id}`,
         {
           content,
+          points,
         },
         {
           headers: {
@@ -122,7 +135,8 @@ export function NewTransactionModal() {
               </Tooltip>
             </S.Tools>
             <S.Selects>
-              <SubjectSelect onChange={handleSelectChange} />
+              <SubjectSelect onChange={handleSelectSubjectChange} />
+              <PointsSelect onChange={handleSelectPointsChange} />
             </S.Selects>
           </S.QuestionMoreInfoContainer>
 

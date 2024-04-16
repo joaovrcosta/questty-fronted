@@ -34,7 +34,7 @@ export function Editor({ onChange }: EditorProps) {
     content: initialContent,
     editorProps: {
       attributes: {
-        class: 'styled-editor-content', // Adicione sua classe personalizada aqui
+        class: 'styled-editor-content', 
         style:
           'outline: none; font-family: Nunito; font-size: 18px; padding: 0.5rem; min-height: 200px;',
       },

@@ -3,7 +3,7 @@ import { QuestionBox } from '@/components/Boxes/QuestionBox'
 import { AnswerBox } from '@/components/Boxes/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
-import { IQuestionData } from '@/shared/types'
+import { IQuestion, IQuestionData } from '@/shared/types'
 import { use, useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
@@ -40,6 +40,7 @@ interface Question {
 
 export default function Question(props: IQuestionData) {
   const [loading, setLoading] = useState(true)
+  const [subjectQuestions, setSubjectQuestions] = useState([])
   const { isMobile, setIsMobile } = useIsMobileStore()
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
@@ -96,10 +97,30 @@ export default function Question(props: IQuestionData) {
     setAnswerQuantity(quantity)
   }, [props.questionData.answers])
 
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await api.get(
+          `/questions/latest-by-subject/${props.questionData.subject_id}`
+        )
+        if (response.status === 200) {
+          const data = response.data
+          setSubjectQuestions(data)
+        }
+      } catch (error) {
+        console.error('Error fetching questions:', error)
+      }
+    }
+
+    fetchQuestions()
+  }, [])
+
   const allAnswers = [
     ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
     ...(props.questionData.answers || []),
   ]
+
+  console.log(subjectQuestions)
 
   const renderAnswers = () => {
     if (loading) {
@@ -207,6 +228,8 @@ export default function Question(props: IQuestionData) {
     }
   }
 
+  console.log(subjectQuestions)
+
   return (
     <>
       <NextSeo
@@ -242,7 +265,11 @@ export default function Question(props: IQuestionData) {
                 <>
                   <S.HeadingCallToAction>
                     <Text size="xx1" weight="extrabold">
-                      Garanta acesso grátis para outras respostas
+                      Crie uma conta e tenha acesso a{' '}
+                      <span style={{ color: '#00672e' }}>
+                        respostas verificadas e para todas matérias
+                      </span>
+                      . É rápido, fácil e gratuito!
                     </Text>
                   </S.HeadingCallToAction>
                   <S.AdvantagesContainer>
@@ -280,20 +307,35 @@ export default function Question(props: IQuestionData) {
                     </div>
                   </S.AdvantagesContainer>
                   <S.ButtonsContainer>
-                    <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
-                      <Dialog.Trigger asChild>
-                        <S.SignInButton backgroundColor="black" color="white">
-                          ENTRAR
-                        </S.SignInButton>
-                      </Dialog.Trigger>
-                      <LoginModal />
-                    </Dialog.Root>
-
-                    <Link href="/signup">
-                      <S.SignUpButton backgroundColor="black" color="white">
-                        CADASTRE-SE
-                      </S.SignUpButton>
-                    </Link>
+                    <S.SignUpContainer>
+                      <Link href="/signup">
+                        <S.SignUpButton
+                          backgroundColor="black"
+                          color="white"
+                          hug={true}
+                        >
+                          CADASTRE-SE
+                        </S.SignUpButton>
+                      </Link>
+                      <S.TermsBox>
+                        <Text size="xs">
+                          Ao se cadastrar, você aceita os{' '}
+                          <strong>Termos de Serviço do Questty</strong> e a{' '}
+                          <strong>Política de Privacidade</strong>.
+                        </Text>
+                      </S.TermsBox>
+                    </S.SignUpContainer>
+                    <S.SignInContainer>
+                      <Text>Já tem conta?</Text>
+                      <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                        <Dialog.Trigger asChild>
+                          <Text style={{ color: '#014a82' }} weight="semibold">
+                            Entre aqui
+                          </Text>
+                        </Dialog.Trigger>
+                        <LoginModal />
+                      </Dialog.Root>
+                    </S.SignInContainer>
                   </S.ButtonsContainer>
                 </>
               </S.CallToActionCard>
@@ -308,17 +350,27 @@ export default function Question(props: IQuestionData) {
             ) : null}
           </S.AnswersSection>
           <S.AnswersContainer>{renderAnswers()}</S.AnswersContainer>
-          <S.HelpMorePeopleContainer>
-            <Text size="xl" weight="semibold">
-              Ajude outras pessoas com dúvidas sobre{' '}
-              {props?.questionData?.subject.name}
-            </Text>
-            <div style={{ marginTop: '1.5rem' }}>
-              <MoreQuestonCard />
-              <MoreQuestonCard />
-              <MoreQuestonCard />
-            </div>
-          </S.HelpMorePeopleContainer>
+          {subjectQuestions.length >= 1 ? (
+            <S.HelpMorePeopleContainer>
+              <Text size="xl" weight="semibold">
+                Ajude outras pessoas com dúvidas sobre{' '}
+                {props?.questionData?.subject.name}
+              </Text>
+              <div style={{ marginTop: '1.5rem' }}>
+                {subjectQuestions.map((question: IQuestion) => (
+                  <MoreQuestonCard
+                    content={question.content}
+                    id={question.id}
+                    subjectName={question.subject.name}
+                    createdAt={question.createdAt}
+                    points={question.points}
+                    avatar_url={question.author.avatar_url ?? ''}
+                    author_id={question.author_id}
+                  />
+                ))}
+              </div>
+            </S.HelpMorePeopleContainer>
+          ) : null}
         </S.QuestionWrapper>
       </S.QuestionContainer>
       <FloatingButton />

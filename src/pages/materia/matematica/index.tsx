@@ -33,10 +33,10 @@ export default function MatematicaPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const questionsResponse = await api.get('/questions/recent')
+        const questionsResponse = await api.get('questions/latest-by-subject/1')
         const data = await questionsResponse.data
 
-        questionStore.setQuestions(data.questions)
+        questionStore.setQuestions(data)
         setLoading(false)
       } catch (error) {
         console.error('Erro ao buscar questões:', error)
@@ -59,7 +59,7 @@ export default function MatematicaPage() {
             <S.Welcome>
               <div style={{ maxWidth: '650px', marginBottom: '1rem' }}>
                 <Heading size="lgg" weight="extrabold" color="black">
-                  Perguntas de Matemática
+                  Perguntas de Português
                 </Heading>
               </div>
             </S.Welcome>
@@ -247,10 +247,11 @@ export default function MatematicaPage() {
                     id={question.id}
                     key={question.id}
                     content={question.content}
-                    category_id={question.category.name}
+                    category_id={question.subject.name}
                     createdAt={question.createdAt}
                     answersQuantity={question.answers?.length}
                     avatarUrl={question.author.avatar_url}
+                    points={question.points}
                   />
                 ))
               ) : (

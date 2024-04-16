@@ -18,11 +18,14 @@ export type subjectsType =
 interface Question {
   id?: string
   author_id?: string
-  content?: string
+  content: string
   category_id?: string
   createdAt?: string
   readOnly?: boolean
   answersQuantity?: number
+  subjectName: string
+  points: number
+  avatar_url: string
 }
 
 export function MoreQuestonCard({
@@ -32,6 +35,9 @@ export function MoreQuestonCard({
   category_id,
   answersQuantity,
   createdAt,
+  subjectName,
+  points,
+  avatar_url,
   readOnly = false,
 }: Question) {
   const questions = useQuestionsStore((state) => state.questions)
@@ -46,14 +52,20 @@ export function MoreQuestonCard({
   const limitedAnswerCount = 3
 
   const createdIn = '2024-02-16T13:00:00.000Z'
-  const subject = 'Matemática'
+
+  const limitedContent =
+    content.length > 80 ? content.slice(0, 80) + '...' : content
 
   return (
     <S.QuestionCardContainer>
       <S.QuestionContentContainer>
         <S.QuestionContent>
           <S.UserAvatarWrapper>
-            <BlankAvatar id={author_id} variant="lg" />
+            <Avatar
+              id={author_id}
+              variant="sm"
+              imageUrl={avatar_url ? avatar_url : null}
+            />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
             <S.SubjectAndDateTimeContainer>
@@ -63,7 +75,7 @@ export function MoreQuestonCard({
                 </S.Subject>
               )}
               <S.DateTime size="xs" color="gray_800">
-                {getTimeAgo(createdIn)}
+                {getTimeAgo(createdAt)}
               </S.DateTime>
               <span>•</span>
               <Text
@@ -72,13 +84,13 @@ export function MoreQuestonCard({
                 style={{ fontFamily: 'Inter' }}
                 weight="semibold"
               >
-                {subject}
+                {subjectName}
               </Text>
             </S.SubjectAndDateTimeContainer>
             {/* <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
             </S.QuestionText> */}
-            <Text>Pergunta meramente ilustrativa</Text>
+            <Text style={{ fontSize: '14px' }}>{limitedContent}</Text>
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
@@ -102,13 +114,13 @@ export function MoreQuestonCard({
                 backgroundColor="white"
                 variant="sm"
                 rounding="rounded-xxl"
-                // onClick={handleResponderClick}
+                onClick={handleResponderClick}
               >
                 {readOnly
                   ? 'VISUALIZAR'
                   : answerCount >= 3
                   ? 'VISUALIZAR'
-                  : 'RESPONDER'}
+                  : `RESPONDER + ${points} pts`}
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>

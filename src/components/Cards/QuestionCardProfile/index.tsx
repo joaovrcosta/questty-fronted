@@ -27,7 +27,7 @@ interface Question {
   avatarUrl?: string
   answeredText?: string
   subjectName?: string
-  questionAnswered: string
+  questionAnswered?: string
   questionId?: string
   likesQuantity?: number
 }
@@ -53,8 +53,8 @@ export function QuestionCardProfile({
     router.push(`/tarefa/${id}`)
   }
 
-  if (questionAnswered.length > 55) {
-    questionAnswered = questionAnswered.substring(0, 55) + '...'
+  if (questionAnswered && questionAnswered?.length > 55) {
+    questionAnswered = questionAnswered?.substring(0, 55) + '...'
   }
 
   const answerCount = answersQuantity || 0
@@ -126,7 +126,7 @@ export function QuestionCardProfile({
               <S.LikesContainer>
                 {/* <hearthIconCSS */}
                 <S.hearthIconCSS></S.hearthIconCSS>
-                <Text weight="bold">{likesQuantity}</Text>
+                <Text weight="bold">{likesQuantity ?? 0}</Text>
               </S.LikesContainer>
             </Tooltip>
             <S.AswerContainer>

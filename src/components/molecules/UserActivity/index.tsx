@@ -58,7 +58,7 @@ export function UserActivityTabs({
               <Text
                 weight="semibold"
                 color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
-                onClick={() => handleTabClick('friends')}
+                onClick={() => handleTabClick('badges')}
               >
                 Emblemas
               </Text>
@@ -72,7 +72,7 @@ export function UserActivityTabs({
               <Text
                 weight="semibold"
                 color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
-                onClick={() => handleTabClick('friends')}
+                onClick={() => handleTabClick('followers')}
               >
                 Seguidores
               </Text>
@@ -86,7 +86,7 @@ export function UserActivityTabs({
               <Text
                 weight="semibold"
                 color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
-                onClick={() => handleTabClick('friends')}
+                onClick={() => handleTabClick('following')}
               >
                 Seguindo
               </Text>

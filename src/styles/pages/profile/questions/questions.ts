@@ -14,7 +14,7 @@ export const ProfileContainer = styled.div`
 `
 export const ProfileContent = styled.div<IProfileProps>`
   display: flex;
-  padding: 4.25rem 3.25rem 4.25rem 3.25rem;
+  padding: 3.25rem;
 
   @media (max-width: 1100px) {
     flex-wrap: wrap;
@@ -87,9 +87,7 @@ export const CreatedAt = styled.div`
 export const UserHistory = styled.div`
   font-family: Poppins;
   margin-top: 1rem;
-  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
 `
 
 export const ActiveIn = styled.div`
