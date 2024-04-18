@@ -175,6 +175,18 @@ export interface IQuestionData {
     comments?: IComment[] | null
   }
   isLoggedIn?: boolean
+  recomendedQuestions: any
+}
+
+export interface IReportSubCategory {
+  id: string
+  text: string
+}
+
+export interface IReportTypes {
+  id: string
+  text: string
+  subcategories: IReportSubCategory[]
 }
 
 export interface ICategories {

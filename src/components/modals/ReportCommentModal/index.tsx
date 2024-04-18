@@ -13,9 +13,8 @@ import { IReportTypes } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
 import { z } from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
-import Cookies from 'js-cookie'
 
-export function ReportQuestionModal(props: any) {
+export function ReportCommentModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
   const [isReportTypeSelected, setIsReportTypeSelected] = useState(false)
   const [selectedReportType, setSelectedReportType] = useState<
@@ -56,9 +55,7 @@ export function ReportQuestionModal(props: any) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = Cookies.get('questty-token')
-
-        const res = await api.get('/list-report-group-by-id/1', {
+        const res = await api.get('/list-report-group-by-id/2', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -66,11 +63,13 @@ export function ReportQuestionModal(props: any) {
         })
         const reportTypes = res.data.ReportType
         setReportTypes(reportTypes)
-      } catch (error) {}
+      } catch (error) {
+        // Tratar erros aqui
+      }
     }
 
     fetchData()
-  }, [])
+  }, [token])
 
   const handleReportTypeChange = (selectedReportTypeId: any) => {
     setSelectedReportType(selectedReportTypeId)

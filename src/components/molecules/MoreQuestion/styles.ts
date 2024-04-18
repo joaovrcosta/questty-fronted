@@ -116,7 +116,6 @@ export const QuestionText = styled.a`
 `
 
 export const QuestionInfo = styled.div`
-  width: 24rem;
   min-height: 64px;
 
   ${({ theme }) => css`
@@ -127,7 +126,7 @@ export const QuestionInfo = styled.div`
 `
 
 export const SubjectAndDateTimeContainer = styled.div`
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
   display: flex;
   gap: 0.5rem;
   align-items: center;

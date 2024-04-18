@@ -94,7 +94,7 @@ export function MoreQuestonCard({
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
-          <S.AnswerQuantity>
+          {/* <S.AnswerQuantity>
             {readOnly ? (
               ''
             ) : (
@@ -107,7 +107,7 @@ export function MoreQuestonCard({
                 {`${answerCount} respostas`}
               </Text>
             )}
-          </S.AnswerQuantity>
+          </S.AnswerQuantity> */}
           <S.AswerContainer>
             <S.AnswerButtonContainer>
               <S.AnswerButton

@@ -108,6 +108,7 @@ export const CloseButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  padding: 0 0 1rem 0;
 
   button {
     background-color: ${({ theme }) => theme.colors.white};

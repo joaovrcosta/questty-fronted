@@ -98,29 +98,13 @@ export default function Question(props: IQuestionData) {
   }, [props.questionData.answers])
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await api.get(
-          `/questions/latest-by-subject/${props.questionData.subject_id}`
-        )
-        if (response.status === 200) {
-          const data = response.data
-          setSubjectQuestions(data)
-        }
-      } catch (error) {
-        console.error('Error fetching questions:', error)
-      }
-    }
-
-    fetchQuestions()
+    setSubjectQuestions(props.recomendedQuestions)
   }, [])
 
   const allAnswers = [
     ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
     ...(props.questionData.answers || []),
   ]
-
-  console.log(subjectQuestions)
 
   const renderAnswers = () => {
     if (loading) {
@@ -227,8 +211,6 @@ export default function Question(props: IQuestionData) {
       )
     }
   }
-
-  console.log(subjectQuestions)
 
   return (
     <>
@@ -393,8 +375,13 @@ export const getServerSideProps = async (ctx: any) => {
     const res = await api.get(`questions/${id}`)
     const questionData = res.data.question
 
+    const response = await api.get(
+      `/questions/latest-by-subject/${questionData.subject.id}`
+    )
+    const recomendedQuestions = response.data
+
     if (questionData !== undefined) {
-      return { props: { questionData, isLoggedIn } }
+      return { props: { questionData, isLoggedIn, recomendedQuestions } }
     } else {
       return { props: {} }
     }

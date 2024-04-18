@@ -72,6 +72,7 @@ const CommentFormSchema = zod.object({
 })
 
 export function QuestionBox({
+  id,
   content,
   author,
   authorId,
@@ -87,6 +88,8 @@ export function QuestionBox({
   })
   const { isSubmitting } = formState
   const [loading, setLoading] = useState(true)
+  const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
+
   const [showAllComments, setShowAllComments] = useState(false)
   const { question } = useQuestionStore()
   const { user, token, isLoggedIn } = useAuthStore()
@@ -173,6 +176,18 @@ export function QuestionBox({
       console.error('Error creating comment:', error)
       throw error
     }
+  }
+
+  const handleReportClick = () => {
+    if (id !== undefined) {
+      setCurrentEntityId(String(id))
+      setIsOpening(true)
+    }
+  }
+
+  const handleCloseModal = () => {
+    setCurrentEntityId(null)
+    setIsOpening(false)
   }
 
   useEffect(() => {
@@ -308,13 +323,20 @@ export function QuestionBox({
             {!isAuthor && (
               <S.ModerationWrapper>
                 <Tooltip content="Denunciar">
-                  <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                  <Dialog.Root
+                    open={currentEntityId === id && isOpening}
+                    onOpenChange={setIsOpening}
+                  >
                     <Dialog.Trigger asChild>
-                      <S.ModerateButton>
+                      <S.ModerateButton onClick={handleReportClick}>
                         <AiOutlineFlag size={24} color="#000" />
                       </S.ModerateButton>
                     </Dialog.Trigger>
-                    <ReportQuestionModal />
+                    <ReportQuestionModal
+                      entityType="QUESTION"
+                      entityId={id}
+                      handleCloseModal={handleCloseModal}
+                    />
                   </Dialog.Root>
                 </Tooltip>
               </S.ModerationWrapper>

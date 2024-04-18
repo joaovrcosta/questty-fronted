@@ -422,7 +422,11 @@ export const BackButtonBox = styled.button`
 
 export const ContentContainer = styled.div``
 
-export const CommentSection = styled.div``
+export const CommentSection = styled.div`
+  &:nth-child(1) {
+    padding-top: 2rem;
+  }
+`
 
 export const CommentForm = styled.form`
   width: 100%;

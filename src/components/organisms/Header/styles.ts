@@ -6,7 +6,6 @@ import { BiSearch } from 'react-icons/bi'
 
 interface IHeader {
   isfixed?: boolean
-  
 }
 
 interface ContentProps {
