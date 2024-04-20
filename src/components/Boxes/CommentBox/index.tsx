@@ -5,12 +5,12 @@ import { IComment } from '@/shared/types'
 import { AiOutlineFlag } from 'react-icons/ai'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Tooltip } from '@/components/molecules/Tooltip'
-import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import { ReportCommentModal } from '@/components/modals/ReportCommentModal'
 import { useState } from 'react'
+import { useReportCommentStore } from '@/features/stores/modals-stores/reportCommentModal'
 
 export function CommentBox({ id, author_id, content, avatar_url }: IComment) {
-  const { isOpening, setIsOpening } = useReportQuestionStore()
+  const { isOpening, setIsOpening } = useReportCommentStore()
   const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
 
   const handleReportClick = () => {

@@ -1,4 +1,4 @@
-import * as S from '@/styles/pages/profile/questions/questions'
+import * as S from '@/styles/pages/profile/questions'
 import { Text } from '@/components/atoms/Text'
 import { QuestionCard } from '@/components/Cards/QuestionCard'
 import { BiTimeFive } from 'react-icons/bi'

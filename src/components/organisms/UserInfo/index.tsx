@@ -35,6 +35,8 @@ export function UserInfo({ data }: UserInfoProps) {
     handleFollowUser(data, isAlreadyFollowing, token, setIsAlreadyFollowing)
   }
 
+  console.log(isAlreadyFollowing)
+
   return (
     <>
       <S.UserInfo>

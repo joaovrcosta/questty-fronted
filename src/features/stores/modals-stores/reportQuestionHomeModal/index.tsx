@@ -8,7 +8,7 @@ interface ReportQuestionModalStore {
   setQuestionReportTypes: (reportQuestionTypes: IReportTypes[] | null) => void
 }
 
-export const useReportQuestionStore = create<ReportQuestionModalStore>(
+export const useReportQuestionHomeStore = create<ReportQuestionModalStore>(
   (set) => ({
     reportQuestionTypes: null,
     isOpening: false,

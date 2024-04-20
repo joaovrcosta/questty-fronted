@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  height: 32rem;
+  height: 15rem;
 `
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -23,13 +23,13 @@ export const Overlay = styled(Dialog.Overlay)`
 
 export const Content = styled(Dialog.Content)`
   max-width: 37.5rem;
-  height: 34rem;
+  height: 20rem;
   font-family: Poppins;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  padding: 4rem 2rem 2.5rem 3rem;
+  padding: 1rem 32px 40px 48px;
   z-index: 999999;
   max-height: 42rem;
   display: flex;
@@ -41,7 +41,7 @@ export const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
 
   @media (max-width: 769px) {
-    padding: 2.5rem 0rem;
+    padding: 0 1rem 2.5rem 1rem;
   }
 `
 
@@ -61,7 +61,7 @@ export const LoginContainerContent = styled.div`
   height: 100%;
 
   @media (max-width: 769px) {
-    padding: 0rem 1rem 1rem 1.5rem;
+    padding: 0rem 1rem 1rem 1rem;
   }
 `
 
@@ -77,9 +77,9 @@ export const InputContainer = styled.div``
 
 export const FormContainer = styled.form`
   display: flex;
-  height: 100%;
   margin-top: 1rem;
   flex-direction: column;
+  justify-content: space-between;
 `
 
 export const ButtonContainer = styled.div`
@@ -108,7 +108,6 @@ export const CloseButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 0 1rem 0;
 
   button {
     background-color: ${({ theme }) => theme.colors.white};

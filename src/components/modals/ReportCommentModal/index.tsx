@@ -3,16 +3,15 @@ import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
-import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { Heading } from '@/components/atoms/Heading'
 import { IoMdClose } from 'react-icons/io'
-import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import { IReportTypes } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
 import { z } from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
+import { useReportCommentStore } from '@/features/stores/modals-stores/reportCommentModal'
 
 export function ReportCommentModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
@@ -29,7 +28,9 @@ export function ReportCommentModal(props: any) {
     handleSubmit: handleSubmitForm,
     formState: { isSubmitting },
   } = useForm<FormData>()
-  const { setIsOpening } = useReportQuestionStore()
+  const { setIsOpening } = useReportCommentStore()
+
+  console
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
@@ -126,14 +127,14 @@ export function ReportCommentModal(props: any) {
                 weight="extrabold"
                 size="md"
                 color="blue_950"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '0.5rem' }}
               >
                 Denunciar!
               </Heading>
             </S.EnterHeader>
             <S.SubHeader>
               <Text size="xs" style={{ fontSize: '15px' }}>
-                Escolha a razão da denúncia:
+                Escolha uma razão para denúnciar este comentário:
               </Text>
             </S.SubHeader>
             <S.FormContainer onSubmit={handleSubmitForm(onSubmit)}>

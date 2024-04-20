@@ -24,7 +24,7 @@ export function SubjectSelect({ onChange }: SubjectSelectProps) {
 
   return (
     <S.SubjectSelect onChange={onChange}>
-      <option value="">Escolha a matéria</option>
+      <option value="">Matéria</option>
       {categories ? (
         categories.map((category: ICategories) => (
           <option key={category.id} value={category.id}>

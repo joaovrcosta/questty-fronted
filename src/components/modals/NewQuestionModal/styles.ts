@@ -153,6 +153,10 @@ export const QuestionMoreInfoContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+  }
 `
 
 export const InputFile = styled.input`

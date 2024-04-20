@@ -8,14 +8,14 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { Heading } from '@/components/atoms/Heading'
 import { IoMdClose } from 'react-icons/io'
-import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import { IReportTypes } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
 import { z } from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
 import Cookies from 'js-cookie'
+import { useReportQuestionHomeStore } from '@/features/stores/modals-stores/reportQuestionHomeModal'
 
-export function ReportQuestionModal(props: any) {
+export function ReportQuestionHomeModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
   const [isReportTypeSelected, setIsReportTypeSelected] = useState(false)
   const [selectedReportTypeId, setSelectedReportTypeId] = useState<
@@ -27,7 +27,9 @@ export function ReportQuestionModal(props: any) {
     handleSubmit: handleSubmitForm,
     formState: { isSubmitting },
   } = useForm<FormData>()
-  const { setIsOpening, isOpening } = useReportQuestionStore()
+  const { setIsOpening, isOpening } = useReportQuestionHomeStore()
+
+  console.log(isOpening)
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
@@ -76,6 +78,7 @@ export function ReportQuestionModal(props: any) {
   const handleCloseModal = () => {
     console.log('Modal close button clicked')
     setIsOpening(false)
+    console.log(isOpening)
   }
 
   const onSubmit = async () => {
