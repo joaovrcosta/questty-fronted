@@ -23,6 +23,8 @@ import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 import { motion } from 'framer-motion'
+import ErrorPage from 'next/error'
+import Custom404 from '../404'
 
 interface Question {
   id: number
@@ -39,6 +41,10 @@ interface Question {
 }
 
 export default function Question(props: IQuestionData) {
+  if (!props.questionData) {
+    return <Custom404 />
+  }
+
   const [loading, setLoading] = useState(true)
   const [subjectQuestions, setSubjectQuestions] = useState([])
   const { isMobile, setIsMobile } = useIsMobileStore()
@@ -52,7 +58,7 @@ export default function Question(props: IQuestionData) {
   const { answers, currentNewAnswer } = useAnswerStore()
   const isLoggedIn = props.isLoggedIn
 
-  const textForTitle = `${props.questionData.content.substring(
+  const textForTitle = `${props.questionData?.content.substring(
     0,
     100
   )} - Questty.com`
@@ -93,9 +99,9 @@ export default function Question(props: IQuestionData) {
   }, [])
 
   useEffect(() => {
-    const quantity = props.questionData.answers.length
+    const quantity = props.questionData?.answers.length
     setAnswerQuantity(quantity)
-  }, [props.questionData.answers])
+  }, [props.questionData?.answers])
 
   useEffect(() => {
     setSubjectQuestions(props.recomendedQuestions)
@@ -103,7 +109,7 @@ export default function Question(props: IQuestionData) {
 
   const allAnswers = [
     ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
-    ...(props.questionData.answers || []),
+    ...(props.questionData?.answers || []),
   ]
 
   const renderAnswers = () => {
@@ -235,7 +241,7 @@ export default function Question(props: IQuestionData) {
               author={props.questionData?.author.username}
               avatarUrl={props.questionData?.author?.avatar_url}
               isMobile={isMobile}
-              authorId={props.questionData.author_id}
+              authorId={props.questionData?.author_id}
               hasAnswered={allAnswers}
               subject={props.questionData?.subject.name}
             />
@@ -332,7 +338,7 @@ export default function Question(props: IQuestionData) {
             ) : null}
           </S.AnswersSection>
           <S.AnswersContainer>{renderAnswers()}</S.AnswersContainer>
-          {subjectQuestions.length >= 1 ? (
+          {subjectQuestions?.length >= 1 ? (
             <S.HelpMorePeopleContainer>
               <Text size="xl" weight="semibold">
                 Ajude outras pessoas com dúvidas sobre{' '}

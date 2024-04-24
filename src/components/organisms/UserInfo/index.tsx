@@ -9,7 +9,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { FollowButton } from '@/components/molecules/FollowButton'
 import { LoginModal } from '@/components/modals/LoginModal'
 import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/authModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { MdEmojiFlags, MdQuestionAnswer } from 'react-icons/md'
 import { Button } from '@/components/atoms/Button'
@@ -17,6 +17,7 @@ import { PiMedalFill } from 'react-icons/pi'
 import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { getDayOfYear } from '@/utils/getDayOfYear'
+import api from '@/services/api'
 
 interface UserInfoProps {
   data: IUserInfo
@@ -31,11 +32,38 @@ export function UserInfo({ data }: UserInfoProps) {
   const isCurrentUserProfile = authenticatedUser?.id === data.userData.id
   const rank = data.userData.rank
 
+  useEffect(() => {
+    const fetchFollowData = async () => {
+      try {
+        if (data.userData && data.userData.id) {
+          const res = await api.get(`follow-status/${data.userData.id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+
+          if (res.status === 200) {
+            const data = res.data
+            setIsAlreadyFollowing(data.isFollowing === true)
+          } else {
+            console.log(res.status)
+          }
+
+          if (res.status === 400) {
+            const data = res.data
+            setIsAlreadyFollowing(data.isFollowing === true)
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error)
+      }
+    }
+    fetchFollowData()
+  }, [data.userData.id, token])
+
   const handleFollow = () => {
     handleFollowUser(data, isAlreadyFollowing, token, setIsAlreadyFollowing)
   }
-
-  console.log(isAlreadyFollowing)
 
   return (
     <>

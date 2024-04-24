@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react'
 import { UserActivityTabs } from '@/components/molecules/UserActivity'
 import { FloatingButton } from '@/components/molecules/FloatingButton'
 import { QuestionCardProfile } from '@/components/Cards/QuestionCardProfile'
-import handleFollowUser from '@/utils/handle/handleFollowUser'
 import { NextSeo } from 'next-seo'
 import { motion } from 'framer-motion'
 import { UserInfo } from '@/components/organisms/UserInfo'
@@ -18,45 +17,12 @@ export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
   const { isLoggedIn, token } = useAuthStore()
   const { setProfile } = useProfileStore()
-  const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
 
   const usernameDisplay = `${props.userData.username} - questty.com`
 
   useEffect(() => {
     setProfile(props)
   }, [props])
-
-  useEffect(() => {
-    const fetchFollowData = async () => {
-      try {
-        if (props.userData && props.userData.id) {
-          const res = await api.get(`follow-status/${props.userData.id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-
-          if (res.status === 200) {
-            const data = res.data
-            setIsAlreadyFollowing(data.isFollowing === true)
-          } else {
-            console.log(res.status)
-          }
-        }
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error)
-      }
-    }
-    fetchFollowData()
-  }, [props.userData.id, token])
-
-  const handleFollow = () => {
-    handleFollowUser(props, isAlreadyFollowing, token, setIsAlreadyFollowing)
-  }
-
-  const rank = props.userData.rank
-
-  console.log(props.answersData?.answers)
 
   return (
     <>

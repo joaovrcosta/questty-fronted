@@ -16,10 +16,13 @@ const handleFollowUser = async (
       },
     })
 
+    console.log(res)
+
     if (res.status === 204) {
       setIsAlreadyFollowing(false)
     } else if (res.status === 201) {
       setIsAlreadyFollowing(true)
+    } else if (res.status === 400) {
     } else {
       console.log(`Código de status inesperado: ${res.status}`)
     }
