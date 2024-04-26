@@ -243,14 +243,14 @@ export default function EnemPage() {
               ) : questions && questions.length > 0 ? (
                 questions.map((question) => (
                   <QuestionCard
-                    author_id={question.author_id}
-                    id={question.id}
-                    key={question.id}
-                    content={question.content}
-                    category_id={question.category.name}
-                    createdAt={question.createdAt}
-                    answersQuantity={question.answers?.length}
-                    avatarUrl={question.author.avatar_url}
+                    author_id={question?.author_id}
+                    id={question?.id}
+                    key={question?.id}
+                    content={question?.content}
+                    category_id={question?.subject?.name}
+                    createdAt={question?.createdAt}
+                    answersQuantity={question?.answers?.length}
+                    avatarUrl={question?.author.avatar_url}
                   />
                 ))
               ) : (

@@ -15,6 +15,10 @@ import { Spinner } from '@/components/atoms/Spinner'
 import Cookies from 'js-cookie'
 import { useReportQuestionHomeStore } from '@/features/stores/modals-stores/reportQuestionHomeModal'
 
+interface FormData {
+  reportType: string
+}
+
 export function ReportQuestionHomeModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
   const [isReportTypeSelected, setIsReportTypeSelected] = useState(false)

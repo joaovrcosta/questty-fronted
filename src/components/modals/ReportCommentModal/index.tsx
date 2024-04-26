@@ -13,6 +13,10 @@ import { z } from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useReportCommentStore } from '@/features/stores/modals-stores/reportCommentModal'
 
+interface FormData {
+  reportType: string
+}
+
 export function ReportCommentModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
   const [isReportTypeSelected, setIsReportTypeSelected] = useState(false)

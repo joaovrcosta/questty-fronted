@@ -30,7 +30,7 @@ interface Question {
   readOnly?: boolean
   answersQuantity?: number
   avatarUrl?: string
-  points: number
+  points?: number
 }
 
 export function QuestionCard({

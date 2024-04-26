@@ -15,6 +15,10 @@ import { z } from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
 import Cookies from 'js-cookie'
 
+interface FormData {
+  reportType: string
+}
+
 export function ReportQuestionModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
   const [isReportTypeSelected, setIsReportTypeSelected] = useState(false)
