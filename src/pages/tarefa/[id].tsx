@@ -244,6 +244,7 @@ export default function Question(props: IQuestionData) {
               authorId={props.questionData?.author_id}
               hasAnswered={allAnswers}
               subject={props.questionData?.subject.name}
+              points={props.questionData?.points}
             />
           </motion.div>
 

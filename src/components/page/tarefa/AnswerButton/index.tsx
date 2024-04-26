@@ -18,6 +18,7 @@ interface AnswerButtonProps {
   loading: boolean
   answersQuantity: number | undefined
   hasAnswer: boolean | null
+  points: number
 }
 
 export function AnswerButton({
@@ -28,6 +29,7 @@ export function AnswerButton({
   loading,
   answersQuantity,
   hasAnswer,
+  points,
 }: AnswerButtonProps) {
   const { isOpening, setIsOpening } = useAuthModalStore()
   const { question } = useQuestionStore()
@@ -66,8 +68,7 @@ export function AnswerButton({
           color="white"
           backgroundColor="black"
         >
-          <AiOutlinePlusCircle size={24} />
-          RESPONDER
+          RESPONDER +{points} XP
         </S.AnswerButton>
       </Dialog.Trigger>
       <LoginModal />
@@ -85,8 +86,7 @@ export function AnswerButton({
           onClick={handleIsAnswering}
           isAnswering={isAnswering}
         >
-          <AiOutlinePlusCircle size={24} />
-          RESPONDER
+          RESPONDER +{points} XP
         </S.AnswerButton>
       </Dialog.Trigger>
       <AnswerModal
@@ -117,8 +117,7 @@ export function AnswerButton({
               onClick={handleIsAnswering}
               isAnswering={isAnswering}
             >
-              <AiOutlinePlusCircle size={24} />
-              RESPONDER
+              RESPONDER +{points} XP
             </S.AnswerButton>
           )}
           {alreadyAnswered && !isAnswering && hasAnswer && (

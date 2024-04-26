@@ -162,6 +162,7 @@ export interface IQuestionData {
     deletedAt: string
     updated_at: string
     subject_id: string
+    points: number
     answers: IAnswer[]
     author: {
       name: string

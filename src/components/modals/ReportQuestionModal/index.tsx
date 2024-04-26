@@ -126,7 +126,7 @@ export function ReportQuestionModal(props: any) {
                 color="blue_950"
                 style={{ marginBottom: '1rem' }}
               >
-                Denunciar!
+                Denunciar pergunta
               </Heading>
             </S.EnterHeader>
             <S.SubHeader>

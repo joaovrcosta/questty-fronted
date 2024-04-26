@@ -5,9 +5,12 @@ interface IAnswerButton {
   isAnswering?: boolean
 }
 export const AnswerButton = styled(Button)<IAnswerButton>`
-  font-weight: 600;
-  border: 2px solid ${({ theme }) => theme.colors.black};
-  height: 40px;
+  font-weight: 700;
+  /* border: 2px solid ${({ theme }) => theme.colors.black}; */
+  height: 46px;
+  border-radius: 16px;
+  /* background: ${({ theme }) => theme.colors.blue_550}; */
+  width: 250px;
 
   &:focus {
     border: 2px solid #000;

@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  height: 31rem;
+  height: 100%;
 `
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -40,7 +40,7 @@ export const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
 
   @media (max-width: 769px) {
-    padding: 1rem 1rem 2.5rem 1rem;
+    padding: 1rem 1rem 2rem 1rem;
   }
 `
 
@@ -76,8 +76,6 @@ export const InputContainer = styled.div``
 
 export const FormContainer = styled.form`
   display: flex;
-  height: 100%;
-  margin-top: 1rem;
   flex-direction: column;
 `
 

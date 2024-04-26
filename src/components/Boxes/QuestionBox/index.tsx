@@ -39,6 +39,7 @@ interface QuestionBoxProps {
   avatarUrl?: string
   isMobile: boolean
   authorId: string
+  points: number
 
   hasAnswered: any
   subject: string
@@ -81,6 +82,7 @@ export function QuestionBox({
   isMobile,
   hasAnswered,
   subject,
+  points,
 }: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
@@ -317,6 +319,7 @@ export function QuestionBox({
               hasThreeAnswers={hasThreeAnswers}
               isAlreadyAnsweredByUser={alreadyAnswered}
               loading={loading}
+              points={points}
             />
 
             {!isAuthor && (

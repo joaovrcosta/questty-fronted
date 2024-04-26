@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  height: 15rem;
+  height: 100%;
 `
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -23,13 +23,12 @@ export const Overlay = styled(Dialog.Overlay)`
 
 export const Content = styled(Dialog.Content)`
   max-width: 37.5rem;
-  height: 20rem;
   font-family: Poppins;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  padding: 1rem 32px 40px 48px;
+  padding: 1.5rem 2rem 2.5rem 3rem;
   z-index: 999999;
   max-height: 42rem;
   display: flex;
@@ -41,7 +40,7 @@ export const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
 
   @media (max-width: 769px) {
-    padding: 0 1rem 2.5rem 1rem;
+    padding: 1rem 1rem 2rem 1rem;
   }
 `
 
@@ -77,9 +76,7 @@ export const InputContainer = styled.div``
 
 export const FormContainer = styled.form`
   display: flex;
-  margin-top: 1rem;
   flex-direction: column;
-  justify-content: space-between;
 `
 
 export const ButtonContainer = styled.div`

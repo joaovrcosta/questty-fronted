@@ -129,7 +129,7 @@ export function ReportCommentModal(props: any) {
                 color="blue_950"
                 style={{ marginBottom: '0.5rem' }}
               >
-                Denunciar!
+                Denunciar comentário
               </Heading>
             </S.EnterHeader>
             <S.SubHeader>
