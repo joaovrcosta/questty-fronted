@@ -2,7 +2,7 @@ import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
 import { intercept } from 'mobx'
 import Image from 'next/image'
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 interface IQuestionBoxProps {
   isLoggedIn: boolean
@@ -175,8 +175,9 @@ export const UserHandleActionsContainer = styled.div`
   padding: 0 0 1rem 0;
   /* margin-top: 3rem; */
 
-  @media (max-width: 768px) {
-    /* flex-wrap: wrap; */
+  @media (max-width: 769px) {
+    border-bottom: 0;
+    margin-bottom: 1rem;
   }
 `
 
@@ -272,7 +273,7 @@ export const ModerateButton = styled.button`
 export const MoreDetailsInputContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 `
 
 export const MoreDetailsInput = styled.input`
@@ -421,7 +422,11 @@ export const BackButtonBox = styled.button`
 
 export const ContentContainer = styled.div``
 
-export const CommentSection = styled.div``
+export const CommentSection = styled.div`
+  &:nth-child(1) {
+    padding-top: 2rem;
+  }
+`
 
 export const CommentForm = styled.form`
   width: 100%;
@@ -429,7 +434,7 @@ export const CommentForm = styled.form`
   gap: 1rem;
 
   @media (max-width: 769px) {
-    gap: 0.5rem;
+    gap: 1rem;
   }
 `
 export const SendButton = styled.button`
@@ -465,6 +470,23 @@ export const HasAnsweredContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  display: block;
+
+  @media (max-width: 769px) {
+    display: none;
+  }
+`
+
+export const HasAnsweredContainerMobile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  display: none;
+  width: 120px;
+
+  @media (max-width: 769px) {
+    display: block;
+  }
 `
 
 export const SubInfosContainer = styled.div`
@@ -475,10 +497,24 @@ export const SubInfosContainer = styled.div`
 
 export const SubjectText = styled(Text)`
   font-family: Inter;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`
+
+const pulseAnimation = keyframes`
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+  }
 `
 
 export const AnwseredStamp = styled.div`
-  background-color: ${({ theme }) => theme.colors.blue_550};
+  background-color: ${({ theme }) => theme.colors.black};
   padding: 0.25rem 0.5rem;
   border-radius: 8px;
   font-family: Poppins;
@@ -487,4 +523,34 @@ export const AnwseredStamp = styled.div`
   justify-content: center;
   gap: 0.5rem;
   white-space: nowrap;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    box-shadow: 0px 0px 1px 1px #0000001a;
+    animation: ${pulseAnimation} 2s infinite;
+  }
+`
+
+export const SeeMoreButton = styled(Button)`
+  background-color: transparent;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.5s ease all;
+  }
+`
+export const SeeMoreContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+
+  @media (max-width: 769px) {
+    margin-top: 2rem;
+  }
 `

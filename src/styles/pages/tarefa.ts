@@ -72,10 +72,10 @@ export const NeedHelpContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border: 1px solid #e5e5e5;
+  /* border: 1px solid #e5e5e5; */
   text-align: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin: 0 auto;
     margin-bottom: 3rem;
   }
@@ -89,6 +89,20 @@ export const NeedHelpContainer = styled.div`
 export const AnswerButton = styled(Button)`
   width: 50%;
   margin-top: 1rem;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+`
+
+export const ShareKnowButton = styled(Button)`
+  width: 50%;
+  margin-top: 1rem;
+  background-color: ${({ theme }) => theme.colors.blue_550};
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `
 
 export const HelpMorePeopleContainer = styled.div`
@@ -135,6 +149,11 @@ export const CallToActionCard = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 1rem;
+  flex-direction: column;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const HeadingCallToAction = styled.div`
@@ -178,4 +197,55 @@ export const AnswerHeading = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+export const ShareYourKnowledgeContainer = styled.div`
+  width: 90%;
+  background-color: transparent;
+  margin-left: auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* border: 1px solid #e5e5e5; */
+  text-align: center;
+
+  @media (max-width: 769px) {
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    width: 100%;
+    background-color: ${({ theme }) => theme.colors.white};
+  }
+
+  @media (max-width: 420px) {
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  }
+`
+export const ShareKnowledgeText = styled(Text)`
+  @media (max-width: 440px) {
+    font-size: 20px;
+  }
+`
+export const SignInContainer = styled.div`
+  display: flex;
+  gap: 0.2rem;
+  justify-content: center;
+
+  @media (max-width: 769px) {
+    align-items: center;
+    justify-content: center;
+  }
+`
+export const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+export const TermsBox = styled.div`
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `

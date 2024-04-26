@@ -20,7 +20,6 @@ import * as zod from 'zod'
 import { MdOutlineSend } from 'react-icons/md'
 import { Spinner } from '@/components/atoms/Spinner'
 import { IComment } from '@/shared/types'
-import { Button } from '@/components/atoms/Button'
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
@@ -40,6 +39,7 @@ interface QuestionBoxProps {
   avatarUrl?: string
   isMobile: boolean
   authorId: string
+  points: number
 
   hasAnswered: any
   subject: string
@@ -72,6 +72,7 @@ const CommentFormSchema = zod.object({
 })
 
 export function QuestionBox({
+  id,
   content,
   author,
   authorId,
@@ -81,17 +82,21 @@ export function QuestionBox({
   isMobile,
   hasAnswered,
   subject,
+  points,
 }: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
   })
   const { isSubmitting } = formState
   const [loading, setLoading] = useState(true)
+  const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
+
   const [showAllComments, setShowAllComments] = useState(false)
   const { question } = useQuestionStore()
   const { user, token, isLoggedIn } = useAuthStore()
   const { isOpening, setIsOpening } = useReportQuestionStore()
   const router = useRouter()
+
   const {
     isAnswering,
     isAnsweringMobile,
@@ -174,6 +179,18 @@ export function QuestionBox({
     }
   }
 
+  const handleReportClick = () => {
+    if (id !== undefined) {
+      setCurrentEntityId(String(id))
+      setIsOpening(true)
+    }
+  }
+
+  const handleCloseModal = () => {
+    setCurrentEntityId(null)
+    setIsOpening(false)
+  }
+
   useEffect(() => {
     if (isMobile && isAnswering) {
       setIsAnsweringMobile(true)
@@ -213,62 +230,41 @@ export function QuestionBox({
                     </Text>
                   </Link>
                 </S.Username>
-                <S.UserLevel>0</S.UserLevel>
+                {/* <S.UserLevel>0</S.UserLevel> */}
               </S.UserInfo>
               <S.SubInfosContainer>
-                <S.DateTimeText
-                  size="xs"
-                  weight="regular"
-                  style={{ fontFamily: 'Inter' }}
-                >
+                <S.DateTimeText size="xs" weight="regular">
                   {getFormattedDateAndTime(createdAt)}
                 </S.DateTimeText>
-                <S.SubjectText size="xs">{subject}</S.SubjectText>
+                <span>•</span>
+                <S.SubjectText size="xs" weight="semibold">
+                  {subject}
+                </S.SubjectText>
               </S.SubInfosContainer>
             </S.InfoWrapperr>
           </S.QuestionInfoWrapper>
 
-          {hasThreeAnswers ? (
-            <Link href="/">
-              <S.BackButtonBox>
-                <AiOutlineArrowLeft size={24} />
-              </S.BackButtonBox>
-            </Link>
-          ) : (
-            <S.AnswerQuantityBox>
-              <div id="answers">
-                <Text
-                  weight="bold"
-                  size="xl"
-                  color="blue_950"
-                  style={{ fontFamily: 'Poppins' }}
-                >
-                  Respostas:
+          {hasAnswer ? (
+            <S.HasAnsweredContainer>
+              <S.AnwseredStamp>
+                <FiCheckCircle size={16} color="#fff" />
+                <Text size="xs" weight="bold" color="white">
+                  respondida
                 </Text>
-              </div>
-              <S.AnswerQuantity>
-                <Text
-                  size="xx1"
-                  weight="bold"
-                  color="blue_950"
-                  style={{ fontFamily: 'Poppins' }}
-                >
-                  {answersQuantity}
-                </Text>
-              </S.AnswerQuantity>
-            </S.AnswerQuantityBox>
-          )}
+              </S.AnwseredStamp>
+            </S.HasAnsweredContainer>
+          ) : null}
         </S.QuestionInfo>
 
         {hasAnswer ? (
-          <S.HasAnsweredContainer>
+          <S.HasAnsweredContainerMobile>
             <S.AnwseredStamp>
               <FiCheckCircle size={16} color="#fff" />
               <Text size="xs" weight="bold" color="white">
-                RESPONDIDO
+                respondida
               </Text>
             </S.AnwseredStamp>
-          </S.HasAnsweredContainer>
+          </S.HasAnsweredContainerMobile>
         ) : null}
 
         <S.QuestionContent>
@@ -313,32 +309,42 @@ export function QuestionBox({
 
         {isAnsweringMobile && <AnswerMobileEditor avatarUrl={avatarUrl} />}
 
-        <S.UserHandleActionsContainer>
-          <AnswerButton
-            isMobile={isMobile}
-            answersQuantity={answersQuantity}
-            hasAnswer={hasAnswer}
-            isAuthor={isAuthor}
-            hasThreeAnswers={hasThreeAnswers}
-            isAlreadyAnsweredByUser={alreadyAnswered}
-            loading={loading}
-          />
+        {!isAuthor && (
+          <S.UserHandleActionsContainer>
+            <AnswerButton
+              isMobile={isMobile}
+              answersQuantity={answersQuantity}
+              hasAnswer={hasAnswer}
+              isAuthor={isAuthor}
+              hasThreeAnswers={hasThreeAnswers}
+              isAlreadyAnsweredByUser={alreadyAnswered}
+              loading={loading}
+              points={points}
+            />
 
-          {!isAuthor && (
-            <S.ModerationWrapper>
-              <Tooltip content="Denunciar">
-                <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
-                  <Dialog.Trigger asChild>
-                    <S.ModerateButton>
-                      <AiOutlineFlag size={24} color="#000" />
-                    </S.ModerateButton>
-                  </Dialog.Trigger>
-                  <ReportQuestionModal />
-                </Dialog.Root>
-              </Tooltip>
-            </S.ModerationWrapper>
-          )}
-        </S.UserHandleActionsContainer>
+            {!isAuthor && (
+              <S.ModerationWrapper>
+                <Tooltip content="Denunciar">
+                  <Dialog.Root
+                    open={currentEntityId === id && isOpening}
+                    onOpenChange={setIsOpening}
+                  >
+                    <Dialog.Trigger asChild>
+                      <S.ModerateButton onClick={handleReportClick}>
+                        <AiOutlineFlag size={24} color="#000" />
+                      </S.ModerateButton>
+                    </Dialog.Trigger>
+                    <ReportQuestionModal
+                      entityType="QUESTION"
+                      entityId={id}
+                      handleCloseModal={handleCloseModal}
+                    />
+                  </Dialog.Root>
+                </Tooltip>
+              </S.ModerationWrapper>
+            )}
+          </S.UserHandleActionsContainer>
+        )}
 
         {!token || !isLoggedIn ? (
           <Link href="/signin" style={{ textDecoration: 'none' }}>
@@ -436,22 +442,14 @@ export function QuestionBox({
           </S.CommentSection>
 
           {comments.length > MAX_DISPLAY_COMMENTS && !showAllComments && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '1rem',
-              }}
-            >
-              <Button
+            <S.SeeMoreContainer>
+              <S.SeeMoreButton
                 onClick={() => setShowAllComments(true)}
-                backgroundColor="transparent"
                 border={false}
               >
                 VER MAIS COMENTÁRIOS
-              </Button>
-            </div>
+              </S.SeeMoreButton>
+            </S.SeeMoreContainer>
           )}
         </>
       </S.QuestionBoxContainer>

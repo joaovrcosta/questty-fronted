@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { AiOutlineFlag, AiOutlineSisternode } from 'react-icons/ai'
 import { Tooltip } from '../../molecules/Tooltip'
 import { VscVerifiedFilled } from 'react-icons/vsc'
+import parse from 'html-react-parser'
 
 interface Answer {
   id: string | undefined
@@ -110,9 +111,7 @@ export function AnswerBox({
                 </Tooltip> */}
               </S.QuestionInfo>
               <S.CreatedAtContainer>
-                <Text size="xs" style={{ fontFamily: 'Inter' }}>
-                  {getTimeAgo(createdAt)}
-                </Text>
+                <Text size="xs">{getTimeAgo(createdAt)}</Text>
               </S.CreatedAtContainer>
             </S.AnswerInfoWrapper>
           </S.AnswerInfoWrapperContainer>
@@ -136,11 +135,11 @@ export function AnswerBox({
         </S.AnswerInfo>
         <S.AnswerContent>
           <S.AnswerContentText size="lg" weight="regular" color="blue_950">
-            {content}
+            {parse(content ?? '')}
           </S.AnswerContentText>
         </S.AnswerContent>
 
-        {isGolden && (
+        {/* {isGolden && (
           <S.ConnectionContainer>
             <AiOutlineSisternode size={34} color="#10162f" />
           </S.ConnectionContainer>
@@ -175,7 +174,7 @@ export function AnswerBox({
               </Text>
             </S.ExplanationText>
           </S.ExplanationContainer>
-        )}
+        )} */}
 
         <S.UserHandleActionsContainer>
           <S.LikedButton
@@ -186,7 +185,7 @@ export function AnswerBox({
             onClick={handleLikeClick}
             disabled={isAlreadyLiked || isButtonDisabled}
           >
-            Valeu
+            Gostei
             {isAlreadyLiked ? (
               <S.hearthIconCSS></S.hearthIconCSS>
             ) : (

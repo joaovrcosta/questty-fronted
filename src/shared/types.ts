@@ -9,11 +9,12 @@ export interface IQuestion {
     username: string
   }
   deleted: boolean
-  category_id: string
+  subject_id: string
   updatedAt: string
   deletedAt: string
   createdAt: string
-  category: {
+  points: number
+  subject: {
     name: string
   }
   answers: IAnswer[]
@@ -37,6 +38,12 @@ export interface IAnswer {
   likes: ILike[]
   category: {
     name: string
+  }
+  question: {
+    content: string
+    category: {
+      name: string
+    }
   }
 }
 
@@ -87,6 +94,7 @@ export interface ICurrentUserData {
   code: Number
   email: string
   createdAt: string
+  grade_id: number
   answers: IAnswer[]
   questions: IQuestion[]
 }
@@ -98,9 +106,48 @@ export interface IProfileData {
     username: string
     code: Number
     avatar_url: string
+    points: number
     email: string
     createdAt: string
     questions: IQuestion[]
+    answers: IAnswer[]
+    rank: {
+      id: number
+      name: string
+      color: string
+      description: string
+      points: number
+      bestResponses: number
+    }
+  }
+
+  answersData: {
+    answers: IAnswer[]
+  }
+}
+
+export interface IUserInfo {
+  userData: {
+    id: string
+    name: string
+    username: string
+    code: Number
+    avatar_url: string
+    points: number
+    email: string
+    createdAt: string
+    questions: IQuestion[]
+    answers: IAnswer[]
+    rank: {
+      id: number
+      name: string
+      color: string
+      description: string
+      points: number
+      bestResponses: number
+    }
+  }
+  answersData: {
     answers: IAnswer[]
   }
 }
@@ -114,19 +161,33 @@ export interface IQuestionData {
     createdAt: string
     deletedAt: string
     updated_at: string
-    category_id: string
+    subject_id: string
+    points: number
     answers: IAnswer[]
     author: {
       name: string
       username: string
       avatar_url: string
     }
-    category: {
+    subject: {
+      id: string
       name: string
     }
     comments?: IComment[] | null
   }
   isLoggedIn?: boolean
+  recomendedQuestions: any
+}
+
+export interface IReportSubCategory {
+  id: string
+  text: string
+}
+
+export interface IReportTypes {
+  id: string
+  text: string
+  subcategories: IReportSubCategory[]
 }
 
 export interface ICategories {

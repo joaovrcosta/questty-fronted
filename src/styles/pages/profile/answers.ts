@@ -7,6 +7,10 @@ interface IProfileProps {
   isLoggedIn: boolean
 }
 
+interface IRankProps {
+  color: string
+}
+
 export const ProfileContainer = styled.div`
   width: 100%;
   max-width: 1280px;
@@ -92,9 +96,9 @@ export const CreatedAt = styled.div`
 export const UserHistory = styled.div`
   font-family: Poppins;
   margin-top: 1rem;
-  background-color: ${({ theme }) => theme.colors.white};
+  /* background-color: ${({ theme }) => theme.colors.white}; */
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  /* border: 1px solid ${({ theme }) => theme.colors.black}; */
 `
 
 export const ActiveIn = styled.div`
@@ -112,11 +116,17 @@ export const ShowmoreQuestionsButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media (max-width: 769px) {
+    margin-bottom: 1rem;
+  }
 `
 
 export const showMoreButton = styled(Button)`
+  border-radius: 16px;
+
   &:hover {
-    background-color: #eaece1;
+    background-color: #cdd8e0;
     transition: 0.3s ease all;
   }
 `
@@ -167,7 +177,7 @@ export const NotFindAnyAnswer = styled.div`
 `
 
 export const UserDetailsBox = styled.div`
-  padding: 1rem 0rem 0rem 0rem;
+  padding: 2rem 0rem 0rem 0rem;
   display: flex;
   gap: 0.5rem;
   width: 100%;
@@ -200,4 +210,49 @@ export const FriendsQuantity = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+`
+
+export const UserBadges = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+`
+
+export const UserRankContainer = styled.div<IRankProps>`
+  margin-top: 0.5rem;
+  width: 100px;
+  background-color: ${(props) => props.color};
+  padding: 0.25rem 0.5rem;
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+`
+export const UserPoints = styled.div`
+  margin-top: 0.5rem;
+  width: 100px;
+  background-color: ${(props) => props.color};
+  padding: 0.25rem 0.5rem;
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+`
+export const VerticalDivider = styled.div`
+  padding: 0 0.5rem;
+`
+
+export const StarQuantity = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+`
+export const StarContainer = styled.div`
+  display: flex;
+  height: 24px;
+  width: 24px;
+  padding: 0 4px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.white};
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.blue_950};
 `

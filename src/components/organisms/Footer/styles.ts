@@ -66,7 +66,7 @@ export const LinksColumn = styled.div`
   flex-direction: column;
   flex: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     flex-basis: 100%;
     border-bottom: 1px solid ${({ theme }) => theme.colors.gray_300};
 

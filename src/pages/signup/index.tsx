@@ -57,7 +57,7 @@ export default function SignUp() {
                 hug={true}
                 showLabel={true}
                 label="E-mail"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '1rem', height: '52px' }}
                 border={true}
               />
               {formState.errors.email && (

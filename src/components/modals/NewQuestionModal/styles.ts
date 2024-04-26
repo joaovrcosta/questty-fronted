@@ -3,8 +3,8 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   inset: 0;
   background: rgba(32, 137, 234, 0.7);
   overflow: hidden;
@@ -18,6 +18,7 @@ export const Content = styled(Dialog.Content)`
   justify-content: center;
   flex-direction: column;
   z-index: 999999;
+  height: 10;
 
   padding: 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
@@ -152,6 +153,10 @@ export const QuestionMoreInfoContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+  }
 `
 
 export const InputFile = styled.input`
@@ -186,7 +191,12 @@ export const Tools = styled.div`
   gap: 0.5rem;
 `
 
-export const Selects = styled.div``
+export const Selects = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+`
 
 export const SubjectSelect = styled.select`
   height: 2.5rem;

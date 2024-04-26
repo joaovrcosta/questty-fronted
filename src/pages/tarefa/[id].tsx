@@ -3,7 +3,7 @@ import { QuestionBox } from '@/components/Boxes/QuestionBox'
 import { AnswerBox } from '@/components/Boxes/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
-import { IQuestionData } from '@/shared/types'
+import { IQuestion, IQuestionData } from '@/shared/types'
 import { use, useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
@@ -22,6 +22,9 @@ import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/aut
 import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
+import { motion } from 'framer-motion'
+import ErrorPage from 'next/error'
+import Custom404 from '../404'
 
 interface Question {
   id: number
@@ -38,7 +41,12 @@ interface Question {
 }
 
 export default function Question(props: IQuestionData) {
+  if (!props.questionData) {
+    return <Custom404 />
+  }
+
   const [loading, setLoading] = useState(true)
+  const [subjectQuestions, setSubjectQuestions] = useState([])
   const { isMobile, setIsMobile } = useIsMobileStore()
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
@@ -50,10 +58,12 @@ export default function Question(props: IQuestionData) {
   const { answers, currentNewAnswer } = useAnswerStore()
   const isLoggedIn = props.isLoggedIn
 
-  const textForTitle = `${props.questionData.content.substring(
+  const textForTitle = `${props.questionData?.content.substring(
     0,
     100
   )} - Questty.com`
+
+  const isAuthor = question?.questionData?.author_id === user?.id
 
   const answersAuthorIds = question?.questionData?.answers.map(
     (resposta) => resposta.author_id
@@ -89,13 +99,17 @@ export default function Question(props: IQuestionData) {
   }, [])
 
   useEffect(() => {
-    const quantity = props.questionData.answers.length
+    const quantity = props.questionData?.answers.length
     setAnswerQuantity(quantity)
-  }, [props.questionData.answers])
+  }, [props.questionData?.answers])
+
+  useEffect(() => {
+    setSubjectQuestions(props.recomendedQuestions)
+  }, [])
 
   const allAnswers = [
     ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
-    ...(props.questionData.answers || []),
+    ...(props.questionData?.answers || []),
   ]
 
   const renderAnswers = () => {
@@ -107,12 +121,13 @@ export default function Question(props: IQuestionData) {
               marginBottom: '1rem',
               display: 'flex',
               justifyContent: 'flex-end',
+              width: '100%',
             }}
           >
             <SkeletonLine
-              width={820}
+              width={700}
               rows={1}
-              height={200}
+              height={280}
               rounding="rounded"
             />
           </div>
@@ -126,7 +141,7 @@ export default function Question(props: IQuestionData) {
             <SkeletonLine
               width={820}
               rows={1}
-              height={200}
+              height={280}
               rounding="rounded"
             />
           </div>
@@ -140,7 +155,7 @@ export default function Question(props: IQuestionData) {
             <SkeletonLine
               width={820}
               rows={1}
-              height={200}
+              height={280}
               rounding="rounded"
             />
           </div>
@@ -148,23 +163,30 @@ export default function Question(props: IQuestionData) {
       )
     } else if (allAnswers.length > 0) {
       return allAnswers.map((answer) => (
-        <AnswerBox
-          isButtonDisabled={
-            isUserInList && answer?.author_id === userLogged ? true : false
-          }
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3 }}
           key={answer?.id}
-          id={answer?.id}
-          authorId={answer?.author_id}
-          content={answer?.content}
-          createdAt={answer?.createdAt}
-          isGolden={answer?.isGolden}
-          author={answer?.author?.username}
-          likesQuantity={answer?.likes?.length || 0}
-          avatarUrl={answer?.author?.avatar_url}
-        />
+        >
+          <AnswerBox
+            isButtonDisabled={
+              isUserInList && answer?.author_id === userLogged ? true : false
+            }
+            id={answer?.id}
+            authorId={answer?.author_id}
+            content={answer?.content}
+            createdAt={answer?.createdAt}
+            isGolden={answer?.isGolden}
+            author={answer?.author?.username}
+            likesQuantity={answer?.likes?.length || 0}
+            avatarUrl={answer?.author?.avatar_url}
+          />
+        </motion.div>
       ))
     } else {
-      return (
+      return !isAuthor ? (
         <S.NeedHelpContainer>
           {allAnswers.length === 0 && (
             <>
@@ -180,6 +202,18 @@ export default function Question(props: IQuestionData) {
             </>
           )}
         </S.NeedHelpContainer>
+      ) : (
+        <S.ShareYourKnowledgeContainer>
+          <S.ShareKnowledgeText size="xx1" weight="medium">
+            Compartilhe seu conhecimento enquanto você espera
+          </S.ShareKnowledgeText>
+          <Link href="/" style={{ width: '100%' }}>
+            <S.ShareKnowButton backgroundColor="black" color="white">
+              <GoPlus size={24} />
+              RESPONDER UMA PERGUNTA
+            </S.ShareKnowButton>
+          </Link>
+        </S.ShareYourKnowledgeContainer>
       )
     }
   }
@@ -192,19 +226,27 @@ export default function Question(props: IQuestionData) {
       />
       <S.QuestionContainer>
         <S.QuestionWrapper>
-          <QuestionBox
-            id={props.questionData?.id}
-            key={props.questionData?.id}
-            content={props.questionData?.content}
-            answersQuantity={answerQuantity}
-            createdAt={props.questionData?.createdAt}
-            author={props.questionData?.author.username}
-            avatarUrl={props.questionData?.author?.avatar_url}
-            isMobile={isMobile}
-            authorId={props.questionData.author_id}
-            hasAnswered={allAnswers}
-            subject={props.questionData?.category.name}
-          />
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <QuestionBox
+              id={props.questionData?.id}
+              key={props.questionData?.id}
+              content={props.questionData?.content}
+              answersQuantity={answerQuantity}
+              createdAt={props.questionData?.createdAt}
+              author={props.questionData?.author.username}
+              avatarUrl={props.questionData?.author?.avatar_url}
+              isMobile={isMobile}
+              authorId={props.questionData?.author_id}
+              hasAnswered={allAnswers}
+              subject={props.questionData?.subject.name}
+              points={props.questionData?.points}
+            />
+          </motion.div>
 
           {!isLoggedIn && (
             <>
@@ -212,7 +254,11 @@ export default function Question(props: IQuestionData) {
                 <>
                   <S.HeadingCallToAction>
                     <Text size="xx1" weight="extrabold">
-                      Garanta acesso grátis para outras respostas
+                      Crie uma conta e tenha acesso a{' '}
+                      <span style={{ color: '#00672e' }}>
+                        respostas verificadas e para todas matérias
+                      </span>
+                      . É rápido, fácil e gratuito!
                     </Text>
                   </S.HeadingCallToAction>
                   <S.AdvantagesContainer>
@@ -250,20 +296,35 @@ export default function Question(props: IQuestionData) {
                     </div>
                   </S.AdvantagesContainer>
                   <S.ButtonsContainer>
-                    <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
-                      <Dialog.Trigger asChild>
-                        <S.SignInButton backgroundColor="black" color="white">
-                          ENTRAR
-                        </S.SignInButton>
-                      </Dialog.Trigger>
-                      <LoginModal />
-                    </Dialog.Root>
-
-                    <Link href="/signup">
-                      <S.SignUpButton backgroundColor="black" color="white">
-                        CADASTRE-SE
-                      </S.SignUpButton>
-                    </Link>
+                    <S.SignUpContainer>
+                      <Link href="/signup">
+                        <S.SignUpButton
+                          backgroundColor="black"
+                          color="white"
+                          hug={true}
+                        >
+                          CADASTRE-SE
+                        </S.SignUpButton>
+                      </Link>
+                      <S.TermsBox>
+                        <Text size="xs">
+                          Ao se cadastrar, você aceita os{' '}
+                          <strong>Termos de Serviço do Questty</strong> e a{' '}
+                          <strong>Política de Privacidade</strong>.
+                        </Text>
+                      </S.TermsBox>
+                    </S.SignUpContainer>
+                    <S.SignInContainer>
+                      <Text>Já tem conta?</Text>
+                      <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                        <Dialog.Trigger asChild>
+                          <Text style={{ color: '#014a82' }} weight="semibold">
+                            Entre aqui
+                          </Text>
+                        </Dialog.Trigger>
+                        <LoginModal />
+                      </Dialog.Root>
+                    </S.SignInContainer>
                   </S.ButtonsContainer>
                 </>
               </S.CallToActionCard>
@@ -278,17 +339,27 @@ export default function Question(props: IQuestionData) {
             ) : null}
           </S.AnswersSection>
           <S.AnswersContainer>{renderAnswers()}</S.AnswersContainer>
-          <S.HelpMorePeopleContainer>
-            <Text size="xl" weight="semibold">
-              Ajude outras pessoas com dúvidas sobre{' '}
-              {props?.questionData?.category.name}
-            </Text>
-            <div style={{ marginTop: '1.5rem' }}>
-              <MoreQuestonCard />
-              <MoreQuestonCard />
-              <MoreQuestonCard />
-            </div>
-          </S.HelpMorePeopleContainer>
+          {subjectQuestions?.length >= 1 ? (
+            <S.HelpMorePeopleContainer>
+              <Text size="xl" weight="semibold">
+                Ajude outras pessoas com dúvidas sobre{' '}
+                {props?.questionData?.subject.name}
+              </Text>
+              <div style={{ marginTop: '1.5rem' }}>
+                {subjectQuestions.map((question: IQuestion) => (
+                  <MoreQuestonCard
+                    content={question.content}
+                    id={question.id}
+                    subjectName={question.subject.name}
+                    createdAt={question.createdAt}
+                    points={question.points}
+                    avatar_url={question.author.avatar_url ?? ''}
+                    author_id={question.author_id}
+                  />
+                ))}
+              </div>
+            </S.HelpMorePeopleContainer>
+          ) : null}
         </S.QuestionWrapper>
       </S.QuestionContainer>
       <FloatingButton />
@@ -311,8 +382,13 @@ export const getServerSideProps = async (ctx: any) => {
     const res = await api.get(`questions/${id}`)
     const questionData = res.data.question
 
+    const response = await api.get(
+      `/questions/latest-by-subject/${questionData.subject.id}`
+    )
+    const recomendedQuestions = response.data
+
     if (questionData !== undefined) {
-      return { props: { questionData, isLoggedIn } }
+      return { props: { questionData, isLoggedIn, recomendedQuestions } }
     } else {
       return { props: {} }
     }

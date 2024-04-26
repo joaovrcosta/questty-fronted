@@ -3,18 +3,14 @@ import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
-import starIcon from '@/assets/star.svg'
-import Image from 'next/image'
-import { GiRoundStar } from 'react-icons/gi'
 import { SiCrystal } from 'react-icons/si'
 import { Tooltip } from '../../molecules/Tooltip'
 import { HiOutlineChatAlt2 } from 'react-icons/hi'
-import { Button } from '@/components/atoms/Button'
-import { IoFlagOutline } from 'react-icons/io5'
 import { AiOutlineFlag } from 'react-icons/ai'
 import * as Dialog from '@radix-ui/react-dialog'
-import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
-import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
+import { useState } from 'react'
+import { useReportQuestionHomeStore } from '@/features/stores/modals-stores/reportQuestionHomeModal'
+import { ReportQuestionHomeModal } from '@/components/modals/ReportQuestionHomeModal'
 
 export type subjectsType =
   | 'math'
@@ -34,6 +30,7 @@ interface Question {
   readOnly?: boolean
   answersQuantity?: number
   avatarUrl?: string
+  points?: number
 }
 
 export function QuestionCard({
@@ -45,12 +42,24 @@ export function QuestionCard({
   createdAt,
   readOnly = false,
   avatarUrl,
+  points,
 }: Question) {
   const router = useRouter()
-  const { isOpening, setIsOpening } = useReportQuestionStore()
+  const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
+  const { isOpening, setIsOpening } = useReportQuestionHomeStore()
 
   const handleResponderClick = () => {
     router.push(`/tarefa/${id}`)
+  }
+
+  const handleReportClick = () => {
+    setCurrentEntityId(id)
+    setIsOpening(true)
+  }
+
+  const handleCloseModal = () => {
+    setCurrentEntityId(null)
+    setIsOpening(false)
   }
 
   const answerCount = answersQuantity || 0
@@ -90,18 +99,18 @@ export function QuestionCard({
                     <Text
                       weight="medium"
                       color="blue_950"
-                      size="sm"
+                      size="md"
                       style={{ whiteSpace: 'nowrap' }}
                     >
                       +
                     </Text>{' '}
                     <Text
                       weight="semibold"
-                      size="sm"
+                      size="lg"
                       color="blue_950"
                       style={{ whiteSpace: 'nowrap' }}
                     >
-                      0
+                      {points}
                     </Text>{' '}
                     <Text
                       weight="medium"
@@ -109,7 +118,7 @@ export function QuestionCard({
                       color="blue_950"
                       style={{ whiteSpace: 'nowrap' }}
                     >
-                      pts
+                      QI
                     </Text>{' '}
                   </S.StarQuantity>
                 </S.QuestionPoints>
@@ -124,7 +133,7 @@ export function QuestionCard({
           <S.UserHandleContainer>
             <Tooltip content="Respostas">
               <S.AnswerQuantityWrapper>
-                <S.AnswerQuantity>
+                <S.AnswerQuantity onClick={handleResponderClick}>
                   {readOnly ? (
                     ''
                   ) : (
@@ -144,14 +153,21 @@ export function QuestionCard({
             </Tooltip>
             <S.AswerContainer>
               <Tooltip content="Denunciar">
-                <S.ReportButtonContainer>
-                  <Dialog.Root open={isOpening} onOpenChange={setIsOpening}>
+                <S.ReportButtonContainer onClick={handleReportClick}>
+                  <Dialog.Root
+                    open={currentEntityId === id && isOpening}
+                    onOpenChange={setIsOpening}
+                  >
                     <Dialog.Trigger asChild>
                       <S.ReportButton>
                         <AiOutlineFlag size={20} color="#000" />
                       </S.ReportButton>
                     </Dialog.Trigger>
-                    <ReportQuestionModal />
+                    <ReportQuestionHomeModal
+                      entityType="QUESTION"
+                      entityId={id}
+                      handleCloseModal={handleCloseModal}
+                    />
                   </Dialog.Root>
                 </S.ReportButtonContainer>
               </Tooltip>

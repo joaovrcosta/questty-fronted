@@ -27,8 +27,13 @@ import logic from '@/assets/subjects/logic.svg'
 import edmoral from '@/assets/subjects/edmoral.svg'
 import espanhol from '@/assets/subjects/espanol.svg'
 import music from '@/assets/subjects/music.svg'
+import Link from 'next/link'
 
-export const SubjectList = () => {
+interface SubjectListProps {
+  subject: any
+}
+
+export const SubjectList = ({ subject }: SubjectListProps) => {
   return (
     <>
       <S.SubjectListContainer>
@@ -38,33 +43,42 @@ export const SubjectList = () => {
         <S.SubjectListWrapper>
           <ul>
             <li>
-              <S.Subject role="button">
-                <S.SubjectButton>
-                  <Image
-                    src={allSubjects}
-                    width={24}
-                    height={24}
-                    alt="Todas as matérias"
-                  />
-                  Todas matérias
-                </S.SubjectButton>
-              </S.Subject>
+              <Link href="/home" style={{ textDecoration: 'none' }}>
+                <S.Subject role="button">
+                  <S.SubjectButton>
+                    <Image
+                      src={allSubjects}
+                      width={24}
+                      height={24}
+                      alt="Todas as matérias"
+                    />
+                    Todas matérias
+                  </S.SubjectButton>
+                </S.Subject>
+              </Link>
             </li>
             <li>
-              <S.Subject role="button">
-                <S.SubjectButton>
-                  <Image src={math} width={24} height={24} alt="Math" />
-                  Matematica
-                </S.SubjectButton>
-              </S.Subject>
+              <Link
+                href="/materia/matematica"
+                style={{ textDecoration: 'none' }}
+              >
+                <S.Subject role="button">
+                  <S.SubjectButton>
+                    <Image src={math} width={24} height={24} alt="Math" />
+                    Matematica
+                  </S.SubjectButton>
+                </S.Subject>
+              </Link>
             </li>
             <li>
-              <S.Subject role="button">
-                <S.SubjectButton>
-                  <Image src={enem} width={24} height={24} alt="ENEM" />
-                  ENEM
-                </S.SubjectButton>
-              </S.Subject>
+              <Link href="/materia/enem" style={{ textDecoration: 'none' }}>
+                <S.Subject role="button">
+                  <S.SubjectButton>
+                    <Image src={enem} width={24} height={24} alt="ENEM" />
+                    ENEM
+                  </S.SubjectButton>
+                </S.Subject>
+              </Link>
             </li>
             <li>
               <S.Subject role="button">

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
+import { BlankAvatar } from '@/components/atoms/Avatar/BlankAvatar'
 
 export type subjectsType =
   | 'math'
@@ -17,11 +18,14 @@ export type subjectsType =
 interface Question {
   id?: string
   author_id?: string
-  content?: string
+  content: string
   category_id?: string
   createdAt?: string
   readOnly?: boolean
   answersQuantity?: number
+  subjectName: string
+  points: number
+  avatar_url: string
 }
 
 export function MoreQuestonCard({
@@ -31,6 +35,9 @@ export function MoreQuestonCard({
   category_id,
   answersQuantity,
   createdAt,
+  subjectName,
+  points,
+  avatar_url,
   readOnly = false,
 }: Question) {
   const questions = useQuestionsStore((state) => state.questions)
@@ -44,6 +51,11 @@ export function MoreQuestonCard({
   const answerCount = answersQuantity || 0
   const limitedAnswerCount = 3
 
+  const createdIn = '2024-02-16T13:00:00.000Z'
+
+  const limitedContent =
+    content.length > 80 ? content.slice(0, 80) + '...' : content
+
   return (
     <S.QuestionCardContainer>
       <S.QuestionContentContainer>
@@ -51,8 +63,8 @@ export function MoreQuestonCard({
           <S.UserAvatarWrapper>
             <Avatar
               id={author_id}
-              variant="lg"
-              imageUrl="https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&w=128&h=128&dpr=2&q=80"
+              variant="sm"
+              imageUrl={avatar_url ? avatar_url : null}
             />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
@@ -63,30 +75,39 @@ export function MoreQuestonCard({
                 </S.Subject>
               )}
               <S.DateTime size="xs" color="gray_800">
-                • {getTimeAgo(createdAt)}
+                {getTimeAgo(createdAt)}
               </S.DateTime>
+              <span>•</span>
+              <Text
+                size="xs"
+                color="gray_800"
+                style={{ fontFamily: 'Inter' }}
+                weight="semibold"
+              >
+                {subjectName}
+              </Text>
             </S.SubjectAndDateTimeContainer>
             {/* <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
             </S.QuestionText> */}
-            <Text>Uma pergunta qualquer ai</Text>
+            <Text style={{ fontSize: '14px' }}>{limitedContent}</Text>
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
-          <S.AnswerQuantity>
+          {/* <S.AnswerQuantity>
             {readOnly ? (
               ''
             ) : (
               <Text
                 weight="semibold"
-                color="blue_550"
+                color="blue_950"
                 size="sm"
                 style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
               >
                 {`${answerCount} respostas`}
               </Text>
             )}
-          </S.AnswerQuantity>
+          </S.AnswerQuantity> */}
           <S.AswerContainer>
             <S.AnswerButtonContainer>
               <S.AnswerButton
@@ -99,7 +120,7 @@ export function MoreQuestonCard({
                   ? 'VISUALIZAR'
                   : answerCount >= 3
                   ? 'VISUALIZAR'
-                  : 'RESPONDER'}
+                  : `RESPONDER + ${points} pts`}
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>

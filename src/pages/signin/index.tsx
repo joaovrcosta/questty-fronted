@@ -3,8 +3,6 @@ import { Heading } from '@/components/atoms/Heading'
 import { Input } from '@/components/atoms/Input'
 import { Button } from '@/components/atoms/Button'
 import { Text } from '@/components/atoms/Text'
-import { SiFacebook } from 'react-icons/si'
-import { FcGoogle } from 'react-icons/fc'
 import { useForm } from 'react-hook-form'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import api from '@/services/api'
@@ -15,7 +13,6 @@ import * as zod from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
 import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
-import Head from 'next/head'
 import Cookies from 'js-cookie'
 import { SignInLayout } from '@/components/layouts/signIn'
 import { NextSeo } from 'next-seo'
@@ -72,6 +69,7 @@ export default function SignIn() {
       Cookies.set('questty-token', token, {
         expires: 60 * 60 * 24 * 3, // 7 day
         path: '/',
+        secure: true,
       })
 
       const userResponse = await api.get('/me', {
@@ -131,7 +129,7 @@ export default function SignIn() {
                   hug={true}
                   showLabel={true}
                   label="E-mail"
-                  style={{ marginBottom: '0.5rem' }}
+                  style={{ marginBottom: '0.5rem', height: '52px' }}
                   border={true}
                 />
                 {formState.errors.email && (
@@ -148,7 +146,7 @@ export default function SignIn() {
                 hug={true}
                 showLabel={true}
                 label="Senha"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
               />
 

@@ -20,11 +20,7 @@ const registerSchema = zod.object({
   username: zod
     .string()
     .min(3, 'O nome de usuário deve ter no mínimo 3 caracteres')
-    .max(22, 'O nome de usuário deve ter no máximo 22 caracteres')
-    .regex(
-      /^[a-z]+$/,
-      'O nome de usuário deve conter apenas letras minúsculas'
-    ),
+    .max(22, 'O nome de usuário deve ter no máximo 22 caracteres'),
   email: zod.string().email('E-mail inválido'),
   password: zod
     .string()
@@ -37,6 +33,27 @@ const registerSchema = zod.object({
     )
     .regex(/[0-9]+/, 'A senha deve conter pelo menos um número'),
   name: zod.string().min(3, 'O nome deve ter no mínimo 3 caracteres'),
+  gender: zod.enum(['1', '2', '3']).optional(),
+  gradeId: zod.enum(['1', '2', '3', '4']).optional(),
+  dateOfBirth: zod
+    .string()
+    .refine(
+      (dateOfBirthString) => {
+        const dateOfBirth = new Date(dateOfBirthString + 'T00:00:00.000Z')
+
+        if (isNaN(dateOfBirth.getTime())) {
+          return false
+        }
+        const today = new Date()
+        const age = today.getFullYear() - dateOfBirth.getFullYear()
+        return age >= 14
+      },
+      {
+        message:
+          'A idade mínima deve ser mais de 14 anos ou a data de nascimento é inválida.',
+      }
+    )
+    .nullable(),
 })
 
 type RegisterFormData = zod.infer<typeof registerSchema>
@@ -59,17 +76,26 @@ export default function Register() {
   const { isSubmitting } = formState
 
   const onSubmit = async (data: RegisterFormData) => {
+    console.log(data)
     try {
-      const { username, email, password, name } = data
+      const { username, email, password, name, gender, gradeId, dateOfBirth } =
+        data
+
+      const lowercaseUsername = username.toLowerCase()
+
+      const genderNumber = gender ? parseInt(gender, 10) : undefined
+      const gradeIdNumber = gradeId ? parseInt(gradeId, 10) : undefined
 
       const response = await api.post('/users', {
-        username,
+        username: lowercaseUsername,
         email,
         password,
         name,
+        gradeId: gradeIdNumber,
+        gender: genderNumber,
+        dateOfBirth,
       })
 
-      // Verifique o status da resposta para detectar um erro 409
       if (response.status === 409) {
         setError('Usuário ou e-mail já existe')
       } else {
@@ -113,7 +139,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="Nome completo"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
                 name="name"
               />
@@ -127,8 +153,8 @@ export default function Register() {
                 variant="lg"
                 hug={true}
                 showLabel={true}
-                label="Nome de usuário (exibido no perfil)"
-                style={{ marginBottom: '0.5rem' }}
+                label="Apelido (exibido no perfil)"
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
                 name="username"
               />
@@ -144,7 +170,7 @@ export default function Register() {
                 hug={true}
                 showLabel={true}
                 label="E-mail"
-                style={{ marginBottom: '0.5rem' }}
+                style={{ marginBottom: '0.5rem', height: '52px' }}
                 border={true}
                 name="email"
               />
@@ -161,6 +187,7 @@ export default function Register() {
                 label="Senha"
                 border={true}
                 type="password"
+                style={{ height: '52px' }}
               />
               {formState.errors.password && (
                 <Text
@@ -171,6 +198,60 @@ export default function Register() {
                 </Text>
               )}
             </S.InputContainer>
+
+            <S.SelectContainer>
+              <S.GradeSelectionContainer>
+                <label>Escolaridade</label>
+                <select {...register('gradeId')}>
+                  <option value=""></option>
+                  <option value="2">Ensino Fundamental</option>
+                  <option value="3">Ensino médio</option>
+                  <option value="1">Ensino Superior</option>
+                  <option value="4">Outros</option>
+                </select>
+                {formState.errors.gradeId && (
+                  <Text size="sm" style={{ color: '#D20032' }}>
+                    {formState.errors.gradeId.message}
+                  </Text>
+                )}
+              </S.GradeSelectionContainer>
+            </S.SelectContainer>
+
+            <S.SelectContainer>
+              <S.GenderSelectionContainer>
+                <label>Genêro</label>
+                <select {...register('gender')}>
+                  <option value=""></option>
+                  <option value="1">Masculino</option>
+                  <option value="2">Feminino</option>
+                  <option value="3">Outros</option>
+                </select>
+                {formState.errors.gender && (
+                  <Text size="sm" style={{ color: '#D20032' }}>
+                    {formState.errors.gender.message}
+                  </Text>
+                )}
+              </S.GenderSelectionContainer>
+
+              <S.DateBirthContainer>
+                <label>Data de nascimento</label>
+                <S.DateBirthInput
+                  {...register('dateOfBirth')}
+                  placeholder="Data de Nascimento"
+                  type="date"
+                />
+              </S.DateBirthContainer>
+            </S.SelectContainer>
+            {formState.errors.email && (
+              <Text size="sm" style={{ color: '#D20032' }}>
+                {formState.errors.email.message}
+              </Text>
+            )}
+            {formState.errors.dateOfBirth && (
+              <Text size="sm" style={{ color: '#D20032' }}>
+                {formState.errors.dateOfBirth.message}
+              </Text>
+            )}
 
             {error && (
               <S.ErrorContainer>

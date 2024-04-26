@@ -4,7 +4,7 @@ import { Button } from '@/components/atoms/Button'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   inset: 0;
   background: #f5f8fa;
@@ -21,6 +21,8 @@ export const Content = styled(Dialog.Content)`
   max-height: 980px;
   border-radius: 5px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 
   position: fixed;
   top: 50%;
@@ -209,7 +211,6 @@ export const QuestionTextContainer = styled.div`
   width: 360px;
   height: 625px;
   background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 16px;
   border: 1px solid #000;
 
   border-bottom: 4px solid #000;
@@ -217,13 +218,14 @@ export const QuestionTextContainer = styled.div`
 
   @media (max-width: 1180px) {
     width: 100%;
-    max-height: 360px;
+    height: 100%;
 
     /* flex-direction: column-reverse; */
   }
 
   @media (max-width: 960px) {
     height: 100%;
+    width: 100%;
     /* flex-direction: column-reverse; */
   }
 
@@ -420,7 +422,7 @@ export const MainContainer = styled.div`
 
   @media (max-width: 1180px) {
     flex-direction: column;
-    margin-top: 24rem;
+    margin-top: 4rem;
     width: 100%;
   }
 

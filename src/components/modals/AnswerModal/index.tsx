@@ -11,9 +11,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { Spinner } from '@/components/atoms/Spinner'
 import { HeaderAnswer } from '@/components/organisms/HeaderAnswer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
 import { AnswerFormSchema } from '@/utils/zodSchemas'
+import { Editor } from '@/components/molecules/Editor'
 
 interface FormData {
   content: string
@@ -32,12 +33,24 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
     useAnswerModalStore()
   const { question } = useQuestionStore()
   const { handleAnswerQuestion } = useAnswerHandler()
+  const [editorContent, setEditorContent] = useState('')
 
   const { isSubmitting } = formState
 
   const handleCloseModal = () => {
     setIsOpen(false)
     setIsAnswering(false)
+  }
+
+  const handleEditorChange = (content: any) => {
+    setEditorContent(content)
+  }
+
+  const submitAnswer = async (data: any) => {
+    await handleAnswerQuestion({
+      content: editorContent,
+    })
+    setIsOpen(false)
   }
 
   useEffect(() => {
@@ -82,8 +95,7 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
           <S.FormAnsweringContainer>
             <form
               onSubmit={handleSubmit(async (data) => {
-                await handleAnswerQuestion(data)
-                setIsOpen(false)
+                await submitAnswer(data)
               })}
             >
               <S.HeadingContainer>
@@ -94,10 +106,11 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
                   Sua resposta:
                 </Text>
               </S.HeadingContainer>
-              <S.QuestionTextarea
+              {/* <S.QuestionTextarea
                 {...register('content')}
                 placeholder="Explicação passo a passo:"
-              ></S.QuestionTextarea>
+              ></S.QuestionTextarea> */}
+              <Editor onChange={handleEditorChange} />
               {formState.errors.content && (
                 <span style={{ color: '#D20032', fontSize: '14px' }}>
                   {formState.errors.content.message}

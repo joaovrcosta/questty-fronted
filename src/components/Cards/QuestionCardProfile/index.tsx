@@ -1,10 +1,10 @@
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
-import { getTimeAgo } from '@/utils/getTimeAgo'
+import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
-import { SiCrystal } from 'react-icons/si'
-import { Tooltip } from '../../molecules/Tooltip'
+import Link from 'next/link'
+import { Tooltip } from '@/components/molecules/Tooltip'
 
 export type subjectsType =
   | 'math'
@@ -27,6 +27,9 @@ interface Question {
   avatarUrl?: string
   answeredText?: string
   subjectName?: string
+  questionAnswered?: string
+  questionId?: string
+  likesQuantity?: number
 }
 
 export function QuestionCardProfile({
@@ -40,11 +43,18 @@ export function QuestionCardProfile({
   avatarUrl,
   answeredText,
   subjectName,
+  questionAnswered,
+  questionId,
+  likesQuantity,
 }: Question) {
   const router = useRouter()
 
   const handleResponderClick = () => {
     router.push(`/tarefa/${id}`)
+  }
+
+  if (questionAnswered && questionAnswered?.length > 55) {
+    questionAnswered = questionAnswered?.substring(0, 55) + '...'
   }
 
   const answerCount = answersQuantity || 0
@@ -65,14 +75,18 @@ export function QuestionCardProfile({
                 </S.UserAvatarWrapper>
                 <div>
                   <S.SubjectAndDateTimeContainer>
-                    <Text size="xs" weight="semibold">
-                      {author_name}
+                    <Text size="xs" color="blue_950">
+                      <strong>{author_name}</strong> {answeredText}{' '}
+                      <strong>
+                        <S.FollowQuestionLink href={`/tarefa/${questionId}`}>
+                          {questionAnswered}
+                        </S.FollowQuestionLink>
+                      </strong>
                     </Text>
-                    <Text size="xs">{answeredText}</Text>
                   </S.SubjectAndDateTimeContainer>
                   <div>
                     <S.DateTime size="xs" color="gray_800">
-                      {getTimeAgo(createdAt)}
+                      {getFormattedDateAndTime(createdAt)}
                     </S.DateTime>
                     <Text size="xs" weight="semibold">
                       {subjectName}
@@ -108,7 +122,13 @@ export function QuestionCardProfile({
                 <Text>{answerCount}</Text>
               </S.AnswerQuantityWrapper>
             </Tooltip> */}
-            <div></div>
+            <Tooltip content="Curtidas">
+              <S.LikesContainer>
+                {/* <hearthIconCSS */}
+                <S.hearthIconCSS></S.hearthIconCSS>
+                <Text weight="bold">{likesQuantity ?? 0}</Text>
+              </S.LikesContainer>
+            </Tooltip>
             <S.AswerContainer>
               <S.AnswerButtonContainer>
                 <S.AnswerButton

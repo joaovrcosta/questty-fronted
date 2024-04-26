@@ -6,9 +6,9 @@ export const QuestionCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.black};
   /* border-bottom: 3px solid ${({ theme }) => theme.colors.black}; */
-  border-radius: 5px;
+  border-radius: 16px;
   box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4);
-  padding: 0.875rem 2.5rem 0.875rem 1rem;
+  padding: 0.15rem 2.5rem 0.15rem 1.5rem;
   margin-bottom: 0.5rem;
   opacity: 1;
   filter: brightness(100%);
@@ -19,16 +19,16 @@ export const QuestionCardContainer = styled.div`
     transition: 0.3s ease all;
   }
 
-  &:hover::before {
+  /* &:hover::before {
     content: '';
     position: absolute;
-    border-radius: 5px 0 0px 5px;
+    border-radius: 16px 0 0px 16px;
     left: 0;
     top: 0;
     bottom: 0;
     width: 5px;
     background-color: ${({ theme }) => theme.colors.blue_500};
-  }
+  } */
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
@@ -116,7 +116,6 @@ export const QuestionText = styled.a`
 `
 
 export const QuestionInfo = styled.div`
-  width: 24rem;
   min-height: 64px;
 
   ${({ theme }) => css`
@@ -127,7 +126,7 @@ export const QuestionInfo = styled.div`
 `
 
 export const SubjectAndDateTimeContainer = styled.div`
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -137,9 +136,7 @@ export const Subject = styled(Text)`
   font-weight: 700;
   font-size: 14px;
 `
-export const DateTime = styled(Text)`
-  font-family: Roboto;
-`
+export const DateTime = styled(Text)``
 
 export const AswerContainer = styled.div`
   display: flex;
@@ -154,6 +151,7 @@ export const AnswerButtonContainer = styled.div`
 
 export const AnswerButton = styled(Button)`
   border: 1px solid ${({ theme }) => theme.colors.black};
+  max-width: 144px;
   font-family: Poppins;
   color: ${({ theme }) => theme.colors.blue_950};
 
