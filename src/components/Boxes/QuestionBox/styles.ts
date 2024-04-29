@@ -178,6 +178,8 @@ export const UserHandleActionsContainer = styled.div`
   @media (max-width: 769px) {
     border-bottom: 0;
     margin-bottom: 1rem;
+    padding: 0;
+    flex-direction: column;
   }
 `
 
@@ -237,7 +239,8 @@ export const ModerationWrapper = styled.div`
   width: 20%;
 
   @media (max-width: 769px) {
-    /* margin-top: 1rem; */
+    margin-top: 1rem;
+    width: 100%;
   }
 `
 
@@ -564,6 +567,12 @@ export const SeeAnswerButtonContainer = styled(Button)`
   color: black;
   text-decoration: none;
   width: 100%;
+
+  transition: 0.3s ease all;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `
 export const QuantityCircle = styled.div`
   display: flex;

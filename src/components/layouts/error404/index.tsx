@@ -1,4 +1,5 @@
 import { Footer } from '@/components/organisms/Footer'
+import { Header } from '@/components/organisms/Header'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
 import styled from 'styled-components'
 
@@ -9,7 +10,7 @@ interface ILayout {
 export function Error404Layout({ children }: ILayout) {
   return (
     <>
-      <HeaderAuth />
+      <Header />
       <Container>{children}</Container>
     </>
   )

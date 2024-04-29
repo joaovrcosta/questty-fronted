@@ -9,17 +9,16 @@ export const AnswerButton = styled(Button)<IAnswerButton>`
   height: 46px;
   padding-left: 28px;
   padding-right: 28px;
+  width: 240px;
 
   &:focus {
     border: 2px solid #000;
     box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.blue_300};
-    transition: 0.2s ease all;
   }
 
   &:hover {
     border: 2px solid ${({ theme }) => theme.colors.white};
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.black};
-    transition: 0.2s ease all;
   }
 
   @media (max-width: 769px) {

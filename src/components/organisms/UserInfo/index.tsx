@@ -187,20 +187,30 @@ export function UserInfo({ data }: UserInfoProps) {
               <Tooltip content="Administrador">
                 <S.UserRankContainer color="#45A6FF">
                   <Text size="sm" color="white" weight="bold">
-                    {data.userData.role}
+                    ADMINISTRADOR
                   </Text>
                 </S.UserRankContainer>
               </Tooltip>
             )}
-            {data.userData.role !== 'ADMIN' && (
-              <Tooltip content={rank?.description}>
-                <S.UserRankContainer color={rank.color}>
-                  <Text size="sm" color="black">
-                    {rank.name}
+            {data.userData.role === 'MODERATOR' && (
+              <Tooltip content="Moderador">
+                <S.UserRankContainer color="#45A6FF">
+                  <Text size="sm" color="white" weight="bold">
+                    MODERADOR
                   </Text>
                 </S.UserRankContainer>
               </Tooltip>
             )}
+            {data.userData.role !== 'ADMIN' &&
+              data.userData.role !== 'MODERATOR' && (
+                <Tooltip content={rank?.description}>
+                  <S.UserRankContainer color={rank.color}>
+                    <Text size="sm" color="black">
+                      {rank.name}
+                    </Text>
+                  </S.UserRankContainer>
+                </Tooltip>
+              )}
           </div>
         </S.UserBadges>
 
@@ -223,7 +233,7 @@ export function UserInfo({ data }: UserInfoProps) {
                       onClick={handleFollow}
                     />
                   </Dialog.Trigger>
-                  <LoginModal />
+                  <LoginModal text="Quer seguir essa pessoa?" />
                 </Dialog.Root>
               </>
             ) : (

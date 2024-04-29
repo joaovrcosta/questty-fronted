@@ -31,6 +31,7 @@ export interface IAnswer {
     avatar_url: string
     level: number
   }
+  reports: IReport[]
   question_id: string
   createdAt: string
   deletedAt: string
@@ -66,6 +67,10 @@ export interface INewAnswer {
     deleted: boolean
     likes: ILike[]
   }
+}
+
+export interface IReport {
+  id: string
 }
 
 export interface ILike {

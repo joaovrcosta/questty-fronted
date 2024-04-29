@@ -81,11 +81,11 @@ export const VerticalDivider = styled.div`
 `
 export const UserRankContainer = styled.div<IRankProps>`
   margin-top: 0.5rem;
-  width: 100px;
+
   background-color: ${(props) => props.color};
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
   border-radius: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  /* border: 1px solid ${({ theme }) => theme.colors.black}; */
   display: flex;
   align-items: center;
   justify-content: center;

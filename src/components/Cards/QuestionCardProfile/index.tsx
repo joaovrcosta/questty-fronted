@@ -53,6 +53,8 @@ export function QuestionCardProfile({
     router.push(`/tarefa/${id}`)
   }
 
+  console.log(avatarUrl)
+
   if (questionAnswered && questionAnswered?.length > 55) {
     questionAnswered = questionAnswered?.substring(0, 55) + '...'
   }

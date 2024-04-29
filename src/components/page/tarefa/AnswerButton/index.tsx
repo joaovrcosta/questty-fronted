@@ -12,6 +12,7 @@ import { Text } from '@/components/atoms/Text'
 import xpIcon from '@/assets/icons/xp.svg'
 import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 interface AnswerButtonProps {
   isMobile: boolean
@@ -78,7 +79,7 @@ export function AnswerButton({
           <Image src={xpIcon} height={22} alt="" />
         </S.AnswerButton>
       </Dialog.Trigger>
-      <LoginModal />
+      <LoginModal text="Oi Oi" />
     </Dialog.Root>
   )
 
@@ -155,18 +156,28 @@ export function AnswerButton({
         <>
           {hasAnswer && (
             <Link href="#answers" style={{ width: '100%' }}>
-              <S.SeeAnswerButton
-                variant="lg"
-                rounding="rounded-full"
-                color="white"
-                backgroundColor="black"
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
               >
-                <AiFillEye size={24} />
-                <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
-                  VER {answersQuantity}{' '}
-                  {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
-                </Text>
-              </S.SeeAnswerButton>
+                <S.SeeAnswerButton
+                  variant="lg"
+                  rounding="rounded-full"
+                  color="white"
+                  backgroundColor="black"
+                >
+                  <AiFillEye size={24} />
+                  <Text
+                    color="white"
+                    weight="bold"
+                    style={{ fontSize: '15px' }}
+                  >
+                    VER {answersQuantity}{' '}
+                    {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
+                  </Text>
+                </S.SeeAnswerButton>
+              </motion.div>
             </Link>
           )}
         </>

@@ -339,3 +339,23 @@ export const ConnectionContainer = styled.div`
   justify-content: flex-start;
   padding: 1rem 0 0.5rem 0;
 `
+export const ModerationButton = styled.button`
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.white};
+  transition: 0.2s ease all;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+  }
+`
+export const ModeratedButton = styled.button`
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.white};
+  transition: 0.2s ease all;
+`

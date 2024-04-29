@@ -1,13 +1,12 @@
 import styled, { css } from 'styled-components'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Button } from '@/components/atoms/Button'
 import Link from 'next/link'
 
 export const MainContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   height: 100%;
 `
@@ -29,7 +28,7 @@ export const Content = styled(Dialog.Content)`
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  padding: 1.5rem 2rem 2.5rem 2rem;
+  padding: 1.5rem 2rem 2.5rem 3rem;
   z-index: 999999;
   max-height: 42rem;
   display: flex;
@@ -57,19 +56,18 @@ export const CloseButton = styled(Dialog.Close)`
 `
 
 export const LoginContainerContent = styled.div`
-  padding: 0 2rem;
-  max-width: 400px;
+  width: 100%;
+  height: 100%;
 
   @media (max-width: 769px) {
-    padding: 1rem 1rem 0 1rem;
+    padding: 0rem 1rem 1rem 1rem;
   }
 `
 
 export const EnterHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: flex-start;
 `
 
 export const EmailInputContainer = styled.div``
@@ -77,7 +75,8 @@ export const EmailInputContainer = styled.div``
 export const InputContainer = styled.div``
 
 export const FormContainer = styled.form`
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
 `
 
 export const ButtonContainer = styled.div`
@@ -90,7 +89,7 @@ export const ForgotMyPasswordLink = styled(Link)`
   text-decoration: none;
 `
 export const DontHaveAccountContainer = styled.div`
-  padding: 1rem 0 0 0;
+  padding: 1.5rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,7 +105,6 @@ export const CloseButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 0 1rem 0;
 
   button {
     background-color: ${({ theme }) => theme.colors.white};
@@ -127,4 +125,37 @@ export const CloseButtonContainer = styled.div`
   @media (max-width: 769px) {
     padding: 0 1rem;
   }
+`
+
+export const SubHeader = styled.div``
+
+export const ItemsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const Label = styled.label`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  height: 43px;
+  gap: 1rem;
+`
+
+// export const CircleRadio = styled.span`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   border: 2px solid #333;
+//   margin-right: 5px; /* Espaçamento entre o círculo e o texto */
+// `
+export const SubmitButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
 `

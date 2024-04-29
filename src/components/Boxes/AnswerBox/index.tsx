@@ -1,4 +1,5 @@
 import * as S from './styles'
+import * as Dialog from '@radix-ui/react-dialog'
 import { Text } from '@/components/atoms/Text'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
@@ -6,11 +7,13 @@ import { MdVerified } from 'react-icons/md'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useEffect, useState } from 'react'
-import { AiOutlineFlag, AiOutlineSisternode } from 'react-icons/ai'
+import { AiOutlineFlag, AiOutlineSisternode, AiFillFlag } from 'react-icons/ai'
 import { Tooltip } from '../../molecules/Tooltip'
 import { VscVerifiedFilled } from 'react-icons/vsc'
 import parse from 'html-react-parser'
 import Link from 'next/link'
+import { useReportAnswerStore } from '@/features/stores/modals-stores/reportAnswerModal'
+import { ReportAnswerModal } from '@/components/modals/ReportAnswerModal'
 
 interface Answer {
   id: string | undefined
@@ -23,6 +26,7 @@ interface Answer {
   authorId: string | undefined
   avatarUrl?: string
   authorLevel: number | undefined
+  isReported: number | boolean
 }
 
 export function AnswerBox({
@@ -36,11 +40,26 @@ export function AnswerBox({
   isButtonDisabled,
   avatarUrl,
   authorLevel,
+  isReported,
 }: Answer) {
   const { token } = useAuthStore()
   const [likesTotal, setLikesTotal] = useState(likesQuantity)
   const { user } = useAuthStore()
   const [isAlreadyLiked, setIsAlreadyLiked] = useState(false)
+  const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
+  const { isOpening, setIsOpening, isModerated } = useReportAnswerStore()
+
+  const handleReportClick = () => {
+    setCurrentEntityId(id || '')
+    setIsOpening(true)
+  }
+
+  const handleCloseModal = () => {
+    setCurrentEntityId(null)
+    setIsOpening(false)
+  }
+
+  const isAuthor = authorId === user?.id
 
   useEffect(() => {
     const fetchData = async () => {
@@ -201,13 +220,38 @@ export function AnswerBox({
             )}
             <Text weight="bold">{likesTotal}</Text>
           </S.LikedButton>
-          <S.ModerationWrapper>
-            <Tooltip content="Denunciar">
-              <S.ModerateLabel>
-                <AiOutlineFlag size={24} color="#10162f" />
-              </S.ModerateLabel>
-            </Tooltip>
-          </S.ModerationWrapper>
+
+          {!isAuthor ? (
+            <div>
+              {isModerated || isReported ? (
+                <>
+                  <Tooltip content="Em moderação">
+                    <S.ModeratedButton onClick={handleReportClick}>
+                      <AiFillFlag size={24} color="#ff341a" />
+                    </S.ModeratedButton>
+                  </Tooltip>
+                </>
+              ) : (
+                <Tooltip content="Denunciar">
+                  <Dialog.Root
+                    open={currentEntityId === id && isOpening}
+                    onOpenChange={setIsOpening}
+                  >
+                    <Dialog.Trigger asChild>
+                      <S.ModerationButton onClick={handleReportClick}>
+                        <AiOutlineFlag size={24} />
+                      </S.ModerationButton>
+                    </Dialog.Trigger>
+                    <ReportAnswerModal
+                      entityType="ANSWER"
+                      entityId={id}
+                      handleCloseModal={handleCloseModal}
+                    />
+                  </Dialog.Root>
+                </Tooltip>
+              )}
+            </div>
+          ) : null}
         </S.UserHandleActionsContainer>
 
         <S.MoreDetailsInputContainer>

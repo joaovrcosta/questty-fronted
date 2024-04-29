@@ -16,6 +16,11 @@ import { Button } from '@/components/atoms/Button'
 import { Heading } from '@/components/atoms/Heading'
 import { useAuthModalStore } from '@/features/stores/modals-stores/authModal/authModal'
 import { IoMdClose } from 'react-icons/io'
+import { motion } from 'framer-motion'
+
+interface LoginModalProps {
+  text: string
+}
 
 interface FormData {
   email: string
@@ -27,7 +32,7 @@ const loginFormSchema = zod.object({
   password: zod.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
 })
 
-export function LoginModal() {
+export function LoginModal({ text }: LoginModalProps) {
   const [error, setError] = useState<string | null>(null)
   const { register, handleSubmit, watch, formState, setValue } =
     useForm<FormData>({
@@ -37,8 +42,6 @@ export function LoginModal() {
   const { setIsOpening } = useAuthModalStore()
   const { login, isLoggedIn } = useAuthStore()
   const { isSubmitting } = formState
-
-  console.log(isLoggedIn)
 
   const router = useRouter()
 
@@ -100,104 +103,121 @@ export function LoginModal() {
     <Dialog.Portal>
       <S.Overlay />
       <S.Content>
-        <S.MainContainer>
-          <S.CloseButtonContainer>
-            <button onClick={handleCloseModal}>
-              <IoMdClose size={28} />
-            </button>
-          </S.CloseButtonContainer>
-          <S.LoginContainerContent>
-            <S.EnterHeader>
-              <Heading
-                weight="bold"
-                size="md"
-                color="blue_950"
-                style={{ marginBottom: '1rem', textAlign: 'center' }}
-              >
-                Olá novamente
-              </Heading>
-              <Text style={{ textAlign: 'center' }}>
-                Receba respostas em minutos e termine a lição de casa mais
-                rápido
-              </Text>
-            </S.EnterHeader>
-            <S.FormContainer onSubmit={handleSubmit(handleSignInModal)}>
-              <S.InputContainer>
-                <S.EmailInputContainer>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <S.MainContainer>
+            <S.CloseButtonContainer>
+              <button onClick={handleCloseModal}>
+                <IoMdClose size={28} />
+              </button>
+            </S.CloseButtonContainer>
+            <S.LoginContainerContent>
+              <S.EnterHeader>
+                <Heading
+                  weight="bold"
+                  size="md"
+                  color="blue_950"
+                  style={{ marginBottom: '1rem', textAlign: 'center' }}
+                >
+                  {text}
+                </Heading>
+                <Text style={{ textAlign: 'center' }}>
+                  Receba respostas em minutos e termine a lição de casa mais
+                  rápido
+                </Text>
+              </S.EnterHeader>
+              <S.FormContainer onSubmit={handleSubmit(handleSignInModal)}>
+                <S.InputContainer>
+                  <S.EmailInputContainer>
+                    <Input
+                      {...register('email')}
+                      placeholder="exemplo@exemplo.com"
+                      variant="lg"
+                      hug={true}
+                      showLabel={true}
+                      label="E-mail"
+                      style={{ marginBottom: '0.5rem' }}
+                      border={true}
+                    />
+                    {formState.errors.email && (
+                      <span style={{ color: '#D20032' }}>
+                        {formState.errors.email.message}
+                      </span>
+                    )}
+                  </S.EmailInputContainer>
                   <Input
-                    {...register('email')}
-                    placeholder="exemplo@exemplo.com"
+                    {...register('password')}
+                    placeholder="Senha"
+                    type="password"
                     variant="lg"
                     hug={true}
                     showLabel={true}
-                    label="E-mail"
+                    label="Senha"
                     style={{ marginBottom: '0.5rem' }}
                     border={true}
                   />
-                  {formState.errors.email && (
+
+                  {formState.errors.password && (
                     <span style={{ color: '#D20032' }}>
-                      {formState.errors.email.message}
+                      {formState.errors.password.message}
                     </span>
                   )}
-                </S.EmailInputContainer>
-                <Input
-                  {...register('password')}
-                  placeholder="Senha"
-                  type="password"
-                  variant="lg"
-                  hug={true}
-                  showLabel={true}
-                  label="Senha"
-                  style={{ marginBottom: '0.5rem' }}
-                  border={true}
-                />
 
-                {formState.errors.password && (
-                  <span style={{ color: '#D20032' }}>
-                    {formState.errors.password.message}
-                  </span>
-                )}
+                  {error && (
+                    <Text className="error" color="danger_500">
+                      E-mail ou senha inválida
+                    </Text>
+                  )}
+                </S.InputContainer>
 
-                {error && (
-                  <Text className="error" color="danger_500">
-                    E-mail ou senha inválida
+                <S.ForgotMyPasswordLink href="/forgot">
+                  Esqueci a minha senha
+                </S.ForgotMyPasswordLink>
+
+                <S.ButtonContainer>
+                  {isSubmitting ? (
+                    <Spinner
+                      size="md"
+                      baseColor="blue_950"
+                      variant="secondary"
+                    />
+                  ) : (
+                    <Button
+                      type="submit"
+                      rounding="rounded"
+                      variant="lg"
+                      backgroundColor="blue_500"
+                      color="white"
+                      disabled={isSubmitting}
+                      hug={true}
+                    >
+                      Entrar
+                    </Button>
+                  )}
+                </S.ButtonContainer>
+                <S.DontHaveAccountContainer>
+                  <Text>
+                    Ainda não tem uma conta?
+                    <S.EnterLink href="/signup">Criar</S.EnterLink>
                   </Text>
-                )}
-              </S.InputContainer>
-
-              <S.ForgotMyPasswordLink href="/forgot">
-                Esqueci a minha senha
-              </S.ForgotMyPasswordLink>
-
-              <S.ButtonContainer>
-                {isSubmitting ? (
-                  <Spinner size="md" baseColor="blue_950" variant="secondary" />
-                ) : (
+                </S.DontHaveAccountContainer>
+                <S.DontHaveAccountContainer>
                   <Button
-                    type="submit"
-                    rounding="rounded"
-                    variant="lg"
-                    backgroundColor="blue_500"
-                    color="white"
-                    disabled={isSubmitting}
-                    hug={true}
+                    onClick={handleCloseModal}
+                    border={false}
+                    backgroundColor="transparent"
                   >
-                    Entrar
+                    Não, obrigado
                   </Button>
-                )}
-              </S.ButtonContainer>
-              <S.DontHaveAccountContainer>
-                <Text>
-                  Ainda não tem uma conta?
-                  <S.EnterLink href="/signup">Criar</S.EnterLink>
-                </Text>
-              </S.DontHaveAccountContainer>
-              <S.DontHaveAccountContainer>
-                <Text>Não, obrigado</Text>
-              </S.DontHaveAccountContainer>
-            </S.FormContainer>
-          </S.LoginContainerContent>
-        </S.MainContainer>
+                </S.DontHaveAccountContainer>
+              </S.FormContainer>
+            </S.LoginContainerContent>
+          </S.MainContainer>
+        </motion.div>
       </S.Content>
     </Dialog.Portal>
   )
