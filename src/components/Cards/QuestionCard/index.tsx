@@ -11,6 +11,8 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { useState } from 'react'
 import { useReportQuestionHomeStore } from '@/features/stores/modals-stores/reportQuestionHomeModal'
 import { ReportQuestionHomeModal } from '@/components/modals/ReportQuestionHomeModal'
+import xpIcon from '@/assets/icons/xp.svg'
+import Image from 'next/image'
 
 export type subjectsType =
   | 'math'
@@ -80,7 +82,7 @@ export function QuestionCard({
                 </S.UserAvatarWrapper>
                 <S.SubjectAndDateTimeContainer>
                   {!!category_id && (
-                    <S.Subject size="xs" color="gray_800">
+                    <S.Subject size="xs" color="blue_950">
                       {category_id}
                     </S.Subject>
                   )}{' '}
@@ -90,10 +92,12 @@ export function QuestionCard({
                   </S.DateTime>
                 </S.SubjectAndDateTimeContainer>
               </S.UserInfo>
-              <Tooltip content="Cristais">
+              <Tooltip
+                content={`Respondendo essa pergunta você ganha ${points} XP`}
+              >
                 <S.QuestionPoints>
                   <S.StarContainer>
-                    <SiCrystal size={14} color="#fff" />
+                    <Image src={xpIcon} alt="" height={24} />
                   </S.StarContainer>
                   <S.StarQuantity>
                     <Text
@@ -105,7 +109,7 @@ export function QuestionCard({
                       +
                     </Text>{' '}
                     <Text
-                      weight="semibold"
+                      weight="extrabold"
                       size="lg"
                       color="blue_950"
                       style={{ whiteSpace: 'nowrap' }}
@@ -113,12 +117,12 @@ export function QuestionCard({
                       {points}
                     </Text>{' '}
                     <Text
-                      weight="medium"
+                      weight="extrabold"
                       size="sm"
                       color="blue_950"
                       style={{ whiteSpace: 'nowrap' }}
                     >
-                      QI
+                      XP
                     </Text>{' '}
                   </S.StarQuantity>
                 </S.QuestionPoints>
@@ -182,7 +186,7 @@ export function QuestionCard({
                     ? 'VISUALIZAR'
                     : answerCount >= 3
                     ? 'VISUALIZAR'
-                    : 'RESPONDER'}
+                    : `RESPONDER`}
                 </S.AnswerButton>
               </S.AnswerButtonContainer>
             </S.AswerContainer>

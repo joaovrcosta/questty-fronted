@@ -289,7 +289,7 @@ export const CreatedAtContainer = styled.div`
 
 export const QuestionInfo = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 `
 
 export const MoreDetailsInputContainer = styled.div`

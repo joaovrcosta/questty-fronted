@@ -18,6 +18,7 @@ export const defaultTheme = {
     yellow_400: '#FFF8BB',
     yellow_500: '#FFED8D',
     yellow_600: '#FFD644',
+    yellow_620: '#ffd900',
     yellow_650: '#FFC700',
     yellow_700: '#EBA900',
     yellow_800: '#FFD302',

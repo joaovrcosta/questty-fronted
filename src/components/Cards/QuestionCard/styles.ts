@@ -157,9 +157,11 @@ export const AnswerButtonContainer = styled.div`
 `
 
 export const AnswerButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  border: 2px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
   color: ${({ theme }) => theme.colors.blue_950};
+  font-weight: 800;
+  font-size: 14px;
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.colors.blue_300};
@@ -235,10 +237,10 @@ export const StarContainer = styled.div`
   height: 24px;
   padding: 0 4px;
   border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.white};
+  /* border: 1px solid ${({ theme }) => theme.colors.white}; */
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.blue_950};
+  background-color: ${({ theme }) => theme.colors.white};
 `
 export const StarQuantity = styled.div`
   display: flex;

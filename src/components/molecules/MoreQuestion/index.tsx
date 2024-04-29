@@ -120,7 +120,7 @@ export function MoreQuestonCard({
                   ? 'VISUALIZAR'
                   : answerCount >= 3
                   ? 'VISUALIZAR'
-                  : `RESPONDER + ${points} pts`}
+                  : `RESPONDER + ${points} XP`}
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>

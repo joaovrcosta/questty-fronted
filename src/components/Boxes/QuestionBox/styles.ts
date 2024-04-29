@@ -287,7 +287,7 @@ export const MoreDetailsInput = styled.input`
 export const NoLoggedMoreDetailsInputContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   width: 100%;
   padding: 0rem 1.5rem;
 
@@ -304,7 +304,7 @@ export const NoLoggedMoreDetailsInputContainer = styled.div`
 
 export const NoLoggedMoreDetailsInput = styled.input`
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0;
   border-radius: 33px;
   border: none;
   font-family: Poppins;
@@ -552,5 +552,38 @@ export const SeeMoreContainer = styled.div`
 
   @media (max-width: 769px) {
     margin-top: 2rem;
+  }
+`
+
+export const SeeAnswerButtonContainer = styled(Button)`
+  display: flex;
+  height: 46px;
+  background: ${({ theme }) => theme.colors.white};
+  font-weight: 800;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  width: 100%;
+`
+export const QuantityCircle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.black};
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
   }
 `

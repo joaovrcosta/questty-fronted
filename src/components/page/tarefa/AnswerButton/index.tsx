@@ -9,6 +9,9 @@ import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuest
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
+import xpIcon from '@/assets/icons/xp.svg'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface AnswerButtonProps {
   isMobile: boolean
@@ -68,7 +71,11 @@ export function AnswerButton({
           color="white"
           backgroundColor="black"
         >
-          RESPONDER +{points} XP
+          RESPONDER
+          <Text color="yellow_620" weight="bold">
+            + {points} XP
+          </Text>
+          <Image src={xpIcon} height={22} alt="" />
         </S.AnswerButton>
       </Dialog.Trigger>
       <LoginModal />
@@ -86,7 +93,11 @@ export function AnswerButton({
           onClick={handleIsAnswering}
           isAnswering={isAnswering}
         >
-          RESPONDER +{points} XP
+          RESPONDER
+          <Text color="yellow_620" weight="bold">
+            + {points} XP
+          </Text>
+          <Image src={xpIcon} height={22} alt="" />
         </S.AnswerButton>
       </Dialog.Trigger>
       <AnswerModal
@@ -99,7 +110,7 @@ export function AnswerButton({
   return (
     <>
       {!isAuthor && !isAlreadyAnsweredByUser ? (
-        <div>
+        <S.ButtonContainer>
           {hasThreeAnswers ? (
             <></>
           ) : loading ? (
@@ -117,37 +128,46 @@ export function AnswerButton({
               onClick={handleIsAnswering}
               isAnswering={isAnswering}
             >
-              RESPONDER +{points} XP
+              RESPONDER
+              <Text color="yellow_620" weight="bold">
+                + {points} XP
+              </Text>
+              <Image src={xpIcon} height={22} alt="" />
             </S.AnswerButton>
           )}
           {alreadyAnswered && !isAnswering && hasAnswer && (
-            <S.SeeAnswerButton
-              variant="lg"
-              rounding="rounded-full"
-              color="white"
-              backgroundColor="black"
-            >
-              <AiFillEye size={24} />
-              <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
-                VER {answersQuantity} RESPOSTAS
-              </Text>
-            </S.SeeAnswerButton>
+            <Link href="#answers">
+              <S.SeeAnswerButton
+                variant="lg"
+                rounding="rounded-full"
+                color="white"
+                backgroundColor="black"
+              >
+                <AiFillEye size={24} />
+                <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
+                  VER {answersQuantity} RESPOSTAS
+                </Text>
+              </S.SeeAnswerButton>
+            </Link>
           )}
-        </div>
+        </S.ButtonContainer>
       ) : (
         <>
           {hasAnswer && (
-            <S.SeeAnswerButton
-              variant="lg"
-              rounding="rounded-full"
-              color="white"
-              backgroundColor="black"
-            >
-              <AiFillEye size={24} />
-              <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
-                VER {answersQuantity} RESPOSTAS
-              </Text>
-            </S.SeeAnswerButton>
+            <Link href="#answers" style={{ width: '100%' }}>
+              <S.SeeAnswerButton
+                variant="lg"
+                rounding="rounded-full"
+                color="white"
+                backgroundColor="black"
+              >
+                <AiFillEye size={24} />
+                <Text color="white" weight="bold" style={{ fontSize: '15px' }}>
+                  VER {answersQuantity}{' '}
+                  {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
+                </Text>
+              </S.SeeAnswerButton>
+            </Link>
           )}
         </>
       )}

@@ -172,7 +172,7 @@ export default function Home() {
           <CardAlert />
 
           <S.QuestionsContainer>
-            <SubjectList subject="home" />
+            {/* <SubjectList subject="home" /> */}
             <S.QuestionsWrapper>
               {loading ? (
                 <>

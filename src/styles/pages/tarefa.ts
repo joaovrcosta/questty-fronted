@@ -57,7 +57,7 @@ export const AnswersSection = styled.div`
 export const TextSectionTitle = styled(Text)`
   font-size: 16px;
   font-family: Poppins;
-  font-weight: 300;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.black};
 `
 

@@ -31,14 +31,14 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
   const { handleAnswerQuestion } = useAnswerHandler()
   const { isSubmitting } = formState
 
+  function onSubmit(data: FormData) {
+    handleAnswerQuestion(data)
+  }
+
   return (
     <>
-      <S.AnswerEditorContainer
-        onSubmit={handleSubmit(async (data) => {
-          await handleAnswerQuestion(data)
-        })}
-      >
-        <form>
+      <S.AnswerEditorContainer>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <S.UserInformationsContainer>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <Avatar
@@ -47,6 +47,7 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
                 imageUrl={avatarUrl ? avatarUrl : null}
               />
               <Text>{user?.username}</Text>
+              <Text>{user?.rank.name}</Text>
             </div>
             <div>
               <S.CloseButtonMobile
@@ -64,8 +65,13 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
               {...register('content')}
               placeholder="Explicação passo a passo:"
             ></S.TextArea>
+            {formState.errors.content && (
+              <Text style={{ color: '#D20032' }}>
+                {formState.errors.content.message}
+              </Text>
+            )}
             {isSubmitting ? (
-              <Spinner size="sm" baseColor="blue_950" variant="primary" />
+              <Spinner size="sm" baseColor="blue_950" variant="secondary" />
             ) : (
               <Button
                 variant="lg"
@@ -76,7 +82,7 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
                 style={{ height: '3rem', width: '100%', marginTop: '1rem' }}
               >
                 <IoMdSend size={24} />
-                ENVIAR
+                RESPONDER
               </Button>
             )}
           </div>

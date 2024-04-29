@@ -35,8 +35,10 @@ export function LoginModal() {
     })
 
   const { setIsOpening } = useAuthModalStore()
-  const { login } = useAuthStore()
+  const { login, isLoggedIn } = useAuthStore()
   const { isSubmitting } = formState
+
+  console.log(isLoggedIn)
 
   const router = useRouter()
 

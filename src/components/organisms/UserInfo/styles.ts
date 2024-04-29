@@ -56,6 +56,7 @@ export const UserBadges = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 `
 
 export const StarContainer = styled.div`
@@ -85,9 +86,12 @@ export const UserRankContainer = styled.div<IRankProps>`
   padding: 0.25rem 0.5rem;
   border-radius: 24px;
   border: 1px solid ${({ theme }) => theme.colors.black};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 export const UserDetailsBox = styled.div`
-  padding: 2rem 0rem 0rem 0rem;
+  padding: 1rem 0rem 0rem 0rem;
   display: flex;
   gap: 0.5rem;
   width: 100%;

@@ -29,6 +29,7 @@ export interface IAnswer {
     name: string
     username: string
     avatar_url: string
+    level: number
   }
   question_id: string
   createdAt: string
@@ -97,6 +98,14 @@ export interface ICurrentUserData {
   grade_id: number
   answers: IAnswer[]
   questions: IQuestion[]
+  rank: {
+    id: number
+    name: string
+    description: string
+    color: string
+    points: number
+    bestResponses: number
+  }
 }
 
 export interface IProfileData {
@@ -107,6 +116,7 @@ export interface IProfileData {
     code: Number
     avatar_url: string
     points: number
+    role: string
     email: string
     createdAt: string
     questions: IQuestion[]
@@ -136,6 +146,7 @@ export interface IUserInfo {
     points: number
     email: string
     createdAt: string
+    role: string
     questions: IQuestion[]
     answers: IAnswer[]
     rank: {
@@ -168,6 +179,7 @@ export interface IQuestionData {
       name: string
       username: string
       avatar_url: string
+      level: number
     }
     subject: {
       id: string

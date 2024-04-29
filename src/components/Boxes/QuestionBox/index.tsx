@@ -1,9 +1,8 @@
 import { Text } from '@/components/atoms/Text'
 import * as S from './styles'
-import { AiOutlineFlag, AiOutlinePlusCircle, AiFillEye } from 'react-icons/ai'
+import { AiOutlineFlag } from 'react-icons/ai'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getFormattedDateAndTime } from '@/utils/getTimeAgo'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
@@ -40,6 +39,7 @@ interface QuestionBoxProps {
   isMobile: boolean
   authorId: string
   points: number
+  authorLevel: number
 
   hasAnswered: any
   subject: string
@@ -83,6 +83,7 @@ export function QuestionBox({
   hasAnswered,
   subject,
   points,
+  authorLevel,
 }: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
@@ -126,7 +127,7 @@ export function QuestionBox({
 
   useEffect(() => {
     const isAlreadyAnsweredByUser =
-      question?.questionData?.answers && // Ensure questionData and answers are non-null
+      question?.questionData?.answers &&
       Array.isArray(question.questionData.answers) &&
       question.questionData.answers.some(
         (answer) => answer.author_id === user?.id
@@ -230,7 +231,7 @@ export function QuestionBox({
                     </Text>
                   </Link>
                 </S.Username>
-                {/* <S.UserLevel>0</S.UserLevel> */}
+                <S.UserLevel>{authorLevel}</S.UserLevel>
               </S.UserInfo>
               <S.SubInfosContainer>
                 <S.DateTimeText size="xs" weight="regular">
@@ -307,10 +308,29 @@ export function QuestionBox({
           </S.ContentContainer>
         </S.QuestionContent>
 
-        {isAnsweringMobile && <AnswerMobileEditor avatarUrl={avatarUrl} />}
+        {isAnsweringMobile && (
+          <AnswerMobileEditor avatarUrl={user?.avatar_url} />
+        )}
 
-        {!isAuthor && (
-          <S.UserHandleActionsContainer>
+        <S.UserHandleActionsContainer>
+          <S.ButtonsContainer>
+            {!isLoggedIn ? (
+              <Link
+                href="#answers"
+                style={{ textDecoration: 'none', width: '100%' }}
+              >
+                <S.SeeAnswerButtonContainer hug={true}>
+                  VER{' '}
+                  <S.QuantityCircle>
+                    <Text weight="bold" color="white">
+                      {answersQuantity}
+                    </Text>
+                  </S.QuantityCircle>
+                  {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
+                </S.SeeAnswerButtonContainer>
+              </Link>
+            ) : null}
+
             <AnswerButton
               isMobile={isMobile}
               answersQuantity={answersQuantity}
@@ -321,10 +341,12 @@ export function QuestionBox({
               loading={loading}
               points={points}
             />
+          </S.ButtonsContainer>
 
-            {!isAuthor && (
-              <S.ModerationWrapper>
-                <Tooltip content="Denunciar">
+          {!isAuthor && (
+            <S.ModerationWrapper>
+              <Tooltip content="Denunciar">
+                {isLoggedIn ? (
                   <Dialog.Root
                     open={currentEntityId === id && isOpening}
                     onOpenChange={setIsOpening}
@@ -340,11 +362,17 @@ export function QuestionBox({
                       handleCloseModal={handleCloseModal}
                     />
                   </Dialog.Root>
-                </Tooltip>
-              </S.ModerationWrapper>
-            )}
-          </S.UserHandleActionsContainer>
-        )}
+                ) : (
+                  <Link href={'/signin'}>
+                    <S.ModerateButton onClick={handleReportClick}>
+                      <AiOutlineFlag size={24} color="#000" />
+                    </S.ModerateButton>
+                  </Link>
+                )}
+              </Tooltip>
+            </S.ModerationWrapper>
+          )}
+        </S.UserHandleActionsContainer>
 
         {!token || !isLoggedIn ? (
           <Link href="/signin" style={{ textDecoration: 'none' }}>
@@ -352,7 +380,7 @@ export function QuestionBox({
               <S.LoginLink weight="semibold">Entrar</S.LoginLink>
               <S.NoLoggedMoreDetailsInput
                 {...register('content')}
-                placeholder={`Para adicionar um comentário`}
+                placeholder={`para adicionar um comentário`}
               />
             </S.NoLoggedMoreDetailsInputContainer>
           </Link>
