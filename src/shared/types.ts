@@ -71,6 +71,7 @@ export interface INewAnswer {
 
 export interface IReport {
   id: string
+  isOpen: boolean
 }
 
 export interface ILike {
