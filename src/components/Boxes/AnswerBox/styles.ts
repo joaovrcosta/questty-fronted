@@ -219,6 +219,7 @@ export const LikedButton = styled(Button)`
   border: 2px solid ${({ theme }) => theme.colors.black};
   border-bottom: 4px solid ${({ theme }) => theme.colors.black};
   padding: 1.02rem;
+  height: 40px;
 
   &:focus {
     transition: 0.2s ease all;

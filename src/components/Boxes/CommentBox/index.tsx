@@ -28,11 +28,12 @@ export function CommentBox({
   avatar_url,
   isReported,
 }: ICommentBoxProps) {
-  const { isOpening, setIsOpening } = useReportCommentStore()
+  const { isOpening, setIsOpening, comments } = useReportCommentStore()
   const { user } = useAuthStore()
   const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
 
   const isAuthor = author_id === user?.id
+  const isCommentReported = comments.includes(id)
 
   const handleReportClick = () => {
     setCurrentEntityId(id)
@@ -59,7 +60,16 @@ export function CommentBox({
       <S.ModerateContainer>
         {!isAuthor && (
           <div>
-            {!isReported ? (
+            {isReported || isCommentReported ? ( // Renderiza a flag vermelha se o comentário estiver na lista de comments
+              <Tooltip content="Em moderação">
+                <S.ReportedButton
+                  onClick={handleReportClick}
+                  style={{ color: '#D20032' }}
+                >
+                  <AiFillFlag size={24} color="#D20032" />
+                </S.ReportedButton>
+              </Tooltip>
+            ) : (
               <Tooltip content="Denunciar">
                 <Dialog.Root
                   open={currentEntityId === id && isOpening}
@@ -76,15 +86,6 @@ export function CommentBox({
                     handleCloseModal={handleCloseModal}
                   />
                 </Dialog.Root>
-              </Tooltip>
-            ) : (
-              <Tooltip content="Em moderação">
-                <S.ReportedButton
-                  onClick={handleReportClick}
-                  style={{ color: '#D20032' }}
-                >
-                  <AiFillFlag size={24} color="#D20032" />
-                </S.ReportedButton>
               </Tooltip>
             )}
           </div>

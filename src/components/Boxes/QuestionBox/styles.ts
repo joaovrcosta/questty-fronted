@@ -435,7 +435,9 @@ export const BackButtonBox = styled.button`
   }
 `
 
-export const ContentContainer = styled.div``
+export const ContentContainer = styled.div`
+  white-space: normal;
+`
 
 export const CommentSection = styled.div`
   &:nth-child(1) {

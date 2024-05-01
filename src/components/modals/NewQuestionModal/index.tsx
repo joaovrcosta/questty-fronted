@@ -91,9 +91,7 @@ export function NewTransactionModal() {
     <Dialog.Portal>
       <S.Overlay />
       <S.Content>
-        <Dialog.Title style={{ fontSize: '18px' }}>
-          Tire sua dúvida escolar
-        </Dialog.Title>
+        <S.Title style={{ fontSize: '18px' }}>Tire sua dúvida escolar</S.Title>
 
         <S.CloseButton>
           <AiOutlineClose size={24} />

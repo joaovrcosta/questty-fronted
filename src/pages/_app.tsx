@@ -8,6 +8,7 @@ import useAuthStore from '@/features/stores/auth/useAuthStore'
 import Cookies from 'js-cookie'
 
 import { getUserFromToken } from '@/lib/get-user-from-token'
+import { ToastContainer } from 'react-toastify'
 
 export default function App({ Component, pageProps }: AppProps) {
   const { login } = useAuthStore()
@@ -41,6 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       {getLayout(<Component {...pageProps} />)}
+      <ToastContainer />
     </ThemeProvider>
   )
 }
