@@ -150,3 +150,14 @@ export const CreatedAt = styled.div`
     border-bottom: 1px solid rgba(204, 204, 204, 1);
   }
 `
+export const UserRegularRankContainer = styled.div<IRankProps>`
+  margin-top: 0.5rem;
+  background-color: ${(props) => props.color};
+  padding: 0.25rem 1rem;
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+`

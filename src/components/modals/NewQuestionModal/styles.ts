@@ -56,14 +56,13 @@ export const Content = styled(Dialog.Content)`
       height: 44px;
       border: 0;
       width: 12rem;
-      background: rgb(73, 192, 248);
+      background: black;
       font-size: 14px;
       color: ${({ theme }) => theme.colors.white};
-      border-bottom: 4px solid rgb(24 153 214);
       font-family: Poppins;
       font-weight: 800;
       padding: 0 1.25rem;
-      border-radius: 12px;
+      border-radius: 50px;
       cursor: pointer;
       text-transform: uppercase;
 
@@ -78,7 +77,7 @@ export const Content = styled(Dialog.Content)`
       } */
 
       &:hover {
-        background-color: rgb(24 153 214);
+        opacity: 0.8;
         transition: 0.4s;
       }
     }

@@ -1,6 +1,6 @@
 import { Text } from '@/components/atoms/Text'
 import * as S from './styles'
-import { AiOutlineFlag } from 'react-icons/ai'
+import { AiOutlineFlag, AiFillFlag } from 'react-icons/ai'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getFormattedDateAndTime } from '@/utils/getTimeAgo'
 import Link from 'next/link'
@@ -40,6 +40,7 @@ interface QuestionBoxProps {
   authorId: string
   points: number
   authorLevel: number
+  isReported: boolean
 
   hasAnswered: any
   subject: string
@@ -84,6 +85,7 @@ export function QuestionBox({
   subject,
   points,
   authorLevel,
+  isReported,
 }: QuestionBoxProps) {
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
@@ -345,31 +347,46 @@ export function QuestionBox({
 
           {!isAuthor && (
             <S.ModerationWrapper>
-              <Tooltip content="Denunciar">
-                {isLoggedIn ? (
-                  <Dialog.Root
-                    open={currentEntityId === id && isOpening}
-                    onOpenChange={setIsOpening}
-                  >
-                    <Dialog.Trigger asChild>
-                      <S.ModerateButton onClick={handleReportClick}>
-                        <AiOutlineFlag size={24} color="#000" />
-                      </S.ModerateButton>
-                    </Dialog.Trigger>
-                    <ReportQuestionModal
-                      entityType="QUESTION"
-                      entityId={id}
-                      handleCloseModal={handleCloseModal}
-                    />
-                  </Dialog.Root>
-                ) : (
+              {isLoggedIn ? (
+                <div>
+                  {isReported ? (
+                    <Tooltip content="Em moderação">
+                      <S.ReportedButton
+                        onClick={handleReportClick}
+                        style={{ color: '#D20032' }}
+                      >
+                        <AiFillFlag size={24} color="#D20032" />
+                      </S.ReportedButton>
+                    </Tooltip>
+                  ) : (
+                    <Tooltip content="Denunciar">
+                      <Dialog.Root
+                        open={currentEntityId === id && isOpening}
+                        onOpenChange={setIsOpening}
+                      >
+                        <Dialog.Trigger asChild>
+                          <S.ModerateButton onClick={handleReportClick}>
+                            <AiOutlineFlag size={24} color="#000" />
+                          </S.ModerateButton>
+                        </Dialog.Trigger>
+                        <ReportQuestionModal
+                          entityType="QUESTION"
+                          entityId={id}
+                          handleCloseModal={handleCloseModal}
+                        />
+                      </Dialog.Root>
+                    </Tooltip>
+                  )}
+                </div>
+              ) : (
+                <Tooltip content="Entre para denunciar">
                   <Link href={'/signin'}>
                     <S.ModerateButton onClick={handleReportClick}>
                       <AiOutlineFlag size={24} color="#000" />
                     </S.ModerateButton>
                   </Link>
-                )}
-              </Tooltip>
+                </Tooltip>
+              )}
             </S.ModerationWrapper>
           )}
         </S.UserHandleActionsContainer>
@@ -465,6 +482,7 @@ export function QuestionBox({
                 createdAt={comment.createdAt}
                 question_id={comment.question_id}
                 avatar_url={comment.author ? comment.author.avatar_url : ''}
+                isReported={comment.reports[0]?.isOpen}
               />
             ))}
           </S.CommentSection>

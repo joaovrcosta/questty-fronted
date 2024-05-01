@@ -26,7 +26,7 @@ interface Answer {
   authorId: string | undefined
   avatarUrl?: string
   authorLevel: number | undefined
-  isReported: number | boolean
+  isReported: boolean | undefined
 }
 
 export function AnswerBox({
@@ -227,7 +227,7 @@ export function AnswerBox({
                 <>
                   <Tooltip content="Em moderação">
                     <S.ModeratedButton onClick={handleReportClick}>
-                      <AiFillFlag size={24} color="#ff341a" />
+                      <AiFillFlag size={24} color="#D20032" />
                     </S.ModeratedButton>
                   </Tooltip>
                 </>

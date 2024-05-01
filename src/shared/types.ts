@@ -192,6 +192,7 @@ export interface IQuestionData {
       name: string
     }
     comments?: IComment[] | null
+    reports: IReport[]
   }
   isLoggedIn?: boolean
   recomendedQuestions: any
@@ -231,4 +232,5 @@ export interface IComment {
     avatar_url: string
   }
   avatar_url: string
+  reports: IReport[]
 }

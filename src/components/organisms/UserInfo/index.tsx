@@ -204,11 +204,11 @@ export function UserInfo({ data }: UserInfoProps) {
             {data.userData.role !== 'ADMIN' &&
               data.userData.role !== 'MODERATOR' && (
                 <Tooltip content={rank?.description}>
-                  <S.UserRankContainer color={rank.color}>
-                    <Text size="sm" color="black">
+                  <S.UserRegularRankContainer color={rank.color}>
+                    <Text size="sm" color="black" weight="bold">
                       {rank.name}
                     </Text>
-                  </S.UserRankContainer>
+                  </S.UserRegularRankContainer>
                 </Tooltip>
               )}
           </div>

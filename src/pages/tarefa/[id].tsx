@@ -74,8 +74,6 @@ export default function Question(props: IQuestionData) {
 
   const isUserInList = userLogged && answersAuthorIds?.includes(userLogged)
 
-  console.log(props.questionData.answers)
-
   useEffect(() => {
     setQuestion(props)
   }, [props])
@@ -187,7 +185,7 @@ export default function Question(props: IQuestionData) {
             likesQuantity={answer?.likes?.length || 0}
             avatarUrl={answer?.author?.avatar_url}
             authorLevel={answer?.author?.level}
-            isReported={!!(answer?.reports && answer.reports?.length > 0)}
+            isReported={answer?.reports[0]?.isOpen}
           />
         </motion.div>
       ))
@@ -252,6 +250,7 @@ export default function Question(props: IQuestionData) {
               hasAnswered={allAnswers}
               subject={props.questionData?.subject.name}
               points={props.questionData?.points}
+              isReported={props.questionData.reports[0]?.isOpen}
             />
           </motion.div>
 
