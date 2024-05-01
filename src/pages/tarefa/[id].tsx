@@ -23,10 +23,7 @@ import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 import { motion } from 'framer-motion'
-import Confetti from 'react-confetti'
 import Custom404 from '../404'
-import { useWindowSize } from 'usehooks-ts'
-import { ToastContainer } from 'react-toastify'
 
 interface Question {
   id: number
@@ -370,7 +367,6 @@ export default function Question(props: IQuestionData) {
         </S.QuestionWrapper>
       </S.QuestionContainer>
       <FloatingButton />
-      <ToastContainer />
     </>
   )
 }
