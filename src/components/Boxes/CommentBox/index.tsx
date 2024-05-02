@@ -40,11 +40,6 @@ export function CommentBox({
     setIsOpening(true)
   }
 
-  const handleCloseModal = () => {
-    setCurrentEntityId(null)
-    setIsOpening(false)
-  }
-
   return (
     <S.CommentContainer>
       <S.CommentInfo>
@@ -60,7 +55,7 @@ export function CommentBox({
       <S.ModerateContainer>
         {!isAuthor && (
           <div>
-            {isReported || isCommentReported ? ( // Renderiza a flag vermelha se o comentário estiver na lista de comments
+            {isReported || isCommentReported ? (
               <Tooltip content="Em moderação">
                 <S.ReportedButton
                   onClick={handleReportClick}
@@ -80,11 +75,7 @@ export function CommentBox({
                       <AiOutlineFlag size={24} />
                     </button>
                   </Dialog.Trigger>
-                  <ReportCommentModal
-                    entityType="COMMENT"
-                    entityId={id}
-                    handleCloseModal={handleCloseModal}
-                  />
+                  <ReportCommentModal entityType="COMMENT" entityId={id} />
                 </Dialog.Root>
               </Tooltip>
             )}

@@ -6,13 +6,14 @@ import { Avatar } from '@/components/atoms/Avatar'
 import { SiCrystal } from 'react-icons/si'
 import { Tooltip } from '../../molecules/Tooltip'
 import { HiOutlineChatAlt2 } from 'react-icons/hi'
-import { AiOutlineFlag } from 'react-icons/ai'
+import { AiFillFlag, AiOutlineFlag } from 'react-icons/ai'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useState } from 'react'
 import { useReportQuestionHomeStore } from '@/features/stores/modals-stores/reportQuestionHomeModal'
 import { ReportQuestionHomeModal } from '@/components/modals/ReportQuestionHomeModal'
 import xpIcon from '@/assets/icons/xp.svg'
 import Image from 'next/image'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
 export type subjectsType =
   | 'math'
@@ -33,6 +34,7 @@ interface Question {
   answersQuantity?: number
   avatarUrl?: string
   points?: number
+  isReported?: boolean
 }
 
 export function QuestionCard({
@@ -45,10 +47,15 @@ export function QuestionCard({
   readOnly = false,
   avatarUrl,
   points,
+  isReported,
 }: Question) {
   const router = useRouter()
+  const { user } = useAuthStore()
   const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
-  const { isOpening, setIsOpening } = useReportQuestionHomeStore()
+  const { isOpening, setIsOpening, questions } = useReportQuestionHomeStore()
+
+  const isQuestionReported = questions.includes(id)
+  const isAuthor = author_id === user?.id
 
   const handleResponderClick = () => {
     router.push(`/tarefa/${id}`)
@@ -57,11 +64,6 @@ export function QuestionCard({
   const handleReportClick = () => {
     setCurrentEntityId(id)
     setIsOpening(true)
-  }
-
-  const handleCloseModal = () => {
-    setCurrentEntityId(null)
-    setIsOpening(false)
   }
 
   const answerCount = answersQuantity || 0
@@ -156,25 +158,36 @@ export function QuestionCard({
               </S.AnswerQuantityWrapper>
             </Tooltip>
             <S.AswerContainer>
-              <Tooltip content="Denunciar">
-                <S.ReportButtonContainer onClick={handleReportClick}>
-                  <Dialog.Root
-                    open={currentEntityId === id && isOpening}
-                    onOpenChange={setIsOpening}
-                  >
-                    <Dialog.Trigger asChild>
-                      <S.ReportButton>
-                        <AiOutlineFlag size={20} color="#000" />
-                      </S.ReportButton>
-                    </Dialog.Trigger>
-                    <ReportQuestionHomeModal
-                      entityType="QUESTION"
-                      entityId={id}
-                      handleCloseModal={handleCloseModal}
-                    />
-                  </Dialog.Root>
-                </S.ReportButtonContainer>
-              </Tooltip>
+              {!isAuthor ? (
+                <div>
+                  {isReported || isQuestionReported ? (
+                    <Tooltip content="Em moderação">
+                      <S.ReportedButton style={{ color: '#D20032' }}>
+                        <AiFillFlag size={20} color="#D20032" />
+                      </S.ReportedButton>
+                    </Tooltip>
+                  ) : (
+                    <Tooltip content="Denunciar">
+                      <S.ReportButtonContainer>
+                        <Dialog.Root
+                          open={currentEntityId === id && isOpening}
+                          onOpenChange={setIsOpening}
+                        >
+                          <Dialog.Trigger asChild>
+                            <S.ReportButton onClick={handleReportClick}>
+                              <AiOutlineFlag size={20} color="#000" />
+                            </S.ReportButton>
+                          </Dialog.Trigger>
+                          <ReportQuestionHomeModal
+                            entityType="QUESTION"
+                            entityId={id}
+                          />
+                        </Dialog.Root>
+                      </S.ReportButtonContainer>
+                    </Tooltip>
+                  )}
+                </div>
+              ) : null}
               <S.AnswerButtonContainer>
                 <S.AnswerButton
                   backgroundColor="white"

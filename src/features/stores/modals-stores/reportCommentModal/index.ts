@@ -6,7 +6,7 @@ interface ReportCommentModalStore {
   isOpening: boolean
   comments: string[]
   setIsOpening: (isOpening: boolean) => void
-  addComment: (comment: string) => void
+  addComment: (commentId: string) => void
   setCommentReportTypes: (reportCommentTypes: IReportTypes[] | null) => void
 }
 
@@ -15,8 +15,8 @@ export const useReportCommentStore = create<ReportCommentModalStore>((set) => ({
   isOpening: false,
   comments: [],
   setIsOpening: (isOpening: boolean) => set({ isOpening }),
-  addComment: (comment: string) =>
-    set((state) => ({ comments: [...state.comments, comment] })),
+  addComment: (commentId: string) =>
+    set((state) => ({ comments: [...state.comments, commentId] })),
   setCommentReportTypes: (reportType: IReportTypes[] | null) =>
     set({ reportCommentTypes: reportType }),
 }))

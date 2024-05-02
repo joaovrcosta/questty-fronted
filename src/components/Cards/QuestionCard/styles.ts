@@ -282,3 +282,14 @@ export const ReportButton = styled.button`
     background-color: ${({ theme }) => theme.colors.gray_100};
   }
 `
+export const ReportedButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: transparent;
+  transition: 0.2s ease all;
+`

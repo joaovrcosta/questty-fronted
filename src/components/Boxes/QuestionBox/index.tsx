@@ -97,7 +97,7 @@ export function QuestionBox({
   const [showAllComments, setShowAllComments] = useState(false)
   const { question } = useQuestionStore()
   const { user, token, isLoggedIn } = useAuthStore()
-  const { isOpening, setIsOpening } = useReportQuestionStore()
+  const { isOpening, setIsOpening, isModerated } = useReportQuestionStore()
   const router = useRouter()
 
   const {
@@ -201,6 +201,8 @@ export function QuestionBox({
       setIsAnsweringMobile(false)
     }
   }, [isMobile, isAnswering, setIsAnsweringMobile])
+
+  console.log(currentEntityId === id && isOpening)
 
   return (
     <S.QuestionWrapper>
@@ -349,12 +351,9 @@ export function QuestionBox({
             <S.ModerationWrapper>
               {isLoggedIn ? (
                 <div>
-                  {isReported ? (
+                  {isReported || isModerated ? (
                     <Tooltip content="Em moderação">
-                      <S.ReportedButton
-                        onClick={handleReportClick}
-                        style={{ color: '#D20032' }}
-                      >
+                      <S.ReportedButton style={{ color: '#D20032' }}>
                         <AiFillFlag size={24} color="#D20032" />
                       </S.ReportedButton>
                     </Tooltip>

@@ -8,7 +8,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  height: 31rem;
+  height: 100%;
 `
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -40,7 +40,7 @@ export const Content = styled(Dialog.Content)`
   transform: translate(-50%, -50%);
 
   @media (max-width: 769px) {
-    padding: 1rem 1rem 2.5rem 1rem;
+    padding: 1rem 1rem 2rem 1rem;
   }
 `
 
@@ -76,8 +76,6 @@ export const InputContainer = styled.div``
 
 export const FormContainer = styled.form`
   display: flex;
-  height: 100%;
-  margin-top: 1rem;
   flex-direction: column;
 `
 
@@ -144,16 +142,6 @@ export const Label = styled.label`
   gap: 1rem;
 `
 
-// export const CircleRadio = styled.span`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   width: 20px;
-//   height: 20px;
-//   border-radius: 50%;
-//   border: 2px solid #333;
-//   margin-right: 5px; /* Espaçamento entre o círculo e o texto */
-// `
 export const SubmitButtonContainer = styled.div`
   display: flex;
   align-items: center;

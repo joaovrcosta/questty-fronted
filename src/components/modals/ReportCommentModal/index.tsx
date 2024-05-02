@@ -33,7 +33,6 @@ export function ReportCommentModal(props: any) {
     formState: { isSubmitting },
   } = useForm<FormData>()
   const { setIsOpening, addComment } = useReportCommentStore()
-  const [reportedComments, setReportedComments] = useState([])
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
@@ -83,6 +82,7 @@ export function ReportCommentModal(props: any) {
   const handleCloseModal = () => {
     setIsOpening(false)
   }
+
   const onSubmit = async () => {
     try {
       const categoryType = mapReportType(selectedReportTypeId || '')
@@ -104,7 +104,6 @@ export function ReportCommentModal(props: any) {
 
       const commentId = props.entityId
       addComment(commentId)
-      setReportedComments(commentId)
       setIsOpening(false)
     } catch (error) {
       if (error instanceof z.ZodError) {

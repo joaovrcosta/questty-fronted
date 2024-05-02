@@ -31,7 +31,7 @@ export function ReportQuestionModal(props: any) {
     handleSubmit: handleSubmitForm,
     formState: { isSubmitting },
   } = useForm<FormData>()
-  const { setIsOpening, isOpening } = useReportQuestionStore()
+  const { setIsOpening, setIsModerated } = useReportQuestionStore()
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
@@ -100,6 +100,7 @@ export function ReportQuestionModal(props: any) {
           'Content-Type': 'application/json',
         },
       })
+      setIsModerated(true)
       setIsOpening(false)
     } catch (error) {
       if (error instanceof z.ZodError) {

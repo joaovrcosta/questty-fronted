@@ -18,6 +18,7 @@ export interface IQuestion {
     name: string
   }
   answers: IAnswer[]
+  reports: IReport[]
 }
 
 export interface IAnswer {
