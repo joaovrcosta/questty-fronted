@@ -56,6 +56,7 @@ export const UserBadges = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 `
 
 export const StarContainer = styled.div`
@@ -80,14 +81,17 @@ export const VerticalDivider = styled.div`
 `
 export const UserRankContainer = styled.div<IRankProps>`
   margin-top: 0.5rem;
-  width: 100px;
+
   background-color: ${(props) => props.color};
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
   border-radius: 24px;
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  /* border: 1px solid ${({ theme }) => theme.colors.black}; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 export const UserDetailsBox = styled.div`
-  padding: 2rem 0rem 0rem 0rem;
+  padding: 1rem 0rem 0rem 0rem;
   display: flex;
   gap: 0.5rem;
   width: 100%;
@@ -145,4 +149,15 @@ export const CreatedAt = styled.div`
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(204, 204, 204, 1);
   }
+`
+export const UserRegularRankContainer = styled.div<IRankProps>`
+  margin-top: 0.5rem;
+  background-color: ${(props) => props.color};
+  padding: 0.25rem 1rem;
+  border-radius: 24px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
 `

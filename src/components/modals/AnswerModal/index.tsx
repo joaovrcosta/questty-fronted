@@ -3,17 +3,15 @@ import * as S from './styles'
 import { AiOutlineClose } from 'react-icons/ai'
 import { Text } from '@/components/atoms/Text'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
-import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useForm } from 'react-hook-form'
 import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuestionModal/useAnswerQuestionModal'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { Spinner } from '@/components/atoms/Spinner'
 import { HeaderAnswer } from '@/components/organisms/HeaderAnswer'
 import { useEffect, useState } from 'react'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
-import { AnswerFormSchema } from '@/utils/zodSchemas'
+import { AnswerFormDesktopSchema } from '@/utils/zodSchemas'
 import { Editor } from '@/components/molecules/Editor'
 
 interface FormData {
@@ -27,7 +25,7 @@ interface AnswerModalProps {
 
 export function AnswerModal({ isMobile }: AnswerModalProps) {
   const { register, handleSubmit, formState } = useForm<FormData>({
-    resolver: zodResolver(AnswerFormSchema),
+    resolver: zodResolver(AnswerFormDesktopSchema),
   })
   const { setIsOpen, isOpen, isAnswering, setIsAnswering } =
     useAnswerModalStore()

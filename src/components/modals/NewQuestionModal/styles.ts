@@ -3,12 +3,17 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   inset: 0;
   background: rgba(32, 137, 234, 0.7);
   overflow: hidden;
   z-index: 999999;
+`
+
+export const Title = styled(Dialog.Title)`
+  /* height: 100%; */
+  padding: 0.25rem;
 `
 
 export const Content = styled(Dialog.Content)`
@@ -18,9 +23,9 @@ export const Content = styled(Dialog.Content)`
   justify-content: center;
   flex-direction: column;
   z-index: 999999;
-  height: 10;
+  height: 100%;
 
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   background-color: ${({ theme }) => theme.colors.white};
   font-family: Poppins;
   max-height: 25.8rem;
@@ -37,6 +42,7 @@ export const Content = styled(Dialog.Content)`
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+    height: 100%;
 
     input {
       border-radius: 5px;
@@ -56,14 +62,13 @@ export const Content = styled(Dialog.Content)`
       height: 44px;
       border: 0;
       width: 12rem;
-      background: rgb(73, 192, 248);
+      background: black;
       font-size: 14px;
       color: ${({ theme }) => theme.colors.white};
-      border-bottom: 4px solid rgb(24 153 214);
       font-family: Poppins;
       font-weight: 800;
       padding: 0 1.25rem;
-      border-radius: 12px;
+      border-radius: 50px;
       cursor: pointer;
       text-transform: uppercase;
 
@@ -78,7 +83,7 @@ export const Content = styled(Dialog.Content)`
       } */
 
       &:hover {
-        background-color: rgb(24 153 214);
+        opacity: 0.8;
         transition: 0.4s;
       }
     }
@@ -86,7 +91,7 @@ export const Content = styled(Dialog.Content)`
 
   @media (max-width: 769px) {
     min-width: 100%;
-    max-height: 28rem;
+    max-height: 60%;
     display: flex;
     width: 100%;
     border: none;

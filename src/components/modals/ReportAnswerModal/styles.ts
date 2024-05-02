@@ -142,6 +142,16 @@ export const Label = styled.label`
   gap: 1rem;
 `
 
+// export const CircleRadio = styled.span`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   border: 2px solid #333;
+//   margin-right: 5px; /* Espaçamento entre o círculo e o texto */
+// `
 export const SubmitButtonContainer = styled.div`
   display: flex;
   align-items: center;

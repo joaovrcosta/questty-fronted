@@ -57,7 +57,7 @@ export const AnswersSection = styled.div`
 export const TextSectionTitle = styled(Text)`
   font-size: 16px;
   font-family: Poppins;
-  font-weight: 300;
+  font-weight: 600;
   color: ${({ theme }) => theme.colors.black};
 `
 
@@ -171,6 +171,11 @@ export const SignInButton = styled(Button)`
 export const SignUpButton = styled(Button)`
   width: 100%;
   margin-top: 1rem;
+  transition: 0.3s ease all;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `
 
 export const CheckIcon = styled(BsFillPatchCheckFill)`

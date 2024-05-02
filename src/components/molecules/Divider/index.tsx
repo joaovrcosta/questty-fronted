@@ -3,9 +3,10 @@ import * as S from './styles'
 
 interface LineProps {
   children: React.ReactNode
+  id?: string
 }
 
-const Divider: React.FC<LineProps> = ({ children }) => {
+const Divider: React.FC<LineProps> = ({ children, id }) => {
   return (
     <S.LineContainer>
       <S.LineDivider />

@@ -18,6 +18,8 @@ import { BiTimeFive } from 'react-icons/bi'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { getDayOfYear } from '@/utils/getDayOfYear'
 import api from '@/services/api'
+import Image from 'next/image'
+import xpIcon from '@/assets/icons/xp.svg'
 
 interface UserInfoProps {
   data: IUserInfo
@@ -150,9 +152,7 @@ export function UserInfo({ data }: UserInfoProps) {
               alignItems: 'center',
             }}
           >
-            <S.StarContainer>
-              <SiCrystal size={14} color="#fff" />
-            </S.StarContainer>
+            <Image src={xpIcon} height={24} alt="" />
             <div
               style={{
                 display: 'flex',
@@ -163,7 +163,7 @@ export function UserInfo({ data }: UserInfoProps) {
               {/* <IoMdArrowDropup size={20} /> */}
               <S.StarQuantity>
                 <Text
-                  weight="semibold"
+                  weight="extrabold"
                   size="lg"
                   color="blue_950"
                   style={{ whiteSpace: 'nowrap' }}
@@ -171,24 +171,47 @@ export function UserInfo({ data }: UserInfoProps) {
                   {data.userData.points ?? 0}
                 </Text>{' '}
                 <Text
-                  weight="medium"
+                  weight="bold"
                   size="sm"
                   color="blue_950"
                   style={{ whiteSpace: 'nowrap' }}
                 >
-                  pts
+                  xp
                 </Text>{' '}
               </S.StarQuantity>
             </div>
           </div>
           <S.VerticalDivider>|</S.VerticalDivider>
-          <Tooltip content={rank?.description}>
-            <S.UserRankContainer color={rank.color}>
-              <Text size="sm" color="black">
-                {rank.name}
-              </Text>
-            </S.UserRankContainer>
-          </Tooltip>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            {data.userData.role === 'ADMIN' && (
+              <Tooltip content="Administrador">
+                <S.UserRankContainer color="#45A6FF">
+                  <Text size="sm" color="white" weight="bold">
+                    ADMINISTRADOR
+                  </Text>
+                </S.UserRankContainer>
+              </Tooltip>
+            )}
+            {data.userData.role === 'MODERATOR' && (
+              <Tooltip content="Moderador">
+                <S.UserRankContainer color="#45A6FF">
+                  <Text size="sm" color="white" weight="bold">
+                    MODERADOR
+                  </Text>
+                </S.UserRankContainer>
+              </Tooltip>
+            )}
+            {data.userData.role !== 'ADMIN' &&
+              data.userData.role !== 'MODERATOR' && (
+                <Tooltip content={rank?.description}>
+                  <S.UserRegularRankContainer color={rank.color}>
+                    <Text size="sm" color="black" weight="bold">
+                      {rank.name}
+                    </Text>
+                  </S.UserRegularRankContainer>
+                </Tooltip>
+              )}
+          </div>
         </S.UserBadges>
 
         {!isCurrentUserProfile && (
@@ -210,7 +233,7 @@ export function UserInfo({ data }: UserInfoProps) {
                       onClick={handleFollow}
                     />
                   </Dialog.Trigger>
-                  <LoginModal />
+                  <LoginModal text="Quer seguir essa pessoa?" />
                 </Dialog.Root>
               </>
             ) : (

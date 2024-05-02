@@ -47,6 +47,8 @@ export default function Home() {
     fetchData()
   }, [])
 
+  console.log(questions)
+
   return (
     <>
       <NextSeo
@@ -172,7 +174,7 @@ export default function Home() {
           <CardAlert />
 
           <S.QuestionsContainer>
-            <SubjectList subject="home" />
+            {/* <SubjectList subject="home" /> */}
             <S.QuestionsWrapper>
               {loading ? (
                 <>
@@ -253,6 +255,7 @@ export default function Home() {
                     answersQuantity={question.answers?.length}
                     avatarUrl={question.author.avatar_url}
                     points={question.points}
+                    isReported={question.reports[0]?.isOpen}
                   />
                 ))
               ) : (

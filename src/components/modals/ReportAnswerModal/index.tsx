@@ -3,25 +3,27 @@ import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
-import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { Heading } from '@/components/atoms/Heading'
 import { IoMdClose } from 'react-icons/io'
-import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import { IReportTypes } from '@/shared/types'
 import { Button } from '@/components/atoms/Button'
 import { z } from 'zod'
 import { Spinner } from '@/components/atoms/Spinner'
-import Cookies from 'js-cookie'
+import { useReportCommentStore } from '@/features/stores/modals-stores/reportCommentModal'
+import { useReportAnswerStore } from '@/features/stores/modals-stores/reportAnswerModal'
 
 interface FormData {
   reportType: string
 }
 
-export function ReportQuestionModal(props: any) {
+export function ReportAnswerModal(props: any) {
   const [reportTypes, setReportTypes] = useState<IReportTypes[]>([])
   const [isReportTypeSelected, setIsReportTypeSelected] = useState(false)
+  const [selectedReportType, setSelectedReportType] = useState<
+    string | undefined
+  >('1')
   const [selectedReportTypeId, setSelectedReportTypeId] = useState<
     string | null
   >(null)
@@ -31,16 +33,16 @@ export function ReportQuestionModal(props: any) {
     handleSubmit: handleSubmitForm,
     formState: { isSubmitting },
   } = useForm<FormData>()
-  const { setIsOpening, setIsModerated } = useReportQuestionStore()
+  const { setIsOpening, setIsModerated } = useReportAnswerStore()
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
       case '1':
         return 'LINKS'
       case '2':
-        return 'INAPPROPRIATE_QUESTION'
+        return 'COPIED_ANSWER'
       case '3':
-        return 'OFFENSIVE_CONTENT'
+        return 'ERROR_IN_CONTENT'
       case '4':
         return 'INCORRECT_MATERIAL'
       case '5':
@@ -57,9 +59,7 @@ export function ReportQuestionModal(props: any) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = Cookies.get('questty-token')
-
-        const res = await api.get('/list-report-group-by-id/1', {
+        const res = await api.get('/list-report-group-by-id/3', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -67,18 +67,20 @@ export function ReportQuestionModal(props: any) {
         })
         const reportTypes = res.data.ReportType
         setReportTypes(reportTypes)
-      } catch (error) {}
+      } catch (error) {
+        // Tratar erros aqui
+      }
     }
 
     fetchData()
-  }, [])
+  }, [token])
 
   const handleReportTypeChange = (selectedReportTypeId: any) => {
+    setSelectedReportType(selectedReportTypeId)
     setIsReportTypeSelected(true)
   }
 
   const handleCloseModal = () => {
-    console.log('Modal close button clicked')
     setIsOpening(false)
   }
 
@@ -129,14 +131,14 @@ export function ReportQuestionModal(props: any) {
                 weight="extrabold"
                 size="md"
                 color="blue_950"
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '0.5rem' }}
               >
-                Denunciar pergunta
+                Denunciar resposta
               </Heading>
             </S.EnterHeader>
             <S.SubHeader>
               <Text size="xs" style={{ fontSize: '15px' }}>
-                Escolha uma razão para denúnciar esta pergunta:
+                Escolha uma razão para denúnciar este comentário:
               </Text>
             </S.SubHeader>
             <S.FormContainer onSubmit={handleSubmitForm(onSubmit)}>

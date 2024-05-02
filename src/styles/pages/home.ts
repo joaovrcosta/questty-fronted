@@ -114,7 +114,6 @@ export const QuestionsContainer = styled.div`
 
 export const FeedContentWrapper = styled.div`
   width: 100%;
-  max-width: 58rem;
 
   @media (max-width: 1168px) {
     width: 100%;

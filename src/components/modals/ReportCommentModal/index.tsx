@@ -32,9 +32,7 @@ export function ReportCommentModal(props: any) {
     handleSubmit: handleSubmitForm,
     formState: { isSubmitting },
   } = useForm<FormData>()
-  const { setIsOpening } = useReportCommentStore()
-
-  console
+  const { setIsOpening, addComment } = useReportCommentStore()
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
@@ -103,13 +101,14 @@ export function ReportCommentModal(props: any) {
           'Content-Type': 'application/json',
         },
       })
+
+      const commentId = props.entityId
+      addComment(commentId)
       setIsOpening(false)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        // Tratar erros de validação do Zod
         console.error('Erro de validação:', error.errors)
       } else {
-        // Tratar outros erros
         console.error('Erro:', error)
       }
     }

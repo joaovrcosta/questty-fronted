@@ -151,7 +151,7 @@ export const AnswerButtonContainer = styled.div`
 `
 
 export const AnswerButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.colors.black};
+  border: 2px solid ${({ theme }) => theme.colors.black};
   font-family: Poppins;
   color: ${({ theme }) => theme.colors.blue_950};
 

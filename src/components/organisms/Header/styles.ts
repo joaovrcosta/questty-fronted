@@ -56,6 +56,7 @@ export const HeaderContent = styled.div`
     @media (max-width: 768px) {
       gap: 0;
       padding: 0.5rem 1rem;
+      width: 100%;
     }
   `}
 `

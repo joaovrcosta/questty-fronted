@@ -3,7 +3,6 @@ import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import api from '@/services/api'
-import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { Heading } from '@/components/atoms/Heading'
@@ -31,9 +30,7 @@ export function ReportQuestionHomeModal(props: any) {
     handleSubmit: handleSubmitForm,
     formState: { isSubmitting },
   } = useForm<FormData>()
-  const { setIsOpening, isOpening } = useReportQuestionHomeStore()
-
-  console.log(isOpening)
+  const { setIsOpening, addQuestion } = useReportQuestionHomeStore()
 
   const mapReportType = (reportTypeId: string): string => {
     switch (selectedReportTypeId) {
@@ -80,9 +77,7 @@ export function ReportQuestionHomeModal(props: any) {
   }
 
   const handleCloseModal = () => {
-    console.log('Modal close button clicked')
     setIsOpening(false)
-    console.log(isOpening)
   }
 
   const onSubmit = async () => {
@@ -103,6 +98,8 @@ export function ReportQuestionHomeModal(props: any) {
           'Content-Type': 'application/json',
         },
       })
+      const questionId = props.entityId
+      addQuestion(questionId)
       setIsOpening(false)
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -133,7 +130,7 @@ export function ReportQuestionHomeModal(props: any) {
                 color="blue_950"
                 style={{ marginBottom: '1rem' }}
               >
-                Denunciar!
+                Denunciar pergunta
               </Heading>
             </S.EnterHeader>
             <S.SubHeader>

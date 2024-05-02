@@ -23,7 +23,6 @@ import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 import { motion } from 'framer-motion'
-import ErrorPage from 'next/error'
 import Custom404 from '../404'
 
 interface Question {
@@ -47,16 +46,17 @@ export default function Question(props: IQuestionData) {
 
   const [loading, setLoading] = useState(true)
   const [subjectQuestions, setSubjectQuestions] = useState([])
+  // const { width, height } = useWindowSize()
   const { isMobile, setIsMobile } = useIsMobileStore()
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
   const answerStore = useAnswerStore()
   const { isOpening, setIsOpening } = useAuthModalStore()
 
-  const { user } = useAuthStore()
+  const { user, isLoggedIn } = useAuthStore()
   const { question, setAnswerQuantity, answerQuantity } = useQuestionStore()
   const { answers, currentNewAnswer } = useAnswerStore()
-  const isLoggedIn = props.isLoggedIn
+  // const isLoggedIn = props.isLoggedIn
 
   const textForTitle = `${props.questionData?.content.substring(
     0,
@@ -182,6 +182,8 @@ export default function Question(props: IQuestionData) {
             author={answer?.author?.username}
             likesQuantity={answer?.likes?.length || 0}
             avatarUrl={answer?.author?.avatar_url}
+            authorLevel={answer?.author?.level}
+            isReported={answer?.reports[0]?.isOpen}
           />
         </motion.div>
       ))
@@ -239,16 +241,18 @@ export default function Question(props: IQuestionData) {
               answersQuantity={answerQuantity}
               createdAt={props.questionData?.createdAt}
               author={props.questionData?.author.username}
+              authorLevel={props.questionData?.author.level}
               avatarUrl={props.questionData?.author?.avatar_url}
               isMobile={isMobile}
               authorId={props.questionData?.author_id}
               hasAnswered={allAnswers}
               subject={props.questionData?.subject.name}
               points={props.questionData?.points}
+              isReported={props.questionData.reports[0]?.isOpen}
             />
           </motion.div>
 
-          {!isLoggedIn && (
+          {isLoggedIn ? null : (
             <>
               <S.CallToActionCard>
                 <>
@@ -322,7 +326,7 @@ export default function Question(props: IQuestionData) {
                             Entre aqui
                           </Text>
                         </Dialog.Trigger>
-                        <LoginModal />
+                        <LoginModal text="Olá novamente" />
                       </Dialog.Root>
                     </S.SignInContainer>
                   </S.ButtonsContainer>
@@ -331,7 +335,7 @@ export default function Question(props: IQuestionData) {
             </>
           )}
 
-          <S.AnswersSection>
+          <S.AnswersSection id="answers">
             {allAnswers.length > 0 ? (
               <Divider>
                 <S.TextSectionTitle>Respostas</S.TextSectionTitle>
@@ -373,10 +377,10 @@ export const getServerSideProps = async (ctx: any) => {
   try {
     const cookies = parseCookies(ctx)
     const existingToken = cookies['questty-token']
-    let isLoggedIn = false
+    let isUserLogged = false
 
     if (existingToken) {
-      isLoggedIn = true
+      isUserLogged = true
     }
 
     const res = await api.get(`questions/${id}`)
@@ -388,7 +392,7 @@ export const getServerSideProps = async (ctx: any) => {
     const recomendedQuestions = response.data
 
     if (questionData !== undefined) {
-      return { props: { questionData, isLoggedIn, recomendedQuestions } }
+      return { props: { questionData, isUserLogged, recomendedQuestions } }
     } else {
       return { props: {} }
     }

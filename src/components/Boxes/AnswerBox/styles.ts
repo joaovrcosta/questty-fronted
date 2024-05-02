@@ -219,6 +219,7 @@ export const LikedButton = styled(Button)`
   border: 2px solid ${({ theme }) => theme.colors.black};
   border-bottom: 4px solid ${({ theme }) => theme.colors.black};
   padding: 1.02rem;
+  height: 40px;
 
   &:focus {
     transition: 0.2s ease all;
@@ -289,7 +290,7 @@ export const CreatedAtContainer = styled.div`
 
 export const QuestionInfo = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 `
 
 export const MoreDetailsInputContainer = styled.div`
@@ -338,4 +339,24 @@ export const ConnectionContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   padding: 1rem 0 0.5rem 0;
+`
+export const ModerationButton = styled.button`
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.white};
+  transition: 0.2s ease all;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+  }
+`
+export const ModeratedButton = styled.button`
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.white};
+  transition: 0.2s ease all;
 `

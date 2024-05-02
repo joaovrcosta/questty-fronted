@@ -9,6 +9,7 @@ export const MainContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
 `
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -22,26 +23,25 @@ export const Overlay = styled(Dialog.Overlay)`
 `
 
 export const Content = styled(Dialog.Content)`
-  max-width: 50rem;
+  max-width: 37.5rem;
   font-family: Poppins;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 24px;
-  padding: 2.5rem;
+  padding: 1.5rem 2rem 2.5rem 2rem;
   z-index: 999999;
   max-height: 42rem;
   display: flex;
   background-color: ${({ theme }) => theme.colors.white};
   width: 100%;
-  height: 100vh;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   @media (max-width: 769px) {
-    padding: 2.5rem 0rem;
+    padding: 1rem 1rem 2rem 1rem;
   }
 `
 
@@ -61,7 +61,7 @@ export const LoginContainerContent = styled.div`
   max-width: 400px;
 
   @media (max-width: 769px) {
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
 `
 
@@ -90,7 +90,7 @@ export const ForgotMyPasswordLink = styled(Link)`
   text-decoration: none;
 `
 export const DontHaveAccountContainer = styled.div`
-  padding: 1.5rem 0;
+  padding: 1rem 0 0 0;
   display: flex;
   align-items: center;
   justify-content: center;

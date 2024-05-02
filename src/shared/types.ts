@@ -18,6 +18,7 @@ export interface IQuestion {
     name: string
   }
   answers: IAnswer[]
+  reports: IReport[]
 }
 
 export interface IAnswer {
@@ -29,7 +30,9 @@ export interface IAnswer {
     name: string
     username: string
     avatar_url: string
+    level: number
   }
+  reports: IReport[]
   question_id: string
   createdAt: string
   deletedAt: string
@@ -67,6 +70,11 @@ export interface INewAnswer {
   }
 }
 
+export interface IReport {
+  id: string
+  isOpen: boolean
+}
+
 export interface ILike {
   id: string
   author_id: string
@@ -97,6 +105,14 @@ export interface ICurrentUserData {
   grade_id: number
   answers: IAnswer[]
   questions: IQuestion[]
+  rank: {
+    id: number
+    name: string
+    description: string
+    color: string
+    points: number
+    bestResponses: number
+  }
 }
 
 export interface IProfileData {
@@ -107,6 +123,7 @@ export interface IProfileData {
     code: Number
     avatar_url: string
     points: number
+    role: string
     email: string
     createdAt: string
     questions: IQuestion[]
@@ -136,6 +153,7 @@ export interface IUserInfo {
     points: number
     email: string
     createdAt: string
+    role: string
     questions: IQuestion[]
     answers: IAnswer[]
     rank: {
@@ -168,12 +186,14 @@ export interface IQuestionData {
       name: string
       username: string
       avatar_url: string
+      level: number
     }
     subject: {
       id: string
       name: string
     }
     comments?: IComment[] | null
+    reports: IReport[]
   }
   isLoggedIn?: boolean
   recomendedQuestions: any
@@ -213,4 +233,5 @@ export interface IComment {
     avatar_url: string
   }
   avatar_url: string
+  reports: IReport[]
 }

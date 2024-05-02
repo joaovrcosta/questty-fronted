@@ -178,6 +178,8 @@ export const UserHandleActionsContainer = styled.div`
   @media (max-width: 769px) {
     border-bottom: 0;
     margin-bottom: 1rem;
+    padding: 0;
+    flex-direction: column;
   }
 `
 
@@ -237,7 +239,8 @@ export const ModerationWrapper = styled.div`
   width: 20%;
 
   @media (max-width: 769px) {
-    /* margin-top: 1rem; */
+    margin-top: 1rem;
+    width: 100%;
   }
 `
 
@@ -268,6 +271,18 @@ export const ModerateButton = styled.button`
   }
 `
 
+export const ReportedButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background-color: transparent;
+  transition: 0.2s ease all;
+`
+
 // More Details
 
 export const MoreDetailsInputContainer = styled.div`
@@ -287,7 +302,7 @@ export const MoreDetailsInput = styled.input`
 export const NoLoggedMoreDetailsInputContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   width: 100%;
   padding: 0rem 1.5rem;
 
@@ -304,7 +319,7 @@ export const NoLoggedMoreDetailsInputContainer = styled.div`
 
 export const NoLoggedMoreDetailsInput = styled.input`
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0;
   border-radius: 33px;
   border: none;
   font-family: Poppins;
@@ -420,7 +435,9 @@ export const BackButtonBox = styled.button`
   }
 `
 
-export const ContentContainer = styled.div``
+export const ContentContainer = styled.div`
+  white-space: normal;
+`
 
 export const CommentSection = styled.div`
   &:nth-child(1) {
@@ -552,5 +569,44 @@ export const SeeMoreContainer = styled.div`
 
   @media (max-width: 769px) {
     margin-top: 2rem;
+  }
+`
+
+export const SeeAnswerButtonContainer = styled(Button)`
+  display: flex;
+  height: 46px;
+  background: ${({ theme }) => theme.colors.white};
+  font-weight: 800;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  width: 100%;
+
+  transition: 0.3s ease all;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`
+export const QuantityCircle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.black};
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
   }
 `
