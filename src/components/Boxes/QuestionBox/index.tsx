@@ -28,6 +28,7 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
+import { CommentFormSchema } from '@/utils/zodSchemas'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -54,23 +55,6 @@ interface FormData {
   }
   categoryType: string
 }
-
-const CommentFormSchema = zod.object({
-  content: zod
-    .string()
-    .min(2, 'Comentário deve ter entre 2 a 500 caracteres.')
-    .max(500, 'Comentário deve ter entre 2 a 500 caracteres.')
-    .refine(
-      (content) => {
-        const words = content.split(/\s+/)
-        return !words.some((word) => word.length > 46)
-      },
-      {
-        message: 'Nenhuma palavra deve ter mais de 46 letras.',
-        path: ['content'],
-      }
-    ),
-})
 
 export function QuestionBox({
   id,

@@ -183,7 +183,12 @@ export default function Question(props: IQuestionData) {
             likesQuantity={answer?.likes?.length || 0}
             avatarUrl={answer?.author?.avatar_url}
             authorLevel={answer?.author?.level}
-            isReported={answer?.reports[0]?.isOpen}
+            isReported={
+              answer?.reports &&
+              answer.reports.length > 0 &&
+              answer.reports[0].isOpen
+            }
+            prevComments={answer?.comments ?? []}
           />
         </motion.div>
       ))

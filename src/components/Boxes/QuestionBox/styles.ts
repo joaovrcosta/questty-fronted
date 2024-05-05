@@ -176,14 +176,14 @@ export const UserHandleActionsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border-bottom: 2px solid #e5e5e5;
-  padding: 0 0 1rem 0;
+  padding: 0 0 1.5rem 0;
   /* margin-top: 3rem; */
 
   @media (max-width: 769px) {
     border-bottom: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     padding: 0;
     flex-direction: column;
   }
@@ -617,7 +617,7 @@ export const ButtonsContainer = styled.div`
   }
 `
 export const AnswerButtonAuthor = styled.div<IQuestionContainer>`
-  margin-top: ${({ isAuthor }) => (isAuthor ? '1rem' : '0')};
+  margin-top: ${({ isAuthor }) => (isAuthor ? '1.5rem' : '0')};
   display: flex;
   align-items: center;
   justify-content: flex-start;

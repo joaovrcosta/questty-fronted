@@ -360,3 +360,51 @@ export const ModeratedButton = styled.button`
   background-color: ${({ theme }) => theme.colors.white};
   transition: 0.2s ease all;
 `
+export const CommentForm = styled.form`
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 769px) {
+    gap: 1rem;
+  }
+`
+export const SendButton = styled.button`
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  cursor: pointer;
+
+  & svg {
+    color: ${({ theme }) => theme.colors.blue_550};
+  }
+`
+export const SeeMoreContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+
+  @media (max-width: 769px) {
+    margin-top: 2rem;
+  }
+`
+export const SeeMoreButton = styled(Button)`
+  background-color: transparent;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.5s ease all;
+  }
+`
+export const CommentSection = styled.div`
+  &:nth-child(1) {
+    padding-top: 2rem;
+  }
+`
