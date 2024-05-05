@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import * as Dialog from '@radix-ui/react-dialog'
+import { Button } from '@/components/atoms/Button'
 
 export const Overlay = styled(Dialog.Overlay)`
   position: fixed;
@@ -85,6 +86,10 @@ export const Content = styled(Dialog.Content)`
       &:hover {
         opacity: 0.8;
         transition: 0.4s;
+      }
+
+      @media (max-width: 769px) {
+        width: 100%;
       }
     }
   }
@@ -199,8 +204,12 @@ export const Tools = styled.div`
 export const Selects = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.5rem;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `
 
 export const SubjectSelect = styled.select`
@@ -240,4 +249,14 @@ export const SelectPoints = styled.select`
 export const AdVideoLink = styled.a`
   text-decoration: none;
   color: inherit;
+`
+
+export const SubmitButton = styled.button`
+  background-color: ${({ theme }) => theme.colors.blue_300};
+`
+
+export const SubmitButtonContainer = styled.div`
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `

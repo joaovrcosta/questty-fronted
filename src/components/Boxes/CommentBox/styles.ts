@@ -6,7 +6,8 @@ export const CommentContainer = styled.div`
   justify-content: space-between;
   padding: 1rem 0 0 0;
   gap: 1.25rem;
-  height: 60px;
+  height: 100%;
+  margin-top: 0.5rem;
 `
 export const CommentInfo = styled.div`
   display: flex;

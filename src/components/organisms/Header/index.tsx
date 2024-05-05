@@ -73,7 +73,7 @@ export function Header() {
             </div>
           ) : (
             <>
-              <S.MakeQuestionButton>
+              <div>
                 <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                   <Dialog.Trigger asChild>
                     <S.MakeYourQuestionButton
@@ -85,7 +85,7 @@ export function Header() {
                   </Dialog.Trigger>
                   <NewTransactionModal />
                 </Dialog.Root>
-              </S.MakeQuestionButton>
+              </div>
             </>
           )}
 

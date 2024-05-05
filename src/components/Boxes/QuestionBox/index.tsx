@@ -108,8 +108,24 @@ export function QuestionBox({
     alreadyAnswered,
   } = useAnswerModalStore()
 
-  const largeText = content?.substring(0, 380)
-  const normalText = content?.substring(380)
+  let largeText = ''
+  let normalText = ''
+
+  if (content) {
+    const maxLength = 182
+    if (content.length <= maxLength) {
+      largeText = content
+    } else {
+      const splitIndex = content.lastIndexOf(' ', maxLength)
+      if (splitIndex !== -1) {
+        largeText = content.substring(0, splitIndex)
+        normalText = content.substring(splitIndex + 1)
+      } else {
+        largeText = content.substring(0, maxLength)
+        normalText = content.substring(maxLength)
+      }
+    }
+  }
 
   useEffect(() => {
     if (question === null) {
@@ -202,8 +218,6 @@ export function QuestionBox({
     }
   }, [isMobile, isAnswering, setIsAnsweringMobile])
 
-  console.log(currentEntityId === id && isOpening)
-
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
@@ -272,7 +286,7 @@ export function QuestionBox({
           </S.HasAnsweredContainerMobile>
         ) : null}
 
-        <S.QuestionContent>
+        <S.QuestionContent isAuthor={isAuthor}>
           <S.QuestionTitle>
             <S.QuestionTitleText
               size="xx1"
@@ -297,18 +311,27 @@ export function QuestionBox({
                 weight="semibold"
                 style={{
                   marginTop: '1.5rem',
-                  lineHeight: '24px',
+                  lineHeight: '28px',
+                  fontFamily: 'ProximaNova',
+                  fontSize: '22px',
                 }}
               >
                 {largeText}
               </Text>
             )}
-            <Text
-              color="blue_950"
-              style={{ marginTop: '1rem', lineHeight: '24px' }}
-            >
-              {normalText}
-            </Text>
+            {normalText && (
+              <Text
+                color="blue_950"
+                style={{
+                  marginTop: '0.5rem',
+                  lineHeight: '24px',
+                  fontFamily: 'ProximaNova',
+                  fontSize: '18px',
+                }}
+              >
+                {normalText}
+              </Text>
+            )}
           </S.ContentContainer>
         </S.QuestionContent>
 
@@ -335,16 +358,18 @@ export function QuestionBox({
               </Link>
             ) : null}
 
-            <AnswerButton
-              isMobile={isMobile}
-              answersQuantity={answersQuantity}
-              hasAnswer={hasAnswer}
-              isAuthor={isAuthor}
-              hasThreeAnswers={hasThreeAnswers}
-              isAlreadyAnsweredByUser={alreadyAnswered}
-              loading={loading}
-              points={points}
-            />
+            <S.AnswerButtonAuthor isAuthor={isAuthor}>
+              <AnswerButton
+                isMobile={isMobile}
+                answersQuantity={answersQuantity}
+                hasAnswer={hasAnswer}
+                isAuthor={isAuthor}
+                hasThreeAnswers={hasThreeAnswers}
+                isAlreadyAnsweredByUser={alreadyAnswered}
+                loading={loading}
+                points={points}
+              />
+            </S.AnswerButtonAuthor>
           </S.ButtonsContainer>
 
           {!isAuthor && (
@@ -446,18 +471,18 @@ export function QuestionBox({
                       />
                     ) : (
                       <S.SendButton type="submit">
-                        <MdOutlineSend size={16} />
+                        <MdOutlineSend size={16} color="#000" />
                       </S.SendButton>
                     )}
                   </S.CommentForm>
                 </S.MoreDetailsInputContainer>
                 {formState.errors.content && (
-                  <div style={{ marginTop: '1.5rem' }}>
+                  <div style={{ marginTop: '1rem' }}>
                     <span
                       style={{
                         color: '#D20032',
                         fontFamily: 'Poppins',
-                        fontWeight: 300,
+                        fontWeight: 400,
                       }}
                     >
                       {formState.errors.content.message}
@@ -481,7 +506,11 @@ export function QuestionBox({
                 createdAt={comment.createdAt}
                 question_id={comment.question_id}
                 avatar_url={comment.author ? comment.author.avatar_url : ''}
-                isReported={comment.reports[0]?.isOpen}
+                isReported={
+                  comment.reports && comment.reports.length > 0
+                    ? comment.reports[0].isOpen
+                    : false
+                }
               />
             ))}
           </S.CommentSection>

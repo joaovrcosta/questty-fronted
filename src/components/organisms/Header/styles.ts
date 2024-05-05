@@ -14,7 +14,6 @@ interface ContentProps {
 
 export const HeaderContainer = styled.div<IHeader>`
   background-color: ${({ theme }) => theme.colors.white};
-  /* margin-bottom: 5rem; */
   margin-right: calc(-16px);
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
 
@@ -45,20 +44,16 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   gap: 1.5em; //Spacing Items
 
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      gap: 1.5rem;
-      padding: 1rem 1.5rem 1rem 1.5rem;
-    }
-  `}
+  @media (max-width: 1280px) {
+    gap: 1.5rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+  }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      gap: 0;
-      padding: 0.5rem 1rem;
-      width: 100%;
-    }
-  `}
+  @media (max-width: 769px) {
+    gap: 0;
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
 `
 
 export const FirstBoxContent = styled.div`
@@ -68,15 +63,10 @@ export const FirstBoxContent = styled.div`
   align-items: center;
 `
 
-export const MakeQuestionButton = styled.div``
-
 export const LogoImage = styled(Image)`
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      width: 72px;
-      /* margin-right: 1rem; */
-    }
-  `}
+  @media (max-width: 769px) {
+    width: 72px;
+  }
 `
 
 export const SearchInputContainer = styled.div`
@@ -87,7 +77,7 @@ export const SearchInputContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.white};
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin-left: 0;
   }
 `
@@ -124,7 +114,7 @@ export const HeaderActionsContainer = styled.div<ContentProps>`
   align-items: center;
   gap: 1.5rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     display: ${(props) => (props.existsToken ? 'none' : 'block')};
   }
 `
@@ -149,27 +139,20 @@ export const MakeYourQuestionButton = styled(Button)`
     transition: 0.3s ease all;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      display: none;
-    }
-  `}
+  @media (max-width: 769px) {
+    display: none;
+  }
 `
 
 export const SignInButton = styled(Button)`
   position: relative;
 
-  ${({ theme }) => css`
-    @media (max-width: 1280px) {
-      /* Estilos para telas até 1280px de largura */
-    }
-  `}
+  @media (max-width: 1280px) {
+  }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      display: none; /* Oculta o botão em telas até 768px de largura */
-    }
-  `}
+  @media (max-width: 769px) {
+    display: none;
+  }
 `
 
 export const ButtonDiv = styled.span`
@@ -180,10 +163,8 @@ export const ButtonDiv = styled.span`
     left: 0;
     width: 100%;
     height: 100%;
-    /* Substitua pela cor desejada */
     border-radius: 50%;
-    background: ${({ theme }) =>
-      theme.colors.gray_100}; /* Substitua pela cor desejada */
+    background: ${({ theme }) => theme.colors.gray_100};
     mix-blend-mode: lighten;
     transition: all 0.5s ease;
     transform-origin: center;
@@ -205,11 +186,9 @@ export const SignUpButton = styled(Button)`
     transition: 0.3s ease all;
   }
 
-  ${({ theme }) => css`
-    @media (max-width: 768px) {
-      display: none;
-    }
-  `}
+  @media (max-width: 769px) {
+    display: none;
+  }
 `
 
 export const SubHeader = styled.div`
@@ -220,11 +199,9 @@ export const SubHeader = styled.div`
   align-items: center;
   justify-content: center;
 
-  ${({ theme }) => css`
-    @media (min-width: 768px) {
-      display: none;
-    }
-  `}
+  @media (min-width: 769px) {
+    display: none;
+  }
 `
 
 export const SubHeaderContent = styled.div`
@@ -260,34 +237,16 @@ export const SearchButton = styled.button`
 export const SubSignInButton = styled(Button)`
   width: 10rem;
 
-  /* @media (max-width: 400px) {
-    width: 100%;
-    width: 10rem;
-  } */
-
   @media (max-width: 364px) {
     width: 100%;
   }
-  /* @media (max-width: 280px) {
-    font-size: 0.75rem;
-  } */
 `
 
 export const SubSignUpButton = styled(Button)`
   width: 12.25rem;
-  /* @media (max-width: 400px) {
-    width: 97%;
-  } */
   @media (max-width: 364px) {
     width: 100%;
   }
-  /* @media (max-width: 310px) {
-    width: 85%;
-  } */
-  /* @media (max-width: 280px) {
-    width: 80%;
-    font-size: 0.75rem;
-  } */
 `
 
 export const PointsContainer = styled.div`

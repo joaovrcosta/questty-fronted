@@ -49,7 +49,16 @@ export function CommentBox({
           id={author_id}
         />
         <div>
-          <Text size="sm">{content}</Text>
+          <Text
+            size="sm"
+            style={{
+              fontFamily: 'ProximaNova',
+              lineHeight: '20px',
+              fontSize: '15px',
+            }}
+          >
+            {content}
+          </Text>
         </div>
       </S.CommentInfo>
       <S.ModerateContainer>
