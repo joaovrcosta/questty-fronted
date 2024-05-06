@@ -47,7 +47,6 @@ export default function Question(props: IQuestionData) {
 
   const [loading, setLoading] = useState(true)
   const [subjectQuestions, setSubjectQuestions] = useState([])
-  // const { width, height } = useWindowSize()
   const { isMobile, setIsMobile } = useIsMobileStore()
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
@@ -56,8 +55,7 @@ export default function Question(props: IQuestionData) {
 
   const { user, isLoggedIn } = useAuthStore()
   const { question, setAnswerQuantity, answerQuantity } = useQuestionStore()
-  const { answers, currentNewAnswer } = useAnswerStore()
-  // const isLoggedIn = props.isLoggedIn
+  const { currentNewAnswer } = useAnswerStore()
 
   const textForTitle = `${props.questionData?.content.substring(
     0,

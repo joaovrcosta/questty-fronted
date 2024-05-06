@@ -1,9 +1,8 @@
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
 import { useRouter } from 'next/router'
-import { getFormattedDateAndTime, getTimeAgo } from '@/utils/getTimeAgo'
+import { getFormattedDateAndTime } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
-import Link from 'next/link'
 import { Tooltip } from '@/components/molecules/Tooltip'
 
 export type subjectsType =

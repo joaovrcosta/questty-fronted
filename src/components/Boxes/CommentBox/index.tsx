@@ -1,7 +1,6 @@
 import { Avatar } from '@/components/atoms/Avatar'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
-import { IComment } from '@/shared/types'
 import { AiFillFlag, AiOutlineFlag } from 'react-icons/ai'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Tooltip } from '@/components/molecules/Tooltip'

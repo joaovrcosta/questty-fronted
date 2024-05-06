@@ -15,7 +15,7 @@ import { UserInfo } from '@/components/organisms/UserInfo'
 
 export default function Answers(props: IProfileData) {
   const [activeTab, setActiveTab] = useState('answers')
-  const { isLoggedIn, token } = useAuthStore()
+  const { isLoggedIn } = useAuthStore()
   const { setProfile } = useProfileStore()
 
   const usernameDisplay = `${props.userData.username} - questty.com`
