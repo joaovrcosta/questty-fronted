@@ -96,9 +96,8 @@ export const AnswerButton = styled(Button)`
 `
 
 export const ShareKnowButton = styled(Button)`
-  width: 50%;
   margin-top: 1rem;
-  background-color: ${({ theme }) => theme.colors.blue_550};
+  background-color: ${({ theme }) => theme.colors.black};
 
   @media (max-width: 600px) {
     width: 100%;

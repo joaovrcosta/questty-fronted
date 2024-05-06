@@ -96,17 +96,23 @@ export function QuestionBox({
   let normalText = ''
 
   if (content) {
-    const maxLength = 182
-    if (content.length <= maxLength) {
-      largeText = content
+    const maxLengthLarge = 182
+    const maxLengthNormal = 345
+
+    if (content.length <= maxLengthNormal) {
+      normalText = content
     } else {
-      const splitIndex = content.lastIndexOf(' ', maxLength)
-      if (splitIndex !== -1) {
-        largeText = content.substring(0, splitIndex)
-        normalText = content.substring(splitIndex + 1)
+      if (content.length <= maxLengthLarge) {
+        largeText = content
       } else {
-        largeText = content.substring(0, maxLength)
-        normalText = content.substring(maxLength)
+        const splitIndex = content.lastIndexOf(' ', maxLengthLarge)
+        if (splitIndex !== -1) {
+          largeText = content.substring(0, splitIndex)
+          normalText = content.substring(splitIndex + 1)
+        } else {
+          largeText = content.substring(0, maxLengthLarge)
+          normalText = content.substring(maxLengthLarge)
+        }
       }
     }
   }
@@ -324,37 +330,39 @@ export function QuestionBox({
         )}
 
         <S.UserHandleActionsContainer>
-          <S.ButtonsContainer>
-            {!isLoggedIn && hasAnswer ? (
-              <Link
-                href="#answers"
-                style={{ textDecoration: 'none', width: '100%' }}
-              >
-                <S.SeeAnswerButtonContainer hug={true}>
-                  VER{' '}
-                  <S.QuantityCircle>
-                    <Text weight="bold" color="white">
-                      {answersQuantity}
-                    </Text>
-                  </S.QuantityCircle>
-                  {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
-                </S.SeeAnswerButtonContainer>
-              </Link>
-            ) : null}
+          {isAuthor && !hasAnswer ? null : (
+            <S.ButtonsContainer>
+              {!isLoggedIn && hasAnswer ? (
+                <Link
+                  href="#answers"
+                  style={{ textDecoration: 'none', width: '100%' }}
+                >
+                  <S.SeeAnswerButtonContainer hug={true}>
+                    VER{' '}
+                    <S.QuantityCircle>
+                      <Text weight="bold" color="white">
+                        {answersQuantity}
+                      </Text>
+                    </S.QuantityCircle>
+                    {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
+                  </S.SeeAnswerButtonContainer>
+                </Link>
+              ) : null}
 
-            <S.AnswerButtonAuthor isAuthor={isAuthor}>
-              <AnswerButton
-                isMobile={isMobile}
-                answersQuantity={answersQuantity}
-                hasAnswer={hasAnswer}
-                isAuthor={isAuthor}
-                hasThreeAnswers={hasThreeAnswers}
-                isAlreadyAnsweredByUser={alreadyAnswered}
-                loading={loading}
-                points={points}
-              />
-            </S.AnswerButtonAuthor>
-          </S.ButtonsContainer>
+              <S.AnswerButtonAuthor isAuthor={isAuthor}>
+                <AnswerButton
+                  isMobile={isMobile}
+                  answersQuantity={answersQuantity}
+                  hasAnswer={hasAnswer}
+                  isAuthor={isAuthor}
+                  hasThreeAnswers={hasThreeAnswers}
+                  isAlreadyAnsweredByUser={alreadyAnswered}
+                  loading={loading}
+                  points={points}
+                />
+              </S.AnswerButtonAuthor>
+            </S.ButtonsContainer>
+          )}
 
           {!isAuthor && (
             <S.ModerationWrapper>

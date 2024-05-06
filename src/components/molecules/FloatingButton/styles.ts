@@ -35,6 +35,8 @@ export const FloatingBoxName = styled.div`
   padding: 0.25rem;
   background-color: ${({ theme }) => theme.colors.black};
   border-radius: 6px;
+  border: 2px solid #ebf2f7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 `
 
 export const CirclePlus = styled.div`
@@ -45,4 +47,6 @@ export const CirclePlus = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
   width: 56px;
   height: 56px;
+  border: 2px solid #ebf2f7;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 `

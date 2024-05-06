@@ -4,7 +4,7 @@ import { AnswerBox } from '@/components/Boxes/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestion, IQuestionData } from '@/shared/types'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
 import GirlLamp from '@/assets/GirlLamp.svg'
@@ -23,6 +23,7 @@ import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 import { motion } from 'framer-motion'
+import { FaPlus } from 'react-icons/fa'
 import Custom404 from '../404'
 
 interface Question {
@@ -216,7 +217,7 @@ export default function Question(props: IQuestionData) {
           </S.ShareKnowledgeText>
           <Link href="/" style={{ width: '100%' }}>
             <S.ShareKnowButton backgroundColor="black" color="white">
-              <GoPlus size={24} />
+              <FaPlus size={18} />
               RESPONDER UMA PERGUNTA
             </S.ShareKnowButton>
           </Link>
