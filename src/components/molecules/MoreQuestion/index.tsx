@@ -40,8 +40,6 @@ export function MoreQuestonCard({
   avatar_url,
   readOnly = false,
 }: Question) {
-  const questions = useQuestionsStore((state) => state.questions)
-
   const router = useRouter()
 
   const handleResponderClick = () => {
@@ -49,9 +47,6 @@ export function MoreQuestonCard({
   }
 
   const answerCount = answersQuantity || 0
-  const limitedAnswerCount = 3
-
-  const createdIn = '2024-02-16T13:00:00.000Z'
 
   const limitedContent =
     content.length > 80 ? content.slice(0, 80) + '...' : content
@@ -90,11 +85,18 @@ export function MoreQuestonCard({
             {/* <S.QuestionText onClick={handleResponderClick}>
               {content.length > 142 ? content.slice(0, 142) + '...' : content}
             </S.QuestionText> */}
-            <Text style={{ fontSize: '14px' }}>{limitedContent}</Text>
+            <Text
+              style={{
+                fontFamily: 'ProximaNova',
+                fontSize: '15px',
+              }}
+            >
+              {limitedContent}
+            </Text>
           </S.QuestionInfo>
         </S.QuestionContent>
         <S.UserHandleContainer>
-          {/* <S.AnswerQuantity>
+          <S.AnswerQuantity>
             {readOnly ? (
               ''
             ) : (
@@ -102,12 +104,15 @@ export function MoreQuestonCard({
                 weight="semibold"
                 color="blue_950"
                 size="sm"
-                style={{ whiteSpace: 'nowrap', fontFamily: 'Poppins' }}
+                style={{
+                  whiteSpace: 'nowrap',
+                  fontFamily: 'Poppins',
+                }}
               >
                 {`${answerCount} respostas`}
               </Text>
             )}
-          </S.AnswerQuantity> */}
+          </S.AnswerQuantity>
           <S.AswerContainer>
             <S.AnswerButtonContainer>
               <S.AnswerButton

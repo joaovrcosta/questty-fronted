@@ -37,3 +37,20 @@ export const AnswerFormDesktopSchema = zod.object({
   //     }
   //   ),
 })
+
+export const CommentFormSchema = zod.object({
+  content: zod
+    .string()
+    .min(2, 'Comentário deve ter entre 2 a 500 caracteres.')
+    .max(500, 'Comentário deve ter entre 2 a 500 caracteres.')
+    .refine(
+      (content) => {
+        const words = content.split(/\s+/)
+        return !words.some((word) => word.length > 46)
+      },
+      {
+        message: 'Nenhuma palavra deve ter mais de 46 letras.',
+        path: ['content'],
+      }
+    ),
+})

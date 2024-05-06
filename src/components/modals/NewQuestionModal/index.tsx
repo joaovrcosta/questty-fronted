@@ -1,11 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as S from './styles'
-import * as T from '../../molecules/Tooltip/styles'
 import * as zod from 'zod'
 import { AiOutlineClose } from 'react-icons/ai'
-import { AiOutlinePaperClip } from 'react-icons/ai'
-import { TbMathFunctionY } from 'react-icons/tb'
-import { MdOutlineEmojiSymbols } from 'react-icons/md'
 import { Tooltip } from '../../molecules/Tooltip'
 import { useForm } from 'react-hook-form'
 import { SubjectSelect } from '@/components/atoms/SubjectSelect'
@@ -19,6 +15,7 @@ import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
 import { PointsSelect } from '@/components/atoms/PointsSelect'
+import { IoHelpCircleSharp } from 'react-icons/io5'
 
 interface FormData {
   content: string
@@ -31,17 +28,19 @@ const createNewQuestionFormSchema = zod.object({
     .min(20, 'Sua pergunta é muito curta. Use pelo menos 20 caracteres')
     .max(2500, 'A pergunta deve ter no máximo 2500 caracteres'),
   points: zod.enum(['10', '20', '30', '40', '50']).optional(),
+  subject: zod.string().nonempty(),
 })
 
 export function NewTransactionModal() {
-  const { register, handleSubmit, watch, formState } = useForm<FormData>({
-    resolver: zodResolver(createNewQuestionFormSchema),
-  })
+  const { register, handleSubmit, watch, formState, setValue } =
+    useForm<FormData>({
+      resolver: zodResolver(createNewQuestionFormSchema),
+    })
 
   const { isSubmitting } = formState
 
-  const [subject, subjectSelect] = useState('')
-  const [pointsSelected, setPointsSelected] = useState('')
+  const [subjectValue, setSubjectValue] = useState('')
+  const [pointsSelected, setPointsSelected] = useState('10')
   const { setIsOpen } = useQuestionModalStore()
   const { user } = useAuthStore()
   const router = useRouter()
@@ -49,7 +48,9 @@ export function NewTransactionModal() {
   const handleSelectSubjectChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    subjectSelect(event.target.value)
+    const selectedSubject = event.target.value
+    setValue('subject', selectedSubject)
+    setSubjectValue(selectedSubject)
   }
 
   const handleSelectPointsChange = (
@@ -66,7 +67,7 @@ export function NewTransactionModal() {
       const points = parseInt(pointsSelected, 10)
 
       const response = await api.post(
-        `/questions/${subject}/${user?.grade_id}`,
+        `/questions/${subjectValue}/${user?.grade_id}`,
         {
           content,
           points,
@@ -112,45 +113,51 @@ export function NewTransactionModal() {
               {formState.errors.content.message}
             </Text>
           )}
+          {!watch('subject') && formState.errors.subject && (
+            <Text color="danger_500" weight="medium">
+              Por favor, selecione uma matéria.
+            </Text>
+          )}
           <S.QuestionMoreInfoContainer>
-            <S.Tools>
-              <Tooltip content="Anexe aqui">
-                <T.IconButton backgroundColor="white">
-                  <AiOutlinePaperClip size={24} />
-                </T.IconButton>
-              </Tooltip>
+            {/* <div>
+              <S.Tools>
+                <Tooltip content="Anexe aqui">
+                  <T.IconButton backgroundColor="white">
+                    <AiOutlinePaperClip size={24} />
+                  </T.IconButton>
+                </Tooltip>
 
-              <Tooltip content="Hello!">
-                <T.IconButton backgroundColor="white">
-                  <TbMathFunctionY size={24} />
-                </T.IconButton>
-              </Tooltip>
+                <Tooltip content="Hello!">
+                  <T.IconButton backgroundColor="white">
+                    <TbMathFunctionY size={24} />
+                  </T.IconButton>
+                </Tooltip>
 
-              <Tooltip content="aaaaaaaaaaaaaaaa">
-                <T.IconButton backgroundColor="white">
-                  <MdOutlineEmojiSymbols size={24} />
-                </T.IconButton>
-              </Tooltip>
-            </S.Tools>
+                <Tooltip content="aaaaaaaaaaaaaaaa">
+                  <T.IconButton backgroundColor="white">
+                    <MdOutlineEmojiSymbols size={24} />
+                  </T.IconButton>
+                </Tooltip>
+              </S.Tools>
+            </div> */}
             <S.Selects>
               <SubjectSelect onChange={handleSelectSubjectChange} />
               <PointsSelect onChange={handleSelectPointsChange} />
+              <Tooltip content="Quanto mais pontos atribuir, mais rapido pode ser sua resposta">
+                <IoHelpCircleSharp size={24} />
+              </Tooltip>
             </S.Selects>
           </S.QuestionMoreInfoContainer>
 
-          <div>
+          <S.SubmitButtonContainer>
             {isSubmitting ? (
               <Spinner size="sm" baseColor="black" variant="primary" />
             ) : (
-              <Button
-                type="submit"
-                backgroundColor="black"
-                disabled={isSubmitting}
-              >
+              <S.SubmitButton type="submit" disabled={isSubmitting}>
                 Fazer pergunta
-              </Button>
+              </S.SubmitButton>
             )}
-          </div>
+          </S.SubmitButtonContainer>
         </form>
       </S.Content>
     </Dialog.Portal>

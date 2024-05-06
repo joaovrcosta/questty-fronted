@@ -33,6 +33,7 @@ export interface IAnswer {
     level: number
   }
   reports: IReport[]
+  comments: IComment[]
   question_id: string
   createdAt: string
   deletedAt: string

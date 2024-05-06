@@ -3,17 +3,24 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { Text } from '@/components/atoms/Text'
 import { Avatar } from '@/components/atoms/Avatar'
 import { getTimeAgo } from '@/utils/getTimeAgo'
-import { MdVerified } from 'react-icons/md'
+import { MdOutlineSend, MdVerified } from 'react-icons/md'
 import api from '@/services/api'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { useEffect, useState } from 'react'
-import { AiOutlineFlag, AiOutlineSisternode, AiFillFlag } from 'react-icons/ai'
+import { AiOutlineFlag, AiFillFlag } from 'react-icons/ai'
 import { Tooltip } from '../../molecules/Tooltip'
 import { VscVerifiedFilled } from 'react-icons/vsc'
 import parse from 'html-react-parser'
 import Link from 'next/link'
 import { useReportAnswerStore } from '@/features/stores/modals-stores/reportAnswerModal'
 import { ReportAnswerModal } from '@/components/modals/ReportAnswerModal'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { CommentFormSchema } from '@/utils/zodSchemas'
+import { useRouter } from 'next/router'
+import { IComment } from '@/shared/types'
+import { Spinner } from '@/components/atoms/Spinner'
+import { CommentBox } from '../CommentBox'
 
 interface Answer {
   id: string | undefined
@@ -27,6 +34,16 @@ interface Answer {
   avatarUrl?: string
   authorLevel: number | undefined
   isReported: boolean | undefined
+  prevComments: IComment[]
+}
+
+interface FormData {
+  content: string
+  oneOfFields: {
+    questionId: string | null
+    answerId: string
+  }
+  categoryType: string
 }
 
 export function AnswerBox({
@@ -41,13 +58,59 @@ export function AnswerBox({
   avatarUrl,
   authorLevel,
   isReported,
+  prevComments,
 }: Answer) {
-  const { token } = useAuthStore()
+  const { register, handleSubmit, formState, reset } = useForm<FormData>({
+    resolver: zodResolver(CommentFormSchema),
+  })
+
+  const { isSubmitting } = formState
+
   const [likesTotal, setLikesTotal] = useState(likesQuantity)
-  const { user } = useAuthStore()
+  const { user, isLoggedIn, token } = useAuthStore()
+  const [showAllComments, setShowAllComments] = useState(false)
   const [isAlreadyLiked, setIsAlreadyLiked] = useState(false)
   const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
+  const [comments, setComments] = useState<IComment[]>([])
+
+  const MAX_DISPLAY_COMMENTS = 3
+
+  const commentsToDisplay = showAllComments
+    ? comments
+    : comments.slice(0, MAX_DISPLAY_COMMENTS)
+
   const { isOpening, setIsOpening, isModerated } = useReportAnswerStore()
+  const router = useRouter()
+
+  useEffect(() => {
+    setComments(prevComments ?? [])
+  }, [prevComments])
+
+  const handleCreateNewComment = async (data: FormData) => {
+    try {
+      if (!token || !isLoggedIn) {
+        await router.push('/signin')
+        return
+      }
+
+      const response = await api.post('/comment', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (response.status === 200) {
+        const newCommentData = response.data.comment
+        setComments((prevComments) => [newCommentData, ...prevComments])
+        reset()
+      } else if (response.status === 400) {
+        console.log('Pergunta já respondida')
+      }
+    } catch (error) {
+      console.error('Error creating comment:', error)
+      throw error
+    }
+  }
 
   const handleReportClick = () => {
     setCurrentEntityId(id || '')
@@ -254,14 +317,84 @@ export function AnswerBox({
           ) : null}
         </S.UserHandleActionsContainer>
 
-        <S.MoreDetailsInputContainer>
-          <Avatar
-            variant="sm"
-            imageUrl={user?.avatar_url ? user?.avatar_url : null}
-            id={String(user?.id)}
-          />
-          <S.MoreDetailsInput placeholder={`Escreva seu comentário`} />
-        </S.MoreDetailsInputContainer>
+        {!token || !isLoggedIn ? (
+          <Link href="/signin" style={{ textDecoration: 'none' }}>
+            <S.NoLoggedMoreDetailsInputContainer>
+              <S.LoginLink weight="semibold">Entrar</S.LoginLink>
+              <S.NoLoggedMoreDetailsInput
+                {...register('content')}
+                placeholder={`para adicionar um comentário`}
+              />
+            </S.NoLoggedMoreDetailsInputContainer>
+          </Link>
+        ) : (
+          <S.MoreDetailsInputContainer>
+            <Avatar
+              variant="sm"
+              imageUrl={user?.avatar_url ? user?.avatar_url : null}
+              id={String(user?.id)}
+            />
+            <S.CommentForm
+              onSubmit={handleSubmit(async (data) => {
+                const formData = {
+                  content: data.content,
+                  oneOfFields: {
+                    questionId: null,
+                    answerId: id ?? '',
+                  },
+                  categoryType: 'answer',
+                }
+
+                await handleCreateNewComment(formData)
+              })}
+            >
+              <S.MoreDetailsInput
+                {...register('content')}
+                placeholder={`Pedir detalhes para ${author}`}
+              />
+              {isSubmitting ? (
+                <Spinner size="md" baseColor="blue_950" variant="secondary" />
+              ) : (
+                <S.SendButton type="submit">
+                  <MdOutlineSend size={16} color="#000" />
+                </S.SendButton>
+              )}
+            </S.CommentForm>
+          </S.MoreDetailsInputContainer>
+        )}
+
+        <>
+          <S.CommentSection>
+            {commentsToDisplay.map((comment) => (
+              <CommentBox
+                key={comment.id}
+                id={comment.id}
+                answer_id={comment.answer_id}
+                author_id={comment.author_id}
+                content={comment.content}
+                createdAt={comment.createdAt}
+                question_id={comment.question_id}
+                avatar_url={comment.author ? comment.author.avatar_url : ''}
+                isReported={
+                  comment.reports && comment.reports.length > 0
+                    ? comment.reports[0].isOpen
+                    : false
+                }
+              />
+            ))}
+          </S.CommentSection>
+
+          {comments.length > MAX_DISPLAY_COMMENTS && !showAllComments && (
+            <S.SeeMoreContainer>
+              <S.SeeMoreButton
+                onClick={() => setShowAllComments(true)}
+                border={false}
+              >
+                VER MAIS COMENTÁRIOS
+              </S.SeeMoreButton>
+            </S.SeeMoreContainer>
+          )}
+        </>
       </S.AnswerBoxContainer>
     </S.AnswerWrapper>
   )

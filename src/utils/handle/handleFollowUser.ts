@@ -16,8 +16,6 @@ const handleFollowUser = async (
       },
     })
 
-    console.log(res)
-
     if (res.status === 204) {
       setIsAlreadyFollowing(false)
     } else if (res.status === 201) {

@@ -15,7 +15,6 @@ import api from '@/services/api'
 import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import * as zod from 'zod'
 import { MdOutlineSend } from 'react-icons/md'
 import { Spinner } from '@/components/atoms/Spinner'
 import { IComment } from '@/shared/types'
@@ -28,6 +27,7 @@ import { FiCheckCircle } from 'react-icons/fi'
 import { useReportQuestionStore } from '@/features/stores/modals-stores/reportQuestionModal/userReportQuestionModal'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
+import { CommentFormSchema } from '@/utils/zodSchemas'
 
 interface QuestionBoxProps {
   id?: number | string
@@ -54,23 +54,6 @@ interface FormData {
   }
   categoryType: string
 }
-
-const CommentFormSchema = zod.object({
-  content: zod
-    .string()
-    .min(2, 'Comentário deve ter entre 2 a 500 caracteres.')
-    .max(500, 'Comentário deve ter entre 2 a 500 caracteres.')
-    .refine(
-      (content) => {
-        const words = content.split(/\s+/)
-        return !words.some((word) => word.length > 46)
-      },
-      {
-        message: 'Nenhuma palavra deve ter mais de 46 letras.',
-        path: ['content'],
-      }
-    ),
-})
 
 export function QuestionBox({
   id,
@@ -108,8 +91,30 @@ export function QuestionBox({
     alreadyAnswered,
   } = useAnswerModalStore()
 
-  const largeText = content?.substring(0, 380)
-  const normalText = content?.substring(380)
+  let largeText = ''
+  let normalText = ''
+
+  if (content) {
+    const maxLengthLarge = 182
+    const maxLengthNormal = 345
+
+    if (content.length <= maxLengthNormal) {
+      normalText = content
+    } else {
+      if (content.length <= maxLengthLarge) {
+        largeText = content
+      } else {
+        const splitIndex = content.lastIndexOf(' ', maxLengthLarge)
+        if (splitIndex !== -1) {
+          largeText = content.substring(0, splitIndex)
+          normalText = content.substring(splitIndex + 1)
+        } else {
+          largeText = content.substring(0, maxLengthLarge)
+          normalText = content.substring(maxLengthLarge)
+        }
+      }
+    }
+  }
 
   useEffect(() => {
     if (question === null) {
@@ -202,8 +207,6 @@ export function QuestionBox({
     }
   }, [isMobile, isAnswering, setIsAnsweringMobile])
 
-  console.log(currentEntityId === id && isOpening)
-
   return (
     <S.QuestionWrapper>
       <S.AvatarContainer>
@@ -272,7 +275,7 @@ export function QuestionBox({
           </S.HasAnsweredContainerMobile>
         ) : null}
 
-        <S.QuestionContent>
+        <S.QuestionContent isAuthor={isAuthor}>
           <S.QuestionTitle>
             <S.QuestionTitleText
               size="xx1"
@@ -297,18 +300,27 @@ export function QuestionBox({
                 weight="semibold"
                 style={{
                   marginTop: '1.5rem',
-                  lineHeight: '24px',
+                  lineHeight: '28px',
+                  fontFamily: 'ProximaNova',
+                  fontSize: '22px',
                 }}
               >
                 {largeText}
               </Text>
             )}
-            <Text
-              color="blue_950"
-              style={{ marginTop: '1rem', lineHeight: '24px' }}
-            >
-              {normalText}
-            </Text>
+            {normalText && (
+              <Text
+                color="blue_950"
+                style={{
+                  marginTop: '0.5rem',
+                  lineHeight: '24px',
+                  fontFamily: 'ProximaNova',
+                  fontSize: '18px',
+                }}
+              >
+                {normalText}
+              </Text>
+            )}
           </S.ContentContainer>
         </S.QuestionContent>
 
@@ -317,35 +329,39 @@ export function QuestionBox({
         )}
 
         <S.UserHandleActionsContainer>
-          <S.ButtonsContainer>
-            {!isLoggedIn ? (
-              <Link
-                href="#answers"
-                style={{ textDecoration: 'none', width: '100%' }}
-              >
-                <S.SeeAnswerButtonContainer hug={true}>
-                  VER{' '}
-                  <S.QuantityCircle>
-                    <Text weight="bold" color="white">
-                      {answersQuantity}
-                    </Text>
-                  </S.QuantityCircle>
-                  {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
-                </S.SeeAnswerButtonContainer>
-              </Link>
-            ) : null}
+          {isAuthor && !hasAnswer ? null : (
+            <S.ButtonsContainer>
+              {!isLoggedIn && hasAnswer ? (
+                <Link
+                  href="#answers"
+                  style={{ textDecoration: 'none', width: '100%' }}
+                >
+                  <S.SeeAnswerButtonContainer hug={true}>
+                    VER{' '}
+                    <S.QuantityCircle>
+                      <Text weight="bold" color="white">
+                        {answersQuantity}
+                      </Text>
+                    </S.QuantityCircle>
+                    {answersQuantity === 1 ? 'RESPOSTA' : 'RESPOSTAS'}
+                  </S.SeeAnswerButtonContainer>
+                </Link>
+              ) : null}
 
-            <AnswerButton
-              isMobile={isMobile}
-              answersQuantity={answersQuantity}
-              hasAnswer={hasAnswer}
-              isAuthor={isAuthor}
-              hasThreeAnswers={hasThreeAnswers}
-              isAlreadyAnsweredByUser={alreadyAnswered}
-              loading={loading}
-              points={points}
-            />
-          </S.ButtonsContainer>
+              <S.AnswerButtonAuthor isAuthor={isAuthor}>
+                <AnswerButton
+                  isMobile={isMobile}
+                  answersQuantity={answersQuantity}
+                  hasAnswer={hasAnswer}
+                  isAuthor={isAuthor}
+                  hasThreeAnswers={hasThreeAnswers}
+                  isAlreadyAnsweredByUser={alreadyAnswered}
+                  loading={loading}
+                  points={points}
+                />
+              </S.AnswerButtonAuthor>
+            </S.ButtonsContainer>
+          )}
 
           {!isAuthor && (
             <S.ModerationWrapper>
@@ -446,18 +462,18 @@ export function QuestionBox({
                       />
                     ) : (
                       <S.SendButton type="submit">
-                        <MdOutlineSend size={16} />
+                        <MdOutlineSend size={16} color="#000" />
                       </S.SendButton>
                     )}
                   </S.CommentForm>
                 </S.MoreDetailsInputContainer>
                 {formState.errors.content && (
-                  <div style={{ marginTop: '1.5rem' }}>
+                  <div style={{ marginTop: '1rem' }}>
                     <span
                       style={{
                         color: '#D20032',
                         fontFamily: 'Poppins',
-                        fontWeight: 300,
+                        fontWeight: 400,
                       }}
                     >
                       {formState.errors.content.message}
@@ -481,7 +497,11 @@ export function QuestionBox({
                 createdAt={comment.createdAt}
                 question_id={comment.question_id}
                 avatar_url={comment.author ? comment.author.avatar_url : ''}
-                isReported={comment.reports[0]?.isOpen}
+                isReported={
+                  comment.reports && comment.reports.length > 0
+                    ? comment.reports[0].isOpen
+                    : false
+                }
               />
             ))}
           </S.CommentSection>

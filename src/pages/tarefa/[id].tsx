@@ -4,7 +4,7 @@ import { AnswerBox } from '@/components/Boxes/AnswerBox'
 import api from '@/services/api'
 import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IQuestion, IQuestionData } from '@/shared/types'
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
 import { Text } from '@/components/atoms/Text'
 import GirlLamp from '@/assets/GirlLamp.svg'
@@ -23,6 +23,7 @@ import { LoginModal } from '@/components/modals/LoginModal'
 import Divider from '@/components/molecules/Divider'
 import { useIsMobileStore } from '@/features/stores/isMobile/userIsMobile'
 import { motion } from 'framer-motion'
+import { FaPlus } from 'react-icons/fa'
 import Custom404 from '../404'
 
 interface Question {
@@ -46,7 +47,6 @@ export default function Question(props: IQuestionData) {
 
   const [loading, setLoading] = useState(true)
   const [subjectQuestions, setSubjectQuestions] = useState([])
-  // const { width, height } = useWindowSize()
   const { isMobile, setIsMobile } = useIsMobileStore()
 
   const setQuestion = useQuestionStore((state) => state.setQuestion)
@@ -55,8 +55,7 @@ export default function Question(props: IQuestionData) {
 
   const { user, isLoggedIn } = useAuthStore()
   const { question, setAnswerQuantity, answerQuantity } = useQuestionStore()
-  const { answers, currentNewAnswer } = useAnswerStore()
-  // const isLoggedIn = props.isLoggedIn
+  const { currentNewAnswer } = useAnswerStore()
 
   const textForTitle = `${props.questionData?.content.substring(
     0,
@@ -183,7 +182,12 @@ export default function Question(props: IQuestionData) {
             likesQuantity={answer?.likes?.length || 0}
             avatarUrl={answer?.author?.avatar_url}
             authorLevel={answer?.author?.level}
-            isReported={answer?.reports[0]?.isOpen}
+            isReported={
+              answer?.reports &&
+              answer.reports.length > 0 &&
+              answer.reports[0].isOpen
+            }
+            prevComments={answer?.comments ?? []}
           />
         </motion.div>
       ))
@@ -211,7 +215,7 @@ export default function Question(props: IQuestionData) {
           </S.ShareKnowledgeText>
           <Link href="/" style={{ width: '100%' }}>
             <S.ShareKnowButton backgroundColor="black" color="white">
-              <GoPlus size={24} />
+              <FaPlus size={18} />
               RESPONDER UMA PERGUNTA
             </S.ShareKnowButton>
           </Link>

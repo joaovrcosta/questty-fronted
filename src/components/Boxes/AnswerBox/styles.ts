@@ -144,7 +144,7 @@ export const UserLevel = styled.div`
 export const AnswerContent = styled.div``
 
 export const AnswerContentText = styled(Text)`
-  font-family: Nunito;
+  font-family: ProximaNova;
   line-height: 24px;
   height: 100%;
 
@@ -359,4 +359,92 @@ export const ModeratedButton = styled.button`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.white};
   transition: 0.2s ease all;
+`
+export const CommentForm = styled.form`
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+
+  @media (max-width: 769px) {
+    gap: 1rem;
+  }
+`
+export const SendButton = styled.button`
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  min-width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  cursor: pointer;
+
+  & svg {
+    color: ${({ theme }) => theme.colors.blue_550};
+  }
+`
+export const SeeMoreContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+
+  @media (max-width: 769px) {
+    margin-top: 2rem;
+  }
+`
+export const SeeMoreButton = styled(Button)`
+  background-color: transparent;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.5s ease all;
+  }
+`
+export const CommentSection = styled.div`
+  &:nth-child(1) {
+    padding-top: 2rem;
+  }
+`
+export const NoLoggedMoreDetailsInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0rem 1.5rem;
+
+  border-radius: 33px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
+  cursor: pointer;
+  height: 38px;
+
+  @media (max-width: 769px) {
+    background-color: #fff;
+  }
+`
+export const LoginLink = styled(Text)`
+  text-decoration: none;
+  font-size: 15px;
+  color: #014a82;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+export const NoLoggedMoreDetailsInput = styled.input`
+  width: 100%;
+  padding: 0;
+  border-radius: 33px;
+  border: none;
+  font-family: Poppins;
+  outline: 0;
+  cursor: pointer;
+  font-size: 15px;
+
+  @media (max-width: 769px) {
+    background-color: #fff;
+  }
 `

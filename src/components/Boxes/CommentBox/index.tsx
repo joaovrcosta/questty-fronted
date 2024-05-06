@@ -1,7 +1,6 @@
 import { Avatar } from '@/components/atoms/Avatar'
 import * as S from './styles'
 import { Text } from '@/components/atoms/Text'
-import { IComment } from '@/shared/types'
 import { AiFillFlag, AiOutlineFlag } from 'react-icons/ai'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Tooltip } from '@/components/molecules/Tooltip'
@@ -43,13 +42,24 @@ export function CommentBox({
   return (
     <S.CommentContainer>
       <S.CommentInfo>
-        <Avatar
-          variant="sm"
-          imageUrl={avatar_url ? avatar_url : null}
-          id={author_id}
-        />
         <div>
-          <Text size="sm">{content}</Text>
+          <Avatar
+            variant="sm"
+            imageUrl={avatar_url ? avatar_url : null}
+            id={author_id}
+          />
+        </div>
+        <div>
+          <Text
+            size="sm"
+            style={{
+              fontFamily: 'ProximaNova',
+              lineHeight: '20px',
+              fontSize: '15px',
+            }}
+          >
+            {content}
+          </Text>
         </div>
       </S.CommentInfo>
       <S.ModerateContainer>

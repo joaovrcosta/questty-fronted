@@ -7,12 +7,11 @@ interface SubjectSelectProps {
 export function PointsSelect({ onChange }: SubjectSelectProps) {
   return (
     <S.SubjectSelect onChange={onChange}>
-      <option value="5">5XP</option>
-      <option value="10">10pts</option>
-      <option value="20">20pts</option>
-      <option value="30">30pts</option>
-      <option value="40">40pts</option>
-      <option value="50">50pts</option>
+      <option value="10">10XP</option>
+      <option value="20">20XP</option>
+      <option value="30">30XP</option>
+      <option value="40">40XP</option>
+      <option value="50">50XP</option>
     </S.SubjectSelect>
   )
 }

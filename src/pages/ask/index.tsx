@@ -1,5 +1,3 @@
-import { Footer } from '@/components/organisms/Footer'
-import { Header } from '@/components/organisms/Header'
 import { QuestionCard } from '@/components/Cards/QuestionCard'
 import { Text } from '@/components/atoms/Text'
 import { withSession } from '@/lib/with-session'

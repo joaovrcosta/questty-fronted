@@ -73,7 +73,7 @@ export function Header() {
             </div>
           ) : (
             <>
-              <S.MakeQuestionButton>
+              <div>
                 <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
                   <Dialog.Trigger asChild>
                     <S.MakeYourQuestionButton
@@ -85,7 +85,7 @@ export function Header() {
                   </Dialog.Trigger>
                   <NewTransactionModal />
                 </Dialog.Root>
-              </S.MakeQuestionButton>
+              </div>
             </>
           )}
 
@@ -127,14 +127,14 @@ export function Header() {
         <S.SubHeader>
           <S.SubHeaderContent>
             <S.StyledLink href="/signin">
-              <S.SubSignInButton backgroundColor="transparent">
+              <S.SubSignInButton backgroundColor="transparent" hug={true}>
                 ENTRAR
               </S.SubSignInButton>
             </S.StyledLink>
 
             <S.StyledLink href="/signin">
               <S.SubSignUpButton backgroundColor="blue_500" color="white">
-                CRIAR CONTA
+                CRIAR UM CONTA
               </S.SubSignUpButton>
             </S.StyledLink>
           </S.SubHeaderContent>

@@ -7,7 +7,6 @@ interface UploadBoxProps {
   fileTypes?: string[]
   label?: string
   hoverLabel?: string
-  //   handleChange: (files: FileList) => void
 }
 
 export function UploadBox({

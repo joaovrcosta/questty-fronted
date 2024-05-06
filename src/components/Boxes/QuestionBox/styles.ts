@@ -12,6 +12,10 @@ interface IAnswerButton {
   isAnswering?: boolean
 }
 
+interface IQuestionContainer {
+  isAuthor?: boolean
+}
+
 export const QuestionBoxContainer = styled.div<IQuestionBoxProps>`
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
@@ -136,8 +140,10 @@ export const AnswerQuantity = styled.div`
 
 // Question Content
 
-export const QuestionContent = styled.div`
-  margin-bottom: 1.5rem;
+export const QuestionContent = styled.div<IQuestionContainer>`
+  margin-bottom: ${({ isAuthor }) => (isAuthor ? '0' : '1.5rem')};
+
+  ${(props) => !props.isAuthor && css``}
 `
 
 export const QuestionTitleText = styled(Text)`
@@ -172,12 +178,12 @@ export const UserHandleActionsContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 1.5rem;
   border-bottom: 2px solid #e5e5e5;
-  padding: 0 0 1rem 0;
+  padding: 0 0 1.5rem 0;
   /* margin-top: 3rem; */
 
   @media (max-width: 769px) {
     border-bottom: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     padding: 0;
     flex-direction: column;
   }
@@ -609,4 +615,11 @@ export const ButtonsContainer = styled.div`
     gap: 0.5rem;
     width: 100%;
   }
+`
+export const AnswerButtonAuthor = styled.div<IQuestionContainer>`
+  margin-top: ${({ isAuthor }) => (isAuthor ? '1.5rem' : '0')};
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
 `

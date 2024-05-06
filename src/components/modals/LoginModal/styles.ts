@@ -58,7 +58,7 @@ export const CloseButton = styled(Dialog.Close)`
 
 export const LoginContainerContent = styled.div`
   padding: 0 2rem;
-  max-width: 400px;
+  max-width: 100%;
 
   @media (max-width: 769px) {
     padding: 1rem 1rem 0 1rem;
@@ -70,6 +70,7 @@ export const EnterHeader = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  /* max-width: 400px; */
 `
 
 export const EmailInputContainer = styled.div``

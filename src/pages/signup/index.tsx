@@ -2,10 +2,8 @@ import * as S from '@/styles/pages/signup'
 import { Heading } from '@/components/atoms/Heading'
 import { Input } from '@/components/atoms/Input'
 import { useForm } from 'react-hook-form'
-import { Footer } from '@/components/organisms/Footer'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { HeaderAuth } from '@/components/organisms/HeaderAuth'
-import Head from 'next/head'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
@@ -22,10 +20,9 @@ const claimEmailSchema = zod.object({
 type ClaimEmailFormData = zod.infer<typeof claimEmailSchema>
 
 export default function SignUp() {
-  const { register, handleSubmit, watch, formState } =
-    useForm<ClaimEmailFormData>({
-      resolver: zodResolver(claimEmailSchema),
-    })
+  const { register, handleSubmit, formState } = useForm<ClaimEmailFormData>({
+    resolver: zodResolver(claimEmailSchema),
+  })
 
   const { isSubmitting } = formState
 

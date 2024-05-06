@@ -178,6 +178,7 @@ export const UserHandleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
+  margin-left: 0.3rem;
 
   ${({ theme }) => css`
     @media (max-width: 768px) {
