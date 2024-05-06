@@ -408,3 +408,43 @@ export const CommentSection = styled.div`
     padding-top: 2rem;
   }
 `
+export const NoLoggedMoreDetailsInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0rem 1.5rem;
+
+  border-radius: 33px;
+  border: 1px solid ${({ theme }) => theme.colors.black};
+  font-family: Poppins;
+  cursor: pointer;
+  height: 38px;
+
+  @media (max-width: 769px) {
+    background-color: #fff;
+  }
+`
+export const LoginLink = styled(Text)`
+  text-decoration: none;
+  font-size: 15px;
+  color: #014a82;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+export const NoLoggedMoreDetailsInput = styled.input`
+  width: 100%;
+  padding: 0;
+  border-radius: 33px;
+  border: none;
+  font-family: Poppins;
+  outline: 0;
+  cursor: pointer;
+  font-size: 15px;
+
+  @media (max-width: 769px) {
+    background-color: #fff;
+  }
+`

@@ -317,39 +317,51 @@ export function AnswerBox({
           ) : null}
         </S.UserHandleActionsContainer>
 
-        <S.MoreDetailsInputContainer>
-          <Avatar
-            variant="sm"
-            imageUrl={user?.avatar_url ? user?.avatar_url : null}
-            id={String(user?.id)}
-          />
-          <S.CommentForm
-            onSubmit={handleSubmit(async (data) => {
-              const formData = {
-                content: data.content,
-                oneOfFields: {
-                  questionId: null,
-                  answerId: id ?? '',
-                },
-                categoryType: 'answer',
-              }
-
-              await handleCreateNewComment(formData)
-            })}
-          >
-            <S.MoreDetailsInput
-              {...register('content')}
-              placeholder={`Pedir detalhes para ${author}`}
+        {!token || !isLoggedIn ? (
+          <Link href="/signin" style={{ textDecoration: 'none' }}>
+            <S.NoLoggedMoreDetailsInputContainer>
+              <S.LoginLink weight="semibold">Entrar</S.LoginLink>
+              <S.NoLoggedMoreDetailsInput
+                {...register('content')}
+                placeholder={`para adicionar um comentário`}
+              />
+            </S.NoLoggedMoreDetailsInputContainer>
+          </Link>
+        ) : (
+          <S.MoreDetailsInputContainer>
+            <Avatar
+              variant="sm"
+              imageUrl={user?.avatar_url ? user?.avatar_url : null}
+              id={String(user?.id)}
             />
-            {isSubmitting ? (
-              <Spinner size="md" baseColor="blue_950" variant="secondary" />
-            ) : (
-              <S.SendButton type="submit">
-                <MdOutlineSend size={16} color="#000" />
-              </S.SendButton>
-            )}
-          </S.CommentForm>
-        </S.MoreDetailsInputContainer>
+            <S.CommentForm
+              onSubmit={handleSubmit(async (data) => {
+                const formData = {
+                  content: data.content,
+                  oneOfFields: {
+                    questionId: null,
+                    answerId: id ?? '',
+                  },
+                  categoryType: 'answer',
+                }
+
+                await handleCreateNewComment(formData)
+              })}
+            >
+              <S.MoreDetailsInput
+                {...register('content')}
+                placeholder={`Pedir detalhes para ${author}`}
+              />
+              {isSubmitting ? (
+                <Spinner size="md" baseColor="blue_950" variant="secondary" />
+              ) : (
+                <S.SendButton type="submit">
+                  <MdOutlineSend size={16} color="#000" />
+                </S.SendButton>
+              )}
+            </S.CommentForm>
+          </S.MoreDetailsInputContainer>
+        )}
 
         <>
           <S.CommentSection>

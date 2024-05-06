@@ -127,14 +127,14 @@ export function Header() {
         <S.SubHeader>
           <S.SubHeaderContent>
             <S.StyledLink href="/signin">
-              <S.SubSignInButton backgroundColor="transparent">
+              <S.SubSignInButton backgroundColor="transparent" hug={true}>
                 ENTRAR
               </S.SubSignInButton>
             </S.StyledLink>
 
             <S.StyledLink href="/signin">
               <S.SubSignUpButton backgroundColor="blue_500" color="white">
-                CRIAR CONTA
+                CRIAR UM CONTA
               </S.SubSignUpButton>
             </S.StyledLink>
           </S.SubHeaderContent>

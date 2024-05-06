@@ -47,8 +47,6 @@ export default function Home() {
     fetchData()
   }, [])
 
-  console.log(questions)
-
   return (
     <>
       <NextSeo

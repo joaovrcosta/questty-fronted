@@ -76,7 +76,6 @@ export default function Register() {
   const { isSubmitting } = formState
 
   const onSubmit = async (data: RegisterFormData) => {
-    console.log(data)
     try {
       const { username, email, password, name, gender, gradeId, dateOfBirth } =
         data

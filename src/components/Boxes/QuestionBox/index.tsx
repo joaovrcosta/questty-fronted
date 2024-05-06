@@ -325,7 +325,7 @@ export function QuestionBox({
 
         <S.UserHandleActionsContainer>
           <S.ButtonsContainer>
-            {!isLoggedIn ? (
+            {!isLoggedIn && hasAnswer ? (
               <Link
                 href="#answers"
                 style={{ textDecoration: 'none', width: '100%' }}

@@ -43,11 +43,13 @@ export function CommentBox({
   return (
     <S.CommentContainer>
       <S.CommentInfo>
-        <Avatar
-          variant="sm"
-          imageUrl={avatar_url ? avatar_url : null}
-          id={author_id}
-        />
+        <div>
+          <Avatar
+            variant="sm"
+            imageUrl={avatar_url ? avatar_url : null}
+            id={author_id}
+          />
+        </div>
         <div>
           <Text
             size="sm"

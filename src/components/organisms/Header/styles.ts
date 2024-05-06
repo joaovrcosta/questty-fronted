@@ -243,9 +243,9 @@ export const SubSignInButton = styled(Button)`
 `
 
 export const SubSignUpButton = styled(Button)`
-  width: 12.25rem;
+  width: 10rem;
   @media (max-width: 364px) {
-    width: 100%;
+    /* width: 100%; */
   }
 `
 

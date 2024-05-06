@@ -8,11 +8,19 @@ export const CommentContainer = styled.div`
   gap: 1.25rem;
   height: 100%;
   margin-top: 0.5rem;
+
+  @media (max-width: 390px) {
+    gap: 0rem;
+  }
 `
 export const CommentInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 1.25rem;
+
+  @media (max-width: 390px) {
+    gap: 0.75rem;
+  }
 `
 export const ModerateContainer = styled.div`
   button {
