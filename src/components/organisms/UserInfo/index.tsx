@@ -134,13 +134,21 @@ export function UserInfo({ data }: UserInfoProps) {
         </div>
 
         <S.FriendsQuantity>
-          {/* <IoMdPeople size={24} style={{ color: 'rgba(51, 51, 51, 1)' }} /> */}
           <Text size="md" color="black">
-            <strong style={{ fontWeight: '900', color: 'black' }}>0</strong>{' '}
+            <strong
+              style={{ fontWeight: '900', color: 'black', fontSize: '18px' }}
+            >
+              {data.userData.followCount.followers}
+            </strong>{' '}
             Seguidores{' '}
           </Text>
           <Text size="md" color="black">
-            <strong style={{ fontWeight: '900', color: 'black' }}>0</strong>{' '}
+            <strong
+              style={{ fontWeight: '900', color: 'black', fontSize: '18px' }}
+            >
+              {' '}
+              {data.userData.followCount.followings}
+            </strong>{' '}
             Segue{' '}
           </Text>
         </S.FriendsQuantity>

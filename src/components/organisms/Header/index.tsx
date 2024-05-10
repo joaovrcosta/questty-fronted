@@ -1,5 +1,5 @@
 import * as S from './styles'
-import logoImg from '../../../assets/logo.svg'
+import logoImg from '../../../assets/questtyLogoTest.svg'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/modals/NewQuestionModal'
 import Link from 'next/link'
@@ -47,7 +47,7 @@ export function Header() {
       <S.HeaderContent>
         <S.FirstBoxContent>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <S.LogoImage src={logoImg} width={145} height={46} alt="" />
+            <S.LogoImage src={logoImg} width={145} height={32} alt="" />
           </Link>
           <SearchInput backgroundColor="white" />
         </S.FirstBoxContent>

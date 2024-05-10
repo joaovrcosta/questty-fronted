@@ -137,6 +137,10 @@ export interface IProfileData {
       points: number
       bestResponses: number
     }
+    followCount: {
+      followers: number
+      followings: number
+    }
   }
 
   answersData: {
@@ -164,6 +168,10 @@ export interface IUserInfo {
       description: string
       points: number
       bestResponses: number
+    }
+    followCount: {
+      followers: number
+      followings: number
     }
   }
   answersData: {
