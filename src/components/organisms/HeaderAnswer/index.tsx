@@ -1,5 +1,5 @@
 import * as S from './styles'
-import logoImg from '../../../assets/questty-logo-header-answers.svg'
+import logoImg from '../../../assets/questtyLogoTest.svg'
 import * as Dialog from '@radix-ui/react-dialog'
 import { NewTransactionModal } from '@/components/modals/NewQuestionModal'
 import Link from 'next/link'
@@ -11,12 +11,23 @@ import { useQuestionModalStore } from '@/features/stores/modals-stores/newQuesti
 import { useEffect, useState } from 'react'
 import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
 import Cookies from 'js-cookie'
+import { IoIosArrowBack } from 'react-icons/io'
+import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuestionModal/useAnswerQuestionModal'
+import { Text } from '@/components/atoms/Text'
+import { FcInfo } from 'react-icons/fc'
+import { Tooltip } from '@/components/molecules/Tooltip'
 
 export function HeaderAnswer() {
   const [loading, setLoading] = useState(false)
 
   const { isLoggedIn, user, token } = useAuthStore()
-  const { isOpen, setIsOpen } = useQuestionModalStore()
+  // const { isOpen, setIsOpen, setIsAnswering } = useQuestionModalStore()
+  const { setIsOpen, setIsAnswering } = useAnswerModalStore()
+
+  const handleCloseModal = () => {
+    setIsOpen(false)
+    setIsAnswering(false)
+  }
 
   useEffect(() => {
     const cookieToken = Cookies.get('questty-token')
@@ -32,6 +43,9 @@ export function HeaderAnswer() {
     <S.HeaderContainer>
       <S.HeaderContent>
         <S.FirstBoxContent>
+          <S.BackButtonContainer onClick={handleCloseModal}>
+            <IoIosArrowBack size={24} />
+          </S.BackButtonContainer>
           <Link
             href="/"
             style={{
@@ -69,6 +83,22 @@ export function HeaderAnswer() {
                   </S.StyledLink>
                 </S.HeaderActionsContainer>
               )}
+
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                }}
+              >
+                <Text style={{ whiteSpace: 'nowrap' }}>
+                  Como ganhar pontos?
+                </Text>
+                <Tooltip content="Para ganhar pontos você deve responder perguntas">
+                  <FcInfo size={24} />
+                </Tooltip>
+              </div>
 
               <S.AvatarContainer>
                 {isLoggedIn && <Dropdown id={user?.id} />}

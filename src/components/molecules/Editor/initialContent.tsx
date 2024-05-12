@@ -1,3 +1,7 @@
 export const initialContent = `
-<p>Sua resposta vale ouro</p>
+<p>
+<strong>Resposta:</strong><br><br>
+
+<strong>Explicação</strong><br>
+</p>
 `

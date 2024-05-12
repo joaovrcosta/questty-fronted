@@ -6,22 +6,50 @@ import { Toolbar } from './Toolbar'
 import { useEffect } from 'react'
 
 const StyledEditorContainer = styled.div`
-  background-color: #f8f8f8;
+  position: relative;
+  background-color: #fff;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  overflow: auto;
+  height: 534px; /* Ajuste a altura conforme necessário */
+
+  /* Estilizando a barra de rolagem */
+  ::-webkit-scrollbar {
+    width: 4px; /* largura da barra de rolagem */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* cor de fundo da trilha da barra de rolagem */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* cor do polegar da barra de rolagem */
+    border-radius: 8px; /* borda arredondada do polegar */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* cor do polegar da barra de rolagem ao passar o mouse */
+  }
 `
 
 const StyledEditorContent = styled.div`
   outline: none;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'ProximaNova', sans-serif;
   font-size: 18px;
-  min-height: 355px;
+  min-height: 465px;
 
   @media (max-width: 1180px) {
     padding: 5px;
     min-height: 250px;
   }
+`
+
+const StyledToolbarContainer = styled.div`
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 1; /* Garante que a barra de ferramentas fique acima do conteúdo */
 `
 
 interface EditorProps {
@@ -34,9 +62,9 @@ export function Editor({ onChange }: EditorProps) {
     content: initialContent,
     editorProps: {
       attributes: {
-        class: 'styled-editor-content', 
+        class: 'styled-editor-content',
         style:
-          'outline: none; font-family: Nunito; font-size: 18px; padding: 0.5rem; min-height: 200px;',
+          'outline: none; font-family: ProximaNova; font-size: 18px; padding: 0.5rem; padding-bottom: 1rem; min-height: 200px; line-height: 1.5rem',
       },
     },
   })
@@ -62,7 +90,9 @@ export function Editor({ onChange }: EditorProps) {
       <StyledEditorContent>
         <EditorContent editor={editor} />
       </StyledEditorContent>
-      <Toolbar editor={editor} />
+      <StyledToolbarContainer>
+        <Toolbar editor={editor} />
+      </StyledToolbarContainer>
     </StyledEditorContainer>
   )
 }

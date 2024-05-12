@@ -26,6 +26,7 @@ export interface IAnswer {
   content: string
   isGolden: boolean
   author_id: string
+  totalLikes: number
   author: {
     name: string
     username: string

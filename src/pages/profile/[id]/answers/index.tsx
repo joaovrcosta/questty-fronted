@@ -62,7 +62,7 @@ export default function Answers(props: IProfileData) {
                       answeredText="respondeu"
                       questionAnswered={answer.question.content}
                       questionId={answer.question_id}
-                      likesQuantity={answer.likes.length}
+                      likesQuantity={answer.totalLikes}
                       // subjectName={answer.category.name}
                     />
                   </motion.div>

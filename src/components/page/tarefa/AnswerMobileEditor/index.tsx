@@ -26,7 +26,8 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
     resolver: zodResolver(AnswerFormSchema),
   })
   const { question } = useQuestionStore()
-  const { setIsAnsweringMobile, setIsAnswering } = useAnswerModalStore()
+  const { setIsAnsweringMobile, setIsAnswering, setIsOpen } =
+    useAnswerModalStore()
   const { user } = useAuthStore()
   const { handleAnswerQuestion } = useAnswerHandler()
   const { isSubmitting } = formState
@@ -54,6 +55,7 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
                 onClick={() => {
                   setIsAnsweringMobile(false)
                   setIsAnswering(false)
+                  setIsOpen(false)
                 }}
               >
                 <IoMdClose size={24} color="#000" />

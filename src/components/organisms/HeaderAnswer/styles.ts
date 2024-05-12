@@ -19,7 +19,7 @@ export const HeaderContainer = styled.div<IHeader>`
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
 
   position: fixed;
-  height: 60px;
+  /* height: 72px; */
   top: 0;
   left: 0;
   z-index: 99999;
@@ -36,7 +36,7 @@ export const HeaderContent = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,10 +118,14 @@ export const AvatarContainer = styled.div`
 export const HeaderActionsContainer = styled.div<ContentProps>`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
 
   @media (max-width: 768px) {
     display: ${(props) => (props.existsToken ? 'none' : 'block')};
+  }
+
+  @media (max-width: 1180px) {
+    gap: 0.25rem;
   }
 `
 
@@ -290,4 +294,21 @@ export const PointsContainer = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+`
+
+export const BackButtonContainer = styled.button`
+  background-color: transparent;
+  border: none;
+  height: 40px;
+  width: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    transition: 0.2s;
+    border-radius: 50%;
+  }
 `

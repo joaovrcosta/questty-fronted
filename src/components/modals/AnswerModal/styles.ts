@@ -34,13 +34,16 @@ export const Content = styled(Dialog.Content)`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    height: 625px;
     padding: 1rem;
-    border-radius: 16px;
+    border-radius: 12px;
     background: ${({ theme }) => theme.colors.white};
-    /* border: 1px solid ${({ theme }) => theme.colors.black}; */
     border: 1px solid #000;
-
     border-bottom: 4px solid #000;
+
+    @media (max-width: 1180px) {
+      height: 25rem;
+    }
 
     input {
       border-radius: 5px;
@@ -57,17 +60,17 @@ export const Content = styled(Dialog.Content)`
     }
 
     button[type='submit'] {
-      height: 44px;
+      min-height: 40px;
+      max-height: 40px;
       border: 0;
       width: 12rem;
-      background: rgb(73, 192, 248);
+      background: ${({ theme }) => theme.colors.black};
       font-size: 14px;
       color: ${({ theme }) => theme.colors.white};
-      border-bottom: 4px solid rgb(24 153 214);
       font-family: Poppins;
       font-weight: 800;
       padding: 0 1.25rem;
-      border-radius: 12px;
+      border-radius: 50px;
       cursor: pointer;
       text-transform: uppercase;
       display: flex;
@@ -86,7 +89,7 @@ export const Content = styled(Dialog.Content)`
       } */
 
       &:hover {
-        background-color: rgb(24 153 214);
+        opacity: 0.8;
         transition: 0.4s;
       }
 
@@ -210,18 +213,11 @@ export const SubjectSelect = styled.select`
 export const QuestionTextContainer = styled.div`
   width: 360px;
   height: 625px;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid #000;
+  background-color: ${({ theme }) => theme.colors.transparent};
+  border: none;
 
-  border-bottom: 4px solid #000;
-  padding: 2rem 1rem 1rem 1rem;
-
-  @media (max-width: 1180px) {
-    width: 100%;
-    height: 100%;
-
-    /* flex-direction: column-reverse; */
-  }
+  /* border-bottom: 4px solid #000; */
+  padding: 0 1rem 1rem 1rem;
 
   @media (max-width: 960px) {
     height: 100%;
@@ -235,6 +231,14 @@ export const QuestionTextContainer = styled.div`
     padding: 1.5rem 1rem 1rem 1rem;
     /* flex-direction: column-reverse; */
   }
+
+  @media (max-width: 1180px) {
+    width: 100%;
+    height: 100%;
+    background-color: ${({ theme }) => theme.colors.transparent};
+    border: none;
+    padding: 0;
+  }
 `
 
 export const FormAnsweringContainer = styled.div`
@@ -242,12 +246,11 @@ export const FormAnsweringContainer = styled.div`
 
   @media (max-width: 1180px) {
     width: 100%;
-    margin-top: 2rem;
     /* flex-direction: column-reverse; */
   }
 
   @media (max-width: 820px) {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     width: 100%;
 
     /* flex-direction: column-reverse; */
@@ -367,7 +370,7 @@ export const TextContainer = styled.div`
 
   @media (max-width: 1180px) {
     padding: 0;
-    max-height: 220px;
+    max-height: 164px;
     margin-bottom: 1rem;
   }
 
@@ -422,8 +425,8 @@ export const MainContainer = styled.div`
 
   @media (max-width: 1180px) {
     flex-direction: column;
-    margin-top: 4rem;
-    width: 100%;
+    /* margin-top: 4rem; */
+    width: 660px;
   }
 
   @media (max-width: 769px) {

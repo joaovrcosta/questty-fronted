@@ -64,9 +64,16 @@ export default function Question(props: IQuestionData) {
 
   const isAuthor = question?.questionData?.author_id === user?.id
 
+  const currentNewQuestionAuthorId = currentNewAnswer?.author_id
+
   const answersAuthorIds = question?.questionData?.answers.map(
     (resposta) => resposta.author_id
   )
+
+  // const isCurrentAuthorInAnswers = answersAuthorIds?.includes(
+  //   currentNewQuestionAuthorId
+  // )
+
   const userLogged = user?.id
 
   const isUserInList = userLogged && answersAuthorIds?.includes(userLogged)
@@ -179,7 +186,7 @@ export default function Question(props: IQuestionData) {
             createdAt={answer?.createdAt}
             isGolden={answer?.isGolden}
             author={answer?.author?.username}
-            likesQuantity={answer?.likes?.length || 0}
+            likesQuantity={answer?.totalLikes}
             avatarUrl={answer?.author?.avatar_url}
             authorLevel={answer?.author?.level}
             isReported={

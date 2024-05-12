@@ -80,14 +80,22 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
               <Dialog.Title style={{ fontSize: '20px' }}>
                 Pergunta:
               </Dialog.Title>
-              <S.CloseButtonMobile>
+              {/* <S.CloseButtonMobile>
                 <S.BackButtonBox onClick={handleCloseModal}>
                   <AiOutlineClose size={24} />
                 </S.BackButtonBox>
-              </S.CloseButtonMobile>
+              </S.CloseButtonMobile> */}
             </S.QuestionInfoWrapper>
             <S.TextContainer>
-              <Text>{question?.questionData?.content}</Text>
+              <Text
+                style={{
+                  fontFamily: 'ProximaNova',
+                  lineHeight: '24px',
+                  fontSize: '18px',
+                }}
+              >
+                {question?.questionData?.content}
+              </Text>
             </S.TextContainer>
           </S.QuestionTextContainer>
           <S.FormAnsweringContainer>
@@ -96,45 +104,12 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
                 await submitAnswer(data)
               })}
             >
-              <S.HeadingContainer>
-                <S.InnerBackButtonBox onClick={handleCloseModal}>
-                  <AiOutlineClose size={24} />
-                </S.InnerBackButtonBox>
-                <Text weight="bold" size="xl" color="blue_950">
-                  Sua resposta:
-                </Text>
-              </S.HeadingContainer>
-              {/* <S.QuestionTextarea
-                {...register('content')}
-                placeholder="Explicação passo a passo:"
-              ></S.QuestionTextarea> */}
               <Editor onChange={handleEditorChange} />
               {formState.errors.content && (
                 <span style={{ color: '#D20032', fontSize: '14px' }}>
                   {formState.errors.content.message}
                 </span>
               )}
-              {/* <S.QuestionMoreInfoContainer>
-              <S.Tools>
-                <Tooltip content="Anexe aqui">
-                  <T.IconButton backgroundColor="white">
-                    <AiOutlinePaperClip size={24} />
-                  </T.IconButton>
-                </Tooltip>
-
-                <Tooltip content="Hello!">
-                  <T.IconButton backgroundColor="white">
-                    <TbMathFunctionY size={24} />
-                  </T.IconButton>
-                </Tooltip>
-
-                <Tooltip content="aaaaaaaaaaaaaaaa">
-                  <T.IconButton backgroundColor="white">
-                    <MdOutlineEmojiSymbols size={24} />
-                  </T.IconButton>
-                </Tooltip>
-              </S.Tools>
-            </S.QuestionMoreInfoContainer> */}
               {isSubmitting ? (
                 <Spinner size="sm" baseColor="blue_950" variant="primary" />
               ) : (
