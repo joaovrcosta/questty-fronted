@@ -300,8 +300,9 @@ export function QuestionBox({
                 weight="semibold"
                 style={{
                   marginTop: '1.5rem',
+                  fontWeight: 800,
                   lineHeight: '28px',
-                  fontFamily: 'ProximaNova',
+                  fontFamily: 'Nunito',
                   fontSize: '22px',
                 }}
               >
@@ -314,7 +315,7 @@ export function QuestionBox({
                 style={{
                   marginTop: '0.5rem',
                   lineHeight: '24px',
-                  fontFamily: 'ProximaNova',
+                  fontFamily: 'Nunito',
                   fontSize: '18px',
                 }}
               >

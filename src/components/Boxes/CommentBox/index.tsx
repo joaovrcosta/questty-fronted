@@ -53,7 +53,7 @@ export function CommentBox({
           <Text
             size="sm"
             style={{
-              fontFamily: 'ProximaNova',
+              fontFamily: 'Nunito',
               lineHeight: '20px',
               fontSize: '15px',
             }}

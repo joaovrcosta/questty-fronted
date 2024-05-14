@@ -87,7 +87,7 @@ export function MoreQuestonCard({
             </S.QuestionText> */}
             <Text
               style={{
-                fontFamily: 'ProximaNova',
+                fontFamily: 'Nunito',
                 fontSize: '15px',
               }}
             >

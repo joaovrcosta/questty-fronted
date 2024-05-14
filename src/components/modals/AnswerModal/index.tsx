@@ -24,7 +24,7 @@ interface AnswerModalProps {
 }
 
 export function AnswerModal({ isMobile }: AnswerModalProps) {
-  const { register, handleSubmit, formState } = useForm<FormData>({
+  const { handleSubmit, formState, setValue } = useForm<FormData>({
     resolver: zodResolver(AnswerFormDesktopSchema),
   })
   const { setIsOpen, isOpen, isAnswering, setIsAnswering } =
@@ -35,12 +35,8 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
 
   const { isSubmitting } = formState
 
-  const handleCloseModal = () => {
-    setIsOpen(false)
-    setIsAnswering(false)
-  }
-
   const handleEditorChange = (content: any) => {
+    setValue('content', content)
     setEditorContent(content)
   }
 
@@ -80,16 +76,11 @@ export function AnswerModal({ isMobile }: AnswerModalProps) {
               <Dialog.Title style={{ fontSize: '20px' }}>
                 Pergunta:
               </Dialog.Title>
-              {/* <S.CloseButtonMobile>
-                <S.BackButtonBox onClick={handleCloseModal}>
-                  <AiOutlineClose size={24} />
-                </S.BackButtonBox>
-              </S.CloseButtonMobile> */}
             </S.QuestionInfoWrapper>
             <S.TextContainer>
               <Text
                 style={{
-                  fontFamily: 'ProximaNova',
+                  fontFamily: 'Nunito',
                   lineHeight: '24px',
                   fontSize: '18px',
                 }}

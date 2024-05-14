@@ -13,12 +13,12 @@ export const Overlay = styled(Dialog.Overlay)`
 `
 
 export const Content = styled(Dialog.Content)`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   font-family: Poppins;
   padding: 0 1rem;
   z-index: 999999;
-  max-height: 980px;
+  /* max-height: 980px; */
   border-radius: 5px;
   display: flex;
   align-items: center;

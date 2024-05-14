@@ -71,7 +71,7 @@ export const QuestionContent = styled.div`
 
 export const QuestionText = styled.a`
   line-height: 1.4;
-  font-family: ProximaNova;
+  font-family: Nunito;
   /* height: 68px; */
 
   &:hover {

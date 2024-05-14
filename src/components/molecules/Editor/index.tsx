@@ -35,7 +35,7 @@ const StyledEditorContainer = styled.div`
 
 const StyledEditorContent = styled.div`
   outline: none;
-  font-family: 'ProximaNova', sans-serif;
+  font-family: 'Nunito', sans-serif;
   font-size: 18px;
   min-height: 465px;
 
@@ -64,7 +64,7 @@ export function Editor({ onChange }: EditorProps) {
       attributes: {
         class: 'styled-editor-content',
         style:
-          'outline: none; font-family: ProximaNova; font-size: 18px; padding: 0.5rem; padding-bottom: 1rem; min-height: 200px; line-height: 1.5rem',
+          'outline: none; font-family: Nunito; font-size: 18px; padding: 0.5rem; padding-bottom: 1rem; min-height: 200px; line-height: 1.5rem',
       },
     },
   })

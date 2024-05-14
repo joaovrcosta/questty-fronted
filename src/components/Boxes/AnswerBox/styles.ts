@@ -144,7 +144,7 @@ export const UserLevel = styled.div`
 export const AnswerContent = styled.div``
 
 export const AnswerContentText = styled(Text)`
-  font-family: ProximaNova;
+  font-family: Nunito;
   line-height: 24px;
   height: 100%;
 
