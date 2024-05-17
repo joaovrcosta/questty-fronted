@@ -12,8 +12,8 @@ import { NextSeo } from 'next-seo'
 import { motion } from 'framer-motion'
 import { UserInfo } from '@/components/organisms/UserInfo'
 
-export default function Achievements(props: IProfileData) {
-  const [activeTab, setActiveTab] = useState('achievements')
+export default function FollowingPage(props: IProfileData) {
+  const [activeTab, setActiveTab] = useState('following')
   const { isLoggedIn } = useAuthStore()
   const { setProfile } = useProfileStore()
 
@@ -48,7 +48,7 @@ export default function Achievements(props: IProfileData) {
               >
                 <S.NotFindAnyAnswer>
                   <Text size="md" color="gray_500">
-                    Nenhuma emblema conquistado ainda.
+                    Usuário não está seguindo ninguém.
                   </Text>
                 </S.NotFindAnyAnswer>
               </motion.div>

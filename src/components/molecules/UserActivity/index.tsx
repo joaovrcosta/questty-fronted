@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Text } from '@/components/atoms/Text'
 
 interface UserActivityTabsProps {
-  userId: string
+  userId: string | undefined
   isActive: string
   setActive: (tabName: string) => void
 }
@@ -17,8 +17,6 @@ export function UserActivityTabs({
   const handleTabClick = (tabName: any) => {
     setActive(tabName)
   }
-
-  console.log(isActive)
 
   return (
     <>
@@ -73,7 +71,7 @@ export function UserActivityTabs({
             >
               <Text
                 weight="semibold"
-                color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
+                color={isActive === 'followers' ? 'blue_500' : 'gray_500'}
                 onClick={() => handleTabClick('followers')}
               >
                 Seguidores
@@ -87,7 +85,7 @@ export function UserActivityTabs({
             >
               <Text
                 weight="semibold"
-                color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
+                color={isActive === 'following' ? 'blue_500' : 'gray_500'}
                 onClick={() => handleTabClick('following')}
               >
                 Seguindo
