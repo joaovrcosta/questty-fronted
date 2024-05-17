@@ -6,6 +6,7 @@ import { SiCrystal } from 'react-icons/si'
 import { AiFillHeart } from 'react-icons/ai'
 import { FaCrown } from 'react-icons/fa6'
 import { MdArrowForwardIos } from 'react-icons/md'
+import { FaGear } from 'react-icons/fa6'
 
 import { SkeletonCircle, SkeletonLine } from '@/components/atoms/Skeleton'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
@@ -17,7 +18,7 @@ export const GameBoxFacade = () => {
   return (
     <>
       <S.ProfileInfoSidebar>
-        <S.RankingBox>
+        <S.Wrapper>
           <S.ProfileSiderbarHeading>
             <S.UserAvatarWrapper>
               {isLoading ? (
@@ -114,6 +115,19 @@ export const GameBoxFacade = () => {
             </S.PointsContainer>
           )}
           <S.MoreConfigurations>
+            <S.AccountConfigurations>
+              <Text
+                weight="semibold"
+                color="blue_950"
+                style={{ whiteSpace: 'nowrap' }}
+                size="sm"
+              >
+                Configurações da conta
+              </Text>
+              <S.ConfigButton>
+                <FaGear size={18} color="#000" />
+              </S.ConfigButton>
+            </S.AccountConfigurations>
             <S.MoreConfigurationsButton>
               <Text
                 weight="semibold"
@@ -136,19 +150,8 @@ export const GameBoxFacade = () => {
               </Text>
               <MdArrowForwardIos size={24} color="#45A6FF" />
             </S.MoreConfigurationsButton>
-            <S.MoreConfigurationsButton>
-              <Text
-                weight="semibold"
-                color="blue_950"
-                style={{ whiteSpace: 'nowrap' }}
-                size="sm"
-              >
-                Configurações da conta
-              </Text>
-              <MdArrowForwardIos size={24} color="#45A6FF" />
-            </S.MoreConfigurationsButton>
           </S.MoreConfigurations>
-        </S.RankingBox>
+        </S.Wrapper>
       </S.ProfileInfoSidebar>
     </>
   )

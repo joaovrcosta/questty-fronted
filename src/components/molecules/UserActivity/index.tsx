@@ -18,6 +18,8 @@ export function UserActivityTabs({
     setActive(tabName)
   }
 
+  console.log(isActive)
+
   return (
     <>
       <S.UserActivityContainer>
@@ -52,13 +54,13 @@ export function UserActivityTabs({
           </S.Item>
           <S.Item>
             <Link
-              href={`/profile/${userId}/badges`}
+              href={`/profile/${userId}/achievements`}
               style={{ textDecoration: 'none' }}
             >
               <Text
                 weight="semibold"
-                color={isActive === 'friends' ? 'blue_500' : 'gray_500'}
-                onClick={() => handleTabClick('badges')}
+                color={isActive === 'achievements' ? 'blue_500' : 'gray_500'}
+                onClick={() => handleTabClick('achievements')}
               >
                 Emblemas
               </Text>

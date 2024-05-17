@@ -72,7 +72,7 @@ export const StarQuantity = styled.div`
   margin-left: 0.25rem;
 `
 export const MoreConfigurations = styled.div`
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `
 export const MoreConfigurationsButton = styled.div`
   display: flex;
@@ -82,6 +82,7 @@ export const MoreConfigurationsButton = styled.div`
   justify-content: space-between;
   cursor: pointer;
   border-radius: 16px;
+  transition: 0.1s ease-in-out;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_150};
@@ -93,4 +94,39 @@ export const SubInfo = styled.div`
 `
 export const PointsContainer = styled.div`
   display: flex;
+`
+
+export const AccountConfigurations = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.gray_150};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray_150};
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+`
+export const ConfigButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+    border-radius: 16px;
+  }
+`
+export const Wrapper = styled.div`
+  font-family: Poppins;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid #000;
+  padding: 1.25rem;
+  border-radius: 16px;
+  /* box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.4); */
+  max-height: 24rem;
+  max-width: 320px;
+  width: 100%;
 `
