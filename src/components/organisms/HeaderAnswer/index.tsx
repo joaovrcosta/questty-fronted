@@ -16,13 +16,16 @@ import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuest
 import { Text } from '@/components/atoms/Text'
 import { FcInfo } from 'react-icons/fc'
 import { Tooltip } from '@/components/molecules/Tooltip'
+import { ConfirmModal } from '@/components/modals/ConfirmModal'
+import { useConfirmModalStore } from '@/features/stores/modals-stores/confirmModal/useConfirmModal'
 
 export function HeaderAnswer() {
   const [loading, setLoading] = useState(false)
 
   const { isLoggedIn, user, token } = useAuthStore()
   // const { isOpen, setIsOpen, setIsAnswering } = useQuestionModalStore()
-  const { setIsOpen, setIsAnswering } = useAnswerModalStore()
+  const { setIsOpen, setIsAnswering, isOpen } = useAnswerModalStore()
+  const { setIsModalOpen, isModalOpen } = useConfirmModalStore()
 
   const handleCloseModal = () => {
     setIsOpen(false)
@@ -43,9 +46,14 @@ export function HeaderAnswer() {
     <S.HeaderContainer>
       <S.HeaderContent>
         <S.FirstBoxContent>
-          <S.BackButtonContainer onClick={handleCloseModal}>
-            <IoIosArrowBack size={24} />
-          </S.BackButtonContainer>
+          <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
+            <Dialog.Trigger asChild>
+              <S.BackButtonContainer>
+                <IoIosArrowBack size={24} />
+              </S.BackButtonContainer>
+            </Dialog.Trigger>
+            <ConfirmModal />
+          </Dialog.Root>
           <Link
             href="/"
             style={{

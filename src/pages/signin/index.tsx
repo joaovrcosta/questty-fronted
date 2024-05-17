@@ -67,9 +67,8 @@ export default function SignIn() {
       const { token } = response.data
 
       Cookies.set('questty-token', token, {
-        expires: 60 * 60 * 24 * 3, // 7 day
+        expires: 60 * 60 * 24 * 3, // 7 days
         path: '/',
-        secure: true,
       })
 
       const userResponse = await api.get('/me', {

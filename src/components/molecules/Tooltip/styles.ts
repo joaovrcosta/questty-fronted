@@ -60,6 +60,7 @@ export const ToolTipContent = styled(TooltipRadix.Content)`
   margin-bottom: 1rem;
   line-height: 1.5rem;
   z-index: 9999999;
+  max-width: 200px;
 
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;

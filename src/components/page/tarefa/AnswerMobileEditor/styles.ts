@@ -19,6 +19,7 @@ export const TextArea = styled.textarea`
   height: 168px;
   border-radius: 8px;
   font-size: 0.85rem;
+  border: 1px solid ${({ theme }) => theme.colors.black};
 `
 export const UserInformationsContainer = styled.div`
   display: flex;

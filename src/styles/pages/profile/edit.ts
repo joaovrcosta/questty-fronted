@@ -19,7 +19,7 @@ export const ProfileEditHeading = styled.div`
   }
 `
 export const EditProfileBox = styled.div`
-  padding: 3.5rem 0 3.5rem 0;
+  padding: 3.5rem 0 3.5rem 1rem;
   display: flex;
 
   @media (max-width: 769px) {

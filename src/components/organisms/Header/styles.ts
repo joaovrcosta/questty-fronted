@@ -134,9 +134,9 @@ export const StyledButton = styled(Button)`
 `
 
 export const MakeYourQuestionButton = styled(Button)`
+  transition: 0.3s ease-in-out;
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};
-    transition: 0.3s ease all;
   }
 
   @media (max-width: 769px) {

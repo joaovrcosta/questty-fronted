@@ -7,21 +7,24 @@ import api from '@/services/api'
 import { useRouter } from 'next/router'
 import { IProfileData } from '@/shared/types'
 import { Input } from '@/components/atoms/Input'
+import { GetServerSideProps } from 'next'
+import useAuthStore from '@/features/stores/auth/useAuthStore'
 
-export default function EditProfile(props: IProfileData) {
+export default function EditProfile() {
   const router = useRouter()
+  const { user } = useAuthStore()
 
   const goBack = () => {
     router.back()
   }
 
-  const userData = props.userData
+  const userData = user
 
   return (
     <>
       <S.EditProfileContainer>
         <S.ProfileEditHeading>
-          <Heading color="blue_550" weight="bold">
+          <Heading color="black" weight="bold">
             Editar Perfil
           </Heading>
           <Button
@@ -42,11 +45,9 @@ export default function EditProfile(props: IProfileData) {
           <S.UserInfo>
             <S.UserInfoFirst>
               <S.UserAvatarPhoto
-                id={props.userData.id}
+                id={userData?.id}
                 variant="xl"
-                imageUrl={
-                  props.userData.avatar_url ? props.userData.avatar_url : null
-                }
+                imageUrl={userData?.avatar_url ? userData.avatar_url : null}
               />
               <S.FirstBoxInputs>
                 <Input
@@ -126,23 +127,42 @@ export default function EditProfile(props: IProfileData) {
   )
 }
 
-export const getServerSideProps = async (ctx: any) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { id } = ctx.params as { id: string }
 
-  const existingToken = Cookies.get('questty-token')
+  const tokenJwt = ctx.req.cookies['questty-token']
 
-  if (existingToken) {
-    return { props: { token: existingToken, id } }
-  }
+  if (tokenJwt) {
+    try {
+      const userResponse = await api.get('/me', {
+        headers: {
+          Authorization: `Bearer ${tokenJwt}`,
+        },
+      })
 
-  try {
-    const res = await api.get(`profile/${id}`)
+      if (userResponse.status === 200) {
+        const user = userResponse.data
 
-    const userData = res.data.user
+        if (id !== user.user.id) {
+          return {
+            redirect: {
+              destination: `/`,
+              permanent: false,
+            },
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching user information:', error)
+    }
 
-    return { props: { userData, id } }
-  } catch (error) {
-    console.error('Erro ao buscar dados:', error)
-    return { props: { userData: null } }
+    return { props: { token: tokenJwt, id } }
+  } else {
+    return {
+      redirect: {
+        destination: '/signin',
+        permanent: false,
+      },
+    }
   }
 }

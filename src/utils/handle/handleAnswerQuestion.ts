@@ -5,6 +5,7 @@ import { useQuestionStore } from '@/features/stores/question/useQuestionStore'
 import { IAnswer } from '@/shared/types'
 import { useAnswerStore } from '@/features/stores/answer/useAnswerStore'
 import { useAnswerModalStore } from '@/features/stores/modals-stores/answerQuestionModal/useAnswerQuestionModal'
+import { useConfirmModalStore } from '@/features/stores/modals-stores/confirmModal/useConfirmModal'
 
 const useAnswerHandler = () => {
   const router = useRouter()
@@ -13,6 +14,7 @@ const useAnswerHandler = () => {
   const answerStore = useAnswerStore()
   const { setIsAnswering, setIsAnsweringMobile, setIsAlreadyAnswered } =
     useAnswerModalStore()
+  const { setIsModalOpen } = useConfirmModalStore()
 
   const handleAnswerQuestion = async (data: any) => {
     try {
@@ -40,6 +42,7 @@ const useAnswerHandler = () => {
         setIsAnswering(false)
         setIsAnsweringMobile(false)
         setIsAlreadyAnswered(true)
+        setIsModalOpen(false)
 
         const updatedAnswerQuantity = answerQuantity + 1
         setAnswerQuantity(updatedAnswerQuantity)

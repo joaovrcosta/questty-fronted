@@ -12,6 +12,7 @@ import { Button } from '@/components/atoms/Button'
 import useAnswerHandler from '@/utils/handle/handleAnswerQuestion'
 import { Spinner } from '@/components/atoms/Spinner'
 import { IoMdSend } from 'react-icons/io'
+import { useConfirmModalStore } from '@/features/stores/modals-stores/confirmModal/useConfirmModal'
 
 interface AnswerMobileEditor {
   avatarUrl: string | undefined
@@ -30,6 +31,8 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
     useAnswerModalStore()
   const { user } = useAuthStore()
   const { handleAnswerQuestion } = useAnswerHandler()
+  const { setIsModalOpen } = useConfirmModalStore()
+
   const { isSubmitting } = formState
 
   function onSubmit(data: FormData) {
@@ -56,6 +59,7 @@ export function AnswerMobileEditor({ avatarUrl }: AnswerMobileEditor) {
                   setIsAnsweringMobile(false)
                   setIsAnswering(false)
                   setIsOpen(false)
+                  setIsModalOpen(false)
                 }}
               >
                 <IoMdClose size={24} color="#000" />

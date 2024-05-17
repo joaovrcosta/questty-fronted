@@ -5,7 +5,8 @@ const handleFollowUser = async (
   props: IProfileData,
   isAlreadyFollowing: boolean,
   token: string | null,
-  setIsAlreadyFollowing: React.Dispatch<React.SetStateAction<boolean>>
+  setIsAlreadyFollowing: React.Dispatch<React.SetStateAction<boolean>>,
+  setFollowersCount: React.Dispatch<React.SetStateAction<number>>
 ) => {
   try {
     const res = await api.request({
@@ -18,8 +19,10 @@ const handleFollowUser = async (
 
     if (res.status === 204) {
       setIsAlreadyFollowing(false)
+      setFollowersCount((prev) => prev - 1)
     } else if (res.status === 201) {
       setIsAlreadyFollowing(true)
+      setFollowersCount((prev) => prev + 1)
     } else if (res.status === 400) {
     } else {
       console.log(`Código de status inesperado: ${res.status}`)

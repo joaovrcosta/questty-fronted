@@ -30,6 +30,12 @@ export function UserInfo({ data }: UserInfoProps) {
   const authenticatedUser = useAuthStore((state) => state.user)
   const { isOpening, setIsOpening } = useAuthModalStore()
   const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false)
+  const [followersCount, setFollowersCount] = useState<number>(
+    data.userData.followCount.followers
+  )
+  const [followings, setFollowings] = useState<number>(
+    data.userData.followCount.followings
+  )
 
   const isCurrentUserProfile = authenticatedUser?.id === data.userData.id
   const rank = data.userData.rank
@@ -64,7 +70,13 @@ export function UserInfo({ data }: UserInfoProps) {
   }, [data.userData.id, token])
 
   const handleFollow = () => {
-    handleFollowUser(data, isAlreadyFollowing, token, setIsAlreadyFollowing)
+    handleFollowUser(
+      data,
+      isAlreadyFollowing,
+      token,
+      setIsAlreadyFollowing,
+      setFollowersCount
+    )
   }
 
   return (
@@ -138,7 +150,7 @@ export function UserInfo({ data }: UserInfoProps) {
             <strong
               style={{ fontWeight: '900', color: 'black', fontSize: '18px' }}
             >
-              {data.userData.followCount.followers}
+              {followersCount}
             </strong>{' '}
             Seguidores{' '}
           </Text>
@@ -147,48 +159,50 @@ export function UserInfo({ data }: UserInfoProps) {
               style={{ fontWeight: '900', color: 'black', fontSize: '18px' }}
             >
               {' '}
-              {data.userData.followCount.followings}
+              {followings}
             </strong>{' '}
             Segue{' '}
           </Text>
         </S.FriendsQuantity>
 
         <S.UserBadges>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <Image src={xpIcon} height={24} alt="" />
+          <Tooltip content="Os pontos de experiencia podem ser conquistados respondendo perguntas respondendo quizes e diversas outras formas">
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginLeft: '0.25rem',
               }}
             >
-              {/* <IoMdArrowDropup size={20} /> */}
-              <S.StarQuantity>
-                <Text
-                  weight="extrabold"
-                  size="lg"
-                  color="blue_950"
-                  style={{ whiteSpace: 'nowrap' }}
-                >
-                  {data.userData.points ?? 0}
-                </Text>{' '}
-                <Text
-                  weight="bold"
-                  size="sm"
-                  color="blue_950"
-                  style={{ whiteSpace: 'nowrap' }}
-                >
-                  xp
-                </Text>{' '}
-              </S.StarQuantity>
+              <Image src={xpIcon} height={24} alt="" />
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginLeft: '0.25rem',
+                }}
+              >
+                {/* <IoMdArrowDropup size={20} /> */}
+                <S.StarQuantity>
+                  <Text
+                    weight="extrabold"
+                    size="lg"
+                    color="blue_950"
+                    style={{ whiteSpace: 'nowrap' }}
+                  >
+                    {data.userData.points ?? 0}
+                  </Text>{' '}
+                  <Text
+                    weight="bold"
+                    size="sm"
+                    color="blue_950"
+                    style={{ whiteSpace: 'nowrap' }}
+                  >
+                    xp
+                  </Text>{' '}
+                </S.StarQuantity>
+              </div>
             </div>
-          </div>
+          </Tooltip>
           <S.VerticalDivider>|</S.VerticalDivider>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             {data.userData.role === 'ADMIN' && (
