@@ -1,12 +1,11 @@
 import { HomePage } from '@/views/home'
+import { NextPageWithLayout } from '../_app'
 import { ReactElement } from 'react'
 import { DefaultLayout } from '@/layouts/default'
-import { IndexPage } from '@/views/index'
-import { NextPageWithLayout } from './_app'
 
 // Home Page
 const ResetPasswordScreen: NextPageWithLayout = () => {
-  return <IndexPage />
+  return <HomePage />
 }
 
 ResetPasswordScreen.getLayout = (page: ReactElement) => {
