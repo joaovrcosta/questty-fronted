@@ -561,6 +561,7 @@ export const AnwseredStamp = styled.div`
 
 export const SeeMoreButton = styled(Button)`
   background-color: transparent;
+  text-transform: uppercase;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray_100};

@@ -185,6 +185,7 @@ export interface IQuestionData {
     id: string
     content: string
     bestAnswerId: string
+    isEditable: boolean
     author_id: string
     createdAt: string
     deletedAt: string

@@ -5,6 +5,7 @@ import { getTimeAgo } from '@/utils/getTimeAgo'
 import { Avatar } from '@/components/atoms/Avatar'
 import { useQuestionsStore } from '@/features/stores/questions/useQuestionsStore'
 import { BlankAvatar } from '@/components/atoms/Avatar/BlankAvatar'
+import { IQuestion } from '@/shared/types'
 
 export type subjectsType =
   | 'math'
@@ -15,41 +16,29 @@ export type subjectsType =
   | 'enem'
   | '6767497f-2929-4f97-92f6-2abef996b6f5'
 
-interface Question {
-  id?: string
-  author_id?: string
-  content: string
-  category_id?: string
-  createdAt?: string
+interface MoreQuestionCardProps {
+  question: IQuestion
   readOnly?: boolean
   answersQuantity?: number
-  subjectName: string
-  points: number
-  avatar_url: string
 }
 
 export function MoreQuestonCard({
-  id,
-  author_id,
-  content,
-  category_id,
-  answersQuantity,
-  createdAt,
-  subjectName,
-  points,
-  avatar_url,
+  question,
   readOnly = false,
-}: Question) {
+  answersQuantity,
+}: MoreQuestionCardProps) {
   const router = useRouter()
 
   const handleResponderClick = () => {
-    router.push(`/tarefa/${id}`)
+    router.push(`/tarefa/${question.id}`)
   }
 
   const answerCount = answersQuantity || 0
 
   const limitedContent =
-    content.length > 80 ? content.slice(0, 80) + '...' : content
+    question.content.length > 80
+      ? question.content.slice(0, 80) + '...'
+      : question.content
 
   return (
     <S.QuestionCardContainer>
@@ -57,20 +46,17 @@ export function MoreQuestonCard({
         <S.QuestionContent>
           <S.UserAvatarWrapper>
             <Avatar
-              id={author_id}
+              id={question.author_id}
               variant="sm"
-              imageUrl={avatar_url ? avatar_url : null}
+              imageUrl={
+                question.author.avatar_url ? question.author.avatar_url : null
+              }
             />
           </S.UserAvatarWrapper>
           <S.QuestionInfo>
             <S.SubjectAndDateTimeContainer>
-              {!!category_id && (
-                <S.Subject size="xs" color="gray_800">
-                  {category_id}
-                </S.Subject>
-              )}
               <S.DateTime size="xs" color="gray_800">
-                {getTimeAgo(createdAt)}
+                {getTimeAgo(question.createdAt)}
               </S.DateTime>
               <span>•</span>
               <Text
@@ -79,7 +65,7 @@ export function MoreQuestonCard({
                 style={{ fontFamily: 'Inter' }}
                 weight="semibold"
               >
-                {subjectName}
+                {question.subject.name}
               </Text>
             </S.SubjectAndDateTimeContainer>
             {/* <S.QuestionText onClick={handleResponderClick}>
@@ -125,7 +111,7 @@ export function MoreQuestonCard({
                   ? 'VISUALIZAR'
                   : answerCount >= 3
                   ? 'VISUALIZAR'
-                  : `RESPONDER + ${points} XP`}
+                  : `RESPONDER + ${question.points} XP`}
               </S.AnswerButton>
             </S.AnswerButtonContainer>
           </S.AswerContainer>

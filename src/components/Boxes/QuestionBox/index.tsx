@@ -17,7 +17,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { MdOutlineSend } from 'react-icons/md'
 import { Spinner } from '@/components/atoms/Spinner'
-import { IComment } from '@/shared/types'
+import { IComment, IQuestionData } from '@/shared/types'
 import { parseCookies } from 'nookies'
 import { GetServerSideProps } from 'next'
 import { withSession } from '@/lib/with-session'
@@ -30,20 +30,10 @@ import { ReportQuestionModal } from '@/components/modals/ReportQuestionModal'
 import { CommentFormSchema } from '@/utils/zodSchemas'
 
 interface QuestionBoxProps {
-  id?: number | string
-  content?: string
-  createdAt?: string
+  data: IQuestionData
   answersQuantity?: number
-  author?: string
-  avatarUrl?: string
   isMobile: boolean
-  authorId: string
-  points: number
-  authorLevel: number
-  isReported: boolean
-
   hasAnswered: any
-  subject: string
 }
 
 interface FormData {
@@ -56,20 +46,13 @@ interface FormData {
 }
 
 export function QuestionBox({
-  id,
-  content,
-  author,
-  authorId,
-  createdAt,
+  data,
   answersQuantity,
-  avatarUrl,
   isMobile,
   hasAnswered,
-  subject,
-  points,
-  authorLevel,
-  isReported,
 }: QuestionBoxProps) {
+  const dataQuestion = data.questionData
+  const isQuestionReported = dataQuestion.reports?.[0].isOpen
   const { register, handleSubmit, formState, reset } = useForm<FormData>({
     resolver: zodResolver(CommentFormSchema),
   })
@@ -94,23 +77,23 @@ export function QuestionBox({
   let largeText = ''
   let normalText = ''
 
-  if (content) {
+  if (dataQuestion.content) {
     const maxLengthLarge = 182
     const maxLengthNormal = 345
 
-    if (content.length <= maxLengthNormal) {
-      normalText = content
+    if (dataQuestion.content.length <= maxLengthNormal) {
+      normalText = dataQuestion.content
     } else {
-      if (content.length <= maxLengthLarge) {
-        largeText = content
+      if (dataQuestion.content.length <= maxLengthLarge) {
+        largeText = dataQuestion.content
       } else {
-        const splitIndex = content.lastIndexOf(' ', maxLengthLarge)
+        const splitIndex = dataQuestion.content.lastIndexOf(' ', maxLengthLarge)
         if (splitIndex !== -1) {
-          largeText = content.substring(0, splitIndex)
-          normalText = content.substring(splitIndex + 1)
+          largeText = dataQuestion.content.substring(0, splitIndex)
+          normalText = dataQuestion.content.substring(splitIndex + 1)
         } else {
-          largeText = content.substring(0, maxLengthLarge)
-          normalText = content.substring(maxLengthLarge)
+          largeText = dataQuestion.content.substring(0, maxLengthLarge)
+          normalText = dataQuestion.content.substring(maxLengthLarge)
         }
       }
     }
@@ -127,7 +110,7 @@ export function QuestionBox({
   const [comments, setComments] = useState<IComment[]>([])
 
   useEffect(() => {
-    setComments(question?.questionData?.comments ?? [])
+    setComments(question?.questionData.comments ?? [])
   }, [question])
 
   const isAuthor = question?.questionData?.author_id === user?.id
@@ -188,8 +171,8 @@ export function QuestionBox({
   }
 
   const handleReportClick = () => {
-    if (id !== undefined) {
-      setCurrentEntityId(String(id))
+    if (dataQuestion.id !== undefined) {
+      setCurrentEntityId(String(dataQuestion.id))
       setIsOpening(true)
     }
   }
@@ -213,7 +196,11 @@ export function QuestionBox({
         <Avatar
           id={String(question?.questionData?.author_id)}
           variant="lg"
-          imageUrl={avatarUrl ? avatarUrl : null}
+          imageUrl={
+            dataQuestion.author.avatar_url
+              ? dataQuestion.author.avatar_url
+              : null
+          }
         />
       </S.AvatarContainer>
       <S.QuestionBoxContainer isLoggedIn={isLoggedIn}>
@@ -223,7 +210,11 @@ export function QuestionBox({
               <Avatar
                 id={String(question?.questionData?.author_id)}
                 variant="lg"
-                imageUrl={avatarUrl ? avatarUrl : null}
+                imageUrl={
+                  dataQuestion.author.avatar_url
+                    ? dataQuestion.author.avatar_url
+                    : null
+                }
               />
             </S.AvatarInfoContainer>
             <S.InfoWrapperr>
@@ -231,22 +222,22 @@ export function QuestionBox({
                 <S.Username>
                   <Link
                     style={{ textDecoration: 'none' }}
-                    href={`/profile/${authorId}/answers`}
+                    href={`/profile/${dataQuestion.author_id}/answers`}
                   >
                     <Text style={{ fontFamily: 'Poppins' }} weight="medium">
-                      {author}
+                      {dataQuestion.author.name}
                     </Text>
                   </Link>
                 </S.Username>
-                <S.UserLevel>{authorLevel}</S.UserLevel>
+                <S.UserLevel>{dataQuestion.author.level}</S.UserLevel>
               </S.UserInfo>
               <S.SubInfosContainer>
                 <S.DateTimeText size="xs" weight="regular">
-                  {getFormattedDateAndTime(createdAt)}
+                  {getFormattedDateAndTime(dataQuestion.createdAt)}
                 </S.DateTimeText>
                 <span>•</span>
                 <S.SubjectText size="xs" weight="semibold">
-                  {subject}
+                  {dataQuestion.subject.name}
                 </S.SubjectText>
               </S.SubInfosContainer>
             </S.InfoWrapperr>
@@ -358,7 +349,7 @@ export function QuestionBox({
                   hasThreeAnswers={hasThreeAnswers}
                   isAlreadyAnsweredByUser={alreadyAnswered}
                   loading={loading}
-                  points={points}
+                  points={dataQuestion.points}
                 />
               </S.AnswerButtonAuthor>
             </S.ButtonsContainer>
@@ -368,7 +359,7 @@ export function QuestionBox({
             <S.ModerationWrapper>
               {isLoggedIn ? (
                 <div>
-                  {isReported || isModerated ? (
+                  {isQuestionReported || isModerated ? (
                     <Tooltip content="Em moderação">
                       <S.ReportedButton style={{ color: '#D20032' }}>
                         <AiFillFlag size={24} color="#D20032" />
@@ -377,7 +368,7 @@ export function QuestionBox({
                   ) : (
                     <Tooltip content="Denunciar">
                       <Dialog.Root
-                        open={currentEntityId === id && isOpening}
+                        open={currentEntityId === dataQuestion.id && isOpening}
                         onOpenChange={setIsOpening}
                       >
                         <Dialog.Trigger asChild>
@@ -387,7 +378,7 @@ export function QuestionBox({
                         </Dialog.Trigger>
                         <ReportQuestionModal
                           entityType="QUESTION"
-                          entityId={id}
+                          entityId={dataQuestion.id}
                           handleCloseModal={handleCloseModal}
                         />
                       </Dialog.Root>
@@ -453,7 +444,7 @@ export function QuestionBox({
                   >
                     <S.MoreDetailsInput
                       {...register('content')}
-                      placeholder={`Pedir detalhes para ${author}`}
+                      placeholder={`Pedir detalhes para ${dataQuestion.author.name}`}
                     />
                     {isSubmitting ? (
                       <Spinner
@@ -490,14 +481,7 @@ export function QuestionBox({
           <S.CommentSection>
             {commentsToDisplay.map((comment) => (
               <CommentBox
-                key={comment.id}
-                id={comment.id}
-                answer_id={comment.answer_id}
-                author_id={comment.author_id}
-                content={comment.content}
-                createdAt={comment.createdAt}
-                question_id={comment.question_id}
-                avatar_url={comment.author ? comment.author.avatar_url : ''}
+                comment={comment}
                 isReported={
                   comment.reports && comment.reports.length > 0
                     ? comment.reports[0].isOpen
@@ -513,7 +497,7 @@ export function QuestionBox({
                 onClick={() => setShowAllComments(true)}
                 border={false}
               >
-                VER MAIS COMENTÁRIOS
+                Ver mais comentários
               </S.SeeMoreButton>
             </S.SeeMoreContainer>
           )}

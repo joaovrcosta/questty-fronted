@@ -41,7 +41,7 @@ interface Question {
 }
 
 export default function Question(props: IQuestionData) {
-  if (!props.questionData) {
+  if (!props) {
     return <Custom404 />
   }
 
@@ -57,16 +57,16 @@ export default function Question(props: IQuestionData) {
   const { question, setAnswerQuantity, answerQuantity } = useQuestionStore()
   const { currentNewAnswer } = useAnswerStore()
 
-  const textForTitle = `${props.questionData?.content.substring(
+  const textForTitle = `${props?.questionData.content?.substring(
     0,
     100
   )} - Questty.com`
 
-  const isAuthor = question?.questionData?.author_id === user?.id
+  const isAuthor = question?.questionData.author_id === user?.id
 
   const currentNewQuestionAuthorId = currentNewAnswer?.author_id
 
-  const answersAuthorIds = question?.questionData?.answers.map(
+  const answersAuthorIds = question?.questionData.answers?.map(
     (resposta) => resposta.author_id
   )
 
@@ -105,9 +105,9 @@ export default function Question(props: IQuestionData) {
   }, [])
 
   useEffect(() => {
-    const quantity = props.questionData?.answers.length
+    const quantity = props?.questionData.answers.length
     setAnswerQuantity(quantity)
-  }, [props.questionData?.answers])
+  }, [props?.questionData.answers])
 
   useEffect(() => {
     setSubjectQuestions(props.recomendedQuestions)
@@ -115,7 +115,7 @@ export default function Question(props: IQuestionData) {
 
   const allAnswers = [
     ...(currentNewAnswer ? [answerStore.currentNewAnswer] : []),
-    ...(props.questionData?.answers || []),
+    ...(props?.questionData.answers || []),
   ]
 
   const renderAnswers = () => {
@@ -205,7 +205,7 @@ export default function Question(props: IQuestionData) {
             <>
               <Image src={GirlLamp} alt="" />
               <Text size="xx1" weight="medium">
-                {props.questionData?.author.username} precisa da sua ajuda.
+                {props?.questionData.author.username} precisa da sua ajuda.
               </Text>
               <Text>Essa pergunta não teve resposta ainda</Text>
               <S.AnswerButton backgroundColor="black" color="white">
@@ -246,20 +246,10 @@ export default function Question(props: IQuestionData) {
             transition={{ duration: 0.3 }}
           >
             <QuestionBox
-              id={props.questionData?.id}
-              key={props.questionData?.id}
-              content={props.questionData?.content}
+              data={props}
               answersQuantity={answerQuantity}
-              createdAt={props.questionData?.createdAt}
-              author={props.questionData?.author.username}
-              authorLevel={props.questionData?.author.level}
-              avatarUrl={props.questionData?.author?.avatar_url}
               isMobile={isMobile}
-              authorId={props.questionData?.author_id}
               hasAnswered={allAnswers}
-              subject={props.questionData?.subject.name}
-              points={props.questionData?.points}
-              isReported={props.questionData.reports[0]?.isOpen}
             />
           </motion.div>
 
@@ -358,19 +348,11 @@ export default function Question(props: IQuestionData) {
             <S.HelpMorePeopleContainer>
               <Text size="xl" weight="semibold">
                 Ajude outras pessoas com dúvidas sobre{' '}
-                {props?.questionData?.subject.name}
+                {props?.questionData.subject.name}
               </Text>
               <div style={{ marginTop: '1.5rem' }}>
                 {subjectQuestions.map((question: IQuestion) => (
-                  <MoreQuestonCard
-                    content={question.content}
-                    id={question.id}
-                    subjectName={question.subject.name}
-                    createdAt={question.createdAt}
-                    points={question.points}
-                    avatar_url={question.author.avatar_url ?? ''}
-                    author_id={question.author_id}
-                  />
+                  <MoreQuestonCard question={question} />
                 ))}
               </div>
             </S.HelpMorePeopleContainer>

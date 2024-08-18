@@ -8,34 +8,23 @@ import { ReportCommentModal } from '@/components/modals/ReportCommentModal'
 import { useState } from 'react'
 import { useReportCommentStore } from '@/features/stores/modals-stores/reportCommentModal'
 import useAuthStore from '@/features/stores/auth/useAuthStore'
+import { IComment } from '@/shared/types'
 
 interface ICommentBoxProps {
-  id: string
-  author_id: string
-  answer_id: string
-  content: string
-  avatar_url: string
+  comment: IComment
   isReported: boolean
-  createdAt: Date
-  question_id: string
 }
 
-export function CommentBox({
-  id,
-  author_id,
-  content,
-  avatar_url,
-  isReported,
-}: ICommentBoxProps) {
+export function CommentBox({ comment, isReported }: ICommentBoxProps) {
   const { isOpening, setIsOpening, comments } = useReportCommentStore()
   const { user } = useAuthStore()
   const [currentEntityId, setCurrentEntityId] = useState<string | null>(null)
 
-  const isAuthor = author_id === user?.id
-  const isCommentReported = comments.includes(id)
+  const isAuthor = comment.author_id === user?.id
+  const isCommentReported = comments.includes(comment.id)
 
   const handleReportClick = () => {
-    setCurrentEntityId(id)
+    setCurrentEntityId(comment.id)
     setIsOpening(true)
   }
 
@@ -45,8 +34,10 @@ export function CommentBox({
         <div>
           <Avatar
             variant="sm"
-            imageUrl={avatar_url ? avatar_url : null}
-            id={author_id}
+            imageUrl={
+              comment.author?.avatar_url ? comment.author?.avatar_url : null
+            }
+            id={comment.author_id}
           />
         </div>
         <div>
@@ -58,7 +49,7 @@ export function CommentBox({
               fontSize: '15px',
             }}
           >
-            {content}
+            {comment.content}
           </Text>
         </div>
       </S.CommentInfo>
@@ -77,7 +68,7 @@ export function CommentBox({
             ) : (
               <Tooltip content="Denunciar">
                 <Dialog.Root
-                  open={currentEntityId === id && isOpening}
+                  open={currentEntityId === comment.id && isOpening}
                   onOpenChange={setIsOpening}
                 >
                   <Dialog.Trigger asChild>
@@ -85,7 +76,10 @@ export function CommentBox({
                       <AiOutlineFlag size={24} />
                     </button>
                   </Dialog.Trigger>
-                  <ReportCommentModal entityType="COMMENT" entityId={id} />
+                  <ReportCommentModal
+                    entityType="COMMENT"
+                    entityId={comment.id}
+                  />
                 </Dialog.Root>
               </Tooltip>
             )}
